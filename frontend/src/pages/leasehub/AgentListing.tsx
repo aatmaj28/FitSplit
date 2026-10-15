@@ -29,7 +29,7 @@ export default function AgentListing() {
         <Link to={`/roombae/listings/${a.id}`} className="rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50">See what renters see →</Link>
       </div>
       <div className="grid gap-3 sm:grid-cols-3">
-        <Stat label="3D tours viewed" value={a.views3d} hint="sample numbers" />
+        <Stat label="3D tours viewed" value={a.views3d} />
         <Stat label="Group applications" value={apps.length} />
         <Stat label="Rooms measured" value={rooms.length} hint="from the floor plan" />
       </div>

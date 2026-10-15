@@ -43,7 +43,6 @@ export default function Demo() {
         </ol>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <button type="button" onClick={start} className="rounded-full bg-teal-400 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-teal-300">Reset and start the demo</button>
-          <span className="text-xs text-slate-400">Works offline: plans, AI checks and clone conversations are bundled. Shift + arrows move between steps.</span>
         </div>
       </div>
     </div>

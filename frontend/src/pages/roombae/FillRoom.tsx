@@ -38,7 +38,7 @@ export default function FillRoom() {
 
   const byId = useMemo(() => Object.fromEntries(profiles.map((p) => [p.id, p])), [profiles]);
   if (loading || sc.loading) return <PageLoading label="Loading the group's apartment…" />;
-  if (error || sc.error || !room) return <ErrorState title="Couldn't load Fill a room" onRetry={retry}>{error ?? sc.error ?? "No scenario bundled"}</ErrorState>;
+  if (error || sc.error || !room) return <ErrorState title="Couldn't load Fill a room" onRetry={retry}>{error ?? sc.error ?? "Nothing to show yet"}</ErrorState>;
 
   const members = fills[0].members.map((m) => ({ ...m, p: byId[m.id], info: room.members.find((x) => x.profile_id === m.id)! }));
   const verdictFor = (f: Fill) => {

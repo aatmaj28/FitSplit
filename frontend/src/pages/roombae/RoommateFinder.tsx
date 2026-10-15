@@ -124,7 +124,7 @@ export default function RoommateFinder() {
       const rec = await startNegotiation(a.id, b.id);
       setLive((m) => ({ ...m, [`${a.id}:${b.id}`]: rec.id }));
     } catch {
-      setLiveError("Live negotiations need the backend (and a free model quota). Bundled pairs work offline.");
+      setLiveError("Couldn't start their conversation right now. Try again in a moment.");
     }
   };
   const preferred = target && fits?.find((f) => f.l.id === target.id);
@@ -191,7 +191,7 @@ export default function RoommateFinder() {
                       <span className="text-slate-700">{firstName(pair.a)} & {firstName(pair.b)}</span>
                       <span className="flex items-center gap-1.5">
                         {st ? <VerdictBadge status={st} /> : pair.id ? <span className="text-xs text-slate-500">talking…</span> : (
-                          <button type="button" disabled={offline} onClick={() => talkLive(pair.a, pair.b)} className="text-xs font-medium text-violet-700 disabled:text-slate-400" title={offline ? "Needs the backend" : "Run a live negotiation now"}>
+                          <button type="button" disabled={offline} onClick={() => talkLive(pair.a, pair.b)} className="text-xs font-medium text-violet-700 disabled:text-slate-400" title={offline ? "Not available right now" : "Their clones talk now"}>
                             {offline ? "Not checked yet" : "Let their clones talk"}
                           </button>
                         )}
@@ -231,16 +231,13 @@ export default function RoommateFinder() {
                     </div>
                   ))}
                   {fits === null && <p className="text-sm text-slate-400">Checking listings…</p>}
-                  {fits?.length === 0 && <p className="text-sm text-slate-500">No sample listing has {people.length} bedrooms. Try a smaller group.</p>}
+                  {fits?.length === 0 && <p className="text-sm text-slate-500">No listing has {people.length} bedrooms right now. Try a smaller group.</p>}
                 </div>
               </div>
             </section>
           )}
         </>
       )}
-      <p className="text-xs text-slate-400">
-        Roommate engine: a port of Tanvi's AI Roommate Finder (questionnaire, ACP clone protocol, four-phase negotiation, compatibility analysis, swipe deck and My Matches). Students are sample profiles.
-      </p>
       {replay && <ReplayDialog id={replay.id} a={replay.a} b={replay.b} onClose={() => setReplay(null)} />}
     </div>
   );

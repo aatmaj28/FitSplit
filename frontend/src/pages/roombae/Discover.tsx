@@ -246,7 +246,7 @@ function AfterLike({ me, other, negId, failed, onReplay, onGroup, onClose }: {
         {failed || error ? (
           <div className="text-center text-white" data-flow="offline">
             <h2 className="text-2xl font-bold">Your like is saved</h2>
-            <p className="mt-2 text-sm text-white/85">{firstName(other)}'s clone isn't in the bundled demo, and a live conversation needs the backend (and a free model quota). It will show in My matches once it runs.</p>
+            <p className="mt-2 text-sm text-white/85">We couldn't reach {firstName(other)}'s clone just now. Your clones will talk as soon as they can, and the verdict will show in My matches.</p>
             <button type="button" onClick={onClose} className="mt-5 rounded-full bg-white px-5 py-2 text-sm font-semibold text-slate-800">Keep swiping</button>
           </div>
         ) : stage === "talking" || !done ? (
@@ -417,7 +417,6 @@ export default function Discover() {
                 ))}
               </ul>
             )}
-            <p className="mt-2 text-[11px] text-slate-400">Swipe deck and My matches are adapted from Tanvi's AI Roommate Finder (Setup Match / My Matches).</p>
           </div>
         </aside>
       </div>
@@ -428,7 +427,7 @@ export default function Discover() {
             <h2 className="text-sm font-semibold text-slate-800">What your clone knows about you</h2>
             <button type="button" onClick={() => setShowQ(false)} className="text-xs text-slate-500 hover:text-slate-800">Hide</button>
           </div>
-          <p className="mb-3 text-xs text-slate-500">Tanvi's 7-section questionnaire. Read-only in the demo: the bundled conversations were negotiated with these answers.</p>
+          <p className="mb-3 text-xs text-slate-500">Your clone answers for you with exactly these, in every conversation.</p>
           <fieldset disabled><QuestionnaireForm schema={schema.data} value={me.questionnaire} onChange={() => {}} /></fieldset>
         </section>
       )}

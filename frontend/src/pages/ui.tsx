@@ -39,9 +39,6 @@ export function ErrorState({ title = "Something went wrong", children, onRetry }
   );
 }
 
-export function SampleBadge({ children = "Sample data" }: { children?: ReactNode }) {
-  return <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-800 ring-1 ring-amber-200">{children}</span>;
-}
 
 export function PoweredBy({ dark = false }: { dark?: boolean }) {
   return (

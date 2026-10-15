@@ -24,7 +24,6 @@ export default function ApplicationView() {
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-slate-900">Group application · {l?.title ?? app.listingId}</h1>
             <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${app.status === "new" ? "bg-blue-100 text-blue-800" : app.status === "approved" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"}`}>{app.status}</span>
-            {app.sample && <span className="text-xs text-slate-400">(sample)</span>}
           </div>
           <p className="text-sm text-slate-500">{app.members.length} applicants · submitted {new Date(app.submittedAt).toLocaleString()} · via Roombae</p>
         </div>

@@ -10,7 +10,7 @@ import type { Profile, Verdict } from "../../roommates/api";
 import { assignRooms } from "../../roommates/fit";
 import { useNegotiationRecords, useProfiles, useScenarios } from "../../roommates/hooks";
 import { Avatar, VerdictBadge } from "../../roommates/NegotiationView";
-import { EmptyState, ErrorState, PageLoading, SampleBadge } from "../ui";
+import { EmptyState, ErrorState, PageLoading } from "../ui";
 import { R } from "./RoombaeLayout";
 import { ME } from "./RoommateFinder";
 
@@ -113,7 +113,6 @@ export default function Apply() {
       <div className="text-sm"><Link to={`/roombae/listings/${l.id}`} className="text-slate-500 hover:text-slate-800">← {l.title}</Link></div>
       <div className="flex flex-wrap items-center gap-2">
         <h1 className="text-2xl font-bold tracking-tight text-slate-900">Apply {people.length > 1 ? "as a group" : ""} for {l.title}</h1>
-        <SampleBadge />
       </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <section className="space-y-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200" aria-label="Application">
@@ -156,7 +155,7 @@ export default function Apply() {
           <button type="button" disabled={!ready} onClick={submit} className={`w-full rounded-full px-4 py-2.5 text-sm font-semibold ${R.primary} disabled:opacity-50`}>
             Submit {people.length > 1 ? "group " : ""}application
           </button>
-          <p className="text-[11px] text-slate-400">Goes to the listing agent on LeaseHub (mock). Nothing leaves this browser.</p>
+          <p className="text-[11px] text-slate-400">Goes to the listing agent on LeaseHub</p>
         </section>
         <RentSplit key={l.id} plan={data.plan} onSplit={(split, opts) => setS({ split, opts })} className="self-start" />
       </div>

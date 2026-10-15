@@ -4,7 +4,7 @@ import { baths, LISTINGS, money, type Listing } from "../../data/listings";
 import { getPlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { computeSplit } from "../../rentSplit";
-import { EmptyState, SampleBadge } from "../ui";
+import { EmptyState } from "../ui";
 import { R } from "./RoombaeLayout";
 
 /** Fair-split room prices per listing (from the parsed plans), e.g. JVUE 3 bed: $1,352 to $1,488. */
@@ -48,7 +48,6 @@ export function ListingCard({ l, price, badge }: { l: Listing; price?: { min: nu
             {price ? <>Rooms {money(price.min)} to {money(price.max)}/mo <span className="text-slate-400">(fair split)</span></> : <span className="text-slate-400">Working out room prices…</span>}
           </div>
         )}
-        <div className="mt-auto pt-1.5"><SampleBadge>Sample listing</SampleBadge></div>
       </div>
     </Link>
   );

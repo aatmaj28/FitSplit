@@ -87,7 +87,7 @@ export function DemoBar() {
         <div className="flex items-center gap-1.5">
           <button type="button" onClick={() => go(idx - 1)} disabled={idx === 0} className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium hover:bg-white/20 disabled:opacity-40">← Back</button>
           <button type="button" onClick={() => go(idx + 1)} disabled={idx === STEPS.length - 1} className="rounded-full bg-teal-400 px-3 py-1.5 text-xs font-semibold text-slate-900 hover:bg-teal-300 disabled:opacity-40">Next →</button>
-          <button type="button" onClick={() => { demo.reset(); go(0); }} className="rounded-full px-2 py-1.5 text-xs text-slate-300 hover:text-white" title="Restore the seeded demo data">Reset demo</button>
+          <button type="button" onClick={() => { demo.reset(); go(0); }} className="rounded-full px-2 py-1.5 text-xs text-slate-300 hover:text-white" title="Start the demo over">Reset demo</button>
           <button type="button" onClick={() => { setDemoActive(false); setOn(false); }} className="rounded-full px-2 py-1.5 text-xs text-slate-400 hover:text-white" aria-label="Exit demo">✕</button>
         </div>
       </div>

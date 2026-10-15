@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from "react-router";
 import { DemoBar } from "../demo/DemoBar";
 import { Avatar } from "../../roommates/NegotiationView";
 import { PortalBar, RoombaeMark } from "../portals";
-import { PageLoading, PoweredBy, SampleBadge } from "../ui";
+import { PageLoading, PoweredBy } from "../ui";
 
 export const R = {
   primary: "bg-[#e8553e] text-white hover:bg-[#d4452f]",
@@ -31,8 +31,7 @@ export default function RoombaeLayout() {
             <NavLink to="/roombae/fill-room" className={nav}>Fill a room</NavLink>
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            <SampleBadge />
-            <span className="flex items-center gap-1.5 rounded-full bg-slate-100 py-0.5 pl-0.5 pr-2.5 text-xs font-medium text-slate-700" title="Signed in as the demo student">
+            <span className="flex items-center gap-1.5 rounded-full bg-slate-100 py-0.5 pl-0.5 pr-2.5 text-xs font-medium text-slate-700" title="Signed in as Priya Sharma">
               <Avatar id="priya" name="Priya Sharma" color="#0d9488" size={6} />
               Priya S.
             </span>
@@ -47,7 +46,7 @@ export default function RoombaeLayout() {
       <DemoBar />
       <footer className="border-t border-orange-100 bg-white/70">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-slate-400">
-          <span>Mock Roombae portal for a hackathon demo. Listings and students are sample data.</span>
+          <span>Roombae · roommates and rooms that fit, in Boston</span>
           <PoweredBy />
         </div>
       </footer>

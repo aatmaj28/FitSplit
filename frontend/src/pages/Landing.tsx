@@ -78,7 +78,6 @@ export default function Landing() {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-slate-500">
-          <span>Everything here is sample data and works offline.</span>
           <button type="button" onClick={() => demo.reset()} className="rounded-full px-2.5 py-1 ring-1 ring-slate-300 hover:bg-white">
             Reset demo data
           </button>

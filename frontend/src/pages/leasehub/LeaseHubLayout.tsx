@@ -3,13 +3,13 @@ import { Link, NavLink, Outlet } from "react-router";
 import { useDemo } from "../../data/store";
 import { DemoBar } from "../demo/DemoBar";
 import { LeaseHubMark, PortalBar } from "../portals";
-import { PageLoading, PoweredBy, SampleBadge } from "../ui";
+import { PageLoading, PoweredBy } from "../ui";
 
 export const L = {
   primary: "bg-blue-600 text-white hover:bg-blue-700",
   soft: "bg-blue-50 text-blue-700",
 };
-export const AGENT = { name: "Dana Brooks", company: "Sample Realty (fictional)" };
+export const AGENT = { name: "Dana Brooks", role: "Agent" };
 
 const item = ({ isActive }: { isActive: boolean }) =>
   `flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors ${isActive ? "bg-white/10 text-white" : "text-slate-300 hover:bg-white/5 hover:text-white"}`;
@@ -38,10 +38,9 @@ export default function LeaseHubLayout() {
           <header className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white px-4 py-2.5 md:px-6">
             <span className="text-sm text-slate-500">Agent workspace</span>
             <div className="flex items-center gap-2">
-              <SampleBadge />
               <span className="flex items-center gap-2 text-sm text-slate-700">
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-slate-800 text-[11px] font-semibold text-white">DB</span>
-                {AGENT.name} <span className="hidden text-xs text-slate-400 sm:inline">· {AGENT.company}</span>
+                {AGENT.name} <span className="text-xs text-slate-400">· {AGENT.role}</span>
               </span>
             </div>
           </header>

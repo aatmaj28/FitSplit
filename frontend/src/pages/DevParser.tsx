@@ -104,9 +104,9 @@ export default function DevParser() {
           {offline && (
             <span
               className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800 ring-1 ring-amber-200"
-              title="Backend unreachable: showing bundled demo plans"
+              title="Showing saved plans"
             >
-              Offline demo data
+              Saved plans
             </span>
           )}
         </div>
@@ -138,7 +138,7 @@ export default function DevParser() {
             onFile={onUpload}
             busy={upload}
             disabled={offline}
-            disabledReason="Backend offline: upload needs the API (demo plans still work)"
+            disabledReason="Uploads are unavailable right now (saved plans still work)"
           />
         </section>
 

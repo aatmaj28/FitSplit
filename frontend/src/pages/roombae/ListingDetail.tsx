@@ -5,7 +5,7 @@ import { RentSplit } from "../../components/RentSplit";
 import { baths, listing, money } from "../../data/listings";
 import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
-import { EmptyState, ErrorState, PageLoading, SampleBadge } from "../ui";
+import { EmptyState, ErrorState, PageLoading } from "../ui";
 import { R } from "./RoombaeLayout";
 
 export default function ListingDetail() {
@@ -23,7 +23,6 @@ export default function ListingDetail() {
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-slate-900">{l.title}</h1>
-            <SampleBadge>Sample listing</SampleBadge>
             {ours && <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 ring-1 ring-emerald-200">Your group's pick</span>}
           </div>
           <p className="text-sm text-slate-500">{l.location} · {l.beds} bed · {baths(l.baths)} · {l.sqft.toLocaleString()} sq ft · {money(l.rent)}/mo</p>

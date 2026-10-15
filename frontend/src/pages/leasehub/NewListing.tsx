@@ -100,12 +100,12 @@ export default function NewListing() {
         <div className="grid gap-4 lg:grid-cols-2">
           <section className="space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <h2 className="font-semibold text-slate-900">1. Floor plan</h2>
-            <UploadBox onFile={upload} busy={busy} disabled={offline === true} disabledReason="Parsing a new plan needs the backend; pick a sample plan instead" />
+            <UploadBox onFile={upload} busy={busy} disabled={offline === true} disabledReason="Uploads are unavailable right now; pick one of these floor plans instead" />
             {error && <ErrorState title="Upload failed">{error}</ErrorState>}
             <p className="text-xs text-slate-500">Known plans come back from the cache instantly; a new plan takes 10-30 s (vision model reads labels, OpenCV measures walls and rooms).</p>
           </section>
           <section className="space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-            <h2 className="font-semibold text-slate-900">Or use a sample floor plan</h2>
+            <h2 className="font-semibold text-slate-900">Or pick one of your floor plans</h2>
             <div className="grid grid-cols-3 gap-2">
               {LISTINGS.map((l) => (
                 <button key={l.id} type="button" onClick={() => pickSample(l.id)} disabled={Boolean(busy)} data-sample={l.id}
@@ -180,7 +180,6 @@ export default function NewListing() {
                     </div>
                   </div>
                 )}
-                <p className="text-[11px] text-slate-400">Syndication is simulated for the demo.</p>
               </div>
             )}
           </section>

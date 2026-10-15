@@ -10,7 +10,7 @@ export function listingInfo(a: AgentListing) {
   return base ? { title: base.title, rent: base.rent, beds: base.beds, baths: base.baths, sqft: base.sqft, image: base.image } : { ...a.custom!, image: a.custom?.imageUrl };
 }
 
-// time saved: an estimate from sample numbers, and labelled as one
+// time saved: an estimate, and labelled as one
 const Q_PER_VIEW = 1 / 3; // one in three viewers would otherwise ask "how big is the room?"
 const MIN_PER_QUESTION = 5;
 
@@ -31,7 +31,7 @@ export default function Dashboard() {
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Active listings" value={listings.filter((l) => l.status === "published").length} />
-        <Stat label="3D tours viewed" value={views} hint="sample numbers" />
+        <Stat label="3D tours viewed" value={views} />
         <Stat label="Group applications" value={applications.length} hint={`${applications.filter((a) => a.status === "new").length} new`} />
         <Stat label="Showing requests" value={showings.length} />
       </div>
@@ -42,7 +42,7 @@ export default function Dashboard() {
           <div><span className="text-3xl font-bold">≈ {questions}</span> <span className="text-blue-100">room-size questions answered by the 3D view</span></div>
           <div><span className="text-3xl font-bold">≈ {hours.toFixed(1)} h</span> <span className="text-blue-100">of calls and emails</span></div>
         </div>
-        <p className="mt-2 text-xs text-blue-100">Estimate from sample numbers: 3D tours ÷ 3 × {MIN_PER_QUESTION} min per "how big is the room?" question. Group applications arrive with exact shares and furniture checked, so fewer wasted showings.</p>
+        <p className="mt-2 text-xs text-blue-100">Estimate: 3D tours ÷ 3 × {MIN_PER_QUESTION} min per "how big is the room?" question. Group applications arrive with exact shares and furniture checked, so fewer wasted showings.</p>
       </section>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
@@ -102,7 +102,7 @@ export default function Dashboard() {
             )}
           </section>
           <section className="rounded-2xl bg-white shadow-sm ring-1 ring-slate-200" aria-label="Showing requests">
-            <h2 className="border-b border-slate-100 px-4 py-3 font-semibold text-slate-900">Showing requests <span className="text-xs font-normal text-slate-400">(sample)</span></h2>
+            <h2 className="border-b border-slate-100 px-4 py-3 font-semibold text-slate-900">Showing requests</h2>
             <ul className="divide-y divide-slate-100">
               {showings.map((s) => (
                 <li key={s.id} className="px-4 py-2.5 text-sm">

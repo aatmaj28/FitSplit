@@ -26,8 +26,9 @@ USAGE_PATH = LLM_DIR / "usage.json"
 CALLS_PATH = LLM_DIR / "calls.jsonl"
 LOCK_PATH = LLM_DIR / ".usage.lock"
 # hard cap on Claude calls (all of them, since the ledger started): 80 for the overnight run (17 used),
-# then "40 more" (57) for the 2026-10-15 fixes, then raised by the user to 150 in total for that day
-CLAUDE_CAP = int(os.getenv("CLAUDE_CALL_CAP", "150"))
+# then "40 more" (57) for the 2026-10-15 fixes, then raised by the user to 150 for that day; for the
+# final pre-hackathon changes "max 10 more" on top of the 108 used by then
+CLAUDE_CAP = int(os.getenv("CLAUDE_CALL_CAP", "118"))
 
 _purpose: contextvars.ContextVar[str] = contextvars.ContextVar("llm_purpose", default="semantics")
 

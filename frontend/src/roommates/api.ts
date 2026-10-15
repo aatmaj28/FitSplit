@@ -212,7 +212,7 @@ export function followNegotiation(id: string, onEvent: (e: NegotiationEvent) => 
         onError("Lost the connection to the live negotiation.");
       };
     })
-    .catch(() => !stopped && onError("This negotiation isn't available offline."));
+    .catch(() => !stopped && onError("This conversation isn't available right now."));
   return () => {
     stopped = true;
     source?.close();
