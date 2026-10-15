@@ -1,13 +1,30 @@
 import type { RoomType } from "../../types";
 import type { PlanModel } from "./geometry";
-import type { ViewMode } from "./PlanScene";
+import type { Angle } from "./PlanScene";
 import { ROOM_COLORS, ROOM_LABELS } from "./theme";
 
 const pill = "pointer-events-auto rounded-full bg-white/90 shadow-sm ring-1 ring-slate-200 backdrop-blur";
 
-export function ViewerToolbar({ view, onView, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount }: {
-  view: ViewMode;
-  onView: (v: ViewMode) => void;
+const PRESETS: { id: "top" | Angle; label: string }[] = [
+  { id: "top", label: "Top" },
+  { id: "corner", label: "Corner" },
+  { id: "front", label: "Front" },
+  { id: "side", label: "Side" },
+];
+
+function RotateIcon({ flip }: { flip?: boolean }) {
+  return (
+    <svg viewBox="0 0 20 20" className={`h-4 w-4 ${flip ? "-scale-x-100" : ""}`} fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden>
+      <path d="M4.5 9.5a5.5 5.5 0 1 1 1.6 3.9" strokeLinecap="round" />
+      <path d="M4 5.5v4h4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function ViewerToolbar({ preset, onPreset, onRotate, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount }: {
+  preset: "top" | Angle;
+  onPreset: (p: "top" | Angle) => void;
+  onRotate: (deg: number) => void;
   show2D: boolean;
   onShow2D: (v: boolean) => void;
   canShow2D: boolean;
@@ -20,21 +37,32 @@ export function ViewerToolbar({ view, onView, show2D, onShow2D, canShow2D, wallH
   itemCount: number;
 }) {
   return (
-    <div className="pointer-events-none absolute inset-x-2 top-2 z-30 flex flex-wrap items-center gap-2 sm:inset-x-3 sm:top-3">
-      <div className={`${pill} inline-flex p-1`} role="group" aria-label="Camera">
-        {(["3d", "top"] as const).map((v) => (
+    <div className="pointer-events-none absolute inset-x-2 top-2 z-30 flex flex-wrap items-center gap-1.5 sm:inset-x-3 sm:top-3 sm:gap-2">
+      <div className={`${pill} inline-flex items-center p-0.5 sm:p-1`} role="group" aria-label="Camera">
+        {PRESETS.map((p) => (
           <button
-            key={v}
+            key={p.id}
             type="button"
-            onClick={() => onView(v)}
-            aria-pressed={view === v}
-            className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
-              view === v ? "bg-teal-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"
+            onClick={() => onPreset(p.id)}
+            aria-pressed={preset === p.id}
+            aria-label={`${p.label} view`}
+            title={`${p.label} view`}
+            className={`rounded-full px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
+              preset === p.id ? "bg-teal-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            {v === "3d" ? "3D view" : "Top view"}
+            {p.label}
           </button>
         ))}
+        <span className="mx-0.5 h-4 w-px bg-slate-200" aria-hidden />
+        <button type="button" onClick={() => onRotate(45)} aria-label="Rotate view 45° left" title="Rotate 45° left"
+          className="rounded-full p-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900">
+          <RotateIcon />
+        </button>
+        <button type="button" onClick={() => onRotate(-45)} aria-label="Rotate view 45° right" title="Rotate 45° right"
+          className="rounded-full p-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900">
+          <RotateIcon flip />
+        </button>
       </div>
       <button
         type="button"

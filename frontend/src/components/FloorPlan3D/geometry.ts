@@ -158,3 +158,14 @@ export function polylabel(poly: Pt[], precision = 0.1): Pt {
   }
   return [best.x, best.y];
 }
+
+/** Even-odd point in polygon test (any units). */
+export function pointInPoly([x, y]: Pt, poly: Pt[]): boolean {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i];
+    const [xj, yj] = poly[j];
+    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}

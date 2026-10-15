@@ -50,7 +50,7 @@ for (const plan of ["jvue_3bed", "longwood_2bed"]) {
   const label = await page.getByRole("button", { name: /^DREAM · 205/ }).boundingBox();
   await page.mouse.click(label.x + label.width / 2, label.y + label.height / 2 + 40); // floor just below the label
   await page.waitForSelector("aside");
-  await page.getByRole("button", { name: "3D view" }).click();
+  await page.getByRole("button", { name: "Corner view" }).click();
   await page.waitForTimeout(1200);
   console.log("canvas", Math.round(box.width), "x", Math.round(box.height), "| selected:", await page.locator("aside h2").textContent());
   await shot(page.locator("main"), "jvue_3bed_room_panel.png");

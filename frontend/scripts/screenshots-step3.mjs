@@ -37,7 +37,7 @@ const statusLines = async (page) => (await page.locator("aside li button").allIn
   console.log("green:", await statusLines(page));
   await page.locator("[data-view]").screenshot({ path: join(OUT, "furniture_green.png") });
   console.log("saved furniture_green.png");
-  await page.getByRole("button", { name: "3D view" }).click(); // same layout as 3D boxes
+  await page.getByRole("button", { name: "Corner view" }).click(); // same layout as 3D boxes
   await page.waitForTimeout(1500);
   await page.locator("[data-view]").screenshot({ path: join(OUT, "furniture_3d.png") });
   console.log("saved furniture_3d.png");

@@ -1,6 +1,6 @@
 import { CameraControlsImpl, Edges, Line, RoundedBox } from "@react-three/drei";
 import { useThree, type ThreeEvent } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, type RefObject } from "react";
 import * as THREE from "three";
 import { IN, type FitResult, type FurnitureItem } from "./furniture";
 import { flatGeometry } from "./geometry";
@@ -46,8 +46,10 @@ export function FurnitureLayer({ items, fits, baseY, selectedId, editing, origin
   onSelect: (id: string) => void;
   onDrag: (id: string, x: number, z: number) => void;
 }) {
+  const group = useRef<THREE.Group>(null);
   return (
-    <>
+    <group ref={group}>
+      <TouchControls editing={editing} items={items} selectedId={selectedId} origin={origin} group={group} onSelect={onSelect} onDrag={onDrag} />
       {items.map((it) => (
         <Piece
           key={it.id}
@@ -61,8 +63,103 @@ export function FurnitureLayer({ items, fits, baseY, selectedId, editing, origin
           onDrag={onDrag}
         />
       ))}
-    </>
+    </group>
   );
+}
+
+/**
+ * Touch: one finger moves a piece (the one under the finger, else the selected one), two fingers orbit and
+ * zoom. Listens in the capture phase, so it decides before camera-controls sees the finger. Mouse dragging
+ * is handled per piece in <Piece>.
+ */
+function TouchControls({ editing, items, selectedId, origin, group, onSelect, onDrag }: {
+  editing: boolean;
+  items: FurnitureItem[];
+  selectedId: string | null;
+  origin: [number, number];
+  group: RefObject<THREE.Group | null>;
+  onSelect: (id: string) => void;
+  onDrag: (id: string, x: number, z: number) => void;
+}) {
+  const controls = useThree((s) => s.controls) as unknown as CameraControlsImpl | null;
+  const camera = useThree((s) => s.camera);
+  const el = useThree((s) => s.events.connected) as HTMLElement | null;
+  const latest = useRef({ items, selectedId, origin, camera, onSelect, onDrag });
+  latest.current = { items, selectedId, origin, camera, onSelect, onDrag };
+
+  // with a piece selected one finger is for the piece, two fingers for the camera
+  useEffect(() => {
+    if (!controls) return;
+    const A = CameraControlsImpl.ACTION;
+    const ortho = (camera as THREE.OrthographicCamera).isOrthographicCamera;
+    const piece = editing && selectedId != null;
+    controls.touches.one = piece ? A.NONE : ortho ? A.TOUCH_TRUCK : A.TOUCH_ROTATE;
+    controls.touches.two = ortho ? A.TOUCH_ZOOM_TRUCK : piece ? A.TOUCH_DOLLY_ROTATE : A.TOUCH_DOLLY_TRUCK;
+  }, [controls, camera, editing, selectedId]);
+
+  useEffect(() => {
+    if (!el || !editing) return;
+    const raycaster = new THREE.Raycaster();
+    const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const hit = new THREE.Vector3();
+    const fingers = new Set<number>();
+    let drag: { pointer: number; itemId: string; start: [number, number]; from: [number, number] | null } | null = null;
+    const aim = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      raycaster.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), latest.current.camera);
+    };
+    const floorAt = (e: PointerEvent): [number, number] | null => {
+      aim(e);
+      const o = latest.current.origin;
+      return raycaster.ray.intersectPlane(floor, hit) ? [hit.x + o[0], hit.z + o[1]] : null;
+    };
+    const pieceAt = (e: PointerEvent): string | null => {
+      aim(e);
+      for (const h of raycaster.intersectObjects(group.current?.children ?? [], true)) {
+        if (!(h.object as THREE.Mesh).isMesh) continue;
+        for (let o: THREE.Object3D | null = h.object; o; o = o.parent) if (o.userData.itemId) return o.userData.itemId as string;
+      }
+      return null;
+    };
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== "touch") return;
+      fingers.add(e.pointerId);
+      if (fingers.size > 1) {
+        drag = null; // second finger: the camera takes over
+        return;
+      }
+      const piece = pieceAt(e);
+      const itemId = piece ?? latest.current.selectedId;
+      const start = itemId ? floorAt(e) : null;
+      if (!itemId || !start) return; // nothing to move: one finger orbits
+      if (controls) controls.touches.one = CameraControlsImpl.ACTION.NONE; // set before camera-controls reads it
+      if (piece) latest.current.onSelect(piece);
+      drag = { pointer: e.pointerId, itemId, start, from: null };
+    };
+    const move = (e: PointerEvent) => {
+      if (!drag || e.pointerId !== drag.pointer || fingers.size > 1) return;
+      const p = floorAt(e);
+      const it = latest.current.items.find((i) => i.id === drag!.itemId);
+      if (!p || !it) return;
+      drag.from ??= [it.x, it.z];
+      latest.current.onDrag(it.id, drag.from[0] + p[0] - drag.start[0], drag.from[1] + p[1] - drag.start[1]);
+    };
+    const up = (e: PointerEvent) => {
+      fingers.delete(e.pointerId);
+      if (drag?.pointer === e.pointerId) drag = null;
+    };
+    el.addEventListener("pointerdown", down, true);
+    el.addEventListener("pointermove", move, true);
+    window.addEventListener("pointerup", up, true);
+    window.addEventListener("pointercancel", up, true);
+    return () => {
+      el.removeEventListener("pointerdown", down, true);
+      el.removeEventListener("pointermove", move, true);
+      window.removeEventListener("pointerup", up, true);
+      window.removeEventListener("pointercancel", up, true);
+    };
+  }, [el, editing, controls, group]);
+  return null;
 }
 
 function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
@@ -95,6 +192,7 @@ function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
 
   const down = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
+    if (e.pointerType === "touch") return; // <TouchControls> selects and drags on touch
     onSelect(item.id);
     if (!editing) return;
     const p = floorPoint(e);
@@ -120,7 +218,7 @@ function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
   };
 
   return (
-    <group position={[item.x, y, item.z]} rotation-y={(-item.rot * Math.PI) / 180}>
+    <group position={[item.x, y, item.z]} rotation-y={(-item.rot * Math.PI) / 180} userData={{ itemId: item.id }}>
       {/* fit status plate: green = fits, red = hits a wall / furniture / sticks out */}
       <mesh rotation-x={-Math.PI / 2} position-y={0.035} renderOrder={3}>
         <planeGeometry args={[w + 0.2, d + 0.2]} />
@@ -137,6 +235,7 @@ function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
         onPointerDown={down}
         onPointerMove={move}
         onPointerUp={up}
+        onClick={(e) => e.stopPropagation()} // a click on a piece must not reach the floor (that would deselect it)
         onPointerOver={(e) => {
           e.stopPropagation();
           document.body.style.cursor = editing ? "grab" : "pointer";

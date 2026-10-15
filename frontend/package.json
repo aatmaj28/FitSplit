@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "screenshots": "node scripts/screenshots.mjs",
     "screenshots:step3": "node scripts/screenshots-step3.mjs",
-    "demo:sync": "node scripts/sync-demo.mjs"
+    "demo:sync": "node scripts/sync-demo.mjs",
+    "e2e:viewer": "node scripts/e2e-viewer.mjs",
+    "screenshots:views": "node scripts/screenshots-views.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

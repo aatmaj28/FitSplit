@@ -5,7 +5,7 @@ import { FitChecker, autoPlace, describe, newId, snapCenter, type FurnitureItem,
 import { FurniturePanel } from "./FurniturePanel";
 import { FALLBACK_PPF, buildModel } from "./geometry";
 import { LabelLayer } from "./LabelLayer";
-import { PlanScene, type ViewMode } from "./PlanScene";
+import { PlanScene, type Angle, type ViewMode } from "./PlanScene";
 import { RoomPanel } from "./RoomPanel";
 import { useLayout } from "./useLayout";
 import { Legend, ViewerToolbar } from "./ViewerToolbar";
@@ -31,9 +31,6 @@ export interface FloorPlan3DProps {
   layoutKey?: string;
 }
 
-/** Edit layout lowers the walls to this height (ft) so furniture stays visible in 3D; the slider still works. */
-const EDIT_WALL_FT = 4;
-
 /** 3D model of a parsed floor plan: 1 scene unit = 1 ft, top view matches the 2D image. */
 export function FloorPlan3D({
   plan,
@@ -51,6 +48,9 @@ export function FloorPlan3D({
   const model = useMemo(() => buildModel(plan), [plan]);
   const checker = useMemo(() => new FitChecker(model), [model]);
   const [view, setView] = useState<ViewMode>(initialView);
+  const [angle, setAngle] = useState<Angle>("corner");
+  const [angleOffset, setAngleOffset] = useState(0);
+  const [spin, setSpin] = useState({ seq: 0, deg: 0 });
   const [resetKey, setResetKey] = useState(0);
   const [show2D, setShow2D] = useState(initialShow2D);
   const [height, setHeight] = useState(wallHeight);
@@ -60,7 +60,7 @@ export function FloorPlan3D({
   const [items, setItems] = useLayout(layoutKey ?? plan.plan_name ?? plan.source_image);
   const [itemId, setItemId] = useState<string | null>(null);
   const [autoMessage, setAutoMessage] = useState<string | null>(null);
-  const wallsBeforeEdit = useRef<{ before: number; cut: number } | null>(null);
+  const [folded, setFolded] = useState(false); // phones: room sheet folded to its title row
   const pointerDown = useRef<[number, number] | null>(null);
   const labelEls = useRef<(HTMLElement | null)[]>([]);
 
@@ -183,8 +183,24 @@ export function FloorPlan3D({
   }, [editing, itemId, rotate, remove, nudge]);
 
   const onReady = useCallback(() => setReady(true), []);
-  const changeView = (v: ViewMode) => (v === view ? setResetKey((k) => k + 1) : setView(v));
+  /** Top, or one of the 3D angle presets; picking the active one again re-fits the camera. */
+  const pickPreset = (p: "top" | Angle) => {
+    if (p === "top") return view === "top" ? setResetKey((k) => k + 1) : setView("top");
+    if (view === "3d" && angle === p && angleOffset === 0) return setResetKey((k) => k + 1);
+    setAngle(p);
+    setAngleOffset(0);
+    setView("3d");
+  };
+  /** Rotate 45°: turns the 3D camera; from the top view it switches to the 3D corner view turned by 45°. */
+  const rotateView = (deg: number) => {
+    if (view === "top") {
+      setAngle("corner");
+      setAngleOffset(deg);
+      setView("3d");
+    } else setSpin((s) => ({ seq: s.seq + 1, deg }));
+  };
   const room = roomId ? (plan.rooms.find((r) => r.id === roomId) ?? null) : null;
+  useEffect(() => setFolded(false), [roomId]);
   const roomItems = room ? items.filter((i) => i.roomId === room.id) : [];
 
   return (
@@ -192,6 +208,7 @@ export function FloorPlan3D({
       className={`relative h-full w-full overflow-hidden rounded-2xl bg-slate-50 ring-1 ring-slate-200 ${className}`}
       data-ready={ready}
       data-view={view}
+      data-angle={view === "top" ? "top" : angle}
       data-editing={editing}
       onPointerDown={(e) => {
         pointerDown.current = [e.clientX, e.clientY];
@@ -220,6 +237,10 @@ export function FloorPlan3D({
           labelEls={labelEls}
           furniture={{ items, fits, selectedId: itemId, editing, doorZones, onSelect: selectItem, onDrag: drag }}
           focusId={editing ? roomId : null}
+          angle={angle}
+          angleOffset={angleOffset}
+          spin={spin}
+          panelFolded={folded}
         />
       </Canvas>
       <LabelLayer model={model} selectedId={roomId} onSelect={selectFromScene} els={labelEls} passThrough={editing} />
@@ -227,8 +248,9 @@ export function FloorPlan3D({
       {showControls && (
         <>
           <ViewerToolbar
-            view={view}
-            onView={changeView}
+            preset={view === "top" ? "top" : angle}
+            onPreset={pickPreset}
+            onRotate={rotateView}
             show2D={show2D}
             onShow2D={setShow2D}
             canShow2D={Boolean(imageUrl)}
@@ -238,16 +260,7 @@ export function FloorPlan3D({
             editing={editing}
             onEditing={(v) => {
               setEditing(v);
-              if (v) {
-                const cut = Math.min(height, EDIT_WALL_FT);
-                wallsBeforeEdit.current = { before: height, cut };
-                setHeight(cut);
-              } else {
-                const w = wallsBeforeEdit.current;
-                if (w && height === w.cut) setHeight(w.before); // restore unless the slider was moved while editing
-                wallsBeforeEdit.current = null;
-                setItemId(null);
-              }
+              if (!v) setItemId(null);
             }}
             onReset={reset}
             itemCount={items.length}
@@ -261,7 +274,7 @@ export function FloorPlan3D({
         </div>
       )}
       {room && (
-        <RoomPanel room={room} plan={plan} onClose={() => selectFromScene(null)} onSelect={selectFromScene} compact={editing}>
+        <RoomPanel room={room} plan={plan} onClose={() => selectFromScene(null)} onSelect={selectFromScene} compact={editing} folded={folded} onFold={setFolded}>
           {editing && (
             <FurniturePanel
               items={roomItems}
