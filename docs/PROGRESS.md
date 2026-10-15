@@ -30,8 +30,10 @@ Branch: `overnight` (baseline on `main`). Checks after every phase: `cd frontend
 | 1 Chat auto scroll + replay controls | done | NegotiationView scroll box, Jump to latest, pause / 1×2×4× / Skip to verdict; `scripts/e2e-chat.mjs` |
 | 2 Navigation | done | landing with 3 entries, PortalBar (Home + switcher), logos to portal home; `scripts/e2e-nav.mjs` |
 | 3 Swipe to match | done | Discover + My matches (Tanvi's Setup Match / My Matches), avatars, deck filters; `scripts/e2e-swipe.mjs` (online, offline, phone) |
-| 4 Clone conversation quality | todo | |
-| 5 Reset view button | todo | |
-| 6 Demo step bar sync | todo | |
+| 4 Clone conversation quality | done | engine rm2 (memory.py): labelled turns + memory, modules by phase, only real non-negotiables end chats early, field notes (move-in vs lease), SAY lines + "details"; seeded conversations regenerated on Groq |
+| 5 Reset view button | done | every 3D viewer (toolbar or standalone pill); `scripts/e2e-reset.mjs` |
+| 6 Demo step bar sync | done | follows the page, keeps the last step elsewhere, Next/Back from anywhere, Shift+arrow nudge no longer changes steps; `scripts/e2e-stepbar.mjs` |
 
 API budget for these fixes: Groq first, Claude at most 40 more calls (cap 57 in total), everything cached.
+
+- 2026-10-15 fixes done: six fix commits (+2 follow-ups to fix 3); all 12 bundled conversations regenerated with engine rm2 (Groq for 3, Claude for the rest after Groq / Gemini ran out); Claude 94 / 150 in total. All suites green from a cold `npm run dev:all`: pytest 53, check 58, build, e2e demo 48, swipe 69, chat 30, stepbar 15, nav 12, reset 8, viewer 10, rentcheck 17. Report: docs/FIXES_2026-10-15.md.
