@@ -223,6 +223,7 @@ export function FloorPlan3D({
       data-view={view}
       data-angle={view === "top" ? "top" : angle}
       data-editing={editing}
+      data-item-selected={editing && itemId != null}
       onPointerDown={(e) => {
         pointerDown.current = [e.clientX, e.clientY];
       }}

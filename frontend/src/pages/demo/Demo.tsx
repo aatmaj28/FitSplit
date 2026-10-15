@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { PRODUCT } from "../../brand";
 import { demo } from "../../data/store";
-import { setDemoActive, STEPS } from "./steps";
+import { setDemoActive, setDemoStep, STEPS } from "./steps";
 
 /** /demo: the walkthrough's start page; /demo/:step jumps straight into a step. */
 export default function Demo() {
@@ -12,12 +12,14 @@ export default function Demo() {
     const n = Number(step);
     if (n >= 1 && n <= STEPS.length) {
       setDemoActive(true);
+      setDemoStep(n - 1);
       navigate(STEPS[n - 1].path(), { replace: true });
     }
   }, [step, navigate]);
   const start = () => {
     demo.reset();
     setDemoActive(true);
+    setDemoStep(0);
     navigate(STEPS[0].path());
   };
   return (
@@ -29,7 +31,7 @@ export default function Demo() {
         <ol className="mt-8 space-y-2">
           {STEPS.map((s) => (
             <li key={s.n}>
-              <button type="button" onClick={() => { setDemoActive(true); navigate(s.path()); }} className="flex w-full items-start gap-3 rounded-xl bg-white/5 px-4 py-3 text-left ring-1 ring-white/10 transition hover:bg-white/10">
+              <button type="button" onClick={() => { setDemoActive(true); setDemoStep(s.n - 1); navigate(s.path()); }} className="flex w-full items-start gap-3 rounded-xl bg-white/5 px-4 py-3 text-left ring-1 ring-white/10 transition hover:bg-white/10">
                 <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-teal-400 text-sm font-bold text-slate-900">{s.n}</span>
                 <span>
                   <span className="block font-semibold"><span className="text-teal-300">{s.side}</span> · {s.title}</span>

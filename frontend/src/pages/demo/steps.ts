@@ -44,9 +44,28 @@ export const STEPS: Step[] = [
       const app = getDemo().applications.find((a) => a.listingId === DEMO_LISTING && !a.sample);
       return app ? `/leasehub/applications/${app.id}` : "/leasehub";
     },
-    matches: (p) => p.startsWith("/leasehub/applications") || p === "/leasehub",
+    // the dashboard is not step 6 (an agent may open it any time); "Next" onto it still shows step 6
+    matches: (p) => p.startsWith("/leasehub/applications"),
   },
 ];
+
+const STEP_KEY = "fitsplit.demo.step";
+/** The step the presenter is on (index into STEPS): set by the bar's buttons and by visiting a step's page. */
+export function demoStep(): number {
+  try {
+    const n = Number(sessionStorage.getItem(STEP_KEY));
+    return Number.isInteger(n) && n >= 0 && n < STEPS.length ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+export function setDemoStep(i: number): void {
+  try {
+    sessionStorage.setItem(STEP_KEY, String(i));
+  } catch {
+    /* ignore */
+  }
+}
 
 const KEY = "fitsplit.demo.active";
 export function demoActive(): boolean {
@@ -59,7 +78,10 @@ export function demoActive(): boolean {
 export function setDemoActive(on: boolean): void {
   try {
     if (on) sessionStorage.setItem(KEY, "1");
-    else sessionStorage.removeItem(KEY);
+    else {
+      sessionStorage.removeItem(KEY);
+      sessionStorage.removeItem(STEP_KEY);
+    }
   } catch {
     /* ignore */
   }
