@@ -9,11 +9,11 @@
       "output_tokens": 0
     },
     "claude": {
-      "calls": 111,
-      "ok": 106,
+      "calls": 112,
+      "ok": 107,
       "errors": 5,
-      "input_tokens": 368218,
-      "output_tokens": 94822
+      "input_tokens": 371901,
+      "output_tokens": 95676
     },
     "groq": {
       "calls": 621,

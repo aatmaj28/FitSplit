@@ -121,5 +121,12 @@ def test_vision_retries_transient_errors_before_falling_back(monkeypatch):
     monkeypatch.setitem(vision.PROVIDERS, "claude", lambda **kw: pytest.fail("Claude must not be used for a transient Gemini error"))
     monkeypatch.setattr(vision, "provider_settings", lambda: {n: {"model": "m", "api_key": "k", "env_key": "X"} for n in ("gemini", "claude", "groq")})
     waits = []
-    res = vision.vision_json(b"img", "image/png", "p", lambda t: t, sleep=waits.append)
+    # retries happen on whichever provider is first; pin Gemini first here (the default is Claude first)
+    res = vision.vision_json(b"img", "image/png", "p", lambda t: t, sleep=waits.append, order=["gemini", "claude", "groq"])
     assert res.provider == "gemini" and calls == ["gemini"] * 3 and waits == [3.0, 8.0]
+
+
+def test_vision_chain_is_claude_first_by_default():
+    from app.config import PROVIDER_ORDER
+
+    assert PROVIDER_ORDER == ["claude", "gemini", "groq"]

@@ -66,9 +66,9 @@ student profiles ──► AI clones negotiate (4 phases, shared memory) ──�
 ```
 
 - **Floor plan parser** (`backend/app/geometry`, `pipeline.py`). OpenCV finds walls and door and
-  window gaps, then closes the rooms off. A vision model (Gemini, then Claude, then Groq) reads the
-  room names and printed dimensions, which set the scale. Results are cached by image hash, so a known
-  plan comes back instantly and never calls a model again.
+  window gaps, then closes the rooms off. A vision model (Claude, then Gemini, then Groq; see
+  `VISION_CHAIN_ORDER`) reads the room names and printed dimensions, which set the scale. Results
+  are cached by image hash, so a known plan comes back instantly and never calls a model again.
 - **FastAPI backend.** It serves parsing, plans, the AI rent check, the roommate engine (REST plus a
   streamed conversation) and an LLM layer. That layer counts every call, caps Claude and caches every
   answer on disk.
@@ -90,7 +90,7 @@ student profiles ──► AI clones negotiate (4 phases, shared memory) ──�
 | Layer | Tools |
 |---|---|
 | Backend | Python 3.11, FastAPI, Uvicorn, OpenCV, NumPy, Pillow, Pydantic, pytest |
-| AI | Gemini Flash (vision), Claude Opus (vision) and Sonnet (text), Groq (gpt-oss-120b / 20b, qwen3.8-27b); SDKs `google-genai`, `anthropic`, `groq` |
+| AI | Claude Opus (vision) and Sonnet (text), Gemini Flash (vision), Groq (gpt-oss-120b / 20b, qwen3.8-27b); SDKs `anthropic`, `google-genai`, `groq` |
 | Frontend | React 19, TypeScript 7, Vite 8, Tailwind CSS 4, React Router 7, three.js + React Three Fiber + drei, Framer Motion, jsPDF |
 | Tests | pytest (backend), Node checks on the real TS modules, Playwright browser tests (in Google Chrome) |
 
@@ -175,13 +175,13 @@ restart `npm run dev:all`.
 
 | Key | Get it at | Used for |
 |---|---|---|
-| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/app/apikey) | vision (first choice): reading a new floor plan, AI rent checks; a last-resort text model |
-| `ANTHROPIC_API_KEY` | [Anthropic Console](https://console.anthropic.com/settings/keys) | vision fallback (Claude Opus); clone conversations and house rules (Claude Sonnet, first for text) |
+| `ANTHROPIC_API_KEY` | [Anthropic Console](https://console.anthropic.com/settings/keys) | first choice for both: vision (Claude Opus: reading a new floor plan, AI rent checks) and text (Claude Sonnet: clone conversations, house rules) |
+| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/app/apikey) | vision fallback; a last-resort text model |
 | `GROQ_API_KEY` | [GroqCloud](https://console.groq.com/keys) | free text models for clone conversations; vision last resort |
 
 | Feature | Needs |
 |---|---|
-| Uploading a new floor plan, AI check of a new split | a vision key: Gemini or Anthropic (Groq as a last resort) |
+| Uploading a new floor plan, AI check of a new split | a vision key: Anthropic or Gemini (Groq as a last resort) |
 | A new clone conversation, house rules for a new group | a text key: Anthropic or Groq (Gemini as a last resort) |
 | Everything in the guided demo | nothing |
 
@@ -189,9 +189,11 @@ Settings, in `backend/.env` or the shell:
 
 - **`CLAUDE_CALL_CAP`** (default `250`): a hard cap on the total number of Claude calls, counted in
   `data/llm/usage.json`. Once it's reached, Claude is skipped and the next provider is used.
+- **`VISION_CHAIN_ORDER`** (default `claude,gemini,groq`): the order of the vision providers for
+  floor plan parsing and the AI rent check. Use `gemini,claude,groq` to try Gemini's free tier first.
 - **`TEXT_CHAIN_ORDER`** (default `claude,groq,gemini`): the order of the text providers. Use
-  `groq,gemini,claude` to put the free Groq models first. The vision order is always Gemini, then
-  Claude, then Groq.
+  `groq,gemini,claude` to put the free Groq models first.
+- Both orders in use are shown at http://localhost:8000/api/health.
 - **`PROVIDER_TIMEOUT_S`** (default `30`): how long one vision provider may take before the next
   one is tried.
 - Model overrides are listed in `backend/.env.example`.
@@ -249,13 +251,14 @@ node scripts/e2e-rentcheck.mjs   # AI check badge and suggestions
 - **"Uploads are unavailable right now".** The API isn't running. Check the `[api]` lines in the
   terminal and make sure `backend/.venv` exists.
 - **A new upload fails with "no provider" (502).** No vision key is set, or all of them are out of
-  quota. Add `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` to `backend/.env` and restart.
+  quota. Add `ANTHROPIC_API_KEY` or `GEMINI_API_KEY` to `backend/.env` and restart.
 - **Quota or rate-limit errors (429).** Each provider falls back to the next one. Groq's free models
   have per-minute and daily token limits, and Gemini's free tier has a daily quota. When Claude
   reaches `CLAUDE_CALL_CAP`, Claude is skipped. Check http://localhost:8000/api/llm/usage.
-- **A new floor plan takes about 40 s.** An overloaded Gemini can hang until `PROVIDER_TIMEOUT_S`
-  (30 s) before Claude answers (about 8 s). Lower the timeout, or leave `GEMINI_API_KEY` empty to
-  skip Gemini.
+- **A new floor plan is slow.** With Claude first, a live parse takes about 10 s. If
+  `VISION_CHAIN_ORDER` puts Gemini first and Gemini is overloaded, it can hang until
+  `PROVIDER_TIMEOUT_S` (30 s) before the next provider answers; lower the timeout or keep Claude
+  first.
 - **First run: the 3D view doesn't load** ("Failed to fetch dynamically imported module"). Vite is
   still pre-bundling dependencies, so reload the page. If it keeps happening, stop the server, run
   `rm -rf frontend/node_modules/.vite` and start again.

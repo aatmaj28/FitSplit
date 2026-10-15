@@ -25,6 +25,7 @@ from fastapi.responses import FileResponse
 from PIL import Image
 
 from . import cache, rentcheck
+from .llm.text import TEXT_CHAIN_ORDER
 from .config import FLOORPLANS_DIR, PARSED_DIR, PROVIDER_ORDER, PROVIDER_TIMEOUT_S, provider_settings
 from .llm import usage as llm_usage
 from .llm.vision import VisionError
@@ -49,7 +50,9 @@ def health() -> dict:
     return {
         "status": "ok",
         "pipeline_version": PIPELINE_VERSION,
-        "provider_order": PROVIDER_ORDER,
+        "provider_order": PROVIDER_ORDER,  # = vision_chain_order (kept for older clients)
+        "vision_chain_order": PROVIDER_ORDER,
+        "text_chain_order": TEXT_CHAIN_ORDER,
         "provider_timeout_s": PROVIDER_TIMEOUT_S,
         "providers": {name: {"configured": bool(s["api_key"]), "model": s["model"]}
                       for name, s in settings.items()},

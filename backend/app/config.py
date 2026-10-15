@@ -27,7 +27,11 @@ load_dotenv(BACKEND_DIR / ".env")
 
 # ----------------------------------------------------------------------------- providers
 
-PROVIDER_ORDER = ["gemini", "claude", "groq"]
+# vision chain (floor plan labels, AI rent check): Claude first since 2026-10-15, like the text chain;
+# VISION_CHAIN_ORDER=gemini,claude,groq restores the original order
+VISION_PROVIDERS = ("claude", "gemini", "groq")
+PROVIDER_ORDER = [p.strip() for p in os.getenv("VISION_CHAIN_ORDER", "claude,gemini,groq").split(",")
+                  if p.strip() in VISION_PROVIDERS] or list(VISION_PROVIDERS)
 PROVIDER_TIMEOUT_S = float(os.getenv("PROVIDER_TIMEOUT_S", "30"))
 
 # Groq: only model whose /models entry lists "image" in input_modalities (checked 2026-10-15
