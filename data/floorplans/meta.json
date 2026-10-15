@@ -1,0 +1,8 @@
+{
+  "jvue_3bed.png":        {"total_sqft": 1500, "rent": 4200, "beds": 3, "baths": 2.5},
+  "longwood_2bed.png":    {"total_sqft": 1125, "rent": 3450, "beds": 2, "baths": 1},
+  "longwood_1bed.png":    {"total_sqft": 775,  "rent": 2700, "beds": 1, "baths": 1},
+  "jvue_1bed.png":        {"total_sqft": 771,  "rent": 2650, "beds": 1, "baths": 1},
+  "missionmain_3bed.png": {"total_sqft": 1427, "rent": 4500, "beds": 3, "baths": 2},
+  "serenity_1bed.png":    {"total_sqft": 713,  "rent": 4000, "beds": 1, "baths": 1}
+}

@@ -1,0 +1,229 @@
+{
+  "image_hash": "6b3cb4012ca8bb20890edb504482ce2e9afa8972b4db7db9f075f72a6610f902",
+  "provider": "gemini",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v2",
+  "created_at": "2026-10-15T01:2x (collected earlier in this session; gemini-3.8-flash free tier was exhausted at test time)",
+  "latency_s": 9.36,
+  "usage": {
+    "input_tokens": 2003,
+    "output_tokens": 601,
+    "thinking_tokens": null
+  },
+  "attempts": [
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "status": "ok",
+      "latency_s": 9.36,
+      "usage": {
+        "input_tokens": 2003,
+        "output_tokens": 601,
+        "thinking_tokens": null
+      }
+    }
+  ],
+  "warnings": [],
+  "raw_text": "{\"is_3d_render\":false,\"rooms\":[{\"name\":\"BREATHE\",\"type\":\"balcony\",\"label_center\":[0.147,0.125]},{\"name\":\"BREATHE\",\"type\":\"balcony\",\"label_center\":[0.86,0.125]},{\"name\":\"GATHER\",\"type\":\"living\",\"label_center\":[0.174,0.509],\"dims_text\":\"23' x 15'\",\"width_ft\":23.0,\"length_ft\":15.0},{\"name\":\"DREAM\",\"type\":\"bedroom\",\"label_center\":[0.427,0.423],\"dims_text\":\"17'10\\\" x 10'10\\\"\",\"width_ft\":17.83,\"length_ft\":10.83,\"has_private_bath\":false},{\"name\":\"DREAM\",\"type\":\"bedroom\",\"label_center\":[0.643,0.423],\"dims_text\":\"17'10\\\" x 11'\",\"width_ft\":17.83,\"length_ft\":11.0,\"has_private_bath\":false},{\"name\":\"DREAM\",\"type\":\"bedroom\",\"label_center\":[0.867,0.423],\"dims_text\":\"17'10\\\" x 11'6\\\"\",\"width_ft\":17.83,\"length_ft\":11.5,\"has_private_bath\":true},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.373,0.678]},{\"name\":\"STYLE\",\"type\":\"closet\",\"label_center\":[0.444,0.665]},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.622,0.678]},{\"name\":\"STYLE\",\"type\":\"closet\",\"label_center\":[0.706,0.651]},{\"name\":\"STYLE\",\"type\":\"closet\",\"label_center\":[0.88,0.653]},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.714,0.793]},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.796,0.793]},{\"name\":\"CREATE\",\"type\":\"kitchen\",\"label_center\":[0.354,0.858]},{\"name\":\"REFRESH\",\"type\":\"bathroom\",\"label_center\":[0.536,0.88]},{\"name\":\"REFRESH\",\"type\":\"bathroom\",\"label_center\":[0.874,0.714]}],\"beds\":3,\"baths\":2.0}",
+  "semantics": {
+    "is_3d_render": false,
+    "rooms": [
+      {
+        "name": "BREATHE",
+        "type": "balcony",
+        "label_center": [
+          0.147,
+          0.125
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "BREATHE",
+        "type": "balcony",
+        "label_center": [
+          0.86,
+          0.125
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "GATHER",
+        "type": "living",
+        "label_center": [
+          0.174,
+          0.509
+        ],
+        "dims_text": "23' x 15'",
+        "width_ft": 23.0,
+        "length_ft": 15.0,
+        "has_private_bath": null
+      },
+      {
+        "name": "DREAM",
+        "type": "bedroom",
+        "label_center": [
+          0.427,
+          0.423
+        ],
+        "dims_text": "17'10\" x 10'10\"",
+        "width_ft": 17.83,
+        "length_ft": 10.83,
+        "has_private_bath": false
+      },
+      {
+        "name": "DREAM",
+        "type": "bedroom",
+        "label_center": [
+          0.643,
+          0.423
+        ],
+        "dims_text": "17'10\" x 11'",
+        "width_ft": 17.83,
+        "length_ft": 11.0,
+        "has_private_bath": false
+      },
+      {
+        "name": "DREAM",
+        "type": "bedroom",
+        "label_center": [
+          0.867,
+          0.423
+        ],
+        "dims_text": "17'10\" x 11'6\"",
+        "width_ft": 17.83,
+        "length_ft": 11.5,
+        "has_private_bath": true
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.373,
+          0.678
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "STYLE",
+        "type": "closet",
+        "label_center": [
+          0.444,
+          0.665
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.622,
+          0.678
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "STYLE",
+        "type": "closet",
+        "label_center": [
+          0.706,
+          0.651
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "STYLE",
+        "type": "closet",
+        "label_center": [
+          0.88,
+          0.653
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.714,
+          0.793
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.796,
+          0.793
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "CREATE",
+        "type": "kitchen",
+        "label_center": [
+          0.354,
+          0.858
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "REFRESH",
+        "type": "bathroom",
+        "label_center": [
+          0.536,
+          0.88
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "REFRESH",
+        "type": "bathroom",
+        "label_center": [
+          0.874,
+          0.714
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      }
+    ],
+    "total_sqft": null,
+    "beds": 3.0,
+    "baths": 2.0
+  }
+}

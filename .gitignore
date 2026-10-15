@@ -1,0 +1,39 @@
+# secrets
+backend/.env
+.env
+test_keys.py
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+backend/.venv/
+
+# os / editor
+.DS_Store
+.vscode/
+.idea/
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+test-results/
+playwright-report/
+
+# secrets anywhere (incl. cloned repos)
+**/.env
+**/.env.*
+!**/.env.example
+**/secrets.toml
+**/*credentials*.json
+**/client_secret*.json
+
+# reference clones of other repos (have their own git history + secrets)
+external/
+
+# node / build output anywhere
+node_modules/
+dist/
+*.tsbuildinfo

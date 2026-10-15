@@ -1,0 +1,1795 @@
+{
+  "source_image": "longwood_1bed.png",
+  "image_size": {
+    "w": 1096,
+    "h": 1526
+  },
+  "semantics_provider": "gemini",
+  "scale": {
+    "pixels_per_foot": 36.499,
+    "method": "room_dims",
+    "notes": "weighted median of 5/5 rooms with printed dims (spread 8.5%; rooms whose region matches the printed shape count more); room size = median row/column span of its region (a bbox that ignores door nooks and alcoves), both orientations tried; cross-check: total_sqft would give 37.13 processed px/ft (-3% vs room dims)"
+  },
+  "walls": [
+    {
+      "id": "w1",
+      "polygon": [
+        [
+          33.4,
+          620.9
+        ],
+        [
+          33.4,
+          1217.0
+        ],
+        [
+          67.7,
+          1217.0
+        ],
+        [
+          67.7,
+          639.0
+        ],
+        [
+          76.3,
+          638.1
+        ],
+        [
+          76.3,
+          620.9
+        ]
+      ],
+      "holes": []
+    },
+    {
+      "id": "w2",
+      "polygon": [
+        [
+          486.4,
+          22.9
+        ],
+        [
+          486.4,
+          48.6
+        ],
+        [
+          508.3,
+          50.5
+        ],
+        [
+          508.3,
+          129.7
+        ],
+        [
+          529.3,
+          129.7
+        ],
+        [
+          530.3,
+          67.7
+        ],
+        [
+          629.5,
+          67.7
+        ],
+        [
+          630.4,
+          44.8
+        ],
+        [
+          1000.5,
+          46.7
+        ],
+        [
+          998.6,
+          368.1
+        ],
+        [
+          617.1,
+          368.1
+        ],
+        [
+          616.1,
+          227.0
+        ],
+        [
+          598.0,
+          227.0
+        ],
+        [
+          598.0,
+          333.8
+        ],
+        [
+          537.9,
+          334.8
+        ],
+        [
+          537.0,
+          231.8
+        ],
+        [
+          533.1,
+          226.0
+        ],
+        [
+          510.3,
+          226.0
+        ],
+        [
+          510.3,
+          493.1
+        ],
+        [
+          537.0,
+          493.1
+        ],
+        [
+          537.9,
+          391.0
+        ],
+        [
+          1022.4,
+          392.0
+        ],
+        [
+          1022.4,
+          617.1
+        ],
+        [
+          1003.3,
+          618.0
+        ],
+        [
+          1003.3,
+          706.7
+        ],
+        [
+          1022.4,
+          708.6
+        ],
+        [
+          1022.4,
+          1176.9
+        ],
+        [
+          998.6,
+          1178.8
+        ],
+        [
+          997.6,
+          1218.9
+        ],
+        [
+          528.4,
+          1217.9
+        ],
+        [
+          528.4,
+          612.3
+        ],
+        [
+          484.5,
+          612.3
+        ],
+        [
+          484.5,
+          632.3
+        ],
+        [
+          503.6,
+          634.2
+        ],
+        [
+          503.6,
+          1221.8
+        ],
+        [
+          379.6,
+          1222.7
+        ],
+        [
+          377.7,
+          1177.9
+        ],
+        [
+          305.2,
+          1177.9
+        ],
+        [
+          304.2,
+          1220.8
+        ],
+        [
+          229.9,
+          1221.8
+        ],
+        [
+          229.9,
+          1262.8
+        ],
+        [
+          303.3,
+          1262.8
+        ],
+        [
+          305.2,
+          1265.6
+        ],
+        [
+          502.6,
+          1262.8
+        ],
+        [
+          503.6,
+          1274.2
+        ],
+        [
+          537.0,
+          1274.2
+        ],
+        [
+          537.9,
+          1261.8
+        ],
+        [
+          996.7,
+          1261.8
+        ],
+        [
+          997.6,
+          1270.4
+        ],
+        [
+          1032.9,
+          1270.4
+        ],
+        [
+          1033.9,
+          1259.0
+        ],
+        [
+          1074.9,
+          1259.0
+        ],
+        [
+          1075.8,
+          1178.8
+        ],
+        [
+          1055.8,
+          1177.9
+        ],
+        [
+          1055.8,
+          707.7
+        ],
+        [
+          1076.8,
+          705.8
+        ],
+        [
+          1076.8,
+          617.1
+        ],
+        [
+          1055.8,
+          616.1
+        ],
+        [
+          1055.8,
+          367.2
+        ],
+        [
+          1019.6,
+          365.3
+        ],
+        [
+          1019.6,
+          23.8
+        ]
+      ],
+      "holes": []
+    },
+    {
+      "id": "w3",
+      "polygon": [
+        [
+          387.2,
+          20.0
+        ],
+        [
+          291.8,
+          20.0
+        ],
+        [
+          291.8,
+          50.5
+        ],
+        [
+          301.4,
+          52.5
+        ],
+        [
+          301.4,
+          240.3
+        ],
+        [
+          257.5,
+          242.3
+        ],
+        [
+          255.6,
+          334.8
+        ],
+        [
+          33.4,
+          334.8
+        ],
+        [
+          33.4,
+          556.0
+        ],
+        [
+          349.1,
+          556.0
+        ],
+        [
+          350.0,
+          619.9
+        ],
+        [
+          297.6,
+          620.9
+        ],
+        [
+          297.6,
+          693.4
+        ],
+        [
+          314.7,
+          692.4
+        ],
+        [
+          315.7,
+          635.2
+        ],
+        [
+          374.8,
+          635.2
+        ],
+        [
+          374.8,
+          470.2
+        ],
+        [
+          347.2,
+          470.2
+        ],
+        [
+          346.2,
+          541.7
+        ],
+        [
+          69.6,
+          541.7
+        ],
+        [
+          68.7,
+          367.2
+        ],
+        [
+          282.3,
+          366.2
+        ],
+        [
+          283.3,
+          269.9
+        ],
+        [
+          350.0,
+          269.0
+        ],
+        [
+          351.0,
+          383.4
+        ],
+        [
+          374.8,
+          383.4
+        ],
+        [
+          374.8,
+          166.0
+        ],
+        [
+          325.2,
+          165.0
+        ],
+        [
+          325.2,
+          57.2
+        ],
+        [
+          380.5,
+          56.3
+        ],
+        [
+          380.5,
+          51.5
+        ],
+        [
+          387.2,
+          49.6
+        ]
+      ],
+      "holes": []
+    }
+  ],
+  "rooms": [
+    {
+      "id": "r1",
+      "name": "Foyer",
+      "type": "foyer",
+      "label_point": [
+        433.0,
+        338.6
+      ],
+      "label_point_norm": [
+        0.404,
+        0.222
+      ],
+      "printed_dims_ft": null,
+      "printed_dims_text": null,
+      "area_sqft": 58.2,
+      "area_sqft_final": 58.2,
+      "area_source": "measured",
+      "printed_area_sqft": null,
+      "area_vs_printed_pct": null,
+      "has_private_bath": null,
+      "bbox": [
+        326.2,
+        51.5,
+        183.1,
+        572.2
+      ],
+      "polygon": [
+        [
+          336.7,
+          57.2
+        ],
+        [
+          335.7,
+          60.1
+        ],
+        [
+          326.2,
+          62.0
+        ],
+        [
+          328.1,
+          162.1
+        ],
+        [
+          332.9,
+          162.1
+        ],
+        [
+          333.8,
+          165.0
+        ],
+        [
+          334.8,
+          162.1
+        ],
+        [
+          368.1,
+          162.1
+        ],
+        [
+          369.1,
+          165.0
+        ],
+        [
+          372.0,
+          162.1
+        ],
+        [
+          372.0,
+          62.9
+        ],
+        [
+          384.4,
+          62.9
+        ],
+        [
+          384.4,
+          166.0
+        ],
+        [
+          380.5,
+          166.9
+        ],
+        [
+          378.6,
+          174.5
+        ],
+        [
+          378.6,
+          385.3
+        ],
+        [
+          375.8,
+          386.3
+        ],
+        [
+          377.7,
+          617.1
+        ],
+        [
+          434.0,
+          617.1
+        ],
+        [
+          440.6,
+          622.8
+        ],
+        [
+          479.7,
+          622.8
+        ],
+        [
+          482.6,
+          608.5
+        ],
+        [
+          508.3,
+          608.5
+        ],
+        [
+          508.3,
+          133.5
+        ],
+        [
+          504.5,
+          131.6
+        ],
+        [
+          504.5,
+          52.5
+        ],
+        [
+          390.1,
+          51.5
+        ],
+        [
+          384.4,
+          53.4
+        ],
+        [
+          382.5,
+          60.1
+        ],
+        [
+          372.9,
+          60.1
+        ],
+        [
+          372.0,
+          57.2
+        ],
+        [
+          370.1,
+          60.1
+        ],
+        [
+          350.0,
+          60.1
+        ],
+        [
+          348.1,
+          57.2
+        ],
+        [
+          347.2,
+          60.1
+        ],
+        [
+          337.6,
+          60.1
+        ]
+      ],
+      "segmentation": "split",
+      "segmentation_notes": [
+        "label moved 10px off a line/wall"
+      ],
+      "shared_region_with": [
+        "r7",
+        "r8"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "C",
+      "type": "closet",
+      "label_point": [
+        347.2,
+        1021.5
+      ],
+      "label_point_norm": [
+        0.317,
+        0.67
+      ],
+      "printed_dims_ft": null,
+      "printed_dims_text": null,
+      "area_sqft": null,
+      "area_sqft_final": null,
+      "area_source": null,
+      "printed_area_sqft": null,
+      "area_vs_printed_pct": null,
+      "has_private_bath": null,
+      "bbox": null,
+      "polygon": null,
+      "segmentation": "failed",
+      "segmentation_notes": [
+        "label point is not on any text and shares its region with properly placed labels; probably misplaced by the vision model"
+      ],
+      "shared_region_with": [
+        "r1",
+        "r7",
+        "r8"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Kitchen",
+      "type": "kitchen",
+      "label_point": [
+        801.1,
+        196.5
+      ],
+      "label_point_norm": [
+        0.732,
+        0.129
+      ],
+      "printed_dims_ft": {
+        "w": 10.0,
+        "l": 9.0
+      },
+      "printed_dims_text": "10\u2019 x 9\u2019",
+      "area_sqft": 90.0,
+      "area_sqft_final": 90.0,
+      "area_source": "printed",
+      "printed_area_sqft": 90.0,
+      "area_vs_printed_pct": -0.0,
+      "has_private_bath": null,
+      "bbox": [
+        617.1,
+        48.6,
+        380.5,
+        316.6
+      ],
+      "polygon": [
+        [
+          632.3,
+          48.6
+        ],
+        [
+          632.3,
+          70.6
+        ],
+        [
+          617.1,
+          71.5
+        ],
+        [
+          619.0,
+          364.3
+        ],
+        [
+          996.7,
+          364.3
+        ],
+        [
+          996.7,
+          48.6
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [
+        "separated by closing gaps up to 4.75 ft"
+      ],
+      "shared_region_with": [
+        "r4"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Pantry",
+      "type": "closet",
+      "label_point": [
+        547.5,
+        302.3
+      ],
+      "label_point_norm": [
+        0.518,
+        0.198
+      ],
+      "printed_dims_ft": null,
+      "printed_dims_text": null,
+      "area_sqft": 9.0,
+      "area_sqft_final": 9.0,
+      "area_source": "measured",
+      "printed_area_sqft": null,
+      "area_vs_printed_pct": null,
+      "has_private_bath": null,
+      "bbox": [
+        537.9,
+        68.7,
+        60.1,
+        266.1
+      ],
+      "polygon": [
+        [
+          537.9,
+          68.7
+        ],
+        [
+          537.9,
+          331.9
+        ],
+        [
+          547.5,
+          333.8
+        ],
+        [
+          547.5,
+          272.8
+        ],
+        [
+          553.2,
+          267.1
+        ],
+        [
+          564.6,
+          269.0
+        ],
+        [
+          564.6,
+          258.5
+        ],
+        [
+          574.2,
+          257.5
+        ],
+        [
+          578.0,
+          259.4
+        ],
+        [
+          578.0,
+          330.0
+        ],
+        [
+          557.9,
+          331.0
+        ],
+        [
+          586.6,
+          333.8
+        ],
+        [
+          586.6,
+          235.6
+        ],
+        [
+          541.7,
+          235.6
+        ],
+        [
+          540.8,
+          227.0
+        ],
+        [
+          597.0,
+          224.1
+        ],
+        [
+          597.0,
+          71.5
+        ],
+        [
+          540.8,
+          71.5
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [
+        "label moved 21px off a line/wall",
+        "separated by closing gaps up to 4.75 ft"
+      ],
+      "shared_region_with": [
+        "r3"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Bath",
+      "type": "bathroom",
+      "label_point": [
+        205.1,
+        429.2
+      ],
+      "label_point_norm": [
+        0.187,
+        0.282
+      ],
+      "printed_dims_ft": {
+        "w": 7.5,
+        "l": 5.0
+      },
+      "printed_dims_text": "7-1/2\u2019 x 5\u2019",
+      "area_sqft": 39.9,
+      "area_sqft_final": 37.5,
+      "area_source": "printed",
+      "printed_area_sqft": 37.5,
+      "area_vs_printed_pct": 6.4,
+      "has_private_bath": null,
+      "bbox": [
+        72.5,
+        272.8,
+        278.5,
+        267.1
+      ],
+      "polygon": [
+        [
+          348.1,
+          272.8
+        ],
+        [
+          286.1,
+          272.8
+        ],
+        [
+          285.2,
+          369.1
+        ],
+        [
+          72.5,
+          369.1
+        ],
+        [
+          72.5,
+          538.9
+        ],
+        [
+          343.4,
+          538.9
+        ],
+        [
+          344.3,
+          468.3
+        ],
+        [
+          350.0,
+          466.4
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [
+        "label moved 1px off a line/wall"
+      ],
+      "shared_region_with": []
+    },
+    {
+      "id": "r6",
+      "name": "Closet",
+      "type": "closet",
+      "label_point": [
+        170.7,
+        661.9
+      ],
+      "label_point_norm": [
+        0.165,
+        0.435
+      ],
+      "printed_dims_ft": null,
+      "printed_dims_text": null,
+      "area_sqft": 22.9,
+      "area_sqft_final": 22.9,
+      "area_source": "measured",
+      "printed_area_sqft": null,
+      "area_vs_printed_pct": null,
+      "has_private_bath": null,
+      "bbox": [
+        68.7,
+        559.9,
+        278.5,
+        139.2
+      ],
+      "polygon": [
+        [
+          68.7,
+          559.9
+        ],
+        [
+          68.7,
+          618.0
+        ],
+        [
+          346.2,
+          618.0
+        ],
+        [
+          346.2,
+          559.9
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [
+        "label moved 10px off a line/wall"
+      ],
+      "shared_region_with": []
+    },
+    {
+      "id": "r7",
+      "name": "C",
+      "type": "closet",
+      "label_point": [
+        340.5,
+        666.7
+      ],
+      "label_point_norm": [
+        0.311,
+        0.437
+      ],
+      "printed_dims_ft": null,
+      "printed_dims_text": null,
+      "area_sqft": 2.5,
+      "area_sqft_final": 2.5,
+      "area_source": "measured",
+      "printed_area_sqft": null,
+      "area_vs_printed_pct": null,
+      "has_private_bath": null,
+      "bbox": [
+        315.7,
+        636.2,
+        51.5,
+        84.9
+      ],
+      "polygon": [
+        [
+          317.6,
+          636.2
+        ],
+        [
+          315.7,
+          684.8
+        ],
+        [
+          317.6,
+          692.4
+        ],
+        [
+          322.4,
+          694.3
+        ],
+        [
+          320.5,
+          708.6
+        ],
+        [
+          333.8,
+          714.4
+        ],
+        [
+          334.8,
+          717.2
+        ],
+        [
+          339.5,
+          717.2
+        ],
+        [
+          340.5,
+          720.1
+        ],
+        [
+          343.4,
+          717.2
+        ],
+        [
+          353.8,
+          717.2
+        ],
+        [
+          366.2,
+          707.7
+        ],
+        [
+          365.3,
+          703.9
+        ],
+        [
+          356.7,
+          702.9
+        ],
+        [
+          356.7,
+          694.3
+        ],
+        [
+          360.5,
+          689.6
+        ],
+        [
+          364.3,
+          689.6
+        ],
+        [
+          359.6,
+          688.6
+        ],
+        [
+          359.6,
+          679.1
+        ],
+        [
+          365.3,
+          678.1
+        ],
+        [
+          359.6,
+          677.2
+        ],
+        [
+          359.6,
+          655.2
+        ],
+        [
+          365.3,
+          654.3
+        ],
+        [
+          359.6,
+          653.3
+        ],
+        [
+          359.6,
+          643.8
+        ],
+        [
+          365.3,
+          642.8
+        ],
+        [
+          360.5,
+          642.8
+        ],
+        [
+          359.6,
+          639.0
+        ],
+        [
+          352.9,
+          636.2
+        ],
+        [
+          351.9,
+          639.0
+        ],
+        [
+          331.0,
+          639.0
+        ],
+        [
+          329.0,
+          636.2
+        ],
+        [
+          328.1,
+          639.0
+        ],
+        [
+          319.5,
+          639.0
+        ]
+      ],
+      "segmentation": "split",
+      "segmentation_notes": [],
+      "shared_region_with": [
+        "r1",
+        "r8"
+      ]
+    },
+    {
+      "id": "r8",
+      "name": "Bedroom",
+      "type": "bedroom",
+      "label_point": [
+        293.8,
+        873.6
+      ],
+      "label_point_norm": [
+        0.268,
+        0.573
+      ],
+      "printed_dims_ft": {
+        "w": 15.0,
+        "l": 11.0
+      },
+      "printed_dims_text": "15\u2019 x 11\u2019",
+      "area_sqft": 168.5,
+      "area_sqft_final": 165.0,
+      "area_source": "printed",
+      "printed_area_sqft": 165.0,
+      "area_vs_printed_pct": 2.1,
+      "has_private_bath": false,
+      "bbox": [
+        71.5,
+        618.0,
+        430.1,
+        602.8
+      ],
+      "polygon": [
+        [
+          500.7,
+          636.2
+        ],
+        [
+          482.6,
+          636.2
+        ],
+        [
+          480.7,
+          622.8
+        ],
+        [
+          440.6,
+          623.8
+        ],
+        [
+          434.0,
+          618.0
+        ],
+        [
+          377.7,
+          618.0
+        ],
+        [
+          377.7,
+          707.7
+        ],
+        [
+          363.4,
+          709.6
+        ],
+        [
+          359.6,
+          715.3
+        ],
+        [
+          343.4,
+          718.2
+        ],
+        [
+          342.4,
+          721.0
+        ],
+        [
+          329.0,
+          715.3
+        ],
+        [
+          328.1,
+          712.5
+        ],
+        [
+          323.3,
+          712.5
+        ],
+        [
+          319.5,
+          708.6
+        ],
+        [
+          319.5,
+          703.9
+        ],
+        [
+          310.0,
+          702.9
+        ],
+        [
+          303.3,
+          703.9
+        ],
+        [
+          301.4,
+          710.5
+        ],
+        [
+          71.5,
+          712.5
+        ],
+        [
+          71.5,
+          1207.4
+        ],
+        [
+          237.5,
+          1207.4
+        ],
+        [
+          239.4,
+          1218.9
+        ],
+        [
+          300.4,
+          1218.9
+        ],
+        [
+          302.3,
+          1175.0
+        ],
+        [
+          380.5,
+          1175.0
+        ],
+        [
+          382.5,
+          1219.8
+        ],
+        [
+          500.7,
+          1219.8
+        ]
+      ],
+      "segmentation": "split",
+      "segmentation_notes": [],
+      "shared_region_with": [
+        "r1",
+        "r7"
+      ],
+      "closet_ids": [
+        "r6",
+        "r7"
+      ],
+      "area_with_closets_sqft": 193.9
+    },
+    {
+      "id": "r9",
+      "name": "Living Room/ Dining Room",
+      "type": "living",
+      "label_point": [
+        772.5,
+        769.7
+      ],
+      "label_point_norm": [
+        0.706,
+        0.505
+      ],
+      "printed_dims_ft": {
+        "w": 22.0,
+        "l": 13.0
+      },
+      "printed_dims_text": "22\u2019 x 13\u2019",
+      "area_sqft": 298.7,
+      "area_sqft_final": 286.0,
+      "area_source": "printed",
+      "printed_area_sqft": 286.0,
+      "area_vs_printed_pct": 4.4,
+      "has_private_bath": null,
+      "bbox": [
+        529.3,
+        393.9,
+        490.2,
+        823.1
+      ],
+      "polygon": [
+        [
+          539.8,
+          393.9
+        ],
+        [
+          539.8,
+          495.0
+        ],
+        [
+          529.3,
+          495.9
+        ],
+        [
+          529.3,
+          608.5
+        ],
+        [
+          532.2,
+          610.4
+        ],
+        [
+          532.2,
+          1216.0
+        ],
+        [
+          995.7,
+          1216.0
+        ],
+        [
+          995.7,
+          1176.9
+        ],
+        [
+          1018.6,
+          1175.0
+        ],
+        [
+          1018.6,
+          710.5
+        ],
+        [
+          999.5,
+          708.6
+        ],
+        [
+          999.5,
+          616.1
+        ],
+        [
+          1018.6,
+          615.2
+        ],
+        [
+          1018.6,
+          393.9
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [],
+      "shared_region_with": []
+    },
+    {
+      "id": "r10",
+      "name": "Balcony",
+      "type": "balcony",
+      "label_point": [
+        770.6,
+        1336.2
+      ],
+      "label_point_norm": [
+        0.704,
+        0.876
+      ],
+      "printed_dims_ft": {
+        "w": 6.33,
+        "l": 12.83
+      },
+      "printed_dims_text": "6\u20194\u201d x 12\u201910\u201d",
+      "area_sqft": 72.0,
+      "area_sqft_final": 81.2,
+      "area_source": "printed",
+      "printed_area_sqft": 81.2,
+      "area_vs_printed_pct": -11.4,
+      "has_private_bath": null,
+      "bbox": [
+        539.8,
+        1265.6,
+        454.9,
+        210.8
+      ],
+      "polygon": [
+        [
+          539.8,
+          1265.6
+        ],
+        [
+          539.8,
+          1475.5
+        ],
+        [
+          993.8,
+          1475.5
+        ],
+        [
+          993.8,
+          1265.6
+        ]
+      ],
+      "segmentation": "ok",
+      "segmentation_notes": [],
+      "shared_region_with": []
+    }
+  ],
+  "footprint": [
+    [
+      [
+        291.8,
+        19.1
+      ],
+      [
+        290.9,
+        50.5
+      ],
+      [
+        300.4,
+        52.5
+      ],
+      [
+        300.4,
+        240.3
+      ],
+      [
+        256.6,
+        242.3
+      ],
+      [
+        256.6,
+        332.9
+      ],
+      [
+        32.4,
+        334.8
+      ],
+      [
+        33.4,
+        1264.7
+      ],
+      [
+        303.3,
+        1263.7
+      ],
+      [
+        304.2,
+        1266.6
+      ],
+      [
+        375.8,
+        1266.6
+      ],
+      [
+        377.7,
+        1263.7
+      ],
+      [
+        502.6,
+        1263.7
+      ],
+      [
+        503.6,
+        1274.2
+      ],
+      [
+        537.0,
+        1274.2
+      ],
+      [
+        537.9,
+        1262.8
+      ],
+      [
+        995.7,
+        1262.8
+      ],
+      [
+        996.7,
+        1270.4
+      ],
+      [
+        1032.9,
+        1270.4
+      ],
+      [
+        1033.9,
+        1259.0
+      ],
+      [
+        1075.8,
+        1259.0
+      ],
+      [
+        1075.8,
+        1177.9
+      ],
+      [
+        1056.8,
+        1176.9
+      ],
+      [
+        1056.8,
+        707.7
+      ],
+      [
+        1077.7,
+        706.7
+      ],
+      [
+        1077.7,
+        617.1
+      ],
+      [
+        1055.8,
+        616.1
+      ],
+      [
+        1055.8,
+        366.2
+      ],
+      [
+        1019.6,
+        364.3
+      ],
+      [
+        1019.6,
+        22.9
+      ],
+      [
+        388.2,
+        22.9
+      ],
+      [
+        387.2,
+        19.1
+      ]
+    ]
+  ],
+  "unit": {
+    "total_sqft": 775,
+    "beds": 1,
+    "baths": 1,
+    "rent": 2700
+  },
+  "warnings": [
+    "rooms: Foyer, C, Bedroom share one open region (no wall/door between them); split with a watershed, areas approximate",
+    "rooms: C: failed - label point is not on any text and shares its region with properly placed labels; probably misplaced by the vision model"
+  ],
+  "plan_name": "longwood_1bed",
+  "image_hash": "e27c7329f2b083929e89fa0c46b161c993e824eba55c6337f8724fc2bb78eae4",
+  "cache_key": "provider=chain|wall_style=auto|ppf=-",
+  "semantics_model": "gemini-3.8-flash",
+  "is_3d_render": false,
+  "checks": {
+    "rooms_sum_sqft": 689.7,
+    "total_sqft": 775,
+    "rooms_vs_total_pct": -11.0,
+    "enclosed_floor_sqft": 801.7
+  },
+  "processing": {
+    "pipeline_version": "1.0",
+    "prompt_version": "v2",
+    "semantics_source": "cache",
+    "semantics_attempts": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.8-flash",
+        "attempt": 1,
+        "status": "ok",
+        "latency_s": 17.86,
+        "usage": {
+          "input_tokens": 2022,
+          "output_tokens": 449,
+          "thinking_tokens": null
+        }
+      }
+    ],
+    "scale_factor": 1.048493,
+    "processed_size": {
+      "w": 1149,
+      "h": 1600
+    },
+    "pixels_per_foot_processed": 38.269,
+    "scale_iterations": [
+      {
+        "ppf_processed": 38.939,
+        "source": "initial (total_sqft)"
+      },
+      {
+        "ppf_processed": 38.269,
+        "source": "room_dims"
+      }
+    ],
+    "scale_per_room": [
+      {
+        "name": "Kitchen",
+        "extent_px": [
+          397,
+          332
+        ],
+        "bbox_px": [
+          399,
+          332
+        ],
+        "orientation": "w->x",
+        "ppf_x": 39.7,
+        "ppf_y": 36.889,
+        "inconsistency": 0.073,
+        "ppf": 38.269,
+        "weight": 9.71,
+        "used": true
+      },
+      {
+        "name": "Bath",
+        "extent_px": [
+          286,
+          179
+        ],
+        "bbox_px": [
+          292,
+          280
+        ],
+        "orientation": "w->x",
+        "ppf_x": 38.133,
+        "ppf_y": 35.8,
+        "inconsistency": 0.063,
+        "ppf": 36.948,
+        "weight": 10.75,
+        "used": true
+      },
+      {
+        "name": "Bedroom",
+        "extent_px": [
+          451,
+          522
+        ],
+        "bbox_px": [
+          451,
+          632
+        ],
+        "orientation": "w->y",
+        "ppf_x": 41.0,
+        "ppf_y": 34.8,
+        "inconsistency": 0.164,
+        "ppf": 37.773,
+        "weight": 5.15,
+        "used": true
+      },
+      {
+        "name": "Living Room/ Dining Room",
+        "extent_px": [
+          511,
+          863
+        ],
+        "bbox_px": [
+          514,
+          863
+        ],
+        "orientation": "w->y",
+        "ppf_x": 39.308,
+        "ppf_y": 39.227,
+        "inconsistency": 0.002,
+        "ppf": 39.267,
+        "weight": 31.25,
+        "used": true
+      },
+      {
+        "name": "Balcony",
+        "extent_px": [
+          477,
+          221
+        ],
+        "bbox_px": [
+          477,
+          221
+        ],
+        "orientation": "w->y",
+        "ppf_x": 37.178,
+        "ppf_y": 34.913,
+        "inconsistency": 0.063,
+        "ppf": 36.028,
+        "weight": 10.75,
+        "used": true
+      }
+    ],
+    "wall_style": {
+      "requested": "auto",
+      "used": "outline",
+      "scores": {
+        "solid": {
+          "score": 0.0249,
+          "ink": 0.072,
+          "straight": 0.846,
+          "connected": 0.412
+        },
+        "outline": {
+          "score": 0.4744,
+          "ink": 0.667,
+          "straight": 0.996,
+          "connected": 0.714
+        },
+        "solid_ink_ratio": 0.108
+      }
+    },
+    "threshold": 173.0,
+    "wall_thickness_px": 34.0,
+    "door_gap_max_px": 155.8,
+    "gap_rays": {
+      "lined": 17,
+      "partly_lined": 2,
+      "open": 150
+    },
+    "railing_pixels_removed": 31021,
+    "timings_s": {
+      "preprocess": 0.01,
+      "semantics": 0.0,
+      "walls": 0.03,
+      "segmentation": 0.32,
+      "total": 0.47
+    },
+    "config": {
+      "target_long_side": 1600,
+      "wall_style": "auto",
+      "threshold": {
+        "method": "otsu",
+        "offset": 0,
+        "fixed_value": 160,
+        "adaptive_block": 51,
+        "adaptive_c": 10,
+        "ink_max_gray": 230
+      },
+      "solid": {
+        "open_kernel_px": 9,
+        "min_component_area_px": 150,
+        "fill_holes_max_area_px": 400
+      },
+      "outline": {
+        "glyph_max_side_px": 80,
+        "close_kernel_px": 35,
+        "fill_holes_max_area_px": 8000,
+        "open_kernel_px": 15,
+        "min_component_area_px": 400
+      },
+      "auto_solid_ink_ratio": 0.7,
+      "polygon_epsilon_px": 2.0,
+      "wall_polygon_min_area_px": 150,
+      "gaps": {
+        "door_max_ft": 4.0,
+        "merge_split_max_ft": 7.0,
+        "merge_split_step_ft": 0.75,
+        "lined_gap_max_ft": 14.0,
+        "line_min_run_ft": 0.75,
+        "lined_tolerance_ft": 0.25,
+        "free_end_max_thickness_ft": 1.6,
+        "run_min_factor": 1.5,
+        "run_min_ft": 1.0,
+        "end_min_elongation": 2.5
+      },
+      "rooms": {
+        "label_snap_max_px": 60,
+        "label_exterior_snap_px": 150,
+        "label_text_radius_ft": 1.0,
+        "min_room_area_sqft": 2.0,
+        "max_room_area_frac": 0.6,
+        "barrier_dilate_px": 2,
+        "barrier_min_side_px": 80,
+        "min_fragment_sqft": 1.0,
+        "merge_fragment_max_sqft": 20.0,
+        "line_adjacency_steps": 12,
+        "dash_bridge_ft": 0.35,
+        "dash_min_len_ft": 1.5,
+        "dash_max_thick_ft": 0.4,
+        "dash_min_blobs": 3,
+        "split_downsample": 3
+      },
+      "scale": {
+        "initial_long_side_ft": 48.0,
+        "outlier_tolerance": 0.15,
+        "max_dims_inconsistency": 0.3,
+        "consistency_weight_floor": 0.03,
+        "max_iterations": 3,
+        "converge_tolerance": 0.03,
+        "total_sqft_basis": "interior"
+      },
+      "sanity": {
+        "total_sqft_tolerance": 0.25,
+        "closet_max_sqft": 30
+      },
+      "balcony_wall_margin_px": 4
+    }
+  },
+  "debug_images": [
+    "longwood_1bed/wall_mask.png",
+    "longwood_1bed/closed_mask.png",
+    "longwood_1bed/walls_overlay.png",
+    "longwood_1bed/rooms_overlay.png"
+  ],
+  "original_image": "longwood_1bed/original.png"
+}

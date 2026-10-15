@@ -1,0 +1,496 @@
+import { CameraControls, CameraControlsImpl, Line, OrthographicCamera, PerspectiveCamera } from "@react-three/drei";
+import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from "react";
+import * as THREE from "three";
+import type { FitResult, FurnitureItem } from "./furniture";
+import { DoorZones, FurnitureLayer } from "./FurnitureLayer";
+import { flatGeometry, plankTexture, wallGeometry, type PlanModel, type RoomEntry } from "./geometry";
+import { ACCENT, ACCENT_SOFT, BACKGROUND, GROUND, ROOM_COLORS, SLAB, WALL_CAP, WALL_SIDE } from "./theme";
+
+export type ViewMode = "3d" | "top";
+
+/** What the camera rig last fitted: camera-controls applies zoom/dolly on its next frame, so the
+ *  camera itself can't be read back reliably right after a fit. */
+interface FitState {
+  zoom: number;
+  distance: number;
+}
+
+// heights (ft) of the flat layers, bottom to top
+const Y_GROUND = -0.6;
+const Y_BALCONY = -0.35;
+const Y_SLAB = 0;
+const Y_ROOM = 0.02;
+const Y_IMAGE = 0.06;
+const Y_OUTLINE = 0.1;
+const LABEL_LIFT = 0.8; // labels float this far above the wall tops
+const TOP_CAMERA_Y = 80; // orthographic: height doesn't change the view, but keep it well inside the fog-free range
+
+// default 3D camera: from the south-south-east (image bottom), 44deg down from vertical
+const VIEW_AZIMUTH = THREE.MathUtils.degToRad(28);
+const VIEW_POLAR = THREE.MathUtils.degToRad(44);
+const FOCUS_POLAR = THREE.MathUtils.degToRad(34); // steeper when framing one room: look down into it
+// px kept free top and bottom for the toolbar and legend (the toolbar wraps on phones)
+const uiMargin = (width: number) => (width < 640 ? 64 : 60);
+
+interface SceneProps {
+  model: PlanModel;
+  view: ViewMode;
+  resetKey: number;
+  show2D: boolean;
+  imageUrl?: string;
+  wallHeight: number;
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
+  onReady?: () => void;
+  /** label buttons rendered by <LabelLayer> outside the canvas, positioned here every frame */
+  labelEls: RefObject<(HTMLElement | null)[]>;
+  furniture?: FurnitureProps;
+  /** frame this room instead of the whole plan (editing its furniture) */
+  focusId?: string | null;
+}
+
+export interface FurnitureProps {
+  items: FurnitureItem[];
+  fits: Map<string, FitResult>;
+  selectedId: string | null;
+  editing: boolean;
+  /** clearance in front of the selected room's doorways (edit mode) */
+  doorZones?: [number, number][][];
+  onSelect: (id: string) => void;
+  onDrag: (id: string, x: number, z: number) => void;
+}
+
+export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight, selectedId, onSelect, onReady, labelEls, furniture, focusId = null }: SceneProps) {
+  const { cx, cz, sx, sz } = model.bounds;
+  const roomType = useMemo(() => new Map(model.rooms.map((r) => [r.room.id, r.room.type])), [model]);
+  const fit = useRef<FitState>({ zoom: 1, distance: 50 }); // last fit, the panel offset's baseline
+  const fogNear = Math.max(sx, sz) * 4 + 100; // only the far ground fades into the background
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  return (
+    <>
+      <color attach="background" args={[BACKGROUND]} />
+      <fog attach="fog" args={[BACKGROUND, fogNear, fogNear * 4]} />
+      <Lights model={model} />
+      <PerspectiveCamera makeDefault={view === "3d"} fov={38} near={0.3} far={4000} position={[0, 60, 60]} />
+      <OrthographicCamera makeDefault={view === "top"} near={0.1} far={4000} position={[0, TOP_CAMERA_Y, 0.001]} />
+      <CameraControls makeDefault />
+      <CameraRig model={model} view={view} resetKey={resetKey} wallHeight={wallHeight} onReady={onReady} fit={fit} focusId={focusId} />
+      <PanelOffset open={selectedId != null} view={view} resetKey={resetKey} fit={fit} focusId={focusId} />
+      {/* plan center at the origin: the shadow light and the camera target both default to it */}
+      <group position={[-cx, 0, -cz]}>
+        <Ground model={model} />
+        <Slab model={model} />
+        {model.rooms.map((r) => (
+          <RoomFloor
+            key={r.room.id}
+            entry={r}
+            selected={r.room.id === selectedId}
+            hovered={r.room.id === hoverId}
+            subtle={Boolean(furniture?.editing)}
+            onSelect={onSelect}
+            onHover={setHoverId}
+          />
+        ))}
+        <Walls model={model} height={wallHeight} ghost={show2D} />
+        {show2D && imageUrl && <PlanImage model={model} url={imageUrl} />}
+        {furniture && (
+          <FurnitureLayer
+            items={furniture.items}
+            fits={furniture.fits}
+            baseY={(it) => (it.roomId && roomType.get(it.roomId) === "balcony" ? Y_BALCONY : Y_ROOM)}
+            selectedId={furniture.selectedId}
+            editing={furniture.editing}
+            origin={[cx, cz]}
+            onSelect={furniture.onSelect}
+            onDrag={furniture.onDrag}
+          />
+        )}
+        {furniture?.doorZones && furniture.doorZones.length > 0 && (
+          <DoorZones zones={furniture.doorZones} y={selectedId && roomType.get(selectedId) === "balcony" ? Y_BALCONY : Y_ROOM} />
+        )}
+      </group>
+      <LabelProjector model={model} height={wallHeight} selectedId={selectedId} els={labelEls} />
+    </>
+  );
+}
+
+function Lights({ model }: { model: PlanModel }) {
+  const light = useRef<THREE.DirectionalLight>(null!);
+  const r = Math.max(model.bounds.sx, model.bounds.sz) / 2 + 6;
+  useLayoutEffect(() => {
+    const cam = light.current.shadow.camera;
+    cam.left = cam.bottom = -r;
+    cam.right = cam.top = r;
+    cam.near = 1;
+    cam.far = r * 6;
+    cam.updateProjectionMatrix();
+  }, [r]);
+  return (
+    <>
+      {/* physically based units: ~pi total for full-brightness surfaces */}
+      <hemisphereLight args={["#ffffff", "#e2ddd5", 2.1]} />
+      {/* sun from the south-west, on the camera's side, so the faces we look at are lit */}
+      <directionalLight
+        ref={light}
+        castShadow
+        position={[-r * 0.7, r * 1.7, r * 0.9]}
+        intensity={1.7}
+        shadow-mapSize={[2048, 2048]}
+        shadow-bias={-0.0004}
+        shadow-normalBias={0.05}
+        shadow-radius={5}
+      />
+    </>
+  );
+}
+
+/** Smallest distance along `dir` at which every point projects inside the frustum (|ndc| <= mx, my). */
+function fitDistance(camera: THREE.PerspectiveCamera, points: THREE.Vector3[], center: THREE.Vector3, dir: THREE.Vector3,
+  mx: number, my: number): number {
+  const cam = camera.clone();
+  cam.updateProjectionMatrix();
+  const p = new THREE.Vector3();
+  // lateral fit only: "inside the far plane" is not monotonic in distance and would break the search
+  let lo = 0.5, hi = camera.far * 0.5;
+  for (let i = 0; i < 40; i++) {
+    const d = (lo + hi) / 2;
+    cam.position.copy(center).addScaledVector(dir, d);
+    cam.lookAt(center);
+    cam.updateMatrixWorld();
+    const fits = points.every((c) => {
+      p.copy(c).project(cam);
+      return Math.abs(p.x) <= mx && Math.abs(p.y) <= my;
+    });
+    if (fits) hi = d;
+    else lo = d;
+  }
+  return hi;
+}
+
+/** Outline vertices to frame (whole plan, or one room plus a margin) at floor and wall-top
+ *  height, in scene coordinates (plan center at the origin). */
+function fitPoints(model: PlanModel, height: number, focusId: string | null): THREE.Vector3[] {
+  const { cx, cz } = model.bounds;
+  const pts: THREE.Vector3[] = [];
+  const add = ([x, z]: [number, number]) => {
+    pts.push(new THREE.Vector3(x - cx, 0, z - cz), new THREE.Vector3(x - cx, height, z - cz));
+  };
+  const room = focusId ? model.rooms.find((r) => r.room.id === focusId) : undefined;
+  if (room) {
+    const m = 2; // ft of context around the room
+    const xs = room.poly.map((p) => p[0]), zs = room.poly.map((p) => p[1]);
+    const [x0, x1, z0, z1] = [Math.min(...xs) - m, Math.max(...xs) + m, Math.min(...zs) - m, Math.max(...zs) + m];
+    ([[x0, z0], [x1, z0], [x1, z1], [x0, z1]] as [number, number][]).forEach(add);
+  } else {
+    model.walls.forEach((w) => w.outer.forEach(add));
+    model.rooms.forEach((r) => r.poly.forEach(add));
+  }
+  return pts;
+}
+
+/** 3/4 perspective view or straight-down orthographic view, both fitted to the plan. */
+function CameraRig({ model, view, resetKey, wallHeight, onReady, fit, focusId }: {
+  model: PlanModel;
+  view: ViewMode;
+  resetKey: number;
+  wallHeight: number;
+  onReady?: () => void;
+  fit: RefObject<FitState>;
+  focusId: string | null;
+}) {
+  const controls = useThree((s) => s.controls) as unknown as CameraControlsImpl | null;
+  const get = useThree((s) => s.get);
+  const last = useRef<CameraControlsImpl | null>(null);
+  const height = useRef(wallHeight);
+  height.current = wallHeight; // re-fit on view changes only, not while dragging the slider
+
+  useEffect(() => {
+    if (!controls) return;
+    const animate = last.current === controls; // same camera: smooth reset; new camera: jump
+    last.current = controls;
+    const { camera, size } = get();
+    const pts = fitPoints(model, height.current, focusId);
+    const frame = new THREE.Box3().setFromPoints(pts);
+    const center = frame.getCenter(new THREE.Vector3());
+    const sx = frame.max.x - frame.min.x, sz = frame.max.z - frame.min.z;
+    const pad = focusId ? 0.5 : Math.max(1.5, Math.max(sx, sz) * 0.03);
+    const top = view === "top";
+    const A = CameraControlsImpl.ACTION;
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = top ? 0 : THREE.MathUtils.degToRad(84);
+    controls.minAzimuthAngle = top ? 0 : -Infinity;
+    controls.maxAzimuthAngle = top ? 0 : Infinity;
+    controls.mouseButtons.left = top ? A.TRUCK : A.ROTATE;
+    controls.touches.one = top ? A.TOUCH_TRUCK : A.TOUCH_ROTATE;
+    controls.dollyToCursor = true;
+    let cancelled = false;
+    (async () => {
+      if (top) {
+        // camera on the +Z side of straight-down: screen-up = -Z = image top, screen-right = +X
+        const ui = uiMargin(size.width);
+        const zoom = Math.min(size.width / (sx + 2 * pad), Math.max(100, size.height - 2 * ui) / (sz + 2 * pad));
+        fit.current = { zoom, distance: TOP_CAMERA_Y };
+        await Promise.all([
+          controls.setLookAt(center.x, TOP_CAMERA_Y, center.z + 0.001, center.x, 0, center.z, animate),
+          controls.zoomTo(zoom, animate),
+        ]);
+      } else {
+        const dir = new THREE.Vector3().setFromSphericalCoords(1, focusId ? FOCUS_POLAR : VIEW_POLAR, VIEW_AZIMUTH);
+        const my = Math.max(0.4, 1 - (2 * uiMargin(size.width)) / size.height);
+        const d = fitDistance(camera as THREE.PerspectiveCamera, pts, center, dir, 0.92, my);
+        fit.current = { zoom: 1, distance: d };
+        const eye = center.clone().addScaledVector(dir, d);
+        await controls.setLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, animate);
+      }
+      if (!cancelled) onReady?.();
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [controls, view, resetKey, model, onReady, get, fit, focusId]);
+  return null;
+}
+
+/**
+ * Keep the model clear of the room panel: shrink it into the visible part of the canvas and shift
+ * it left (desktop side panel) or up (phone bottom sheet); undo when the panel closes.
+ */
+function PanelOffset({ open, view, resetKey, fit, focusId }: {
+  open: boolean;
+  view: ViewMode;
+  resetKey: number;
+  fit: RefObject<FitState>;
+  focusId: string | null; // the framing changed: recompute the offset at the new zoom
+}) {
+  const controls = useThree((s) => s.controls) as unknown as CameraControlsImpl | null;
+  const get = useThree((s) => s.get);
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (!controls || (!open && !wasOpen.current)) return; // nothing to undo
+    wasOpen.current = open;
+    const t = setTimeout(() => {
+      const { camera, size } = get();
+      const phone = size.width < 640;
+      const panel = phone ? 0.42 * size.height : Math.min(300, size.width * 0.45); // px the panel covers
+      const keep = open ? Math.max(0.45, 1 - panel / (phone ? size.height : size.width)) : 1;
+      const shift: [number, number] = open ? (phone ? [0, panel / 2] : [panel / 2, 0]) : [0, 0];
+      // camera-controls focal offset: +x shifts the scene left, +y shifts it up on screen
+      if ((camera as THREE.OrthographicCamera).isOrthographicCamera) {
+        const zoom = fit.current.zoom * keep;
+        controls.zoomTo(zoom, true);
+        controls.setFocalOffset(shift[0] / zoom, shift[1] / zoom, 0, true);
+      } else {
+        const dist = fit.current.distance / keep;
+        controls.dollyTo(dist, true);
+        const perPx = (2 * dist * Math.tan(THREE.MathUtils.degToRad((camera as THREE.PerspectiveCamera).fov) / 2)) / size.height;
+        controls.setFocalOffset(shift[0] * perPx, shift[1] * perPx, 0, true);
+      }
+    }, 0); // after the view fit has run
+    return () => clearTimeout(t);
+  }, [controls, open, view, resetKey, get, fit, focusId]);
+  return null;
+}
+
+/** Positions the DOM labels every frame; bigger rooms win when labels would overlap. */
+function LabelProjector({ model, height, selectedId, els }: {
+  model: PlanModel;
+  height: number;
+  selectedId: string | null;
+  els: RefObject<(HTMLElement | null)[]>;
+}) {
+  const v = useMemo(() => new THREE.Vector3(), []);
+  const order = useMemo(() => {
+    const score = (e: RoomEntry) =>
+      (e.room.id === selectedId ? 1e9 : 0) + (e.room.type === "closet" ? 0 : 1e6) + (e.room.area_sqft_final ?? 0);
+    return model.rooms.map((_, i) => i).sort((a, b) => score(model.rooms[b]) - score(model.rooms[a]));
+  }, [model, selectedId]);
+  useFrame(({ camera, size }) => {
+    const placed: number[][] = [];
+    const { cx, cz } = model.bounds;
+    for (const i of order) {
+      const el = els.current?.[i];
+      if (!el) continue;
+      const [x, z] = model.rooms[i].labelAt;
+      v.set(x - cx, height + LABEL_LIFT, z - cz).project(camera);
+      const px = ((v.x + 1) / 2) * size.width;
+      const py = ((1 - v.y) / 2) * size.height;
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      // try the spot itself, then nudged up / down by one label height; hide if all collide
+      let dy = 0;
+      let r: number[] = [];
+      let free = false;
+      for (const off of [0, -(h + 3), h + 3]) {
+        r = [px - w / 2 - 2, py + off - h / 2 - 1, px + w / 2 + 2, py + off + h / 2 + 1];
+        free = !placed.some((q) => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1]);
+        if (free) {
+          dy = off;
+          break;
+        }
+      }
+      const selected = model.rooms[i].room.id === selectedId;
+      if (!free) dy = 0;
+      const show = v.z > -1 && v.z < 1 && (free || selected);
+      el.style.transform = `translate(${Math.round(px - w / 2)}px, ${Math.round(py + dy - h / 2)}px)`;
+      el.style.opacity = show ? "1" : "0";
+      el.style.pointerEvents = show ? "auto" : "none";
+      if (show) placed.push(free ? r : [px - w / 2, py - h / 2, px + w / 2, py + h / 2]);
+    }
+  });
+  return null;
+}
+
+function Ground({ model }: { model: PlanModel }) {
+  const { cx, cz, sx, sz } = model.bounds;
+  const size = Math.max(sx, sz) * 30 + 600;
+  return (
+    <mesh position={[cx, Y_GROUND, cz]} rotation-x={-Math.PI / 2} receiveShadow>
+      <planeGeometry args={[size, size]} />
+      <meshStandardMaterial color={GROUND} roughness={1} />
+    </mesh>
+  );
+}
+
+/** One continuous floor under walls + hallways (rooms sit on top of it). */
+function Slab({ model }: { model: PlanModel }) {
+  const geos = useMemo(() => model.footprint.map((p) => flatGeometry(p)), [model]);
+  useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
+  return (
+    <>
+      {geos.map((g, i) => (
+        <mesh key={i} geometry={g} position-y={Y_SLAB} receiveShadow>
+          <meshStandardMaterial color={SLAB} roughness={0.95} side={THREE.DoubleSide} />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
+function RoomFloor({ entry, selected, hovered, subtle, onSelect, onHover }: {
+  entry: RoomEntry;
+  selected: boolean;
+  hovered: boolean;
+  /** editing furniture: only tint the selected room, so the green / red fit plates stand out */
+  subtle: boolean;
+  onSelect: (id: string) => void;
+  onHover: (id: string | null) => void;
+}) {
+  const { room, poly } = entry;
+  const balcony = room.type === "balcony";
+  const geo = useMemo(() => flatGeometry(poly), [poly]);
+  const planks = useMemo(() => (balcony ? plankTexture() : null), [balcony]);
+  useEffect(() => () => geo.dispose(), [geo]);
+  useEffect(() => () => planks?.dispose(), [planks]);
+  const outline = useMemo(() => [...poly, poly[0]].map(([x, z]) => [x, Y_OUTLINE, z] as [number, number, number]), [poly]);
+
+  const base = new THREE.Color(ROOM_COLORS[room.type] ?? ROOM_COLORS.other);
+  const color = selected
+    ? subtle
+      ? base.clone().lerp(new THREE.Color(ACCENT_SOFT), 0.3)
+      : new THREE.Color(ACCENT_SOFT)
+    : hovered
+      ? base.clone().lerp(new THREE.Color("#ffffff"), 0.35)
+      : base;
+  const click = (e: ThreeEvent<MouseEvent>) => {
+    if (e.delta > 4) return; // that was an orbit drag
+    e.stopPropagation();
+    onSelect(room.id);
+  };
+  return (
+    <>
+      <mesh
+        geometry={geo}
+        position-y={balcony ? Y_BALCONY : Y_ROOM}
+        receiveShadow
+        onClick={click}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          onHover(room.id);
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          onHover(null);
+          document.body.style.cursor = "";
+        }}
+      >
+        {balcony ? (
+          <meshStandardMaterial map={planks} color={selected ? ACCENT_SOFT : "#ffffff"} roughness={1} side={THREE.DoubleSide} />
+        ) : (
+          <meshStandardMaterial color={color} roughness={0.85} side={THREE.DoubleSide} />
+        )}
+      </mesh>
+      {selected && (
+        <Line points={balcony ? outline.map(([x, , z]) => [x, Y_BALCONY + 0.08, z] as [number, number, number]) : outline} color={ACCENT} lineWidth={3} />
+      )}
+    </>
+  );
+}
+
+function Walls({ model, height, ghost }: { model: PlanModel; height: number; ghost: boolean }) {
+  const geos = useMemo(() => model.walls.map((w) => wallGeometry(w.outer, w.holes)), [model]);
+  useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
+  const mats = useMemo(
+    () => [
+      new THREE.MeshStandardMaterial({ color: WALL_CAP, roughness: 0.9 }),
+      new THREE.MeshStandardMaterial({ color: WALL_SIDE, roughness: 0.9 }),
+    ],
+    [],
+  );
+  useEffect(() => () => mats.forEach((m) => m.dispose()), [mats]);
+  useEffect(() => {
+    for (const m of mats) {
+      m.transparent = ghost; // see-through walls while the 2D plan is shown, so the drawn walls stay visible
+      m.opacity = ghost ? 0.45 : 1;
+      m.depthWrite = !ghost;
+      m.needsUpdate = true;
+    }
+  }, [ghost, mats]);
+  return (
+    <group scale={[1, height, 1]}>
+      {geos.map((g, i) => (
+        <mesh key={i} geometry={g} material={mats} castShadow={!ghost} receiveShadow renderOrder={2} />
+      ))}
+    </group>
+  );
+}
+
+/** The original image laid on the floor, multiplied over it: white paper disappears, ink stays. */
+function PlanImage({ model, url }: { model: PlanModel; url: string }) {
+  const [tex, setTex] = useState<THREE.Texture | null>(null);
+  useEffect(() => {
+    let alive = true;
+    new THREE.TextureLoader().load(
+      url,
+      (t) => {
+        if (!alive) return t.dispose();
+        t.colorSpace = THREE.SRGBColorSpace;
+        t.anisotropy = 8;
+        setTex(t);
+      },
+      undefined,
+      () => setTex(null),
+    );
+    return () => {
+      alive = false;
+    };
+  }, [url]);
+  useEffect(() => () => tex?.dispose(), [tex]);
+  if (!tex) return null;
+  const { w, h } = model.image;
+  // image pixel (0,0) is scene (0,0); local +Y (image top) maps to -Z after the rotation
+  return (
+    <mesh position={[w / 2, Y_IMAGE, h / 2]} rotation-x={-Math.PI / 2} renderOrder={1}>
+      <planeGeometry args={[w, h]} />
+      <meshBasicMaterial
+        map={tex}
+        transparent
+        opacity={0.85}
+        blending={THREE.MultiplyBlending}
+        premultipliedAlpha
+        depthWrite={false}
+        toneMapped={false}
+      />
+    </mesh>
+  );
+}

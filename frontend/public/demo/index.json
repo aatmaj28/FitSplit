@@ -1,0 +1,30 @@
+[
+  {
+    "name": "jvue_3bed",
+    "source_image": "jvue_3bed.png",
+    "unit": {
+      "total_sqft": 1500,
+      "beds": 3,
+      "baths": 2.5,
+      "rent": 4200
+    },
+    "rooms": 16,
+    "semantics_provider": "claude",
+    "json": "jvue_3bed.json",
+    "image": "jvue_3bed.png"
+  },
+  {
+    "name": "longwood_2bed",
+    "source_image": "longwood_2bed.png",
+    "unit": {
+      "total_sqft": 1125,
+      "beds": 2,
+      "baths": 1,
+      "rent": 3450
+    },
+    "rooms": 12,
+    "semantics_provider": "claude",
+    "json": "longwood_2bed.json",
+    "image": "longwood_2bed.png"
+  }
+]

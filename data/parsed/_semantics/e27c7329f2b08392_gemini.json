@@ -1,0 +1,157 @@
+{
+  "image_hash": "e27c7329f2b083929e89fa0c46b161c993e824eba55c6337f8724fc2bb78eae4",
+  "provider": "gemini",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v2",
+  "created_at": "2026-10-15T06:06:45+00:00",
+  "latency_s": 17.86,
+  "usage": {
+    "input_tokens": 2022,
+    "output_tokens": 449,
+    "thinking_tokens": null
+  },
+  "attempts": [
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "status": "ok",
+      "latency_s": 17.86,
+      "usage": {
+        "input_tokens": 2022,
+        "output_tokens": 449,
+        "thinking_tokens": null
+      }
+    }
+  ],
+  "warnings": [],
+  "raw_text": "{\"is_3d_render\":false,\"rooms\":[{\"name\":\"Foyer\",\"type\":\"foyer\",\"label_center\":[0.404,0.222]},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.317,0.67]},{\"name\":\"Kitchen\",\"type\":\"kitchen\",\"label_center\":[0.732,0.129],\"dims_text\":\"10\u2019 x 9\u2019\",\"width_ft\":10.0,\"length_ft\":9.0},{\"name\":\"Pantry\",\"type\":\"closet\",\"label_center\":[0.518,0.198]},{\"name\":\"Bath\",\"type\":\"bathroom\",\"label_center\":[0.187,0.282],\"dims_text\":\"7-1/2\u2019 x 5\u2019\",\"width_ft\":7.5,\"length_ft\":5.0},{\"name\":\"Closet\",\"type\":\"closet\",\"label_center\":[0.165,0.435]},{\"name\":\"C\",\"type\":\"closet\",\"label_center\":[0.311,0.437]},{\"name\":\"Bedroom\",\"type\":\"bedroom\",\"label_center\":[0.268,0.573],\"dims_text\":\"15\u2019 x 11\u2019\",\"width_ft\":15.0,\"length_ft\":11.0,\"has_private_bath\":false},{\"name\":\"Living Room/\\nDining Room\",\"type\":\"living\",\"label_center\":[0.706,0.505],\"dims_text\":\"22\u2019 x 13\u2019\",\"width_ft\":22.0,\"length_ft\":13.0},{\"name\":\"Balcony\",\"type\":\"balcony\",\"label_center\":[0.704,0.876],\"dims_text\":\"6\u20194\u201d x 12\u201910\u201d\",\"width_ft\":6.33,\"length_ft\":12.83}],\"beds\":1,\"baths\":1.0}",
+  "semantics": {
+    "is_3d_render": false,
+    "rooms": [
+      {
+        "name": "Foyer",
+        "type": "foyer",
+        "label_center": [
+          0.404,
+          0.222
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.317,
+          0.67
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "Kitchen",
+        "type": "kitchen",
+        "label_center": [
+          0.732,
+          0.129
+        ],
+        "dims_text": "10\u2019 x 9\u2019",
+        "width_ft": 10.0,
+        "length_ft": 9.0,
+        "has_private_bath": null
+      },
+      {
+        "name": "Pantry",
+        "type": "closet",
+        "label_center": [
+          0.518,
+          0.198
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "Bath",
+        "type": "bathroom",
+        "label_center": [
+          0.187,
+          0.282
+        ],
+        "dims_text": "7-1/2\u2019 x 5\u2019",
+        "width_ft": 7.5,
+        "length_ft": 5.0,
+        "has_private_bath": null
+      },
+      {
+        "name": "Closet",
+        "type": "closet",
+        "label_center": [
+          0.165,
+          0.435
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "C",
+        "type": "closet",
+        "label_center": [
+          0.311,
+          0.437
+        ],
+        "dims_text": null,
+        "width_ft": null,
+        "length_ft": null,
+        "has_private_bath": null
+      },
+      {
+        "name": "Bedroom",
+        "type": "bedroom",
+        "label_center": [
+          0.268,
+          0.573
+        ],
+        "dims_text": "15\u2019 x 11\u2019",
+        "width_ft": 15.0,
+        "length_ft": 11.0,
+        "has_private_bath": false
+      },
+      {
+        "name": "Living Room/\nDining Room",
+        "type": "living",
+        "label_center": [
+          0.706,
+          0.505
+        ],
+        "dims_text": "22\u2019 x 13\u2019",
+        "width_ft": 22.0,
+        "length_ft": 13.0,
+        "has_private_bath": null
+      },
+      {
+        "name": "Balcony",
+        "type": "balcony",
+        "label_center": [
+          0.704,
+          0.876
+        ],
+        "dims_text": "6\u20194\u201d x 12\u201910\u201d",
+        "width_ft": 6.33,
+        "length_ft": 12.83,
+        "has_private_bath": null
+      }
+    ],
+    "total_sqft": null,
+    "beds": 1.0,
+    "baths": 1.0
+  }
+}
