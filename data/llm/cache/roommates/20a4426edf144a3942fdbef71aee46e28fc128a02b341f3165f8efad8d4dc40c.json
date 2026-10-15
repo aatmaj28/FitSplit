@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:SOCIAL>>\nSAY: I maintain a tidy home with occasional weekend guests, keeping noise low to respect quiet hours.\nPFR:[gwk:1-2, nzl:Low, guests:Occasional friends over (weekends), notice:Always give notice]\nCNF:[slp:status(misalign)(Kavya sleeps before 10pm, I wake 6-8am but stay up later)]",
+  "created": "2026-10-15T16:39:40+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -4,37 +4,37 @@
       {
         "a": "priya",
         "b": "ananya",
-        "id": "n_43ec9850ce60",
+        "id": "n_4a9f06839f47",
         "status": "strong"
       },
       {
         "a": "priya",
+        "b": "jake",
+        "id": "n_a2ec448a2ac8",
+        "status": "incompatible"
+      },
+      {
+        "a": "priya",
         "b": "meera",
-        "id": "n_feed62b05810",
+        "id": "n_df6915b8e045",
         "status": "conditional"
       },
       {
         "a": "ananya",
         "b": "meera",
-        "id": "n_dc5814af3047",
+        "id": "n_1288eb7f7263",
         "status": "conditional"
       },
       {
         "a": "priya",
-        "b": "jake",
-        "id": "n_6eb157360e44",
-        "status": "incompatible"
-      },
-      {
-        "a": "priya",
         "b": "kavya",
-        "id": "n_80b50260ef9f",
-        "status": "strong"
+        "id": "n_6c194346bfbe",
+        "status": "conditional"
       },
       {
         "a": "priya",
         "b": "rohan",
-        "id": "n_237865066ca8",
+        "id": "n_cb8ba53cb16e",
         "status": "strong"
       }
     ],
@@ -45,22 +45,22 @@
           "meera",
           "priya"
         ],
-        "score": 667,
+        "score": 641,
         "pairs": [
           {
-            "id": "n_dc5814af3047",
+            "id": "n_1288eb7f7263",
             "a": "ananya",
             "b": "meera",
             "status": "conditional"
           },
           {
-            "id": "n_43ec9850ce60",
+            "id": "n_4a9f06839f47",
             "a": "priya",
             "b": "ananya",
             "status": "strong"
           },
           {
-            "id": "n_feed62b05810",
+            "id": "n_df6915b8e045",
             "a": "priya",
             "b": "meera",
             "status": "conditional"
@@ -127,23 +127,23 @@
             "id": "arjun",
             "name": "Arjun Reddy"
           },
-          "id": "n_7f9d90c14a9b",
+          "id": "n_50c07611e023",
           "status": "complete",
-          "verdict": "conditional"
+          "verdict": "strong"
         },
         {
           "member": {
             "id": "sofia",
             "name": "Sofia Alvarez"
           },
-          "id": "n_caf4712eb0e9",
+          "id": "n_6cc498a757ee",
           "status": "complete",
           "verdict": "strong"
         }
       ],
       "group": {
         "match": true,
-        "status": "conditional",
+        "status": "strong",
         "rule": "all",
         "approvals": 2,
         "members": 2,
@@ -151,7 +151,7 @@
       },
       "layout": [
         {
-          "id": "ljwv7l0g",
+          "id": "t2dp0avl",
           "kind": "queen_bed",
           "name": "Queen bed",
           "w": 60,
@@ -164,7 +164,7 @@
           "z": 12.763506540596325
         },
         {
-          "id": "pmjk63wd",
+          "id": "pwhl69mj",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -177,7 +177,7 @@
           "z": 17.18017320726299
         },
         {
-          "id": "87fn27nf",
+          "id": "sv3omr6b",
           "kind": "bookshelf",
           "name": "Bookshelf",
           "w": 36,
@@ -245,7 +245,7 @@
             "id": "arjun",
             "name": "Arjun Reddy"
           },
-          "id": "n_320922943733",
+          "id": "n_3c2734edd145",
           "status": "complete",
           "verdict": "incompatible"
         },
@@ -254,7 +254,7 @@
             "id": "sofia",
             "name": "Sofia Alvarez"
           },
-          "id": "n_73dd5464835f",
+          "id": "n_f7b90f7e31f8",
           "status": "complete",
           "verdict": "incompatible"
         }
@@ -269,7 +269,7 @@
       },
       "layout": [
         {
-          "id": "qnn56cfs",
+          "id": "i23o9iav",
           "kind": "full_bed",
           "name": "Full bed",
           "w": 54,
@@ -282,7 +282,7 @@
           "z": 12.55517320726299
         },
         {
-          "id": "4998qmnt",
+          "id": "jtbpu818",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -295,7 +295,7 @@
           "z": 10.43017320726299
         },
         {
-          "id": "eb4g4ikp",
+          "id": "1i95b59n",
           "kind": "custom",
           "name": "Keyboard stand",
           "w": 54,
@@ -363,7 +363,7 @@
             "id": "arjun",
             "name": "Arjun Reddy"
           },
-          "id": "n_b9a35d41426b",
+          "id": "n_9bc1a5c7f81d",
           "status": "complete",
           "verdict": "incompatible"
         },
@@ -372,7 +372,7 @@
             "id": "sofia",
             "name": "Sofia Alvarez"
           },
-          "id": "n_61b65361fbe5",
+          "id": "n_a3720f893813",
           "status": "complete",
           "verdict": "incompatible"
         }
@@ -387,7 +387,7 @@
       },
       "layout": [
         {
-          "id": "x8w28x09",
+          "id": "vkg01woe",
           "kind": "twin_bed",
           "name": "Twin bed",
           "w": 39,
@@ -400,7 +400,7 @@
           "z": 12.55517320726299
         },
         {
-          "id": "712hgmzr",
+          "id": "42ktum6b",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -413,7 +413,7 @@
           "z": 10.43017320726299
         },
         {
-          "id": "x57slmkq",
+          "id": "vj9mh3mh",
           "kind": "bookshelf",
           "name": "Bookshelf",
           "w": 36,

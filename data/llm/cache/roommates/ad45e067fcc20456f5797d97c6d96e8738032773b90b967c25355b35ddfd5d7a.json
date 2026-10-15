@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My 6am wake-up clashes with your late nights, and weekly guests conflict with my need for quiet; I need stricter boundaries.\nCNF:[slp:conflict(6am wake vs late nights), gwk:conflict(weekly guests vs quiet need)]\nPFR:[slp:6am–8am, gwk:Occasionally (once a month or less), wfh:Hybrid (a few days a week)]",
+  "created": "2026-10-15T16:28:23+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

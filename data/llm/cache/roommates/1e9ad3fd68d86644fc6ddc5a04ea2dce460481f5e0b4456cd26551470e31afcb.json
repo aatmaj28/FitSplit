@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 84,
+      "finances": 92,
+      "lifestyle": 74,
+      "personality": 82,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both hold identical non-negotiables on smoking (no indoor smoking). Rohan's guest habits (never or very rarely, small weekend visits only) fit Arjun's 'no parties ever' rule, so neither non-negotiable is in conflict.",
+      "Budgets overlap at $1,200–1,400, and the $1,360/mo Bedroom 2 share fits Rohan's hard cap. Both want equal utility splits, a Splitwise setup, and a 1-year lease with a 1–3 month move-in window.",
+      "They worked through their differences concretely: after-10pm headphones, cooking done before 9pm, quiet before 8am, 24-hour guest notice with a 10pm wrap-up, and a rotating chore chart with a Sunday reset. Both are students who love pets and are non-smokers."
+    ],
+    "concerns": [
+      "Sleep schedules differ sharply (Rohan sleeps before 10pm and wakes 6-8am; Arjun sleeps after midnight and wakes 8-10am). Shared walls, bathroom use, and late-night kitchen activity could still cause friction beyond what the agreed quiet-hours plan covers.",
+      "Arjun works from home full-time, so he will be in the apartment during the day and Rohan will not. Rohan gets little solo time on weekdays, and Arjun's 1-5pm quiet needs will mean ongoing coordination, though Rohan's school schedule should make this easy.",
+      "Cleanliness differs slightly (4 vs 3), and Rohan's budget cap leaves little margin if costs rise. The agreement rests on a chore chart and Sunday reset that both must keep following, and on utility costs that could push total spend over Rohan's cap."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Keep the written chore chart with the Sunday-evening common-area reset, and review it after the first month. If the 4 vs 3 cleanliness gap causes friction, adjust the task split or add a mid-week quick-tidy.",
+      "Confirm the quiet-hours schedule in writing (before 8am quiet, after 10pm headphones and quiet common areas, 1-5pm weekday work quiet). Consider white noise or a door-seal for the shared wall if the room layout allows, and agree on a quick check-in if a guest evening runs over 10pm."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Rohan and Arjun have no conflicts on either person's non-negotiables, and their finances, lease terms, and guest rules line up well. Their opposite sleep schedules are the main risk, but they have already agreed on specific quiet-hour and chore arrangements that address it. This is a strong match if they stick to the agreed routines."
+  },
+  "created": "2026-10-15T16:59:31+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

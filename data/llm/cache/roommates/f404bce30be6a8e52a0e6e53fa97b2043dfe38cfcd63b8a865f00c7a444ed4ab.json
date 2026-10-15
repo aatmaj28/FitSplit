@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student seeking a private room in Fenway or Mission Hill for 1-3 months, prioritizing cleanliness and quiet work time.\nHI:[loc:Boston/Fenway / Mission Hill|mv:1–3 months|rm:Private room|occ:Student]\nPFR:[pri:Similar cleanliness standards;Respectful of quiet/work time]",
+  "created": "2026-10-15T16:25:59+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I am an early riser who works off-site, so I need a very quiet environment with minimal guests.\n\n<<MOD:ROUTINES>>\nPFR:[slp:Early bird (sleep before 10pm)|wake:6am–8am|cln:4(tidy)|clean_sched:Rotating chore chart]\nPFR:[nzl:Very quiet, minimal guests|wfh:No, I go to office/school daily]",
+  "created": "2026-10-15T16:23:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

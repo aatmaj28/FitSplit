@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm an early bird, asleep before 10pm and up 6-8am, cleanliness 4 with a chore chart, rarely host anyone, cook daily, and I'm fine with Sofia's Friday guests if it's quiet after 10pm.\n\nPFR:[slp:early bird(sleep before 10pm),wake:6am-8am,cln:4(tidy),clean_sched:rotating chore chart,cook:daily,gwk:never/very rarely,nzl:occasional friends weekends,wfh:no(Kennedy School most days),quiet:headphones handle it]\nFLX:[gwk:partner most Fridays OK|notice given and quiet after 10pm,parties:small <10 OK|advance notice and not on weeknights]\n<<MOD:SOCIAL>>",
+  "created": "2026-10-15T17:00:07+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m glad we both prioritize quiet and cleanliness, Priya!  \n\nPFR:wfh=No, I’m on campus daily; noise=Very quiet, minimal guests, volume low after 10 pm; guests=Never or very rare, but I can allow a single weekend visit per month with at least 24 hr notice.  \n\nFLX:guests=Agree to limit any guest visits to once a month with prior notice, matching my quiet‑room preference.",
+  "created": "2026-10-15T16:16:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

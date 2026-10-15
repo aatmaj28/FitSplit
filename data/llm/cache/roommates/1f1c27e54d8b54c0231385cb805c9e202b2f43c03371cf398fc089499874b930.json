@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m an early‑to‑bed student who keeps my room tidy, rarely hosts guests, prefers quiet, and works from home a few days; I can shift my sleep slightly if you’re okay with a quiet hour after midnight.  \nPFR:slp_sched=Early to bed (6–8 am)|cln=4(tidy)|guests=Rarely (≤1/month)|nzl=Quiet|wfh=Hybrid (few days a week)  \nFLX:slp_sched=Adjust to 9 pm bedtime if you’re comfortable with a 1‑hour quiet period after midnight.",
+  "created": "2026-10-15T16:20:45+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

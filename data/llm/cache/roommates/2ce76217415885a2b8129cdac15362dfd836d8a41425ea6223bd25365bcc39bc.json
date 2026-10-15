@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep before 10pm and wake 6-8am, keep cleanliness at 4/5 with a rotating chore chart, rarely host guests, and don't work from home; what are yours?\n\nPFR:[slp:early bird (sleep before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,gwk:never/very rarely,nzl:occasional weekend friends with notice,wfh:no (out at school daily)]\nPFR:[ask:slp, cln, gwk, nzl, wfh]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:56:44+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

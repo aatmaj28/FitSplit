@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student seeking a private room in Fenway or Back Bay for 1-3 months, prioritizing social energy and location.\nHI:[loc:Boston/Fenway / Back Bay|mv:1–3 months|rm:Private room|occ:Student]\nPFR:[pri:Matching social energy;Similar guest/party preferences;Location match]",
+  "created": "2026-10-15T16:26:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

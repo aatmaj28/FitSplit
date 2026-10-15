@@ -1,6 +1,7 @@
-"""Text-only completions with the overnight budget rules:
-Groq "openai/gpt-oss-120b" (free) -> Groq "openai/gpt-oss-20b" -> Groq "qwen/qwen3.8-27b" (free, each with
-its own daily quota) -> Gemini -> Claude "claude-sonnet-5-5" (paid, capped).
+"""Text-only completions. The overnight budget rule was Groq "openai/gpt-oss-120b" (free) -> Groq
+"openai/gpt-oss-20b" -> Groq "qwen/qwen3.8-27b" (free, each with its own daily quota) -> Gemini ->
+Claude "claude-sonnet-5-5" (paid, capped). On 2026-10-15, with Groq and Gemini out of quota, the
+user put Claude first; TEXT_CHAIN_ORDER=groq,gemini,claude restores the overnight order.
 
 A 429 is retried with backoff on the same provider (honouring Retry-After); a long Retry-After
 (daily quota gone), any other error, or output that `parse` rejects twice moves on to the next
@@ -21,19 +22,23 @@ from . import usage
 
 T = TypeVar("T")
 
-# (provider, model) in order; each Groq model has its own free quota
-TEXT_CHAIN: list[tuple[str, str]] = [
-    ("groq", os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-120b")),
-    ("groq", os.getenv("GROQ_TEXT_MODEL_2", "openai/gpt-oss-20b")),
-    ("groq", os.getenv("GROQ_TEXT_MODEL_3", "qwen/qwen3.8-27b")),
-    ("gemini", os.getenv("GEMINI_TEXT_MODEL", "gemini-flash-latest")),
-    ("claude", os.getenv("CLAUDE_TEXT_MODEL", "claude-sonnet-5-5")),
-]
+# (provider, model) per provider; each Groq model has its own free quota
+PROVIDER_MODELS: dict[str, list[tuple[str, str]]] = {
+    "groq": [("groq", os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-120b")),
+             ("groq", os.getenv("GROQ_TEXT_MODEL_2", "openai/gpt-oss-20b")),
+             ("groq", os.getenv("GROQ_TEXT_MODEL_3", "qwen/qwen3.8-27b"))],
+    "gemini": [("gemini", os.getenv("GEMINI_TEXT_MODEL", "gemini-flash-latest"))],
+    "claude": [("claude", os.getenv("CLAUDE_TEXT_MODEL", "claude-sonnet-5-5"))],
+}
+OVERNIGHT_ORDER = "groq,gemini,claude"
+TEXT_CHAIN_ORDER = [p.strip() for p in os.getenv("TEXT_CHAIN_ORDER", "claude,groq,gemini").split(",") if p.strip() in PROVIDER_MODELS]
+TEXT_CHAIN: list[tuple[str, str]] = [m for p in TEXT_CHAIN_ORDER for m in PROVIDER_MODELS[p]]
 GROQ_QWEN_MAX_TOKENS = 1000  # this account's output-tokens-per-minute limit for qwen (see semantics/providers.py)
 Messages = list[dict]  # [{"role": "user" | "assistant", "content": str}]
 KEYS = {"groq": "GROQ_API_KEY", "gemini": "GEMINI_API_KEY", "claude": "ANTHROPIC_API_KEY"}
 TIMEOUT_S = float(os.getenv("TEXT_TIMEOUT_S", "60"))
 MAX_RATE_RETRIES = 3
+TRANSIENT_WAITS = (3.0, 8.0)  # a timeout, dropped connection or 5xx is retried on the same provider first
 MAX_WAIT_S = 45.0  # a longer Retry-After means "come back much later": use the next provider
 
 
@@ -157,6 +162,16 @@ def extract_json(text: str) -> object:
         raise
 
 
+_TRANSIENT = ("timed out", "timeout", "connection error", "connection reset", "overloaded", "internal server error",
+              "bad gateway", "service unavailable", "error code: 500", "error code: 502", "error code: 503", "error code: 529")
+
+
+def _transient(e: Exception) -> bool:
+    """Worth one or two retries on the same provider (not a quota, not a bad request)."""
+    t = f"{type(e).__name__} {e}".lower()
+    return not _rate_limited(e) and not usage.quota_exhausted(e) and any(x in t for x in _TRANSIENT)
+
+
 def complete(system: str, user: "str | Messages", *, parse: Callable[[object], T] = lambda v: v, json_mode: bool = True,
              max_tokens: int = 1200, temperature: float = 0.7, chain: Optional[list[tuple[str, str]]] = None,
              sleep: Callable[[float], None] = time.sleep) -> TextResult:
@@ -173,7 +188,7 @@ def complete(system: str, user: "str | Messages", *, parse: Callable[[object], T
         if usage.cooling(slot):
             attempts.append({"provider": name, "model": model, "status": "skipped", "error": "quota exhausted earlier, cooling down"})
             continue
-        messages, invalid, rate_retries = base, 0, 0
+        messages, invalid, rate_retries, transient = base, 0, 0, 0
         while True:
             try:
                 with usage.track(name, model) as meta:
@@ -194,6 +209,11 @@ def complete(system: str, user: "str | Messages", *, parse: Callable[[object], T
                         rate_retries += 1
                         sleep(wait)
                         continue
+                if _transient(e) and transient < len(TRANSIENT_WAITS):
+                    attempts.append({"provider": name, "model": model, "status": "transient", "wait_s": TRANSIENT_WAITS[transient]})
+                    sleep(TRANSIENT_WAITS[transient])
+                    transient += 1
+                    continue
                 attempts.append({"provider": name, "model": model, "status": "rate_limited" if _rate_limited(e) else "api_error",
                                  "error": " ".join(str(e).split())[:200]})
                 break

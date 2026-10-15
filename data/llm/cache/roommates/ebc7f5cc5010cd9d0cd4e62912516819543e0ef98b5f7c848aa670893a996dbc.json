@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:FINANCIAL>>\nSAY: I align on splitting utilities and groceries equally with a shared app, and I also cook daily, so our habits are compatible.\nPFR:usp=Split equally|groc=Split basics (condiments, cleaning)|cook=Daily — I cook most meals\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+  "created": "2026-10-15T16:43:31+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

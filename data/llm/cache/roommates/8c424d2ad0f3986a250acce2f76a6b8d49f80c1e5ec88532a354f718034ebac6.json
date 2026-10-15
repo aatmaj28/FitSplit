@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can accept two weekend gatherings a month under 10 people, with Thursday notice and 11:30pm quiet, plus small hangouts in my room, so it's a conditional match pending your okay on those hangouts and late-night noise.\n\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if I can still have 2-3 friends over in my room on other weekends, keeping the common areas quiet]\nFLX:[cln:Rotating chore chart with weekly check-in, you draft the \"tidy\" checklist|I'll edit it with you before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking, location, room type, budget overlap, money split, cooking, and chores; the remaining gap is my social, night-owl rhythm versus your early mornings|open=small friend hangouts in my room on non-gathering weekends, late-night noise after 11:30pm",
+  "created": "2026-10-15T16:53:00+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

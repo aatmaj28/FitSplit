@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My schedule aligns with yours, but I work from home a few days a week and need occasional quiet hours for focus.\n\nPFR:[cln:4/5 tidy, clean_sched:Rotating chore chart]\nPFR:[wfh:Hybrid (a few days a week), nzl:Occasional friends over (weekends)]\nFLX:[gwk:1 guest per week|condition:always give notice and keep gatherings small]",
+  "created": "2026-10-15T16:46:17+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

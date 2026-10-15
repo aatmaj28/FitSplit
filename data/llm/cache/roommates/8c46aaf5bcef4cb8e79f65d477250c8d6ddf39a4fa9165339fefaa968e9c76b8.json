@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I appreciate the quiet hours alignment; I cook daily so I need a rotating chore chart and strict veg kitchen rules.\n\nPFR:[cook:Daily, cln:5, clean_sched:Rotating chore chart, notes:Strict vegetarian kitchen]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:40:34+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

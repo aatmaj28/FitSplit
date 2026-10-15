@@ -1,0 +1,31 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 100,
+      "lifestyle": 85,
+      "personality": 90,
+      "logistics": 95
+    },
+    "highlights": [
+      "Perfect alignment on non-negotiables: both require a non-smoking household and agree on no pets.",
+      "Identical financial structures with equal splitting of utilities, groceries, and use of Splitwise.",
+      "Shared daily cooking habits and identical cleanliness standards (4/5) with rotating chore charts."
+    ],
+    "concerns": [
+      "Significant difference in social frequency: Ananya requires a strictly quiet home with minimal guests, while Priya has occasional weekend friends.",
+      "Sleep schedule mismatch: Ananya is an early bird (sleeps before 10pm) while Priya is 'somewhere in between', requiring strict adherence to quiet hours."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Strict guest policy: Limited to once a month max, strictly during daytime, and no noise after 8pm.",
+      "Quiet hours enforcement: Priya commits to respecting Ananya's early lab hours and maintaining a silent environment after 8pm."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "This is a strong match with high alignment on finances, cleanliness, and core non-negotiables. The only friction point regarding guest frequency was successfully resolved with a specific compromise that satisfies both parties' needs for quiet and social connection."
+  },
+  "created": "2026-10-15T16:25:28+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

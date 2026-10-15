@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m a night‑owl student, clean moderately, host guests weekly, enjoy social nights, and work from home a few days, so we need to align on sleep and guests.  \nPFR:slp_sched=Night owl (sleep after midnight)|cln=3(moderate)|guests=Regularly (weekly)|nzl=Social and lively|wfh=Hybrid (a few days a week)  \nCNF:slp_sched=Night owl vs. early‑to‑bed → potential friction on sleep schedules.",
+  "created": "2026-10-15T16:20:30+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

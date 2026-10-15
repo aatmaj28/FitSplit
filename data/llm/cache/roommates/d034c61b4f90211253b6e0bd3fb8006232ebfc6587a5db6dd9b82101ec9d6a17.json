@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I wake 6-8am, rate cleanliness 4/5 with a rotating chore chart, host guests about monthly with notice, work hybrid, and need quiet a few times a week; weekly guests and late nights may clash.\n\nPFR:[slp:Somewhere in between, wake 6am-8am, cln:4 (tidy), clean_sched:Rotating chore chart, gwk:Occasionally (once a month or less), always give notice, gatherings under 10 people, wfh:Hybrid, a few days a week, quiet:a few times a week]\nCNF:[gwk:mild friction(your weekly guests vs my monthly), slp:mild friction(your after-midnight nights vs my 6am-8am wake-ups)]\nFLX:[gwk:I can be fine with weekly small gatherings|if you give advance notice and keep them to weekends and under 10 people]",
+  "created": "2026-10-15T16:52:10+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

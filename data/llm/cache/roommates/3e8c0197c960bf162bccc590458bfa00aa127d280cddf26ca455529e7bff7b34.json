@@ -1,0 +1,33 @@
+{
+  "value": {
+    "scores": {
+      "overall": 85,
+      "finances": 90,
+      "lifestyle": 80,
+      "personality": 75,
+      "logistics": 80
+    },
+    "highlights": [
+      "Shared budget and rent flexibility",
+      "Both prioritize cleanliness and quiet living",
+      "Both are non‑smokers and have compatible sleep schedules"
+    ],
+    "concerns": [
+      "Priya’s occasional weekend guests vs Kavya’s preference for very rare guests",
+      "Priya’s slightly later bedtime (lights out 11 pm) vs Kavya’s 10 pm cutoff",
+      "Priya loves pets but currently has none, while Kavya is allergic – potential future pet plans"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree to limit guest visits to once a month with 24 hr notice",
+      "Adjust bedtime to 10 pm on shared nights",
+      "Maintain pet‑free environment for now"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Both roommates align on budget, cleanliness, quietness, and non‑smoking. Minor differences in guest policy and bedtime can be negotiated with clear limits. Overall, they are a strong match."
+  },
+  "created": "2026-10-15T16:17:43+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

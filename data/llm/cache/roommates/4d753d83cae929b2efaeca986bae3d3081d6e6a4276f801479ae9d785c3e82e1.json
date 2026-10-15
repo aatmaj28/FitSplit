@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student moving into a private room in Fenway or Kenmore within 1–3 months, seeking a non-smoking, pet-free home.\n\nHI:[loc:Boston/Fenway / Kenmore, mv:1–3 months, bd:1000-1400, smk:Non-smoking household only, pet:No pets, nn:No smoking indoors; No pets]\nPFR:[rm:Private room, pri:Similar cleanliness standards, Compatible sleep schedule, Honest communication style]",
+  "created": "2026-10-15T16:45:29+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

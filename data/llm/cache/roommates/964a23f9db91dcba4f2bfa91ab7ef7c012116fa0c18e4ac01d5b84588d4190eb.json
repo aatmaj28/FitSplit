@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m a night owl working from home a few days a week with weekly small gatherings, and I’d like to know your sleep and WFH habits.\n\nPFR:[slp:Sleep after midnight, wake 8am–10am|wfh:Hybrid (a few days a week)|nzl:Social and lively, guests often|gwk:Weekly]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:31:38+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

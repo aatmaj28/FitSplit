@@ -18,8 +18,9 @@ from datetime import datetime, timezone
 from typing import Callable, Literal, Optional
 
 from ..config import DATA_DIR
-from .checks import ROOM_VERSION, RoomContext, exact_checks, group_verdict, room_module, spurious_incompatible
-from .engine import ENGINE_VERSION, Agent, Negotiation
+from .checks import (ROOM_VERSION, RoomContext, exact_checks, fact_check_lines, group_verdict, negotiable_lines, nn_conflict,
+                     room_module, spurious_incompatible)
+from .engine import ENGINE_VERSION, Agent, Negotiation, fill_says
 from .questionnaire import validate_questionnaire
 
 DATA = DATA_DIR / "roommates"
@@ -136,7 +137,10 @@ def _run(rec: dict, a: dict, b: dict, room: Optional[RoomContext], runner) -> No
             extra_b = room_module(b["name"], room, "member", [a["name"]] + [m["name"] for m in room.members if m["name"] != b["name"]]) if room else ""
             neg = Negotiation(Agent(a["id"], a["name"], a["questionnaire"], extra_a), Agent(b["id"], b["name"], b["questionnaire"], extra_b),
                               emit=lambda e: _emit(rec, e),
-                              spurious=lambda t: spurious_incompatible(t, a["questionnaire"], b["questionnaire"], room is not None))
+                              spurious=lambda t: spurious_incompatible(t, a["questionnaire"], b["questionnaire"], room is not None),
+                              fact_check=lambda t: fact_check_lines(t, a["name"], a["questionnaire"], b["name"], b["questionnaire"], room is not None),
+                              nn_conflict=lambda t: nn_conflict(t, a["questionnaire"], b["questionnaire"]),
+                              negotiable=lambda t: negotiable_lines(t, a["name"], a["questionnaire"], b["name"], b["questionnaire"]))
             with _one_at_a_time:
                 out = runner(neg)
             result = out["outcome"]
@@ -145,6 +149,9 @@ def _run(rec: dict, a: dict, b: dict, room: Optional[RoomContext], runner) -> No
                 result = {"status": "conditional", "source": "exact_check",
                           "reason": f"The clones agreed on everything else, but {soft[0]['topic']} is still open: {soft[0]['detail']}.",
                           "unresolved_topics": [c["topic"] for c in soft][:2]}
+            elif soft and result["status"] == "conditional":  # code-verified open points come first in "still to agree on"
+                topics = [c["topic"] for c in soft] + [t for t in result["unresolved_topics"] if t not in {c["topic"] for c in soft}]
+                result = {**result, "unresolved_topics": topics[:3]}
             rec.update(messages=out["messages"], analysis=out["analysis"], result=result, providers=neg.providers,
                        ignored_verdicts=neg.ignored)
         rec["status"] = "complete"
@@ -158,6 +165,23 @@ def _run(rec: dict, a: dict, b: dict, room: Optional[RoomContext], runner) -> No
         with _lock:
             if rec["status"] == "complete":
                 RUNNING.pop(rec["id"], None)
+
+
+def narrate(nid: str) -> Optional[dict]:
+    """Give a stored conversation's messages their plain-English "say" lines (one cached call), e.g. a
+    conversation from engine rm1 that is kept rather than regenerated. Its id and verdict don't change."""
+    rec = load_negotiation(nid)
+    if not rec or rec["status"] != "complete" or not rec["messages"] or all(m.get("say") for m in rec["messages"]):
+        return rec
+    provider = fill_says(rec["messages"])
+    says = {m["turn"]: m.get("say") for m in rec["messages"]}
+    for e in rec["events"]:
+        if e["type"] == "agent_message" and says.get(e["data"]["turn"]):
+            e["data"]["say"] = says[e["data"]["turn"]]
+    if provider:
+        rec.setdefault("providers", {})[f"narrate:{provider}"] = 1
+    _save(rec)
+    return rec
 
 
 def fill_room(candidate: str, members: list[str], room: RoomContext, rule: Literal["all", "majority"] = "all",

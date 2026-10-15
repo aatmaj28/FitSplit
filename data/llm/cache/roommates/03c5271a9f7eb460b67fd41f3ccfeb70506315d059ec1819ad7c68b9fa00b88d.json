@@ -1,0 +1,6 @@
+{
+  "value": "VRD:STRONG|r=All non‑negotiables and priorities are met; guest policy, chore schedule, and WFH accommodations are agreed |open=none",
+  "created": "2026-10-15T15:58:13+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

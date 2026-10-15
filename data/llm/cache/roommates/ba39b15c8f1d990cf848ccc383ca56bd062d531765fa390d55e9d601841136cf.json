@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept your grocery adjustment: we each buy our own cooking ingredients and split only shared basics. I'll keep gatherings to small weekend friend visits with notice, no parties.\n\nFLX:[groc:I buy my own daily cooking ingredients, since I cook most meals|we split only shared basics (condiments, cleaning supplies) via Splitwise]\nCNF:[parties:minor gap(your no-parties-ever vs my rare parties with notice)|resolved by small friend visits only, always with advance notice, no parties]",
+  "created": "2026-10-15T16:59:01+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

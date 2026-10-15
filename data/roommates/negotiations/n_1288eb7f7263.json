@@ -1,0 +1,482 @@
+{
+  "id": "n_1288eb7f7263",
+  "engine": "rm2",
+  "mode": "find",
+  "a": {
+    "id": "ananya",
+    "name": "Ananya Iyer"
+  },
+  "b": {
+    "id": "meera",
+    "name": "Meera Patel"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": true,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": false,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "SAY: I’m a student seeking a private room in Boston’s Fenway/Kenmore area, moving in within 1–3 months, budget $1000‑$1400, non‑smoking, no pets.  \nHI:loc=Boston/Fenway|Kenmore,mv=1–3 months,bd=1000-1400,rm=Private room,smk=No smoking indoors,pet=No pets,nn=No smoking indoors;No pets  \nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style,cf=Open,flex=Lease length|Chore split style|Temperature preference",
+        "say": "I’m a student seeking a private room in Boston’s Fenway/Kenmore area, moving in within 1–3 months, budget $1000‑$1400, non‑smoking, no pets.",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:41:43+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I am a student in Fenway/Mission Hill with a $1300-1650 budget, moving in within a month, strict no-smoking household required.\n\nHI:loc=Boston/Fenway/Mission Hill,mv=Within 1 month,bd=1300-1650,rm=Private room,smk=Non-smoking household only,pet=Love pets but don't have any,nn=Non-smoking household only\nPFR:pri=Matching social energy|Location match|Honest communication style,cf=Direct,flex=Noise levels|Guest frequency|Chore split style",
+        "say": "I am a student in Fenway/Mission Hill with a $1300-1650 budget, moving in within a month, strict no-smoking household required.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:41:44+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "SAY: My move-in timeline of 1–3 months is slightly later than your one-month window, but we can coordinate if needed.\nFLX:mv:I can discuss adjusting my move-in date to align with your one-month timeline|condition:Lease start date flexibility\nVRD:STRONG|r=Location and core non-negotiables align|open=Specific lease start dates",
+        "say": "My move-in timeline of 1–3 months is slightly later than your one-month window, but we can coordinate if needed.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:41:44+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I sleep late (after midnight) and wake at 8-10am, keeping common areas clean as I go. How do you handle sleep schedules and noise in shared spaces?\n\n<<MOD:ROUTINES>>\nPFR:slp=Night owl (sleep after midnight),wake=8am–10am,cln=3(moderate),clean_sched=Clean as you go\nPFR:nzl=Social and lively, guests often|guests=Regularly (weekly)|parties=Small gatherings only (< 10 people)",
+        "say": "I sleep late (after midnight) and wake at 8-10am, keeping common areas clean as I go. How do you handle sleep schedules and noise in shared spaces?",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:41:53+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "<<MOD:ROUTINES>>\nSAY: I am an early bird sleeping before 10 PM and waking by 8 AM, requiring quiet hours and a rotating chore chart for cleanliness.\nPFR:slp_sched=Early bird (sleep before 10pm),wake=6am–8am,cln=4(tidy),clean_sched=Rotating chore chart,nzl=Very quiet, minimal guests\nPFR:wfh=No, I go to office/school daily,quiet=Rarely, headphones handle it\nCNF:slp:high_detail(Major friction: my early rise conflicts with your late sleep; my quiet preference conflicts with your lively social habits)",
+        "say": "I am an early bird sleeping before 10 PM and waking by 8 AM, requiring quiet hours and a rotating chore chart for cleanliness.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:42:12+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I work hybrid with some quiet days, but my late nights and weekly guests clash with your early rise and strict quiet preference.\n\nCNF:slp:high_detail(Wake/sleep windows differ significantly)|nzl:high_detail(Weekly guests vs. minimal guests preference)\nFLX:nzl:Offer compromise on guest frequency (e.g., bi-weekly instead of weekly)|condition:Strict adherence to early morning quiet hours (before 8am)",
+        "say": "I work hybrid with some quiet days, but my late nights and weekly guests clash with your early rise and strict quiet preference.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:42:31+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "SAY: I acknowledge the sleep schedule clash, but I am open to your bi-weekly guest compromise if strict early morning quiet hours are respected.\nPFR:guests=Never / very rarely,notice=Always give notice\nFLX:guests:Accept bi-weekly guest frequency|condition:Strict adherence to quiet hours (before 8am) and advance notice",
+        "say": "I acknowledge the sleep schedule clash, but I am open to your bi-weekly guest compromise if strict early morning quiet hours are respected.",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:42:50+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I accept bi-weekly guests with strict pre-8am quiet hours; I cook a few times a week and split basics equally.\n\n<<MOD:FINANCIAL>>\nPFR:groc=Split basics (condiments, cleaning)|usp=Split equally|cook=A few times a week\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+        "say": "I accept bi-weekly guests with strict pre-8am quiet hours; I cook a few times a week and split basics equally.",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:43:11+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "<<MOD:FINANCIAL>>\nSAY: I align on splitting utilities and groceries equally with a shared app, and I also cook daily, so our habits are compatible.\nPFR:usp=Split equally|groc=Split basics (condiments, cleaning)|cook=Daily — I cook most meals\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+        "say": "I align on splitting utilities and groceries equally with a shared app, and I also cook daily, so our habits are compatible.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:43:31+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I’m happy to coordinate kitchen use since I cook a few times a week; let’s finalize the lease terms.\n\nPFR:cook=A few times a week|kitchen=No strong preference\nFLX:clean_sched:Accept rotating chore chart|condition:Shared responsibility for immediate cleanup post-cooking\nVRD:STRONG|r=Aligned on financials, flexible on chores, compatible social compromise|open=none",
+        "say": "I’m happy to coordinate kitchen use since I cook a few times a week; let’s finalize the lease terms.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:43:50+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "SAY: I accept the immediate cleanup condition for the rotating chore chart, and I am ready to finalize the lease terms.\nPFR:clean_sched=Rotating chore chart|clean_condition=Immediate cleanup post-cooking\nFLX:lease:Accept 1-year lease|condition:Standard terms",
+        "say": "I accept the immediate cleanup condition for the rotating chore chart, and I am ready to finalize the lease terms.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:44:10+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I accept the 1-year lease with standard terms; we are aligned on all key living arrangements.\n\nPFR:lease=1-year lease|terms=Standard\nVRD:STRONG|r=Aligned on financials, chores, and social compromise; no non-negotiable conflicts|open=none",
+        "say": "I accept the 1-year lease with standard terms; we are aligned on all key living arrangements.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:44:30+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "SAY: I confirm the 1-year lease and agree to the bi-weekly guest limit with strict quiet hours.\nPFR:lease=1-year lease|guests=Bi-weekly max|quiet=Pre-8am\nVRD:STRONG|r=Aligned on financials, chores, and social compromise|open=none",
+        "say": "I confirm the 1-year lease and agree to the bi-weekly guest limit with strict quiet hours.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:44:48+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "conditional",
+        "source": "exact_check",
+        "reason": "The clones agreed on everything else, but move-in date is still open: Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it.",
+        "unresolved_topics": [
+          "move-in date"
+        ]
+      },
+      "analysis": {
+        "scores": {
+          "overall": 72,
+          "finances": 95,
+          "lifestyle": 55,
+          "personality": 60,
+          "logistics": 85
+        },
+        "highlights": [
+          "Perfect alignment on financials, including equal splitting of utilities, groceries, and use of a shared app like Splitwise.",
+          "Both parties are non-smokers and agree on a strictly non-smoking household, satisfying both non-negotiables.",
+          "Successful negotiation on lease terms, with Meera accepting a 1-year lease to match Ananya's preference."
+        ],
+        "concerns": [
+          "Significant clash in sleep schedules: Ananya is an early bird (sleeps before 10 PM) while Meera is a night owl (sleeps after midnight), creating high friction for shared spaces.",
+          "Major difference in social energy: Ananya prefers a very quiet home with minimal guests, whereas Meera is social and lively with regular guest habits.",
+          "Move-in timeline mismatch: Meera needs to move in within a month, while Ananya was originally looking at 1-3 months, requiring coordination."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Guests limited to bi-weekly frequency instead of weekly, with strict adherence to quiet hours before 8 AM.",
+          "Implementation of a rotating chore chart with a specific condition for immediate cleanup after cooking to maintain cleanliness standards."
+        ],
+        "recommendation": "conditional",
+        "recommendation_summary": "This is a conditional match due to significant lifestyle differences in sleep schedules and social energy. While financial and logistical terms are perfectly aligned, the success of this arrangement depends entirely on both parties strictly adhering to the negotiated quiet hours and guest limitations."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": true,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": false,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "SAY: I’m a student seeking a private room in Boston’s Fenway/Kenmore area, moving in within 1–3 months, budget $1000‑$1400, non‑smoking, no pets.  \nHI:loc=Boston/Fenway|Kenmore,mv=1–3 months,bd=1000-1400,rm=Private room,smk=No smoking indoors,pet=No pets,nn=No smoking indoors;No pets  \nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style,cf=Open,flex=Lease length|Chore split style|Temperature preference",
+      "say": "I’m a student seeking a private room in Boston’s Fenway/Kenmore area, moving in within 1–3 months, budget $1000‑$1400, non‑smoking, no pets.",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:41:43+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I am a student in Fenway/Mission Hill with a $1300-1650 budget, moving in within a month, strict no-smoking household required.\n\nHI:loc=Boston/Fenway/Mission Hill,mv=Within 1 month,bd=1300-1650,rm=Private room,smk=Non-smoking household only,pet=Love pets but don't have any,nn=Non-smoking household only\nPFR:pri=Matching social energy|Location match|Honest communication style,cf=Direct,flex=Noise levels|Guest frequency|Chore split style",
+      "say": "I am a student in Fenway/Mission Hill with a $1300-1650 budget, moving in within a month, strict no-smoking household required.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:41:44+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "SAY: My move-in timeline of 1–3 months is slightly later than your one-month window, but we can coordinate if needed.\nFLX:mv:I can discuss adjusting my move-in date to align with your one-month timeline|condition:Lease start date flexibility\nVRD:STRONG|r=Location and core non-negotiables align|open=Specific lease start dates",
+      "say": "My move-in timeline of 1–3 months is slightly later than your one-month window, but we can coordinate if needed.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:41:44+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I sleep late (after midnight) and wake at 8-10am, keeping common areas clean as I go. How do you handle sleep schedules and noise in shared spaces?\n\n<<MOD:ROUTINES>>\nPFR:slp=Night owl (sleep after midnight),wake=8am–10am,cln=3(moderate),clean_sched=Clean as you go\nPFR:nzl=Social and lively, guests often|guests=Regularly (weekly)|parties=Small gatherings only (< 10 people)",
+      "say": "I sleep late (after midnight) and wake at 8-10am, keeping common areas clean as I go. How do you handle sleep schedules and noise in shared spaces?",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:41:53+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "<<MOD:ROUTINES>>\nSAY: I am an early bird sleeping before 10 PM and waking by 8 AM, requiring quiet hours and a rotating chore chart for cleanliness.\nPFR:slp_sched=Early bird (sleep before 10pm),wake=6am–8am,cln=4(tidy),clean_sched=Rotating chore chart,nzl=Very quiet, minimal guests\nPFR:wfh=No, I go to office/school daily,quiet=Rarely, headphones handle it\nCNF:slp:high_detail(Major friction: my early rise conflicts with your late sleep; my quiet preference conflicts with your lively social habits)",
+      "say": "I am an early bird sleeping before 10 PM and waking by 8 AM, requiring quiet hours and a rotating chore chart for cleanliness.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:42:12+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I work hybrid with some quiet days, but my late nights and weekly guests clash with your early rise and strict quiet preference.\n\nCNF:slp:high_detail(Wake/sleep windows differ significantly)|nzl:high_detail(Weekly guests vs. minimal guests preference)\nFLX:nzl:Offer compromise on guest frequency (e.g., bi-weekly instead of weekly)|condition:Strict adherence to early morning quiet hours (before 8am)",
+      "say": "I work hybrid with some quiet days, but my late nights and weekly guests clash with your early rise and strict quiet preference.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:42:31+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "SAY: I acknowledge the sleep schedule clash, but I am open to your bi-weekly guest compromise if strict early morning quiet hours are respected.\nPFR:guests=Never / very rarely,notice=Always give notice\nFLX:guests:Accept bi-weekly guest frequency|condition:Strict adherence to quiet hours (before 8am) and advance notice",
+      "say": "I acknowledge the sleep schedule clash, but I am open to your bi-weekly guest compromise if strict early morning quiet hours are respected.",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:42:50+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I accept bi-weekly guests with strict pre-8am quiet hours; I cook a few times a week and split basics equally.\n\n<<MOD:FINANCIAL>>\nPFR:groc=Split basics (condiments, cleaning)|usp=Split equally|cook=A few times a week\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+      "say": "I accept bi-weekly guests with strict pre-8am quiet hours; I cook a few times a week and split basics equally.",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:43:11+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "<<MOD:FINANCIAL>>\nSAY: I align on splitting utilities and groceries equally with a shared app, and I also cook daily, so our habits are compatible.\nPFR:usp=Split equally|groc=Split basics (condiments, cleaning)|cook=Daily — I cook most meals\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+      "say": "I align on splitting utilities and groceries equally with a shared app, and I also cook daily, so our habits are compatible.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:43:31+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I’m happy to coordinate kitchen use since I cook a few times a week; let’s finalize the lease terms.\n\nPFR:cook=A few times a week|kitchen=No strong preference\nFLX:clean_sched:Accept rotating chore chart|condition:Shared responsibility for immediate cleanup post-cooking\nVRD:STRONG|r=Aligned on financials, flexible on chores, compatible social compromise|open=none",
+      "say": "I’m happy to coordinate kitchen use since I cook a few times a week; let’s finalize the lease terms.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:43:50+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "SAY: I accept the immediate cleanup condition for the rotating chore chart, and I am ready to finalize the lease terms.\nPFR:clean_sched=Rotating chore chart|clean_condition=Immediate cleanup post-cooking\nFLX:lease:Accept 1-year lease|condition:Standard terms",
+      "say": "I accept the immediate cleanup condition for the rotating chore chart, and I am ready to finalize the lease terms.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:44:10+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I accept the 1-year lease with standard terms; we are aligned on all key living arrangements.\n\nPFR:lease=1-year lease|terms=Standard\nVRD:STRONG|r=Aligned on financials, chores, and social compromise; no non-negotiable conflicts|open=none",
+      "say": "I accept the 1-year lease with standard terms; we are aligned on all key living arrangements.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:44:30+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "SAY: I confirm the 1-year lease and agree to the bi-weekly guest limit with strict quiet hours.\nPFR:lease=1-year lease|guests=Bi-weekly max|quiet=Pre-8am\nVRD:STRONG|r=Aligned on financials, chores, and social compromise|open=none",
+      "say": "I confirm the 1-year lease and agree to the bi-weekly guest limit with strict quiet hours.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:44:48+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "lease",
+      "ok": true,
+      "hard": false,
+      "topic": "lease length",
+      "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+    },
+    {
+      "id": "move_in",
+      "ok": false,
+      "hard": false,
+      "topic": "move-in date",
+      "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+    }
+  ],
+  "result": {
+    "status": "conditional",
+    "source": "exact_check",
+    "reason": "The clones agreed on everything else, but move-in date is still open: Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it.",
+    "unresolved_topics": [
+      "move-in date"
+    ]
+  },
+  "analysis": {
+    "scores": {
+      "overall": 72,
+      "finances": 95,
+      "lifestyle": 55,
+      "personality": 60,
+      "logistics": 85
+    },
+    "highlights": [
+      "Perfect alignment on financials, including equal splitting of utilities, groceries, and use of a shared app like Splitwise.",
+      "Both parties are non-smokers and agree on a strictly non-smoking household, satisfying both non-negotiables.",
+      "Successful negotiation on lease terms, with Meera accepting a 1-year lease to match Ananya's preference."
+    ],
+    "concerns": [
+      "Significant clash in sleep schedules: Ananya is an early bird (sleeps before 10 PM) while Meera is a night owl (sleeps after midnight), creating high friction for shared spaces.",
+      "Major difference in social energy: Ananya prefers a very quiet home with minimal guests, whereas Meera is social and lively with regular guest habits.",
+      "Move-in timeline mismatch: Meera needs to move in within a month, while Ananya was originally looking at 1-3 months, requiring coordination."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Guests limited to bi-weekly frequency instead of weekly, with strict adherence to quiet hours before 8 AM.",
+      "Implementation of a rotating chore chart with a specific condition for immediate cleanup after cooking to maintain cleanliness standards."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "This is a conditional match due to significant lifestyle differences in sleep schedules and social energy. While financial and logistical terms are perfectly aligned, the success of this arrangement depends entirely on both parties strictly adhering to the negotiated quiet hours and guest limitations."
+  },
+  "providers": {
+    "groq": 14
+  },
+  "created": "2026-10-15T16:41:42+00:00",
+  "ignored_verdicts": []
+}

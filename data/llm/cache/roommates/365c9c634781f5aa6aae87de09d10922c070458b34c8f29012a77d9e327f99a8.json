@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My evening-only compromise works for me if you also respect my late-night study habits before 2 AM.\n\nFLX:[nzl:Keep gatherings strictly after 8 PM|condition:No noise before 2 AM]\nPFR:[slp:Sleep after midnight, wake 8am–10am]",
+  "created": "2026-10-15T16:32:52+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

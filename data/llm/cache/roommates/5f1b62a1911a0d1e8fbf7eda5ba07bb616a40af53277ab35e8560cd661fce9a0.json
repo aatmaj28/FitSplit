@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can agree to weekend gatherings of 4 or fewer with advance notice, ending by 9pm, and I'll take family calls in my room at low volume, wrapping up by 10pm.\n\nFLX:[gwk:gatherings capped at 4 people, with notice, ending by 9pm|instead of my usual under-10 limit]\nFLX:[nzl:calls in my room at low volume, wrapped up by 10pm|on the occasional late call I'll text or use headphones]\nPFR:[cln:a 4 vs 5 gap is fine with a rotating chore chart, and I'm open to how the chores are split]",
+  "created": "2026-10-15T16:54:09+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

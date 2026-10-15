@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My budget is $1100–$1450, I’ll split utilities evenly, cook daily, and love sharing meals.  \nPFR:bd=1100-1450(flex+100_private)|usp=Split equally|groc=Split basics|cook=Daily |cln=4(tidy)",
+  "created": "2026-10-15T16:20:14+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

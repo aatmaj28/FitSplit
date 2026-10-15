@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I cannot accept weekly guests due to my non-negotiable need for quiet, but I can agree to strict quiet hours if you respect my early mornings.\nCNF:[gwk:conflict(Weekly guests violate my quiet/hard limit)]\nFLX:[slp:offer(Accept strict 10pm-7am quiet hours)|condition(You maintain silence during these times)]",
+  "created": "2026-10-15T16:28:55+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

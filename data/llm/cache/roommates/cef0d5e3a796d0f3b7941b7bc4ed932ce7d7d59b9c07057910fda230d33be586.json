@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm fine with 2-3 friends in your room on other weekends if they keep it quiet after 11:30pm, so this is a conditional match pending written quiet-hour terms.\n\nFLX:[nzl:2-3 friends in your room on non-gathering weekends, door closed, voices low after 11:30pm|if weeknights stay quiet, since I wake between 6am and 8am]\nFLX:[cln:Rotating chore chart and \"tidy\" checklist, which I'll draft and we'll edit together|if we finalize it before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking household, location, private room, budget overlap, equal utilities, shared staples via Splitwise, and chores. The gap is your late-night social rhythm against my early mornings.|open=late-night noise after 11:30pm on weeknights, room hangout volume on weekends",
+  "created": "2026-10-15T16:53:07+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

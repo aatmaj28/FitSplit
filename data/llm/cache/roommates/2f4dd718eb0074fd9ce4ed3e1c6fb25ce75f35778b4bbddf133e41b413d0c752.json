@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m a student seeking a private room in Boston for 1-3 months, prioritizing cleanliness and quiet. Where are you located and what’s your budget?\n\nHI:[loc:Boston/Fenway / Mission Hill, mv:1–3 months, bd:1100-1450, rm:Private room, gnd:Woman, occ:Student]\nPFR:[cln:5, nzl:quiet, pri:Similar cleanliness standards; Respectful of quiet/work time]",
+  "created": "2026-10-15T16:27:31+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

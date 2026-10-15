@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I never host guests and need a strictly quiet home for my early lab work, so your weekend plans might be too disruptive.\n\nCNF:[nzl:mismatch(I require very quiet/minimal guests, you have occasional weekend friends)]\nFLX:[nzl:accept|condition:Guests limited to once a month max, strictly during daytime, and no noise after 8pm]",
+  "created": "2026-10-15T16:23:59+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

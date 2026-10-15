@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My budget is $1150-$1500, but I'm a night owl who hosts weekly guests and practices guitar late, so I need a housemate comfortable with social energy.\nPFR:[bd:1150-1500(HARD_CAP)|nzl:Social and lively|gwk:Regularly (weekly)|slp_sched:Night owl (sleep after midnight)]\nPFR:[cln:2|wfh:Varies by week]",
+  "created": "2026-10-15T16:26:22+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep after midnight, wake 8-10am, rate cleanliness 3/5, work from home with quiet needed 1-5pm weekdays, and host guests monthly or less; what are yours?\n\nPFR:[slp:night owl(after midnight),wake:8am-10am,cln:3,clean_sched:rotating chore chart]\nPFR:[wfh:yes full-time remote,quiet:1-5pm weekdays,nzl:very quiet,gwk:once a month or less,notice:always give notice]\n\n<<MOD:SOCIAL>>",
+  "created": "2026-10-15T16:58:24+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

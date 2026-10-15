@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I wake 6-8am, rate my cleanliness 4 with a rotating chore chart, host weekly guests with notice (my partner stays most Fridays), and go to school daily. What are yours?\n\nPFR:[slp:somewhere in between,wake:6am-8am,cln:4(tidy),clean_sched:rotating chore chart]\nPFR:[gwk:weekly with notice(partner most Fridays),parties:small <10,nzl:balanced depends on week,wfh:no(office/school daily),quiet:occasionally a few times a week]\nPFR:[ask_rohan:slp,cln(1-5),gwk,wfh,nzl]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T17:00:00+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

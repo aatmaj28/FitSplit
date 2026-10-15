@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the 1-year lease with standard terms; we are aligned on all key living arrangements.\n\nPFR:lease=1-year lease|terms=Standard\nVRD:STRONG|r=Aligned on financials, chores, and social compromise; no non-negotiable conflicts|open=none",
+  "created": "2026-10-15T16:44:30+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

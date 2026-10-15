@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 30,
+      "finances": 40,
+      "lifestyle": 20,
+      "personality": 35,
+      "logistics": 25
+    },
+    "highlights": [
+      "Both are non‑smokers and agree on split utilities and basic groceries",
+      "Both value honest communication and have similar cleanliness expectations",
+      "Both are students and share a preference for a private room in Boston"
+    ],
+    "concerns": [
+      "Lease term mismatch: Ananya wants 1‑3 months, Meera requires 6 months",
+      "Sleep schedule conflict: early bird vs night owl",
+      "Guest frequency conflict: Ananya prefers very quiet, rare guests, Meera has regular weekly guests"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Lease term mismatch (1‑3 months vs 6 months) is a hard non‑negotiable for both parties",
+    "middle_ground": [
+      "Ananya could extend to 3 months, Meera could consider a 3‑month lease if she can keep noise low after 10pm",
+      "Both could agree on a strict quiet hour policy after 10pm and limit guests to once a month"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The lease term conflict is a hard non‑negotiable for both, making a match impossible. Even though they share many preferences, the fundamental mismatch in duration prevents a viable living arrangement."
+  },
+  "created": "2026-10-15T16:40:03+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

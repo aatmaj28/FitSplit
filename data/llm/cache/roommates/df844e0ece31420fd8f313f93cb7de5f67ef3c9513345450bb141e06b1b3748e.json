@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m Priya, a student looking for a private room in Boston’s Fenway/Mission Hill area, moving in within 1‑3 months, budget $1100‑$1450, non‑smoking, pet‑free, with non‑negotiables of no indoor smoking and a non‑smoking household.  \nHI:loc=Boston/Fenway / Mission Hill|mv=1–3 months|bd=1100-1450|smk=Non-smoking household only|pet=none|nn=No smoking indoors;Non-smoking household only  \nPFR:occ=Student|rm=Private room|drink=Socially|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility|gnd=Woman|cf=Collaborative|gwk=0|usp=Split evenly|groc=Flexible|dep=$500|wfh=Occasional|nzl=Low\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:31:19+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

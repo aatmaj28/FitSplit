@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our locations and non-smoking rules align, but our move-in windows are tight; I need to know your exact date to see if it works.\nFLX:[mv:1–3 months|Must align with your move-in within 1 month]\nPFR:[smk:Non-smoking household only]",
+  "created": "2026-10-15T16:27:52+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

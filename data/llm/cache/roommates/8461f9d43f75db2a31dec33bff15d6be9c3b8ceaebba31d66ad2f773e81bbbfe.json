@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I am a student in Fenway/Mission Hill with a $1300-1650 budget, moving in within a month, strict no-smoking household required.\n\nHI:loc=Boston/Fenway/Mission Hill,mv=Within 1 month,bd=1300-1650,rm=Private room,smk=Non-smoking household only,pet=Love pets but don't have any,nn=Non-smoking household only\nPFR:pri=Matching social energy|Location match|Honest communication style,cf=Direct,flex=Noise levels|Guest frequency|Chore split style",
+  "created": "2026-10-15T16:41:44+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

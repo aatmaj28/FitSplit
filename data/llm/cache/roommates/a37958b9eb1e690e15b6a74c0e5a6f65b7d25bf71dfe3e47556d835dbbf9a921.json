@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'll take the 7am-onward shower slot; for money, I propose equal utilities, split basics like cleaning supplies and condiments, Splitwise payments, and a deposit up to one month's rent. Do you agree?\n\nFLX:[bath_time:I take the 7am-onward slot|you shower first before 7am]\nPFR:[usp:split equally,groc:split basics only (condiments, cleaning), own food separate,dep:up to 1 month's rent,pay:Splitwise or similar shared app]\nPFR:[ask_rohan:usp,groc,dep,pay]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T17:00:32+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

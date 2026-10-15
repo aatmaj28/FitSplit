@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept bi-weekly guests with strict pre-8am quiet hours; I cook a few times a week and split basics equally.\n\n<<MOD:FINANCIAL>>\nPFR:groc=Split basics (condiments, cleaning)|usp=Split equally|cook=A few times a week\nPFR:dep=Yes, up to 1 month's rent|pay=Shared app (Splitwise, etc.)",
+  "created": "2026-10-15T16:43:11+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

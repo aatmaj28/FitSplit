@@ -1,0 +1,20 @@
+{
+  "value": [
+    "I'm a student looking for a private room in Boston for one to three months, with a budget of $1100 to $1450.",
+    "I am a student seeking a private room in Fenway or Kenmore for $1000 to $1400 for one to three months.",
+    "Our locations and budgets align well, and I appreciate your no-pets rule since I don't keep animals either.",
+    "I am an early riser who works off-site, so I need a very quiet environment with minimal guests.",
+    "I have a hybrid work schedule and occasional weekend friends, which might conflict with your need for very quiet.",
+    "I rarely host guests and need a very quiet environment for my early lab hours.",
+    "My social schedule is balanced; I have occasional weekend friends but always give notice and keep gatherings small.",
+    "I need a strictly quiet home for my early lab work, so your weekend plans might be too disruptive.",
+    "I accept your strict quiet conditions; my friends come rarely, stay until early evening, and respect the 8pm cutoff.",
+    "Since quiet hours are settled, I need to know how we handle cooking and utility costs, as I cook daily.",
+    "I agree to split utilities equally and use Splitwise; I cook daily too, so sharing meals sounds great.",
+    "Our financial and lifestyle compatibility is strong, with no remaining conflicts in our discussed areas.",
+    "I agree with your assessment; our compatibility on location, budget, and lifestyle habits is excellent."
+  ],
+  "created": "2026-10-15T16:25:50+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

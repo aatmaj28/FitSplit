@@ -20,6 +20,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
+from ..llm.text import TextError
 from . import service
 from .checks import RoomContext
 from .questionnaire import get_all_questions, get_section_labels
@@ -86,6 +87,18 @@ def start(body: StartBody) -> dict:
 @router.get("/negotiations/{nid}")
 def get(nid: str) -> dict:
     rec = service.load_negotiation(nid)
+    if rec is None:
+        raise HTTPException(404, f"no negotiation {nid!r}")
+    return _summary(rec)
+
+
+@router.post("/negotiations/{nid}/narrate")
+def narrate(nid: str) -> dict:
+    """Plain-English lines for a stored conversation's messages (one cached text call)."""
+    try:
+        rec = service.narrate(nid)
+    except TextError as e:
+        raise HTTPException(503, "no text model available for the narration right now") from e
     if rec is None:
         raise HTTPException(404, f"no negotiation {nid!r}")
     return _summary(rec)

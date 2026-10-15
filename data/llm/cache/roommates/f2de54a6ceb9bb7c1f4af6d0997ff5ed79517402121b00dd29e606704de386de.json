@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My budget is $1100-$1450, and since I need quiet study time, could you share your noise level and guest frequency?\n<<MOD:FINANCIAL>>\nPFR:[bd:1100-1450(flex+100_private)]\nPFR:[nzl:Low;gwk:0-1]",
+  "created": "2026-10-15T16:26:08+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

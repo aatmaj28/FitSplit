@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I work on-site daily so I don't need WFH quiet blocks, but I appreciate your notice for weekend guests.\n\nPFR:[wfh:No, go to school daily, quiet:Rarely needed, headphones handle it]\nFLX:[gwk:1 guest per week|condition:Advance notice required to support my early sleep schedule]",
+  "created": "2026-10-15T16:46:36+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

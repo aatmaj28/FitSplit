@@ -1,0 +1,6 @@
+{
+  "value": "SAY: The 7 AM kitchen rule works for me, and I agree to keep the thermostat between 68 and 72°F.\n\nPFR:[temp:Moderate (68–72°F / 20–22°C)]\nFLX:[clean_sched:Rotating chore chart|condition:Kitchen cleared by 7 AM daily]",
+  "created": "2026-10-15T16:48:12+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

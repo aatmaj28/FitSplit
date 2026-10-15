@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)\nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm\nCNF:cleanliness:aligned(✓)|sleep:aligned(✓)|guest_policy:aligned_with_flexibility(✓)\nVRD:STRONG|r=Our sleep windows, cleanliness standards, and low‑noise expectations match; guest policy flexible with notice|open=any further details on your weekly chore schedule or WFH timing]",
+  "created": "2026-10-15T15:56:53+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

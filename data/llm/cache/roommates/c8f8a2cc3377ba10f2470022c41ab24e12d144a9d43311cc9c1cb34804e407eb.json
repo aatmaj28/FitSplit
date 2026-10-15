@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 25,
+      "finances": 40,
+      "lifestyle": 15,
+      "personality": 60,
+      "logistics": 10
+    },
+    "highlights": [
+      "Both parties are students with a strong location match in the Fenway area.",
+      "Shared non-negotiable for a strictly non-smoking household.",
+      "Agreement on splitting utilities and basic groceries equally."
+    ],
+    "concerns": [
+      "Fundamental lease term mismatch: Ananya requires 1-3 months, Meera requires 6 months.",
+      "Severe lifestyle conflict: Ananya is an early bird needing a very quiet environment, while Meera is a night owl who hosts guests weekly.",
+      "Budget ranges do not fully overlap (Ananya max $1400 vs Meera min $1300), leaving little financial flexibility."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "The lease term requirement is a hard non-negotiable for both parties (1-3 months vs 6 months) that cannot be bridged, rendering the arrangement impossible.",
+    "middle_ground": [
+      "Meera offered to maintain strict quiet hours after 10 PM to accommodate Ananya's early sleep schedule.",
+      "Both agreed to an equal split of utilities and basic household items."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "This match is incompatible due to a hard conflict in lease duration (1-3 months vs 6 months) that neither party is willing to compromise on. Additionally, the significant difference in sleep schedules and social habits (quiet early bird vs. social night owl with weekly guests) creates a high risk of lifestyle friction."
+  },
+  "created": "2026-10-15T16:38:34+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

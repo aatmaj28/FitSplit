@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the weekly rotating chore chart agreed in week one, and I'll pick my move-in date within 1-3 months to fit the lease handoff, so this is a strong match.\n\nFLX:[chore:agree to weekly rotating chart, kitchen and bathroom split evenly, swaps allowed when swamped|list agreed in week one]\nPFR:[mv:I'll pick a date within my 1-3 month window once the lease handoff is clear,lease:1-year]\nVRD:STRONG|r=Both non-negotiables align (non-smoking household, rent at or under $1,400), cleanliness is matched at 4 with a shared chore chart, and groceries, utilities, and quiet-time habits fit|open=none",
+  "created": "2026-10-15T16:57:38+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the \"clean as you go\" approach for shared spaces while maintaining my weekly deep-clean routine.\n\nPFR:[clean_sched:Clean as you go / whoever notices]\nVRD:STRONG|r=Non-negotiables met, lifestyle compatibility confirmed|open=none",
+  "created": "2026-10-15T16:34:20+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

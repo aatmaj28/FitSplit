@@ -1,0 +1,176 @@
+{
+  "id": "n_a2ec448a2ac8",
+  "engine": "rm2",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "jake",
+    "name": "Jake Thompson"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I am a student looking for a private room in Boston within 1-3 months, budget $1100-1450, with strict non-smoking rules. Where are you located, what is your budget, and do you smoke?\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1100-1450|smk:Non-smoking household only|pet:None|nn:No smoking indoors;Non-smoking household only\nPFR:cln:5|wfh:Yes|nzl:Low\nCNF:smk:verify",
+        "say": "I am a student looking for a private room in Boston within 1-3 months, budget $1100-1450, with strict non-smoking rules. Where are you located, what is your budget, and do you smoke?",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:49:17+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Jake Thompson",
+        "speaker_id": "b",
+        "message": "SAY: I'm a student in Boston with a $1150-1500 budget, moving in 1-3 months; I smoke, which conflicts with your non-smoking rule.\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1150-1500|smk:I smoke|pet:I love pets but don't have any|nn:Budget hard cap (cannot exceed max)\nCNF:smk:conflict(I smoke; you require non-smoking household)\nVRD:INCOMPATIBLE|r=Smoking policy conflict is a non-negotiable for both parties|open=none",
+        "say": "I'm a student in Boston with a $1150-1500 budget, moving in 1-3 months; I smoke, which conflicts with your non-smoking rule.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:49:32+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "analyzing",
+      "seq": 4
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "incompatible",
+        "reason": "Smoking policy conflict is a non-negotiable for both parties",
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 10,
+          "finances": 85,
+          "lifestyle": 15,
+          "personality": 40,
+          "logistics": 90
+        },
+        "highlights": [
+          "Both are students in the same Boston area (Fenway) with overlapping move-in timelines.",
+          "Budgets are highly compatible, with significant overlap between $1150 and $1450.",
+          "Both prefer to split bills and groceries equally."
+        ],
+        "concerns": [
+          "Jake smokes, which directly violates Priya's non-negotiable requirement for a non-smoking household.",
+          "Significant mismatch in cleanliness standards (Priya 4/5 vs Jake 2/5).",
+          "Lifestyle clash between Priya's quiet work environment and Jake's regular socializing and guest frequency."
+        ],
+        "dealbreaker_detected": true,
+        "dealbreaker_detail": "Priya has a strict non-negotiable for a non-smoking household, while Jake identifies as a smoker. This is a hard conflict that cannot be resolved.",
+        "middle_ground": [
+          "No viable middle ground exists for the smoking policy as it is a non-negotiable for Priya.",
+          "They could agree on a strict 'no smoking indoors' rule if Jake were willing to quit or smoke exclusively outside, but this is not a standard compromise for a 'non-smoking household' requirement."
+        ],
+        "recommendation": "incompatible",
+        "recommendation_summary": "This match is incompatible due to a direct conflict with Priya's non-negotiable requirement for a non-smoking household, as Jake is a smoker. Additionally, there are significant differences in cleanliness standards and social energy that would likely lead to friction."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 5
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I am a student looking for a private room in Boston within 1-3 months, budget $1100-1450, with strict non-smoking rules. Where are you located, what is your budget, and do you smoke?\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1100-1450|smk:Non-smoking household only|pet:None|nn:No smoking indoors;Non-smoking household only\nPFR:cln:5|wfh:Yes|nzl:Low\nCNF:smk:verify",
+      "say": "I am a student looking for a private room in Boston within 1-3 months, budget $1100-1450, with strict non-smoking rules. Where are you located, what is your budget, and do you smoke?",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:49:17+00:00"
+    },
+    {
+      "speaker": "Jake Thompson",
+      "speaker_id": "b",
+      "message": "SAY: I'm a student in Boston with a $1150-1500 budget, moving in 1-3 months; I smoke, which conflicts with your non-smoking rule.\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1150-1500|smk:I smoke|pet:I love pets but don't have any|nn:Budget hard cap (cannot exceed max)\nCNF:smk:conflict(I smoke; you require non-smoking household)\nVRD:INCOMPATIBLE|r=Smoking policy conflict is a non-negotiable for both parties|open=none",
+      "say": "I'm a student in Boston with a $1150-1500 budget, moving in 1-3 months; I smoke, which conflicts with your non-smoking rule.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:49:32+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "incompatible",
+    "reason": "Smoking policy conflict is a non-negotiable for both parties",
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 10,
+      "finances": 85,
+      "lifestyle": 15,
+      "personality": 40,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are students in the same Boston area (Fenway) with overlapping move-in timelines.",
+      "Budgets are highly compatible, with significant overlap between $1150 and $1450.",
+      "Both prefer to split bills and groceries equally."
+    ],
+    "concerns": [
+      "Jake smokes, which directly violates Priya's non-negotiable requirement for a non-smoking household.",
+      "Significant mismatch in cleanliness standards (Priya 4/5 vs Jake 2/5).",
+      "Lifestyle clash between Priya's quiet work environment and Jake's regular socializing and guest frequency."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Priya has a strict non-negotiable for a non-smoking household, while Jake identifies as a smoker. This is a hard conflict that cannot be resolved.",
+    "middle_ground": [
+      "No viable middle ground exists for the smoking policy as it is a non-negotiable for Priya.",
+      "They could agree on a strict 'no smoking indoors' rule if Jake were willing to quit or smoke exclusively outside, but this is not a standard compromise for a 'non-smoking household' requirement."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "This match is incompatible due to a direct conflict with Priya's non-negotiable requirement for a non-smoking household, as Jake is a smoker. Additionally, there are significant differences in cleanliness standards and social energy that would likely lead to friction."
+  },
+  "providers": {
+    "groq": 3
+  },
+  "created": "2026-10-15T16:49:08+00:00",
+  "ignored_verdicts": []
+}

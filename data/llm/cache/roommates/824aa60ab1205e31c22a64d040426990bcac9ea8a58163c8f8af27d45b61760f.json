@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 90,
+      "finances": 93,
+      "lifestyle": 85,
+      "personality": 88,
+      "logistics": 92
+    },
+    "highlights": [
+      "Both share the same non-negotiables on smoking (no smoking indoors, non-smoking household), and both love pets but have none, so there is no conflict on core house rules.",
+      "Budgets overlap well: Priya's $1100-1450 range and Rohan's $1100-1400 hard cap meet at $1400. Priya explicitly committed to rent at or under $1,400. Both agreed to split utilities equally and use Splitwise with monthly settlement.",
+      "Both rate cleanliness 4/5 and agreed on a weekly rotating chore chart with kitchen and bathroom split evenly. They also agreed on splitting staples (rice, lentils, spices, oil) and basics while keeping personal food separate, and on a 1-year lease and flexible move-in within 1-3 months."
+    ],
+    "concerns": [
+      "Sleep schedules differ: Rohan sleeps before 10pm, while Priya is 'somewhere in between' and calls family in India in the late evening. The 9:30pm cutoff or headphones mitigates this, but time-zone-driven calls may sometimes run later than planned.",
+      "Rohan's budget hard cap of $1400 is a non-negotiable. If a specific listing or a utilities-inclusive total goes above it, the match could break down. Priya's range extends to $1450, so she may be tempted to look at pricier options.",
+      "Priya works from home several days a week, while Rohan is out at school daily and rarely hosts. Priya hosts monthly and both host occasional weekend friends, so Rohan's early-bird, low-guest preference could feel strained if gatherings run late. Daily cooking by both could also cause kitchen scheduling friction."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Keep Priya's family calls in her room with the door closed and wrapped up by about 9:30pm on Rohan's sleep nights, using headphones or moving calls earlier if needed. Hold weekend gatherings to small groups (under 10) with advance notice and an end time that respects Rohan's early nights.",
+      "Screen listings against the $1400 hard cap including utilities, agree on a kitchen schedule or shared-use norms for daily cooking, and finalize the chore list in week one with swap weeks allowed when either is swamped."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Rohan align on all listed non-negotiables, with matched cleanliness standards, compatible budgets under Rohan's $1,400 cap, and agreed systems for chores, groceries, and utilities. The main friction is Priya's late-evening calls versus Rohan's early bedtime, which they already addressed with a clear 9:30pm cutoff. This is a strong match."
+  },
+  "created": "2026-10-15T16:57:54+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

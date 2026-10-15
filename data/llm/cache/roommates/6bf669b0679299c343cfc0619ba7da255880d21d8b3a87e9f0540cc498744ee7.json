@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'll wrap up calls by 9:30pm in my room, keep gatherings to once a month or less with guests gone by 9pm, so those two open items are resolved and I'm calling it a strong match.\n\nFLX:[nzl:family calls stay in my room and end by 9:30pm instead of late evening|you're fine with quiet, low-volume talking before then]\nPFR:[gwk:gatherings once a month or less, 24-hour text notice, within your 4-person cap and done by 9pm]\nVRD:STRONG|r=No non-negotiable conflicts: both households are non-smoking, I have no pets, and the budget overlap fits your cap. Cleanliness, chores, costs, and cooking are aligned, and the evening noise and gathering concerns are resolved.|open=none",
+  "created": "2026-10-15T16:54:53+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 15,
+      "finances": 30,
+      "lifestyle": 20,
+      "personality": 25,
+      "logistics": 10
+    },
+    "highlights": [
+      "Both are students in Boston with similar budget ranges (Priya $1100-1450, Kavya $900-1250)",
+      "Both require non‑smoking households and split groceries equally",
+      "Both value cleanliness (Priya 4, Kavya 5)"
+    ],
+    "concerns": [
+      "Priya loves pets and wants a pet‑friendly environment",
+      "Kavya is allergic to pets and requires a no‑pets household",
+      "Kavya never drinks while Priya drinks socially, though minor"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Pet preference conflict: Priya wants pets (or is open to having them) whereas Kavya has a non‑negotiable allergy to pets, making cohabitation unsafe.",
+    "middle_ground": [
+      "Priya could agree to a strict no‑pets rule while staying in a pet‑free unit",
+      "Kavya could consider a separate pet‑free area if a pet were ever introduced (unlikely given allergy)"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The fundamental pet allergy conflict is a non‑negotiable dealbreaker, outweighing other compatible factors. Despite aligned budgets and cleanliness standards, they should not be paired as roommates."
+  },
+  "created": "2026-10-15T15:55:53+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

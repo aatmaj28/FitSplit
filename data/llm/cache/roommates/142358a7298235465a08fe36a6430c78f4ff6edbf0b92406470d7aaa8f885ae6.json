@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (evenings)  \nFLX:guest_policy=I can allow a friend over for up to 2 hrs on a Saturday afternoon if you give a 12‑hr heads‑up |condition=Keep music ≤60 dB and clean up immediately after  \nFLX:chore_schedule=I’ll take the kitchen cleanup on Mon/Thu, you can handle living‑room tidying on Tue/Fri |condition=Both stick to the rotating chart; we’ll swap weeks if needed  \nFLX:wfh_hours=If you need to work from home on a weekday morning, I can shift my coffee‑making to 6:30 am and keep the kitchen quiet until 8 am |condition=You’ll keep noise low and limit video calls to a private space if possible  \n\nNo non‑negotiable conflicts detected; budget and smoking remain within hard caps.  \n\nVRD:STRONG|r=All friction points addressed with concrete compromises; awaiting your confirmation on the chore split and guest notice |open=none",
+  "created": "2026-10-15T15:57:08+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

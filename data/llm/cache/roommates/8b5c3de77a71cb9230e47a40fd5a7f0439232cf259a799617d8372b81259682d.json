@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student needing a private room in Fenway or Mission Hill for a 6-month lease, budgeting $1300-$1650, in a strictly non-smoking household.\n\nHI:[loc:Boston/Fenway / Mission Hill|mv:Within 1 month|bd:1300-1650|rm:Private room|smk:Non-smoking household only|pet:I love pets but don't have any|nn:Non-smoking household only]\nPFR:[pri:Matching social energy;Location match;Honest communication style]",
+  "created": "2026-10-15T16:34:57+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

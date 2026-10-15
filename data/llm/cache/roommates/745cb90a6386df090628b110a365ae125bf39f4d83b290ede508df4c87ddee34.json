@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree to split utilities and basics equally. I’m also a daily cook who enjoys sharing meals sometimes.\n\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning)]\nPFR:[cook:Daily — I cook most meals, kitchen:Happy to share and cook together sometimes]",
+  "created": "2026-10-15T16:47:33+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

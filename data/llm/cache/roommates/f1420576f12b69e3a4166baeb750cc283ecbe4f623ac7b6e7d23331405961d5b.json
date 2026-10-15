@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I split utilities equally, share basics like condiments and cleaning supplies, can pay up to one month's rent as deposit via Splitwise, and cook a few times a week.\n\nCNF:[temp:aligned(68-72°F matches my preference)]\nPFR:[usp:split equally,groc:split basics only (condiments, cleaning),dep:up to 1 month's rent,pay:Splitwise,cook:a few times a week,kitchen:no strong preference]\nFLX:[groc:I can adjust the grocery arrangement|you buy your own daily cooking ingredients and we split only shared basics]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:58:52+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

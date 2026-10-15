@@ -87,6 +87,65 @@ def spurious_incompatible(text: str, a: dict, b: dict, budget_settled: bool) -> 
     return bool(reasons) and not any(reasons)
 
 
+# non-negotiable option (questionnaire.py) -> words a verdict about it uses
+NN_WORDS = {
+    "No smoking indoors": r"smok|cigar|vap",
+    "Non-smoking household only": r"smok|cigar|vap",
+    "No pets": r"\bpets?\b|allerg|\bdogs?\b|\bcats?\b",
+    "Must be okay with my pet(s)": r"\bpets?\b|allerg|\bdogs?\b|\bcats?\b",
+    "No overnight guests": r"overnight|guests?",
+    "Strict quiet hours (e.g., no noise after 10pm)": r"quiet|nois|loud",
+    "Must keep kitchen very clean": r"kitchen|clean",
+    "No parties ever": r"part(y|ies)",
+    "Same gender roommate only": r"gender",
+    "Budget hard cap (cannot exceed max)": r"budget|afford|rent|price|\$|\bcap\b",
+}
+
+
+def nn_conflict(text: str, a: dict, b: dict) -> bool:
+    """Does a verdict's reason name one of either person's non-negotiables? Before the conclusion
+    only such a conflict ends the chat; anything else is negotiable (engine rm2)."""
+    t = text.lower()
+    nns = (a.get("dealbreakers", {}).get("non_negotiables") or []) + (b.get("dealbreakers", {}).get("non_negotiables") or [])
+    if (a.get("dealbreakers", {}).get("custom_dealbreaker") or b.get("dealbreakers", {}).get("custom_dealbreaker")):
+        return True  # a free-text dealbreaker can be about anything
+    return any(re.search(NN_WORDS.get(n, re.escape(n.lower())), t) for n in nns)
+
+
+def negotiable_lines(text: str, a_name: str, a: dict, b_name: str, b: dict) -> list[str]:
+    """Shown to both clones when an early "incompatible" names no non-negotiable."""
+    def nn(q: dict) -> str:
+        return "; ".join(q.get("dealbreakers", {}).get("non_negotiables") or []) or "none"
+
+    def flex(q: dict) -> str:
+        return "; ".join(q.get("dealbreakers", {}).get("flexible_on") or []) or "nothing listed"
+
+    fa, fb = a_name.split(" ")[0], b_name.split(" ")[0]
+    return [f"Before the conclusion only a non-negotiable ends the chat. {fa}'s non-negotiables: {nn(a)}; {fb}'s: {nn(b)}. "
+            f"\"{text.strip()[:100]}\" is not one of them: negotiate it with FLX offers, or name it as an open topic in your final VRD.",
+            f"Flexible by their own answers: {fa}: {flex(a)}; {fb}: {flex(b)}."]
+
+
+def fact_check_lines(text: str, a_name: str, a: dict, b_name: str, b: dict, budget_settled: bool) -> list[str]:
+    """What the profiles really say on the topics a rejected "incompatible" blamed (engine rm2 shows
+    these to both clones and to the analysis, so they stop arguing about a conflict that isn't there)."""
+    if not spurious_incompatible(text, a, b, budget_settled):
+        return []
+    t = text.lower()
+    la, lb = a.get("living", {}), b.get("living", {})
+    fa, fb = a_name.split(" ")[0], b_name.split(" ")[0]
+    out = []
+    if "smok" in t:
+        out.append(f"Nobody in this home smokes ({fa}: {la.get('smoking')}; {fb}: {lb.get('smoking')}), so there is no smoking conflict.")
+    if re.search(r"\bpets?\b|allerg", t):
+        out.append(f"Nobody has a pet ({fa}: {la.get('pets')}; {fb}: {lb.get('pets')}). A no-pets rule is already met: liking pets is not having one.")
+    if "gender" in t:
+        out.append("Nobody's same-gender preference is broken, so there is no gender conflict.")
+    if re.search(r"\b(budget|afford\w*|rent|price)\b|\$", t) and budget_settled:
+        out.append("The budget is settled: code checked that the room's exact share fits the candidate's budget.")
+    return out
+
+
 # logistics both sides state exactly; a mismatch nobody is flexible on is still open after any chat
 LOGISTICS = (("lease_type", "Lease length", "lease", "{a} wants a {va}, {b} a {vb}"),
              ("move_in_date", "Move-in date", "move_in", "{a} moves in {va}, {b} {vb}"))

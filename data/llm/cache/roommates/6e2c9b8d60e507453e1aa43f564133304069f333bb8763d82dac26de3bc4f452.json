@@ -1,0 +1,6 @@
+{
+  "value": "SAY: The lease term, sleep schedule, and guest frequency are all incompatible with my strict requirements, so we cannot proceed.\n\nCNF:[mv:1-3 months max (incompatible with 6-month requirement)]\nCNF:[slp:Early bird (sleep before 10pm) (incompatible with night owl)]\nVRD:INCOMPATIBLE|r=Lease term, sleep schedule, and guest frequency conflicts|open=none",
+  "created": "2026-10-15T16:36:17+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

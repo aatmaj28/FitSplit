@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I am an early bird who cooks daily and needs a quiet, spotless environment; please detail your guest frequency and noise levels.\n\nPFR:[slp:Early bird (sleep before 10pm), cln:5, wfh:No, nzl:Very quiet]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:39:22+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Rohan, a student in Fenway, moving in within 1–3 months, with a hard budget cap of $1400, a non-smoking household only, and I love pets but have none.\n\nHI:[loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; budget hard cap (cannot exceed max),occ:Student]\nPFR:[rm:private room,pri:budget compatibility; similar cleanliness standards; respectful of quiet/work time]\nCNF:[bd:ok(overlap 1100-1400, my max is firm at 1400)]",
+  "created": "2026-10-15T16:56:34+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

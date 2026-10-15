@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our temperature preference matches at 68-72°F, and I cook vegetarian meals daily, so I'm asking how you use the kitchen and whether shared groceries would work for you.\n\nPFR:[temp:moderate (68-72°F),cook:daily (vegetarian),kitchen:happy to share and cook together sometimes]\nFLX:[groc:flexible, either shared staples or fully separate|whichever you prefer]\nPFR:[ask:cook, kitchen, groc]",
+  "created": "2026-10-15T16:57:09+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

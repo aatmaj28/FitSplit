@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our budgets overlap, and the $1,360/mo Bedroom 2 share fits my cap. I have no conflict with your no-smoking or no-parties rules, so I'd like to talk about guests next.\n\nCNF:[smk:aligned(no indoor smoking),bd:aligned($1,360 fits within 1100-1400 cap),parties:no conflict(no parties ever is fine with me)]\nPFR:[rm:Bedroom 2 private room at $1,360/mo,lease:1-year lease,usp:split equally]\n\n<<MOD:SOCIAL>>",
+  "created": "2026-10-15T16:58:16+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Small weekend friend visits work for me if I get a day's notice and they wrap up by 10pm, but no parties ever, since that's a firm limit for me.\n\nCNF:[parties:resolved(no parties, small friend visits only)|this is a hard limit for me, and I'm glad we're aligned]\nFLX:[gwk:small weekend visits OK|24-hour notice and wrap up by 10pm to match your early bedtime]\nPFR:[groc:agreed(own cooking ingredients, split shared basics via Splitwise)]",
+  "created": "2026-10-15T16:59:07+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

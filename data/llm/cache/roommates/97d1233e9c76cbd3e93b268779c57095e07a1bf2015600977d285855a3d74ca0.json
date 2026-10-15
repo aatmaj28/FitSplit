@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I need a quiet environment for work and keep a tidy space, which clashes with your weekly guests and late-night activities.\n<<MOD:ROUTINES>>\nCNF:[cln:INCOMPATIBLE(4_vs_2)|nzl:INCOMPATIBLE(Low_vs_Social)|gwk:INCOMPATIBLE(0-1_vs_Weekly)]\nPFR:[slp_sched:Somewhere in between|wfh:Hybrid (a few days a week)|cln:4]",
+  "created": "2026-10-15T16:26:37+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the 24-hour notice and 10pm wrap-up, and propose a weekly rotating chore chart with a Sunday common-area reset to bridge our 4 vs 3 cleanliness gap.\n\nCNF:[gwk:aligned(24-hour notice, visits wrap up by 10pm, no parties)]\nFLX:[cln:weekly rotating chore chart with a Sunday common-area reset|each of us finishes assigned chores by Sunday evening, and I'm happy to take the first week]",
+  "created": "2026-10-15T16:59:14+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

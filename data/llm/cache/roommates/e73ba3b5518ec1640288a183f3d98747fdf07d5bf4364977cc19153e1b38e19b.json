@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I cook daily and prefer splitting basic groceries, so I can handle shared staples if you split equally.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning)]\nPFR:[cook:Daily, kitchen:Happy to share and cook together sometimes]",
+  "created": "2026-10-15T16:47:15+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

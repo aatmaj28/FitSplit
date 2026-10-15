@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 84,
+      "finances": 88,
+      "lifestyle": 78,
+      "personality": 82,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are non-smoking-household-only, and no pets will live in or stay at the apartment, so Kavya's pet allergy and 'No pets' non-negotiable are fully met alongside Priya's non-smoking requirement.",
+      "Budgets overlap at $1100-1250, which sits within Kavya's hard cap of $1250. Both agreed to split utilities equally, split only grocery basics, and use Splitwise with a deposit of up to one month's rent.",
+      "Both are vegetarian and cook daily (Priya makes South Indian food), so they agreed to a no-meat kitchen. They also agreed on a weekly rotating chore chart with a bathroom slot for Priya and kitchen wipe-down for Kavya, which bridges Priya's cleanliness 4 and Kavya's 5."
+    ],
+    "concerns": [
+      "Kavya sleeps before 10pm and wakes before 6am, while Priya calls family in India late in the evening. Priya agreed to end calls by 9:30pm in her room, but time-zone-driven calls may be hard to keep to that cutoff over a year.",
+      "Kavya's profile says guests 'never/very rarely' and 'very quiet'. Priya has friends over on weekends and hosts gatherings. The cap of 4 people, 24-hour notice, a 9pm end and once a month or less narrows this, but Priya may feel restricted and Kavya may still find it intrusive.",
+      "Priya's 4 vs Kavya's 5 on cleanliness could cause friction over time. The budget is also tight for Kavya: her cap is $1250, and Priya's range extends up to $1450, so Priya must accept a place at or below $1250 for the match to work."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Set a firm shared-space quiet time from 9:30pm, with Priya's family calls kept in her room (headphones or texts after 9:30pm), and review it after the first month. If the calls consistently run late, shift them to mornings or weekends.",
+      "Pick a place at or under $1250 for a private room. Hold gatherings to once a month or less, with at most 4 people, 24-hour text notice and a 9pm end. Add a short monthly check-in to adjust the chore chart and the guest and noise rules."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "There are no non-negotiable conflicts: both want a non-smoking household, no pets will be kept, and the budget overlap of $1100-1250 fits Kavya's hard cap. The conversation settled the main friction points (calls, guests, chores, cooking and costs) with specific agreements. The remaining risk is the lifestyle gap between Kavya's early, quiet routine and Priya's social and call habits, which depends on Priya keeping to the 9:30pm and 9pm limits."
+  },
+  "created": "2026-10-15T16:55:01+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

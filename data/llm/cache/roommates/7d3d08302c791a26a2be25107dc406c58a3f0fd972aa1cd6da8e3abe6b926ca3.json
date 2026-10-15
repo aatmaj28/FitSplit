@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I am a student looking for a private room in Boston within 1-3 months, budget $1100-1450, with strict non-smoking rules. Where are you located, what is your budget, and do you smoke?\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1100-1450|smk:Non-smoking household only|pet:None|nn:No smoking indoors;Non-smoking household only\nPFR:cln:5|wfh:Yes|nzl:Low\nCNF:smk:verify",
+  "created": "2026-10-15T16:49:17+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

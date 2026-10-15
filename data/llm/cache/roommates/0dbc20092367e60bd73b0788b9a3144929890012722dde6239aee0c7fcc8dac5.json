@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 10,
+      "finances": 75,
+      "lifestyle": 5,
+      "personality": 20,
+      "logistics": 60
+    },
+    "highlights": [
+      "Both are students with overlapping budget ranges ($1100-$1450 overlap).",
+      "Both prefer to split expenses equally and share basic groceries.",
+      "Both are located in the Boston/Fenway area, ensuring geographic compatibility."
+    ],
+    "concerns": [
+      "Hard conflict on noise levels: Priya requires a quiet environment for work, while Jake is a night owl who hosts weekly guests and plays guitar late.",
+      "Significant mismatch in cleanliness standards: Priya rates herself a 4/5, while Jake rates himself a 2/5.",
+      "Priya explicitly stated that her need for a quiet, clean environment is a non-negotiable priority."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Priya identified the conflict in noise levels and cleanliness as a hard limit conflict, stating they cannot proceed with the match.",
+    "middle_ground": [
+      "Jake offered to keep guests out of shared spaces after 11pm and wear headphones, but this was rejected as insufficient for Priya's non-negotiables.",
+      "Jake offered to handle trash and outdoor common areas to compensate for lower personal cleanliness, but this did not resolve the core lifestyle clash."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The match is incompatible due to fundamental lifestyle conflicts. Priya's strict requirements for a quiet and clean environment directly clash with Jake's social, late-night lifestyle and lower cleanliness standards, which Priya has designated as non-negotiable."
+  },
+  "created": "2026-10-15T16:27:23+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

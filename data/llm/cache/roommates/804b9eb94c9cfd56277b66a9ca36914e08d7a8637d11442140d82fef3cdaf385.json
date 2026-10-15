@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m available within a month; I’m a night owl who needs quiet for WFH but hosts small groups weekly. What are your sleep and guest habits?\n\n<<MOD:ROUTINES>>\nPFR:[slp:Night owl (sleep after midnight)/wake 8am–10am, cln:3, gwk:Regularly (weekly), wfh:Hybrid (a few days a week)]\nVRD:[CONDITIONAL]|r=Cleanliness gap (3 vs 5) and noise preference (social vs quiet) need resolution|open=sleep, guests, WFH",
+  "created": "2026-10-15T16:28:06+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1194,3 +1194,39 @@ Most important first.
     - Streamlit labels phase 2 "Exploration" while the server says "Lifestyle Exploration".
     - In the manual flow, the shared `agents{}` objects mean that two rooms using the same user would overwrite each other's histories.
 13. **Unclear: the README's token-savings claim** (85-97%) is not backed by any measurement in the code. Every turn still resends the full, growing system prompt.
+
+## 2026-10-15: why the clones asked for things already said (engine rm2)
+
+Found after the tour, on the bundled conversations (Priya + Kavya was the worst case: her clone
+repeated Kavya's message word for word for ten turns, and Meera's clone reported Priya's sleep
+and guest answers as its own). All three suspects contributed:
+
+1. **How the other clone's message is passed (main cause).**
+   - The reply arrived as a bare "user" message behind the phase hint, with nothing saying who
+     wrote it. Models echoed it, answered in its voice, or called the other person "User".
+   - Each clone saw only its last 6 history entries. By turn 8 or so the other's introduction
+     (budget, move-in, location) was out of view, so it was asked again.
+2. **Lazy modules.** A clone's own routines / social / lifestyle / financial answers reached it
+   only after it emitted `<<MOD:X>>`, and only on its next turn. Until then it had no data for
+   sleep, guests or cleanliness, so it guessed, often by mirroring the other's values.
+3. **Phase prompts.**
+   - "Share your own preferences and ask theirs" repeated every turn of a phase.
+   - The protocol's "VRD must appear in your final message" made models add a verdict to every
+     message. A turn-1 "STRONG" then decided the match when later verdicts were rejected.
+
+Fixes (engine rm2: `backend/app/roommates/memory.py`, `engine.py`):
+- **Memory.** Every turn's prompt names both speakers and labels the other's message. It carries
+  a memory parsed from the ACP fields: what the other already told you (never ask again), what
+  you already shared (don't repeat), and this phase's open topics. History keeps only "X's clone
+  said: ...".
+- **Modules by phase.** Exploration loads routines, social and lifestyle; negotiation loads
+  financial and dealbreakers. A topic the other raises loads its module before you reply.
+- **Verdicts.** Only conclusion-phase verdicts decide strong / conditional. An "incompatible"
+  still ends the chat at any point.
+- **Fact checks.** A rejected invented dealbreaker becomes a FACT CHECK line that both clones and
+  the analysis see.
+- **Intro and non-negotiables.** The intro must state smoking, pets and non-negotiables. Each
+  clone is told its exact non-negotiables, and that everything else is negotiable.
+- **Plain-English lines.** Each reply starts with a `SAY:` line, the UI's main text. Gaps (and
+  conversations kept from rm1) get lines from one cached narration call, and a line quoting a
+  number its message doesn't contain is dropped.

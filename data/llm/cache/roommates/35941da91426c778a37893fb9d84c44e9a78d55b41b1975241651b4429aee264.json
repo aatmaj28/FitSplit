@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 10,
+      "finances": 85,
+      "lifestyle": 15,
+      "personality": 40,
+      "logistics": 60
+    },
+    "highlights": [
+      "Both are students with overlapping budgets ($1150-$1450) and similar financial expectations for splitting costs.",
+      "Both prefer to split basics like condiments and cleaning supplies equally.",
+      "Both love pets, even though neither currently has one."
+    ],
+    "concerns": [
+      "Hard conflict: Jake smokes, while Priya requires a non-smoking household and no indoor smoking.",
+      "Lifestyle mismatch: Jake is a night owl who hosts guests weekly, while Priya prefers quiet, low-noise environments with occasional guests.",
+      "Cleanliness standards differ significantly (Priya rates 4/5, Jake rates 2/5)."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Jake smokes, which directly violates Priya's non-negotiable requirement for a non-smoking household and no indoor smoking.",
+    "middle_ground": [
+      "None possible regarding smoking due to hard non-negotiables.",
+      "Could potentially agree on strict outdoor-only smoking zones if the building allows, but this does not satisfy 'non-smoking household' usually implying no smoke residue/odor indoors."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The match is incompatible due to a fundamental conflict in non-negotiables regarding smoking. Jake smokes, while Priya strictly requires a non-smoking household, making cohabitation impossible regardless of other compatible factors like budget and location."
+  },
+  "created": "2026-10-15T16:31:21+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

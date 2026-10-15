@@ -1,0 +1,436 @@
+{
+  "id": "n_cb8ba53cb16e",
+  "engine": "rm2",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "rohan",
+    "name": "Rohan Mehta"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm Priya, a student looking in Fenway/Mission Hill, moving in within 1–3 months, budget $1100–1450, non-smoking household only, no pets. Cleanliness and quiet time matter most. What about you?\n\nHI:[loc:Boston/Fenway / Mission Hill,mv:within 1–3 months,bd:1100-1450,smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; non-smoking household only,occ:Student]\nPFR:[rm:private room,pri:similar cleanliness standards; respectful of quiet/work time]\nPFR:[ask:Rohan's loc, bd, mv, smk, pet, nn]",
+        "say": "I'm Priya, a student looking in Fenway/Mission Hill, moving in within 1–3 months, budget $1100–1450, non-smoking household only, no pets. Cleanliness and quiet time matter most. What about you?",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:56:29+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: I'm Rohan, a student in Fenway, moving in within 1–3 months, with a hard budget cap of $1400, a non-smoking household only, and I love pets but have none.\n\nHI:[loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; budget hard cap (cannot exceed max),occ:Student]\nPFR:[rm:private room,pri:budget compatibility; similar cleanliness standards; respectful of quiet/work time]\nCNF:[bd:ok(overlap 1100-1400, my max is firm at 1400)]",
+        "say": "I'm Rohan, a student in Fenway, moving in within 1–3 months, with a hard budget cap of $1400, a non-smoking household only, and I love pets but have none.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:56:34+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: Your $1400 cap fits within my range, so budget works, and our smoking and pet answers match. Next I'd like to know your cleanliness standards, sleep schedule, and noise habits.\n\nCNF:[bd:ok(overlap 1100-1400, I can stay within your firm 1400 cap)]\nPFR:[ask:cln, slp, nzl]\n<<MOD:ROUTINES>>",
+        "say": "Your $1400 cap fits within my range, so budget works, and our smoking and pet answers match. Next I'd like to know your cleanliness standards, sleep schedule, and noise habits.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:56:39+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: I sleep before 10pm and wake 6-8am, keep cleanliness at 4/5 with a rotating chore chart, rarely host guests, and don't work from home; what are yours?\n\nPFR:[slp:early bird (sleep before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,gwk:never/very rarely,nzl:occasional weekend friends with notice,wfh:no (out at school daily)]\nPFR:[ask:slp, cln, gwk, nzl, wfh]\n<<MOD:ROUTINES>>",
+        "say": "I sleep before 10pm and wake 6-8am, keep cleanliness at 4/5 with a rotating chore chart, rarely host guests, and don't work from home; what are yours?",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:56:44+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm 4/5 tidy, wake 6-8am, work from home a few days weekly, host guests monthly with notice, and call family in India late evenings, so I'll keep calls quiet.\n\nPFR:[cln:4,clean_sched:rotating chore chart,slp:somewhere in between,wake:6am-8am,wfh:hybrid (a few days a week),gwk:occasionally (once a month or less, always with notice),nzl:small gatherings only (<10 people)]\nCNF:[slp:minor(I call family in India late evening, and you sleep before 10pm)]\nFLX:[calls:take them in my room, keep volume low, wrap up by about 9:30pm on your sleep nights|if that works for you]\n<<MOD:LIFESTYLE>>",
+        "say": "I'm 4/5 tidy, wake 6-8am, work from home a few days weekly, host guests monthly with notice, and call family in India late evenings, so I'll keep calls quiet.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:56:53+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: Your 9:30pm call cutoff works with my sleep before 10pm, your WFH days won't clash since I'm at school daily, and I prefer the temperature around 68-72°F.\n\nCNF:[slp:ok(calls in your room, wrapped up by 9:30pm, fits my sleep before 10pm)]\nPFR:[temp:moderate (68-72°F),quiet:rarely needed, headphones handle it,sched:mostly consistent with some variation]\n<<MOD:LIFESTYLE>>",
+        "say": "Your 9:30pm call cutoff works with my sleep before 10pm, your WFH days won't clash since I'm at school daily, and I prefer the temperature around 68-72°F.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:57:00+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: Our temperature preference matches at 68-72°F, and I cook vegetarian meals daily, so I'm asking how you use the kitchen and whether shared groceries would work for you.\n\nPFR:[temp:moderate (68-72°F),cook:daily (vegetarian),kitchen:happy to share and cook together sometimes]\nFLX:[groc:flexible, either shared staples or fully separate|whichever you prefer]\nPFR:[ask:cook, kitchen, groc]",
+        "say": "Our temperature preference matches at 68-72°F, and I cook vegetarian meals daily, so I'm asking how you use the kitchen and whether shared groceries would work for you.",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:57:09+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: I cook most meals daily with no strong kitchen preference, and I'd split basics like condiments and cleaning supplies, buy my own food, split utilities equally, and use Splitwise.\n\nPFR:[cook:daily, I cook most meals,kitchen:no strong preference, happy to share and cook together sometimes,groc:split basics (condiments, cleaning supplies),usp:split equally,pay:Splitwise or similar shared app,dep:up to 1 month's rent]\nFLX:[groc:separate personal food, shared basics, or fully shared staples if you prefer|since you're vegetarian, we can split staples and keep our own proteins separate]\n<<MOD:FINANCIAL>>",
+        "say": "I cook most meals daily with no strong kitchen preference, and I'd split basics like condiments and cleaning supplies, buy my own food, split utilities equally, and use Splitwise.",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:57:14+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'll split vegetarian staples with you and keep personal food separate, and I can keep rent at or under your $1,400 cap, so our budgets fit.\n\nFLX:[groc:split staples (rice, lentils, spices, oil) plus basics, keep personal items and snacks separate|log everything in Splitwise and settle monthly]\nCNF:[bd:ok(my range of 1100-1450 overlaps your 1100-1400 cap, so I'll target 1400 or less)]\n<<MOD:FINANCIAL>>",
+        "say": "I'll split vegetarian staples with you and keep personal food separate, and I can keep rent at or under your $1,400 cap, so our budgets fit.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:57:20+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: I accept splitting staples and basics with personal food separate, settled monthly on Splitwise, and I need rent at or under $1,400, which is firm.\n\nFLX:[groc:agree to split staples (rice, lentils, spices, oil) plus basics, personal items and snacks separate|settle monthly through Splitwise]\nCNF:[bd:ok(your target of $1,400 or less fits my hard cap, so we're aligned as long as rent stays within it)]",
+        "say": "I accept splitting staples and basics with personal food separate, settled monthly on Splitwise, and I need rent at or under $1,400, which is firm.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:57:25+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: Rent at or under $1,400 works for me; I propose a weekly rotating chore chart, and I can shift my move-in date within the 1-3 month window to suit you.\n\nFLX:[chore:weekly rotating chart, kitchen and bathroom split evenly, swap weeks if either of us is swamped|we both agree on the list in week one]\nFLX:[mv:flexible anywhere in my 1-3 month window|you pick the date that fits your lease handoff]",
+        "say": "Rent at or under $1,400 works for me; I propose a weekly rotating chore chart, and I can shift my move-in date within the 1-3 month window to suit you.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:57:33+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "SAY: I accept the weekly rotating chore chart agreed in week one, and I'll pick my move-in date within 1-3 months to fit the lease handoff, so this is a strong match.\n\nFLX:[chore:agree to weekly rotating chart, kitchen and bathroom split evenly, swaps allowed when swamped|list agreed in week one]\nPFR:[mv:I'll pick a date within my 1-3 month window once the lease handoff is clear,lease:1-year]\nVRD:STRONG|r=Both non-negotiables align (non-smoking household, rent at or under $1,400), cleanliness is matched at 4 with a shared chore chart, and groceries, utilities, and quiet-time habits fit|open=none",
+        "say": "I accept the weekly rotating chore chart agreed in week one, and I'll pick my move-in date within 1-3 months to fit the lease handoff, so this is a strong match.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:57:38+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I accept the chore chart; I call family in India late evenings, so I'll keep those calls quiet in my room. Strong match.\n\nFLX:[nzl:late-evening family calls kept low-volume in my room with the door closed|if you're asleep before 10pm, I'll move calls earlier or use headphones]\nVRD:STRONG|r=Both non-negotiables align (non-smoking household, rent within $1,400), cleanliness matches at 4 with a rotating chore chart, and groceries, utilities, move-in timing and quiet-time habits all fit|open=none",
+        "say": "I accept the chore chart; I call family in India late evenings, so I'll keep those calls quiet in my room. Strong match.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:57:46+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 90,
+          "finances": 93,
+          "lifestyle": 85,
+          "personality": 88,
+          "logistics": 92
+        },
+        "highlights": [
+          "Both share the same non-negotiables on smoking (no smoking indoors, non-smoking household), and both love pets but have none, so there is no conflict on core house rules.",
+          "Budgets overlap well: Priya's $1100-1450 range and Rohan's $1100-1400 hard cap meet at $1400. Priya explicitly committed to rent at or under $1,400. Both agreed to split utilities equally and use Splitwise with monthly settlement.",
+          "Both rate cleanliness 4/5 and agreed on a weekly rotating chore chart with kitchen and bathroom split evenly. They also agreed on splitting staples (rice, lentils, spices, oil) and basics while keeping personal food separate, and on a 1-year lease and flexible move-in within 1-3 months."
+        ],
+        "concerns": [
+          "Sleep schedules differ: Rohan sleeps before 10pm, while Priya is 'somewhere in between' and calls family in India in the late evening. The 9:30pm cutoff or headphones mitigates this, but time-zone-driven calls may sometimes run later than planned.",
+          "Rohan's budget hard cap of $1400 is a non-negotiable. If a specific listing or a utilities-inclusive total goes above it, the match could break down. Priya's range extends to $1450, so she may be tempted to look at pricier options.",
+          "Priya works from home several days a week, while Rohan is out at school daily and rarely hosts. Priya hosts monthly and both host occasional weekend friends, so Rohan's early-bird, low-guest preference could feel strained if gatherings run late. Daily cooking by both could also cause kitchen scheduling friction."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Keep Priya's family calls in her room with the door closed and wrapped up by about 9:30pm on Rohan's sleep nights, using headphones or moving calls earlier if needed. Hold weekend gatherings to small groups (under 10) with advance notice and an end time that respects Rohan's early nights.",
+          "Screen listings against the $1400 hard cap including utilities, agree on a kitchen schedule or shared-use norms for daily cooking, and finalize the chore list in week one with swap weeks allowed when either is swamped."
+        ],
+        "recommendation": "strong",
+        "recommendation_summary": "Priya and Rohan align on all listed non-negotiables, with matched cleanliness standards, compatible budgets under Rohan's $1,400 cap, and agreed systems for chores, groceries, and utilities. The main friction is Priya's late-evening calls versus Rohan's early bedtime, which they already addressed with a clear 9:30pm cutoff. This is a strong match."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm Priya, a student looking in Fenway/Mission Hill, moving in within 1–3 months, budget $1100–1450, non-smoking household only, no pets. Cleanliness and quiet time matter most. What about you?\n\nHI:[loc:Boston/Fenway / Mission Hill,mv:within 1–3 months,bd:1100-1450,smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; non-smoking household only,occ:Student]\nPFR:[rm:private room,pri:similar cleanliness standards; respectful of quiet/work time]\nPFR:[ask:Rohan's loc, bd, mv, smk, pet, nn]",
+      "say": "I'm Priya, a student looking in Fenway/Mission Hill, moving in within 1–3 months, budget $1100–1450, non-smoking household only, no pets. Cleanliness and quiet time matter most. What about you?",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:56:29+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: I'm Rohan, a student in Fenway, moving in within 1–3 months, with a hard budget cap of $1400, a non-smoking household only, and I love pets but have none.\n\nHI:[loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; budget hard cap (cannot exceed max),occ:Student]\nPFR:[rm:private room,pri:budget compatibility; similar cleanliness standards; respectful of quiet/work time]\nCNF:[bd:ok(overlap 1100-1400, my max is firm at 1400)]",
+      "say": "I'm Rohan, a student in Fenway, moving in within 1–3 months, with a hard budget cap of $1400, a non-smoking household only, and I love pets but have none.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:56:34+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: Your $1400 cap fits within my range, so budget works, and our smoking and pet answers match. Next I'd like to know your cleanliness standards, sleep schedule, and noise habits.\n\nCNF:[bd:ok(overlap 1100-1400, I can stay within your firm 1400 cap)]\nPFR:[ask:cln, slp, nzl]\n<<MOD:ROUTINES>>",
+      "say": "Your $1400 cap fits within my range, so budget works, and our smoking and pet answers match. Next I'd like to know your cleanliness standards, sleep schedule, and noise habits.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:56:39+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: I sleep before 10pm and wake 6-8am, keep cleanliness at 4/5 with a rotating chore chart, rarely host guests, and don't work from home; what are yours?\n\nPFR:[slp:early bird (sleep before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,gwk:never/very rarely,nzl:occasional weekend friends with notice,wfh:no (out at school daily)]\nPFR:[ask:slp, cln, gwk, nzl, wfh]\n<<MOD:ROUTINES>>",
+      "say": "I sleep before 10pm and wake 6-8am, keep cleanliness at 4/5 with a rotating chore chart, rarely host guests, and don't work from home; what are yours?",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:56:44+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm 4/5 tidy, wake 6-8am, work from home a few days weekly, host guests monthly with notice, and call family in India late evenings, so I'll keep calls quiet.\n\nPFR:[cln:4,clean_sched:rotating chore chart,slp:somewhere in between,wake:6am-8am,wfh:hybrid (a few days a week),gwk:occasionally (once a month or less, always with notice),nzl:small gatherings only (<10 people)]\nCNF:[slp:minor(I call family in India late evening, and you sleep before 10pm)]\nFLX:[calls:take them in my room, keep volume low, wrap up by about 9:30pm on your sleep nights|if that works for you]\n<<MOD:LIFESTYLE>>",
+      "say": "I'm 4/5 tidy, wake 6-8am, work from home a few days weekly, host guests monthly with notice, and call family in India late evenings, so I'll keep calls quiet.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:56:53+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: Your 9:30pm call cutoff works with my sleep before 10pm, your WFH days won't clash since I'm at school daily, and I prefer the temperature around 68-72°F.\n\nCNF:[slp:ok(calls in your room, wrapped up by 9:30pm, fits my sleep before 10pm)]\nPFR:[temp:moderate (68-72°F),quiet:rarely needed, headphones handle it,sched:mostly consistent with some variation]\n<<MOD:LIFESTYLE>>",
+      "say": "Your 9:30pm call cutoff works with my sleep before 10pm, your WFH days won't clash since I'm at school daily, and I prefer the temperature around 68-72°F.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:57:00+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: Our temperature preference matches at 68-72°F, and I cook vegetarian meals daily, so I'm asking how you use the kitchen and whether shared groceries would work for you.\n\nPFR:[temp:moderate (68-72°F),cook:daily (vegetarian),kitchen:happy to share and cook together sometimes]\nFLX:[groc:flexible, either shared staples or fully separate|whichever you prefer]\nPFR:[ask:cook, kitchen, groc]",
+      "say": "Our temperature preference matches at 68-72°F, and I cook vegetarian meals daily, so I'm asking how you use the kitchen and whether shared groceries would work for you.",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:57:09+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: I cook most meals daily with no strong kitchen preference, and I'd split basics like condiments and cleaning supplies, buy my own food, split utilities equally, and use Splitwise.\n\nPFR:[cook:daily, I cook most meals,kitchen:no strong preference, happy to share and cook together sometimes,groc:split basics (condiments, cleaning supplies),usp:split equally,pay:Splitwise or similar shared app,dep:up to 1 month's rent]\nFLX:[groc:separate personal food, shared basics, or fully shared staples if you prefer|since you're vegetarian, we can split staples and keep our own proteins separate]\n<<MOD:FINANCIAL>>",
+      "say": "I cook most meals daily with no strong kitchen preference, and I'd split basics like condiments and cleaning supplies, buy my own food, split utilities equally, and use Splitwise.",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:57:14+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'll split vegetarian staples with you and keep personal food separate, and I can keep rent at or under your $1,400 cap, so our budgets fit.\n\nFLX:[groc:split staples (rice, lentils, spices, oil) plus basics, keep personal items and snacks separate|log everything in Splitwise and settle monthly]\nCNF:[bd:ok(my range of 1100-1450 overlaps your 1100-1400 cap, so I'll target 1400 or less)]\n<<MOD:FINANCIAL>>",
+      "say": "I'll split vegetarian staples with you and keep personal food separate, and I can keep rent at or under your $1,400 cap, so our budgets fit.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:57:20+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: I accept splitting staples and basics with personal food separate, settled monthly on Splitwise, and I need rent at or under $1,400, which is firm.\n\nFLX:[groc:agree to split staples (rice, lentils, spices, oil) plus basics, personal items and snacks separate|settle monthly through Splitwise]\nCNF:[bd:ok(your target of $1,400 or less fits my hard cap, so we're aligned as long as rent stays within it)]",
+      "say": "I accept splitting staples and basics with personal food separate, settled monthly on Splitwise, and I need rent at or under $1,400, which is firm.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:57:25+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: Rent at or under $1,400 works for me; I propose a weekly rotating chore chart, and I can shift my move-in date within the 1-3 month window to suit you.\n\nFLX:[chore:weekly rotating chart, kitchen and bathroom split evenly, swap weeks if either of us is swamped|we both agree on the list in week one]\nFLX:[mv:flexible anywhere in my 1-3 month window|you pick the date that fits your lease handoff]",
+      "say": "Rent at or under $1,400 works for me; I propose a weekly rotating chore chart, and I can shift my move-in date within the 1-3 month window to suit you.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:57:33+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "SAY: I accept the weekly rotating chore chart agreed in week one, and I'll pick my move-in date within 1-3 months to fit the lease handoff, so this is a strong match.\n\nFLX:[chore:agree to weekly rotating chart, kitchen and bathroom split evenly, swaps allowed when swamped|list agreed in week one]\nPFR:[mv:I'll pick a date within my 1-3 month window once the lease handoff is clear,lease:1-year]\nVRD:STRONG|r=Both non-negotiables align (non-smoking household, rent at or under $1,400), cleanliness is matched at 4 with a shared chore chart, and groceries, utilities, and quiet-time habits fit|open=none",
+      "say": "I accept the weekly rotating chore chart agreed in week one, and I'll pick my move-in date within 1-3 months to fit the lease handoff, so this is a strong match.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:57:38+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I accept the chore chart; I call family in India late evenings, so I'll keep those calls quiet in my room. Strong match.\n\nFLX:[nzl:late-evening family calls kept low-volume in my room with the door closed|if you're asleep before 10pm, I'll move calls earlier or use headphones]\nVRD:STRONG|r=Both non-negotiables align (non-smoking household, rent within $1,400), cleanliness matches at 4 with a rotating chore chart, and groceries, utilities, move-in timing and quiet-time habits all fit|open=none",
+      "say": "I accept the chore chart; I call family in India late evenings, so I'll keep those calls quiet in my room. Strong match.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:57:46+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 90,
+      "finances": 93,
+      "lifestyle": 85,
+      "personality": 88,
+      "logistics": 92
+    },
+    "highlights": [
+      "Both share the same non-negotiables on smoking (no smoking indoors, non-smoking household), and both love pets but have none, so there is no conflict on core house rules.",
+      "Budgets overlap well: Priya's $1100-1450 range and Rohan's $1100-1400 hard cap meet at $1400. Priya explicitly committed to rent at or under $1,400. Both agreed to split utilities equally and use Splitwise with monthly settlement.",
+      "Both rate cleanliness 4/5 and agreed on a weekly rotating chore chart with kitchen and bathroom split evenly. They also agreed on splitting staples (rice, lentils, spices, oil) and basics while keeping personal food separate, and on a 1-year lease and flexible move-in within 1-3 months."
+    ],
+    "concerns": [
+      "Sleep schedules differ: Rohan sleeps before 10pm, while Priya is 'somewhere in between' and calls family in India in the late evening. The 9:30pm cutoff or headphones mitigates this, but time-zone-driven calls may sometimes run later than planned.",
+      "Rohan's budget hard cap of $1400 is a non-negotiable. If a specific listing or a utilities-inclusive total goes above it, the match could break down. Priya's range extends to $1450, so she may be tempted to look at pricier options.",
+      "Priya works from home several days a week, while Rohan is out at school daily and rarely hosts. Priya hosts monthly and both host occasional weekend friends, so Rohan's early-bird, low-guest preference could feel strained if gatherings run late. Daily cooking by both could also cause kitchen scheduling friction."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Keep Priya's family calls in her room with the door closed and wrapped up by about 9:30pm on Rohan's sleep nights, using headphones or moving calls earlier if needed. Hold weekend gatherings to small groups (under 10) with advance notice and an end time that respects Rohan's early nights.",
+      "Screen listings against the $1400 hard cap including utilities, agree on a kitchen schedule or shared-use norms for daily cooking, and finalize the chore list in week one with swap weeks allowed when either is swamped."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Rohan align on all listed non-negotiables, with matched cleanliness standards, compatible budgets under Rohan's $1,400 cap, and agreed systems for chores, groceries, and utilities. The main friction is Priya's late-evening calls versus Rohan's early bedtime, which they already addressed with a clear 9:30pm cutoff. This is a strong match."
+  },
+  "providers": {
+    "claude": 14
+  },
+  "created": "2026-10-15T16:56:23+00:00",
+  "ignored_verdicts": []
+}

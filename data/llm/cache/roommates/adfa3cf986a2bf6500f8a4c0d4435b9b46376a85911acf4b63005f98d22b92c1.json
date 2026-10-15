@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the Thursday text heads-up, quiet after 10pm, and the stove after 7:30pm on my cooking nights, so we're a strong match with nothing left open.\n\nCNF:[gwk:aligned(Thursday text notice, quiet after 10pm),kitchen:aligned(you cook ~6pm|I take the stove after 7:30pm),smk:aligned(no smoking indoors),cln:aligned(both 4, rotating chore chart)]\nVRD:STRONG|r=No smoking conflict, and cleanliness, sleep, money, guests and kitchen plans all line up|open=none",
+  "created": "2026-10-15T17:00:56+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Thanks, those work for me. I cook vegetarian meals daily, call family in India late in the evening, and keep the thermostat around 68-72°F. Are you okay with that?\n\n<<MOD:LIFESTYLE>>\nPFR:[cook:Daily vegetarian, happy to share the kitchen and cook together sometimes, temp:Moderate (68-72°F), notes:Late-evening calls to family in India, quiet:A few times a week on WFH days]\nFLX:[nzl:I'll tell you my quiet days ahead of time, a few times a week|if common areas stay low-noise on those days and after midnight]",
+  "created": "2026-10-15T16:52:26+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

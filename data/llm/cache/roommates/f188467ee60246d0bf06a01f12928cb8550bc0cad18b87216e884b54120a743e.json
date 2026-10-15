@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree we're a strong match: no smoking or party conflicts, $1,360 fits my cap, and I'm out most days so your 1-5pm weekday quiet hours won't affect me.\n\nCNF:[slp:aligned(my early bedtime and your 10pm quiet after-hours plan cover our different schedules)|nzl:no conflict]\nVRD:STRONG|r=No non-negotiable conflicts on smoking, parties or budget; guests, cleaning chart, groceries and quiet hours are all agreed|open=none",
+  "created": "2026-10-15T16:59:23+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

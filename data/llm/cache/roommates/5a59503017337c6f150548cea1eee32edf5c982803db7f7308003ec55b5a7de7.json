@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I rarely host guests and need a very quiet environment, so your weekend visitors are a significant friction point for my strict sleep schedule.\n\nCNF:[gwk:status(misalign)(I prefer minimal guests; your 1-2/week may disrupt strict quiet needs)]\nFLX:[gwk:0-1|Can work if guests are strictly limited to once a week with prior notice]",
+  "created": "2026-10-15T16:40:06+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

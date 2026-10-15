@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:FINANCIAL>>\nSAY: I can’t do a short-term lease, but I’m quiet after 10 pm and can split utilities equally if you’re open to 6 months.\n\nPFR:[usp:Split equally|groc:Split basics (condiments, cleaning)]\nFLX:[nzl:Quiet after 10 pm to respect early schedule|slp:Keep noise low during your sleep hours]",
+  "created": "2026-10-15T16:37:15+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

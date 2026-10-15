@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can extend to three months, but six is too long; I agree to split utilities and basics equally.\n\nFLX:[mv:Up to 3 months max (cannot accept 6 months)]\nPFR:[usp:Split equally|groc:Split basics (condiments, cleaning)]\nVRD:CONDITIONAL|r=Lease term mismatch (3 vs 6 months)|open=lease_negotiation",
+  "created": "2026-10-15T16:37:36+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

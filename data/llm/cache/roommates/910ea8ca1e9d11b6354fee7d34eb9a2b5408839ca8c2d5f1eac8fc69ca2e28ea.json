@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My move-in timeline of 1–3 months is slightly later than your one-month window, but we can coordinate if needed.\nFLX:mv:I can discuss adjusting my move-in date to align with your one-month timeline|condition:Lease start date flexibility\nVRD:STRONG|r=Location and core non-negotiables align|open=Specific lease start dates",
+  "created": "2026-10-15T16:41:44+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

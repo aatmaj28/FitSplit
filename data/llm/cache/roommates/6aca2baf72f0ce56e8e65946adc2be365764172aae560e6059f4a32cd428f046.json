@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My showers also run 15-30 minutes and I like 68-72°F too, so I'll take the bathroom first before 7am, and since I cook daily, I'm happy to share the kitchen.\n\nPFR:[bath_time:15-30 min,temp:moderate 68-72°F,kitchen:no strong preference,common:balanced use,hobbies:debate club/squash/podcasts]\nCNF:[temp:aligned(both 68-72°F),bath:minor overlap(both wake 6-8am)|resolved by staggering]\nFLX:[bath_time:I shower first before 7am|you take the later slot, 7am onward]\n<<MOD:LIFESTYLE>>",
+  "created": "2026-10-15T17:00:24+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

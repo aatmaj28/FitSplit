@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Thanks, Priya—happy to see we both value quiet and tidy living!  \n\nPFR:slp=Early bird (lights out by 10 pm, up before 6 am); cln=5 (spotless, strict rotating chore chart); guests=Never or very rare, always give notice; wfh=No, I’m on campus daily; noise=Very quiet, minimal guests.  \n\nCNF:guests:status(misalignment—my preference is never/very rare versus occasional friends).",
+  "created": "2026-10-15T16:16:23+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My need for a quiet, clean environment is a non-negotiable priority, so we cannot proceed with this match.\n<<MOD:DEALBREAKERS>>\nCNF:[cln:INCOMPATIBLE(4_vs_2)|nzl:INCOMPATIBLE(Low_vs_Social)]\nVRD:INCOMPATIBLE|r=Hard limit conflict on noise and cleanliness|open=none",
+  "created": "2026-10-15T16:27:12+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

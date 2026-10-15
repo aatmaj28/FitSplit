@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your $1400 cap fits within my range, so budget works, and our smoking and pet answers match. Next I'd like to know your cleanliness standards, sleep schedule, and noise habits.\n\nCNF:[bd:ok(overlap 1100-1400, I can stay within your firm 1400 cap)]\nPFR:[ask:cln, slp, nzl]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:56:39+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

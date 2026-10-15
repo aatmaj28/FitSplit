@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept your strict quiet conditions; my friends come rarely, stay until early evening, and always respect the 8pm cutoff.\n\nPFR:[guests:Occasionally (once a month or less)]\nPFR:[nzl:Occasional friends over (weekends)]\nFLX:[nzl:accept|condition:Guests limited to once a month max, strictly during daytime, and no noise after 8pm]",
+  "created": "2026-10-15T16:24:18+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

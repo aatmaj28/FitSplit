@@ -1,0 +1,6 @@
+{
+  "value": "SAY: The lease term is a hard stop, and I'm a night owl with weekly guests, which clashes with your quiet, early-bird routine.\n\nCNF:[mv:6-month lease required (incompatible with 1-3 months)]\nCNF:[slp:Night owl (sleep after midnight, wake 8-10am) (conflict with early bird)]\nCNF:[nzl:Social and lively, guests often (conflict with very quiet/rare guests)]",
+  "created": "2026-10-15T16:36:00+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

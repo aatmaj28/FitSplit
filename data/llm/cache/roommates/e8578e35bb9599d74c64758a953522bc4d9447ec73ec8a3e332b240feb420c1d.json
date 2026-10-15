@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I work hybrid with some quiet days, but my late nights and weekly guests clash with your early rise and strict quiet preference.\n\nCNF:slp:high_detail(Wake/sleep windows differ significantly)|nzl:high_detail(Weekly guests vs. minimal guests preference)\nFLX:nzl:Offer compromise on guest frequency (e.g., bi-weekly instead of weekly)|condition:Strict adherence to early morning quiet hours (before 8am)",
+  "created": "2026-10-15T16:42:31+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

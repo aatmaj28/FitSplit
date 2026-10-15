@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep before 10pm, wake 6-8am, rate cleanliness 4/5, cook daily, am out at school on weekdays, and rarely have guests, so I'm offering quiet-hour compromises.\n\nPFR:[slp:early bird(before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,cook:daily,wfh:no(out at school most days),gwk:never/very rarely,notice:always]\nCNF:[slp:mismatch(early bird vs after midnight),cln:minor gap(4 vs 3, within 1 point)]\nFLX:[nzl:I keep morning cooking quiet and your 1-5pm weekday quiet hours are easy since I'm out|late-night noise stays low after 10pm, or you use headphones]\n\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:58:31+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: On money, I also want utilities split equally, shared basics split, up to one month's rent as deposit, and payments tracked on Splitwise. I'm open to sharing vegetarian staples too.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning), own food bought separately, dep:Yes, up to 1 month's rent, pay:Splitwise]\nFLX:[groc:I can share staples like rice, lentils, and oil|if we log them on Splitwise and you're fine with them being vegetarian]",
+  "created": "2026-10-15T16:52:39+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

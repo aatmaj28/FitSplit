@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep after midnight, clean moderately, have weekly guests, enjoy social nights, and work from home a few days, so our sleep and work schedules differ but we match on cleanliness and WFH.  \nPFR:slp_sched=Night owl (sleep after midnight)|cln=3(moderate)|guests=Regularly (weekly)|nzl=Social and lively|wfh=Hybrid (a few days a week)  \nCNF:slp_sched=Night owl vs. early‑to‑bed → potential friction on sleep schedules.",
+  "created": "2026-10-15T16:19:30+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

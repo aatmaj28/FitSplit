@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Hi Priya! Great to meet you—let’s see if we click as roommates.  \n\nHI:loc=Boston/Cambridgeport or Fenway|mv=1–3 months|bd=900-1250|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=Allergic to pets  \nPFR:pri=Similar cleanliness standards;Budget compatibility;Compatible sleep schedule  \n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:16:12+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

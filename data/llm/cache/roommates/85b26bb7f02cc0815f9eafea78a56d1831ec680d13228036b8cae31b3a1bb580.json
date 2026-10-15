@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept your limit of one guest visit per week with notice, but I need quiet hours after 9 PM to accommodate your early sleep.\n\nFLX:[gwk:1|Strictly once a week with 24-hour prior notice]\nPFR:[nzl:Low after 9 PM, quiet:Enforce quiet hours post-9 PM]",
+  "created": "2026-10-15T16:40:16+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

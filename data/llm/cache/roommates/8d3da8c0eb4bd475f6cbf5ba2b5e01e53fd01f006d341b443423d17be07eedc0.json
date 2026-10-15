@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Priya, a student looking in Fenway/Mission Hill, moving in within 1–3 months, budget $1100–1450, non-smoking household only, no pets. Cleanliness and quiet time matter most. What about you?\n\nHI:[loc:Boston/Fenway / Mission Hill,mv:within 1–3 months,bd:1100-1450,smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors; non-smoking household only,occ:Student]\nPFR:[rm:private room,pri:similar cleanliness standards; respectful of quiet/work time]\nPFR:[ask:Rohan's loc, bd, mv, smk, pet, nn]",
+  "created": "2026-10-15T16:56:29+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

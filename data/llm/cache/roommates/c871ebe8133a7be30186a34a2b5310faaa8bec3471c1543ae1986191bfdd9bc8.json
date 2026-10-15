@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Weekly gatherings are more than I'm used to, so I can do up to two weekend gatherings a month, under 10 people, with Thursday notice and a quiet-down by 11:30pm.\n\nCNF:[gwk:gap(your weekly vs my once a month or less; I wake 6am-8am and want quiet late)]\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if other weekends stay low-key and after-hours socializing moves to your room or out]\nFLX:[cln:Rotating chore chart with weekly check-in works; I'll draft the \"tidy\" checklist for kitchen and bathroom|if you edit it with me before move-in]",
+  "created": "2026-10-15T16:52:54+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

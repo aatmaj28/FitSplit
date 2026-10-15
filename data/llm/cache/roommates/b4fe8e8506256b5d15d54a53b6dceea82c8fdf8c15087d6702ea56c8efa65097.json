@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Weekly guests are a core part of my life, so I cannot reduce them to monthly; I need a partner who accepts social energy.\n\nCNF:[gwk:conflict(Weekly guests vs rare quiet need)]\nVRD:[INCOMPATIBLE]|r=Social frequency and noise levels are fundamental mismatches|open=none",
+  "created": "2026-10-15T16:29:14+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

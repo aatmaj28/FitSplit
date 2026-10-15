@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your 9:30pm call cutoff works with my sleep before 10pm, your WFH days won't clash since I'm at school daily, and I prefer the temperature around 68-72°F.\n\nCNF:[slp:ok(calls in your room, wrapped up by 9:30pm, fits my sleep before 10pm)]\nPFR:[temp:moderate (68-72°F),quiet:rarely needed, headphones handle it,sched:mostly consistent with some variation]\n<<MOD:LIFESTYLE>>",
+  "created": "2026-10-15T16:57:00+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

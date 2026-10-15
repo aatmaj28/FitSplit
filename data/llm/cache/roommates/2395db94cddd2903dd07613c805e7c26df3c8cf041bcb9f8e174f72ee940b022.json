@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 72,
+      "finances": 95,
+      "lifestyle": 55,
+      "personality": 60,
+      "logistics": 85
+    },
+    "highlights": [
+      "Perfect alignment on financials, including equal splitting of utilities, groceries, and use of a shared app like Splitwise.",
+      "Both parties are non-smokers and agree on a strictly non-smoking household, satisfying both non-negotiables.",
+      "Successful negotiation on lease terms, with Meera accepting a 1-year lease to match Ananya's preference."
+    ],
+    "concerns": [
+      "Significant clash in sleep schedules: Ananya is an early bird (sleeps before 10 PM) while Meera is a night owl (sleeps after midnight), creating high friction for shared spaces.",
+      "Major difference in social energy: Ananya prefers a very quiet home with minimal guests, whereas Meera is social and lively with regular guest habits.",
+      "Move-in timeline mismatch: Meera needs to move in within a month, while Ananya was originally looking at 1-3 months, requiring coordination."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Guests limited to bi-weekly frequency instead of weekly, with strict adherence to quiet hours before 8 AM.",
+      "Implementation of a rotating chore chart with a specific condition for immediate cleanup after cooking to maintain cleanliness standards."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "This is a conditional match due to significant lifestyle differences in sleep schedules and social energy. While financial and logistical terms are perfectly aligned, the success of this arrangement depends entirely on both parties strictly adhering to the negotiated quiet hours and guest limitations."
+  },
+  "created": "2026-10-15T16:45:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

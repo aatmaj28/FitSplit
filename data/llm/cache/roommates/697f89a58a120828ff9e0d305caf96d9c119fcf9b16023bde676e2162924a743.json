@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m happy to coordinate kitchen use since I cook a few times a week; let’s finalize the lease terms.\n\nPFR:cook=A few times a week|kitchen=No strong preference\nFLX:clean_sched:Accept rotating chore chart|condition:Shared responsibility for immediate cleanup post-cooking\nVRD:STRONG|r=Aligned on financials, flexible on chores, compatible social compromise|open=none",
+  "created": "2026-10-15T16:43:50+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

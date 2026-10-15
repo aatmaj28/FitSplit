@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep late (after midnight) and wake at 8-10am, keeping common areas clean as I go. How do you handle sleep schedules and noise in shared spaces?\n\n<<MOD:ROUTINES>>\nPFR:slp=Night owl (sleep after midnight),wake=8am–10am,cln=3(moderate),clean_sched=Clean as you go\nPFR:nzl=Social and lively, guests often|guests=Regularly (weekly)|parties=Small gatherings only (< 10 people)",
+  "created": "2026-10-15T16:41:53+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

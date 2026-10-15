@@ -75,26 +75,41 @@ class FakeLLM:
                 "concerns": [], "dealbreaker_detected": False, "dealbreaker_detail": "", "middle_ground": [],
                 "recommendation": "strong", "recommendation_summary": "ok"}, "fake"
 
+    def narrate(self, conversation):
+        self.narrated = [m["turn"] for m in conversation if not m.get("say")]
+        return [f"Turn {m['turn']} in plain words." for m in conversation], "fake"
 
-def _agents():
+
+def _agents(b="ananya"):
     p = {x["id"]: x for x in PROFILES}
-    return (engine.Agent("priya", "Priya", p["priya"]["questionnaire"]), engine.Agent("ananya", "Ananya", p["ananya"]["questionnaire"]))
+    return (engine.Agent("priya", "Priya", p["priya"]["questionnaire"]), engine.Agent(b, p[b]["name"].split()[0], p[b]["questionnaire"]))
+
+
+def _neg(a, b, llm, **kw):
+    return engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=llm.analysis, narrate=llm.narrate, **kw)
 
 
 def test_loop_runs_13_turns_with_phase_modules():
     a, b = _agents()
     llm, events = FakeLLM(), []
-    out = engine.Negotiation(a, b, emit=events.append, turn_llm=llm.turn, analysis_llm=llm.analysis).run()
+    out = _neg(a, b, llm, emit=events.append).run()
     assert out["turns"] == 13 and [m["speaker_id"] for m in out["messages"]].count("a") == 7
     phases = [e["phase"] for e in events if e["type"] == "phase_start"]
     assert phases == ["introduction", "exploration", "negotiation", "conclusion"]  # no duplicate conclusion events
     assert [m["phase"] for m in out["messages"]] == ["introduction"] * 3 + ["exploration"] * 4 + ["negotiation"] * 4 + ["conclusion"] * 2
-    assert "## MOD:DEALBREAKERS" in llm.systems[7] and "## MOD:DEALBREAKERS" not in llm.systems[6]
+    # rm2: own answers arrive when the phase starts (exploration: routines / social / lifestyle; negotiation: financial + dealbreakers)
+    assert all(f"## MOD:{m}" in llm.systems[3] for m in ("ROUTINES", "SOCIAL", "LIFESTYLE")) and "## MOD:ROUTINES" not in llm.systems[2]
+    assert "## MOD:DEALBREAKERS" in llm.systems[7] and "## MOD:DEALBREAKERS" not in llm.systems[6] and "## MOD:FINANCIAL" in llm.systems[7]
     assert all(f"## MOD:{m}" in llm.systems[11] for m in engine.LAZY_MODULES)
-    assert all(len(w) <= engine.HISTORY_WINDOW for w in llm.windows)
-    # turn 2 (B): the other clone's reply arrives once, with the phase hint (the original sent it twice)
-    assert [m["role"] for m in llm.windows[1]] == ["user"] and llm.windows[1][0]["content"].endswith("PFR:[turn:1]")
-    assert llm.windows[0][0]["content"].endswith(engine.STARTER)
+    assert all(len(w) <= engine.HISTORY_WINDOW and w[0]["role"] == "user" for w in llm.windows)
+    # turn 2 (B): the other clone's reply arrives once, labelled, with the phase hint (the original sent it twice, unlabelled)
+    assert [m["role"] for m in llm.windows[1]] == ["user"]
+    assert 'Priya\'s clone just said:\n"""\nPFR:[turn:1]\n"""' in llm.windows[1][0]["content"] and llm.windows[1][0]["content"].startswith("[PHASE: INTRODUCTION]")
+    assert engine.STARTER in llm.windows[0][0]["content"] and "The app opened the chat with:" in llm.windows[0][0]["content"]
+    # history keeps only who said what; the memory block is rebuilt for the current turn
+    assert llm.windows[2][0]["content"] == f"Ananya's clone said:\n{engine.STARTER}" or llm.windows[2][0]["content"].startswith("Ananya's clone said:")
+    # no SAY lines from the fake clones: one narration call fills them
+    assert llm.narrated == list(range(1, 14)) and all(m["say"] == f"Turn {m['turn']} in plain words." for m in out["messages"])
     # no verdict lines -> keywords say unclear -> the analysis recommendation decides
     assert out["outcome"]["source"] == "analysis" and out["outcome"]["status"] == "strong"
 
@@ -102,14 +117,14 @@ def test_loop_runs_13_turns_with_phase_modules():
 def test_requested_module_is_injected_for_next_turn():
     a, b = _agents()
     llm = FakeLLM(["HI:[loc:Boston] <<MOD:FINANCIAL>>"])
-    engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=llm.analysis).run()
+    _neg(a, b, llm).run()
     assert "## MOD:FINANCIAL — Priya" not in llm.systems[0] and "## MOD:FINANCIAL — Priya" in llm.systems[2]
 
 
 def test_incompatible_vrd_stops_early():
     a, b = _agents()
     llm = FakeLLM(["HI:[loc:Boston]", "CNF:[smk:conflict] VRD:[INCOMPATIBLE]|r=[smoking indoors]|open=[none]"])
-    out = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=llm.analysis).run()
+    out = _neg(a, b, llm).run()
     assert out["turns"] == 2 and out["outcome"]["status"] == "incompatible" and out["outcome"]["reason"] == "smoking indoors"
 
 
@@ -144,7 +159,7 @@ def store(tmp_path, monkeypatch):
 
     def runner(neg):
         calls.append(neg)
-        neg.turn_llm, neg.analysis_llm = llm.turn, llm.analysis
+        neg.turn_llm, neg.analysis_llm, neg.narrate = llm.turn, llm.analysis, llm.narrate
         return neg.run()
 
     monkeypatch.setattr(service, "RUNNER", runner)
@@ -224,7 +239,7 @@ def test_spurious_incompatible_guard():
 def test_spurious_verdict_does_not_stop_the_chat():
     a, b = _agents()
     llm = FakeLLM(["HI:[loc:Boston]", "VRD:[INCOMPATIBLE]|r=[no smoking indoors]"])
-    neg = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=llm.analysis, spurious=lambda t: "smoking" in t.lower())
+    neg = _neg(a, b, llm, spurious=lambda t: "smoking" in t.lower())
     out = neg.run()
     assert out["turns"] == 13 and neg.ignored == [2] and out["outcome"]["status"] == "strong"
 
@@ -237,7 +252,7 @@ def test_analysis_dealbreaker_overrides_soft_verdict():
         v, _ = FakeLLM().analysis(system, user)
         return {**v, "dealbreaker_detected": True, "dealbreaker_detail": "Jake smokes indoors", "recommendation": "incompatible"}, "fake"
 
-    out = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=analysis).run()
+    out = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=analysis, narrate=llm.narrate).run()
     assert (out["outcome"]["status"], out["outcome"]["source"]) == ("incompatible", "analysis")
 
 
@@ -253,3 +268,133 @@ def test_lease_mismatch_caps_a_strong_verdict(store):
     rec = service.start("priya", "meera")  # the fake clones agree on everything ("strong" by analysis)
     assert rec["result"]["status"] == "conditional" and rec["result"]["source"] == "exact_check"
     assert "lease length" in rec["result"]["unresolved_topics"]
+
+
+# ---------------------------------------------------------------- engine rm2: the clones use what the other said
+
+def test_memory_keeps_the_others_facts_past_the_history_window():
+    a, b = _agents()
+    llm = FakeLLM(["SAY: Hi, I'm Priya from Fenway.\nHI:loc=Boston/Fenway|bd=1100-1450|mv=1-3 months"])
+    out = _neg(a, b, llm).run()
+    assert out["messages"][0]["say"] == "Hi, I'm Priya from Fenway."
+    late = llm.windows[9]  # Ananya's 5th turn: Priya's intro left her window long ago...
+    assert not any("HI:loc=Boston" in m["content"] for m in late[:-1])
+    # ...but the memory block still tells her, so she never has to ask again
+    assert "ALREADY TOLD YOU by Priya" in late[-1]["content"] and "bd=1100-1450" in late[-1]["content"]
+    first = llm.windows[1][-1]["content"]
+    assert "STILL OPEN" in first and "ask Priya about smoking, pets, non-negotiables, priorities" in first
+    assert "Your HI must state loc, mv, bd, smk, pet and nn" in first and "YOUR non-negotiables are exactly: No smoking indoors; No pets" in first
+
+
+def test_a_topic_the_other_raises_loads_your_module_before_you_reply():
+    a, b = _agents()
+    llm = FakeLLM(["PFR:usp=Split equally|dep=500"])
+    _neg(a, b, llm).run()
+    assert "## MOD:FINANCIAL — Ananya" in llm.systems[1]  # turn 2, still in the introduction phase
+
+
+def test_a_provisional_verdict_does_not_decide():
+    a, b = _agents()
+    replies = ["HI:loc=Boston VRD:STRONG|r=All initial criteria align|open=none"] + [f"PFR:[turn:{n}]" for n in range(2, 12)] \
+        + ["VRD:CONDITIONAL|r=guests|open=guest policy", "VRD:CONDITIONAL|r=guests|open=guest policy"]
+    out = _neg(a, b, FakeLLM(replies)).run()
+    assert out["outcome"]["status"] == "conditional" and out["outcome"]["unresolved_topics"] == ["guest policy"]
+    # only the turn-1 VRD: the conclusion said nothing, so it is unclear (analysis decides), never the early "strong"
+    out = _neg(a, b, FakeLLM(replies[:1])).run()
+    assert out["outcome"]["source"] == "analysis"
+
+
+def test_a_rejected_dealbreaker_becomes_a_fact_check_for_both_clones():
+    from app.roommates.checks import fact_check_lines, spurious_incompatible
+
+    p = {x["id"]: x for x in PROFILES}
+    a, b = _agents("kavya")
+    pa, pk = p["priya"]["questionnaire"], p["kavya"]["questionnaire"]
+    llm = FakeLLM(["HI:loc=Boston", "CNF:pet:conflict(you love pets) VRD:INCOMPATIBLE|r=Pet preference conflicts with my allergy"])
+    neg = _neg(a, b, llm, spurious=lambda t: spurious_incompatible(t, pa, pk, False),
+               fact_check=lambda t: fact_check_lines(t, "Priya Sharma", pa, "Kavya Nair", pk, False))
+    out = neg.run()
+    assert out["turns"] == 13 and neg.ignored == [2]
+    assert "FACT CHECK" not in llm.windows[1][-1]["content"]
+    for w in (llm.windows[2], llm.windows[3]):  # both clones see it from the next turn on
+        assert "FACT CHECK" in w[-1]["content"] and "Nobody has a pet" in w[-1]["content"] and "liking pets is not having one" in w[-1]["content"]
+    assert fact_check_lines("VRD:INCOMPATIBLE|r=smoking indoors", "Jake Thompson", p["jake"]["questionnaire"], "Priya Sharma", pa, False) == []
+
+
+def test_narration_drops_lines_with_invented_numbers(monkeypatch):
+    conv = [{"speaker": "Priya", "turn": 1, "message": "HI:bd=1100-1450"}, {"speaker": "Ananya", "turn": 2, "message": "PFR:cln=4", "say": "Mine."}]
+    monkeypatch.setattr(engine, "_cached_call", lambda *a, **k: (["My budget is $1,100 to $1,450 a month.", "I keep things at a 4, and pay a $500 deposit."], "fake"))
+    lines, _ = engine.narrate_llm(conv)
+    assert lines == ["My budget is $1,100 to $1,450 a month.", None]  # "$500" is not in the second message
+    engine.fill_says(conv, engine.narrate_llm)
+    assert conv[0]["say"].startswith("My budget") and conv[1]["say"] == "Mine."  # a clone's own SAY line wins
+
+
+def test_say_line_parsing():
+    from app.roommates.memory import mentioned, say_line, stated
+
+    assert say_line("SAY: I sleep early and keep things tidy.\nPFR:slp=Early bird|cln=4") == "I sleep early and keep things tidy."
+    assert say_line("**SAY:** Sounds good to me! PFR:cln=4") == "Sounds good to me!"
+    assert say_line("PFR:cln=4") is None and say_line("SAY: ok") is None
+    assert stated("PFR:[slp:Early bird, cln:5, gwk:0]") == {"sleep": {"slp": "Early bird"}, "cleanliness": {"cln": "5"}, "guests": {"gwk": "0"}}
+    assert mentioned("CNF:pet:conflict(loves pets|allergic)") == {"pets"}
+
+
+def test_an_early_verdict_that_names_no_non_negotiable_does_not_end_the_chat():
+    from app.roommates.checks import negotiable_lines, nn_conflict
+
+    p = {x["id"]: x for x in PROFILES}
+    a, b = _agents("meera")
+    pa, pm = p["priya"]["questionnaire"], p["meera"]["questionnaire"]
+    llm = FakeLLM(["HI:loc=Boston"] + [f"PFR:[turn:{n}]" for n in range(2, 8)] + ["VRD:INCOMPATIBLE|r=Social frequency and noise levels are fundamental mismatches"])
+    neg = _neg(a, b, llm, nn_conflict=lambda t: nn_conflict(t, pa, pm), negotiable=lambda t: negotiable_lines(t, "Priya Sharma", pa, "Meera Patel", pm))
+    out = neg.run()
+    assert out["turns"] == 13 and neg.ignored == [8]
+    note = llm.windows[8][-1]["content"]
+    assert "only a non-negotiable ends the chat" in note and "Meera: Noise levels; Guest frequency; Chore split style" in note
+    assert out["outcome"]["status"] != "incompatible"  # the set-aside verdict doesn't decide either
+    # a real non-negotiable (smoking) still ends it at once, as does any verdict in the conclusion
+    assert nn_conflict("Jake smokes", pa, p["jake"]["questionnaire"]) and not nn_conflict("guests and noise", pa, pm)
+    llm = FakeLLM(["HI:loc=Boston", "VRD:INCOMPATIBLE|r=I smoke indoors"])
+    assert _neg(a, b, llm, nn_conflict=lambda t: nn_conflict(t, pa, pm)).run()["turns"] == 2
+
+
+def test_analysis_override_needs_a_real_non_negotiable():
+    from app.roommates.checks import nn_conflict
+
+    p = {x["id"]: x for x in PROFILES}
+    a, b = _agents("meera")
+    pa, pm = p["priya"]["questionnaire"], p["meera"]["questionnaire"]
+    llm = FakeLLM(["VRD:[CONDITIONAL]|open=[lease]"] * 13)
+    seen = []
+
+    def analysis(system, user):
+        seen.append(user)
+        v, _ = FakeLLM().analysis(system, user)
+        return {**v, "dealbreaker_detected": True, "dealbreaker_detail": "The lease term is a hard non-negotiable", "recommendation": "incompatible"}, "fake"
+
+    out = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=analysis, narrate=llm.narrate, nn_conflict=lambda t: nn_conflict(t, pa, pm)).run()
+    assert out["outcome"]["status"] == "conditional"  # the lease is in nobody's non-negotiables
+    assert "Meera: non-negotiables: Non-smoking household only; flexible on: Noise levels; Guest frequency; Chore split style" in seen[0]
+
+
+def test_field_notes_tell_move_in_from_lease_length():
+    a, b = _agents("meera")
+    assert "you move in 1–3 months from now. It is NOT how long you stay" in a.system_prompt and "yours is a 1-year lease" in a.system_prompt
+    assert "you move in within a month from now" in b.system_prompt and "yours is a 6-month lease" in b.system_prompt
+    seen = []
+    llm = FakeLLM()
+    engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=lambda s, u: (seen.append(u), llm.analysis(s, u))[1], narrate=llm.narrate).run()
+    assert "Meera: non-negotiables: Non-smoking household only; flexible on: Noise levels; Guest frequency; Chore split style; moves in within a month from now; wants a 6-month lease" in seen[0]
+
+
+def test_a_conditional_verdict_also_lists_code_verified_open_points(store, monkeypatch):
+    llm = FakeLLM(["HI:loc=Boston"] * 11 + ["VRD:CONDITIONAL|r=guests|open=guest policy"] * 2)
+
+    def runner(neg):
+        neg.turn_llm, neg.analysis_llm, neg.narrate = llm.turn, llm.analysis, llm.narrate
+        return neg.run()
+
+    monkeypatch.setattr(service, "RUNNER", runner)
+    rec = service.start("priya", "meera")
+    assert rec["result"]["status"] == "conditional" and rec["result"]["unresolved_topics"] == ["lease length", "guest policy"]

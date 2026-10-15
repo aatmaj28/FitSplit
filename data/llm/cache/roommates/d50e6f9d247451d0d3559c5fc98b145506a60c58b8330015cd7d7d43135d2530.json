@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I cannot accept a 6-month lease as I only need 3 months, but the quiet hours work perfectly for me.\n\nCNF:[mv:1-3 months max (cannot extend to 6 months)]\nVRD:CONDITIONAL|r=Lease term mismatch (3 months vs 6 months required)|open=lease_negotiation",
+  "created": "2026-10-15T16:38:15+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

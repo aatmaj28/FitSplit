@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Great, I’m glad we’re both aiming for the same budget and quiet, clean environment!  \n\nPFR:loc=Boston/Cambridgeport or Fenway|mv=1–3 months|bd=900‑1250|rm=Private room|smk=Non-smoking|drink=Never|pet=Allergic to pets|wfh=No, on campus daily|slp=Wake before 6am, lights out before 10pm|cln=5|guests=Never or very rare, but can allow one visit per month with 24 hr notice  \n\nCNF:bd:status(no conflict—my hard cap is $1,250, which matches your target)  \n\nVRD:STRONG|r=All core and MOD constraints align, with matching budget, location, cleanliness, quietness, and guest policy.",
+  "created": "2026-10-15T16:17:25+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

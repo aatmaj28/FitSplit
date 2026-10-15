@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I rarely host guests and need a very quiet environment for my early lab hours.\n\n<<MOD:SOCIAL>>\nPFR:[guests:Never / very rarely|notice:Always give notice|parties:Rarely, and with advance notice]\nPFR:[nzl:Very quiet, minimal guests]",
+  "created": "2026-10-15T16:23:25+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

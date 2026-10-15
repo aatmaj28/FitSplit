@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Kavya, a student looking in Fenway or Cambridgeport, budget $900-1250 (firm cap), moving in within 1–3 months, non-smoking, no pets (I'm allergic). Will you keep pets in the home?\n\nHI:[loc:Boston/Fenway or Cambridgeport, mv:within 1–3 months, bd:900-1250 (hard cap), smk:non-smoking household only, pet:none, allergic to pets, nn:budget hard cap; no pets]\nPFR:[rm:private room, pri:similar cleanliness standards/budget compatibility/compatible sleep schedule]\nCNF:[pet:check(Fenway overlaps and budget overlaps at 1100-1250; you have no pets, but will any pets live in or stay at the apartment?)]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:53:38+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -41,15 +41,17 @@ backend/app/
   semantics/            vision providers (Gemini -> Claude -> Groq), prompt, validation
   rentcheck.py          POST /api/rent-check: vision check of a rent split's inputs (never its numbers)
   llm/                  usage ledger + Claude call cap, text chain, vision helper, result cache
-  roommates/            roommate finder (port of Tanvi's AI-Roommate-Finder, see below)
+  roommates/            roommate finder (port of Tanvi's AI-Roommate-Finder, see below; memory.py = engine rm2)
 backend/scripts/        parse_all.py, seed_roommates.py, groq_models.py
 backend/tests/          pytest (no test ever reaches a real provider)
 frontend/src/
   main.tsx              routes: / , /demo, /roombae/*, /leasehub/*, /dev (parser lab)
   components/FloorPlan3D/  the 3D viewer (lazy chunk): presets, cutaway, furniture fit, doors/windows
   components/RentSplit.tsx, RentCheck.tsx   rent split cards + "AI checked" badge
-  roommates/            client, ACP message rendering, negotiation view, questionnaire
-  pages/roombae/        Roombae mock portal     pages/leasehub/   LeaseHub mock portal
+  roommates/            client, ACP rendering, chat replay (NegotiationView), Discover deck filters (deck.ts),
+                        avatars + card facts (people.ts), replay dialog, questionnaire
+  pages/roombae/        Roombae mock portal (Discover, My matches, Find a place together, listings, fill a room, apply)
+  pages/leasehub/       LeaseHub mock portal    pages/portals.tsx  portal bar (Home + Roombae / LeaseHub switch)
   pages/demo/           guided walkthrough + floating step bar
   data/                 listings catalog, plan loader, shared demo store (localStorage, "Reset demo")
 frontend/public/demo/   offline data: 6 parsed plans, 16 rent checks, roommate profiles + avatars + 12 negotiations
@@ -98,7 +100,14 @@ Results are cached by an input key computed the same way in Python and TypeScrip
 [AI-Roommate-Finder](https://github.com/Tanvi-15/AI-Roommate-Finder)**: her 7-section questionnaire and
 ACP/1.0 clone prompts are copied verbatim, and her four-phase negotiation loop, keyword verdict and
 compatibility analysis are ported with documented fixes (13 turns, no double feed, ACP verdicts parsed,
-false "incompatible" triggers removed). Added for FitSplit:
+false "incompatible" triggers removed). Engine rm2 (`roommates/memory.py`) makes the clones use what the
+other said:
+- each turn labels who is speaking and carries a memory of what each side has already stated;
+- each clone gets its own profile when the phase needs it;
+- only a real non-negotiable ends a chat early;
+- every message has a plain-English line, shown in the chat with the protocol folded under "details".
+
+Added for FitSplit:
 - local JSON storage, REST + Server-Sent Events;
 - "Find roommates" (people first): **Discover**, a Tinder-style swipe deck ported from Tanvi's
   **Setup Match** page, and **My matches**, ported from her **My Matches** page (verdict counts,

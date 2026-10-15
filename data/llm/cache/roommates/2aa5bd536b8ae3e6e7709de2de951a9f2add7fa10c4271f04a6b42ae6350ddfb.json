@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept your grocery and Splitwise terms, and I propose a weekly rotating chore chart, 24-hour notice for guests, and quiet morning cooking before 7am to fit your sleep.\n\nPFR:[cln:weekly rotating chore chart with a shared-space checklist (kitchen, bathroom, floors), and I'll take the kitchen wipe-down on my cooking days|if you take a bathroom slot each rotation]\nFLX:[gwk:24-hour notice for any guests, within your 4-person cap and 9pm end|if you text me the day before, I'm fine]\nFLX:[nzl:I'll keep early-morning kitchen noise low before 7am, using no loud appliances|if you keep shared-space noise down after 9:30pm]",
+  "created": "2026-10-15T16:54:33+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

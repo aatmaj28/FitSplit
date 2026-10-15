@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I work from home a few days a week and need quiet mornings for focus, so evening-only gatherings would work for me.\n\nPFR:[wfh:Hybrid (a few days a week)|quiet:Occasionally — a few times a week]\nFLX:[nzl:Accept evening-only gatherings|condition:No loud guests before 10am or during my morning study blocks]",
+  "created": "2026-10-15T16:32:32+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

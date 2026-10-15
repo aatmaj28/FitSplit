@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits if prior notice |condition=Must keep noise low and respect study hours  \n\nVRD:STRONG|r=Preferences shared; awaiting your routines and guest preferences|open=guest_policy, sleep schedule, WFH habits",
+  "created": "2026-10-15T15:56:18+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

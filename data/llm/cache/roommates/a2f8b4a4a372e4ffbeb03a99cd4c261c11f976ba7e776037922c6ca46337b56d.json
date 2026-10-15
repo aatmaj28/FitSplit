@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the 2 AM quiet rule, and I cook daily but am happy to share ingredients if we split basics.\n\nPFR:[wfh:Hybrid (a few days a week)|cook:Daily — I cook most meals]\nFLX:[groc:Split basic condiments and cleaning supplies|condition:We agree to a simple chore chart for shared spaces]",
+  "created": "2026-10-15T16:33:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

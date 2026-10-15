@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a night owl (asleep after midnight), rate cleanliness 3/5, have small guest gatherings weekly, and work hybrid. What are your sleep hours, cleanliness level, guest habits, and WFH days?\n\n<<MOD:ROUTINES>>\nPFR:[slp:Night owl, asleep after midnight, wake 8am-10am, cln:3 (clean as you go), gwk:About 1 weekly, gatherings under 10 people, wfh:Hybrid, a few days a week, nzl:Social and lively]\nCNF:[nzl:possible friction(your quiet/work time vs my late nights and weekly guests)]\nFLX:[nzl:I can keep it down during your work hours|if you tell me which hours you need quiet]",
+  "created": "2026-10-15T16:52:04+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

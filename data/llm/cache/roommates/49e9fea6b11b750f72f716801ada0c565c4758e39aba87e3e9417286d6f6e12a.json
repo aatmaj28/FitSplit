@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 74,
+      "finances": 82,
+      "lifestyle": 66,
+      "personality": 74,
+      "logistics": 68
+    },
+    "highlights": [
+      "Both share the same non-negotiable (non-smoking household), so there is no dealbreaker. They also match on location (Fenway/Mission Hill), room type (private room), drinking (socially), pet attitude (love pets, have none) and hybrid WFH schedules.",
+      "Finances align well: equal utilities, shared basics (and vegetarian staples) logged on Splitwise, and a deposit of up to one month's rent. The budgets overlap at $1300-1450, which is workable even though Meera's range is higher.",
+      "Both negotiated constructively. They agreed on a rotating chore chart with a weekly check-in, a Priya-drafted 'tidy' checklist, and a compromise on guests (two weekend gatherings a month under 10 people, Thursday notice, quiet by 11:30pm). Daily vegetarian cooking, late calls to India and a 68-72°F thermostat were accepted without friction."
+    ],
+    "concerns": [
+      "Sleep schedule mismatch: Meera is a night owl (asleep after midnight, wakes 8-10am) and Priya wakes at 6-8am and needs quiet a few times a week on WFH days. Late-night noise, especially on weeknights, is still an open item.",
+      "Social energy gap: Meera lists matching social energy as a priority and wants weekly guests, while Priya hosts about monthly. The compromise of two gatherings a month plus 2-3 friends in Meera's room may leave Meera feeling restricted over time, and Priya may find even this more than she is used to.",
+      "Logistics mismatch: Meera moves in within a month on a 6-month lease, while Priya moves in 1-3 months out and wants a 1-year lease. The conversation never addressed this. Their cleanliness ratings also differ (3 vs 4), and 'tidy' is not yet defined in writing."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Put the quiet-hour terms in writing: common areas quiet by 11:30pm, weeknights fully quiet, and room hangouts of 2-3 friends with the door closed and voices low. Add a shared calendar of Priya's quiet/WFH days.",
+      "Align the lease and move-in timing: pick a move-in date around the 1-month mark, then start with a 6-month lease with an option to renew to 12 months, or sign a 12-month lease with a sublet/replacement clause. Finalize the 'tidy' checklist before move-in and review the guest arrangement after 2-3 months."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "Priya and Meera are aligned on the non-negotiable (non-smoking), location, money handling and chore structure, and both showed real willingness to compromise. The main risks are the sleep-schedule and social-energy differences, plus the unresolved lease-length and move-in timing gap. A written agreement on quiet hours, guest limits and lease terms would make this a workable match."
+  },
+  "created": "2026-10-15T16:53:14+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: The rotating chore chart and equal split work for me, and our schedules align well enough for a comfortable living situation.\n\nPFR:[cln:3(moderate)|clean_sched:Clean as you go / whoever notices]\nVRD:STRONG|r=Non-negotiables met, flexible topics resolved, compatible lifestyles|open=none",
+  "created": "2026-10-15T16:34:03+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

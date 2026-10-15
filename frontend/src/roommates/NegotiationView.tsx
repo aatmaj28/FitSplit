@@ -84,11 +84,13 @@ function PartView({ part }: { part: Part }) {
 
 function Bubble({ msg, side, color, who, shownParts, raw }: { msg: NegotiationMessage; side: "left" | "right"; color: string; who?: string; shownParts: number; raw: boolean }) {
   const { parts, modules } = useMemo(() => parseAcp(msg.message), [msg.message]);
+  const [details, setDetails] = useState(false);
+  const statements = parts.filter((p) => p.kind === "statement").length;
   return (
     <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`} data-msg={msg.turn}>
       <Avatar name={msg.speaker} color={color} id={who} />
       <div className={`max-w-[85%] space-y-1.5 rounded-2xl px-3 py-2 text-[13px] shadow-sm ring-1 ring-slate-200 ${side === "left" ? "rounded-bl-md bg-white" : "rounded-br-md bg-violet-50/60"}`}>
-        <div className="flex items-center gap-2 text-[11px] text-slate-400">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-slate-400">
           <span className="font-semibold text-slate-600">{msg.speaker}'s clone</span>
           <span>turn {msg.turn}</span>
           {modules.map((m) => (
@@ -99,6 +101,16 @@ function Bubble({ msg, side, color, who, shownParts, raw }: { msg: NegotiationMe
         </div>
         {raw ? (
           <pre className="whitespace-pre-wrap break-words font-mono text-[11px] text-slate-600">{msg.message}</pre>
+        ) : msg.say ? (
+          <>
+            <p className="text-[14px] leading-relaxed text-slate-800" data-say>{msg.say}</p>
+            {statements > 0 && (
+              <button type="button" onClick={() => setDetails((d) => !d)} aria-expanded={details} className="text-[11px] font-medium text-slate-400 hover:text-violet-700">
+                {details ? "hide details ▴" : `details (${statements} protocol ${statements === 1 ? "statement" : "statements"}) ▾`}
+              </button>
+            )}
+            {details && <div className="space-y-1.5 pt-0.5">{parts.map((p, i) => <PartView key={i} part={p} />)}</div>}
+          </>
         ) : (
           parts.slice(0, Math.max(1, shownParts)).map((p, i) => <PartView key={i} part={p} />)
         )}
@@ -270,7 +282,7 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
       const t = setTimeout(next, (e.type === "phase_start" ? 450 : 250) / speed);
       return () => clearTimeout(t);
     }
-    const n = parseAcp(e.data.message).parts.length || 1;
+    const n = e.data.say ? 1 : parseAcp(e.data.message).parts.length || 1; // a plain-English line appears in one go
     const t = setTimeout(step >= n ? next : () => setStep((s) => s + 1), (step === 0 ? 650 : step >= n ? 350 : 260) / speed);
     return () => clearTimeout(t);
   }, [pos, step, events, speed, paused]);

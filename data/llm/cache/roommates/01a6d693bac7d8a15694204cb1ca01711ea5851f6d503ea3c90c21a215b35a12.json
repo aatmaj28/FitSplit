@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:ROUTINES>>\nSAY: I am an early bird sleeping before 10 PM and waking by 8 AM, requiring quiet hours and a rotating chore chart for cleanliness.\nPFR:slp_sched=Early bird (sleep before 10pm),wake=6am–8am,cln=4(tidy),clean_sched=Rotating chore chart,nzl=Very quiet, minimal guests\nPFR:wfh=No, I go to office/school daily,quiet=Rarely, headphones handle it\nCNF:slp:high_detail(Major friction: my early rise conflicts with your late sleep; my quiet preference conflicts with your lively social habits)",
+  "created": "2026-10-15T16:42:12+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

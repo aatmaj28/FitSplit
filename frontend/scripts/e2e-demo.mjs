@@ -188,6 +188,15 @@ async function portalShots() {
   await page.getByLabel("Show incompatible").check();
   await page.waitForTimeout(400);
   await page.screenshot({ path: join(OUT, "roombae_my_matches.png") });
+  // the replay: plain-English lines, protocol details folded, replay controls
+  await page.locator("[data-match='meera']").getByRole("button", { name: "Watch the conversation" }).click();
+  await page.locator("[data-replay-dialog] [data-msg]").first().waitFor({ timeout: 8000 });
+  await page.getByRole("button", { name: "2×" }).click();
+  await page.waitForTimeout(6000);
+  await page.getByRole("button", { name: "Pause" }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: join(OUT, "roombae_replay.png") });
+  await page.keyboard.press("Escape");
   await go("/roombae/fill-room", 2500);
   await page.locator("[data-candidate='rohan']").click();
   await page.waitForTimeout(5000); // a few turns of Rohan + Arjun playing back

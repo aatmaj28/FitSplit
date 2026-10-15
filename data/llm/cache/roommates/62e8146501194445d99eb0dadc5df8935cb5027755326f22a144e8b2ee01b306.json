@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m also looking for a private room in Boston/Fenway or Mission Hill, moving in within a month, budget $1300‑1650, non‑smoking, pet‑loving, with similar priorities.  \nHI:[loc:Boston/Fenway / Mission Hill, mv:Within 1 month, bd:1300-1650, smk:Non-smoking household only, pet:I love pets but don’t have any, nn:Non-smoking household only]  \nPFR:[rm:Private room, pri:Matching social energy; Location match; Honest communication style]",
+  "created": "2026-10-15T16:51:00+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

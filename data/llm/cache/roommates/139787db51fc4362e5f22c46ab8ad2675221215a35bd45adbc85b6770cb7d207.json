@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree to split utilities equally and use Splitwise; I cook daily too, so sharing meals sounds great.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally|groc:Split basics (condiments, cleaning)|dep:Yes, up to 1 month's rent|pay:Shared app (Splitwise, etc.)]\nSAY: I also cook most meals daily and would love to share the kitchen space.",
+  "created": "2026-10-15T16:24:37+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

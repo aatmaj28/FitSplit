@@ -15,6 +15,18 @@ written. Deliberate changes (docs/DECISIONS.md, phase 3):
      checks in code (checks.py) that run before any model call;
   7. an "incompatible" verdict blaming smoking, pets, gender or a budget that code already settled
      is ignored when the profiles show no such conflict (models sometimes invent one).
+Engine rm2 (2026-10-15, after the clones kept asking for things already said; see memory.py):
+  8. every turn's prompt says who is talking to whom, labels the other clone's message, and carries
+     a memory of what each side has already stated (parsed from the ACP fields), the phase's open
+     topics and any fact check from code; history keeps only "X's clone said: ...";
+  9. a clone gets its own routines / social / lifestyle answers when the exploration phase starts,
+     financial + dealbreakers at negotiation (and any module whose topic the other just raised),
+     instead of only after asking for it;
+ 10. only conclusion-phase verdicts decide strong / conditional (clones emitted VRD:STRONG in their
+     first message); an "incompatible" still ends the chat in any phase;
+ 11. a rejected invented dealbreaker becomes a FACT CHECK line both clones (and the analysis) see;
+ 12. each reply starts with a plain-English "SAY:" line for people; messages without one get a
+     line from one cached narration call per conversation.
 """
 from __future__ import annotations
 
@@ -27,6 +39,8 @@ from pydantic import BaseModel, Field, field_validator
 
 from ..llm import cache as llm_cache
 from ..llm import text, usage
+from . import memory
+from .questionnaire import get_flexible_items, get_non_negotiables
 from .modules import (
     AUTO_LOAD_MODULES,
     LAZY_MODULES,
@@ -36,7 +50,7 @@ from .modules import (
     get_module,
 )
 
-ENGINE_VERSION = "rm1"
+ENGINE_VERSION = "rm2"
 
 # ---------------------------------------------------------------- verbatim from server.py:98-144
 PHASES = [
@@ -86,6 +100,14 @@ PHASES = [
 ]
 
 TOTAL_PHASE_TURNS = sum(p["turns"] for p in PHASES)  # = 13 turns max
+
+# rm2: a clone's own answers arrive when its phase starts (the original waited for <<MOD:X>> and
+# delivered it one turn late); a <<MOD:X>> request or a topic the other raises still loads it earlier
+PHASE_MODULES = {
+    "exploration": ("ROUTINES", "SOCIAL", "LIFESTYLE"),
+    "negotiation": ("FINANCIAL", "DEALBREAKERS"),
+    "conclusion": tuple(LAZY_MODULES),
+}
 
 # server.py:390-393
 STARTER = "Hey! We've both been matched as potential roommates. Tell me a bit about yourself and what you're looking for?"
@@ -205,15 +227,21 @@ def parse_vrd(message: str) -> Optional[dict]:
     return {"status": m.group(1).lower(), "reason": reason, "unresolved_topics": topics[:2]}
 
 
-def decide(conversation: list[dict], spurious: Callable[[str], bool] = lambda t: False) -> dict:
+def decide(conversation: list[dict], spurious: Callable[[str], bool] = lambda t: False, ignored: frozenset[int] | set[int] = frozenset()) -> dict:
     """Both clones' last VRDs if present (any incompatible -> incompatible, both strong -> strong,
-    else conditional); otherwise the keyword detector. `spurious` rejects an incompatible verdict
-    whose reason the profiles contradict (checks.spurious_incompatible)."""
+    else conditional); otherwise the keyword detector. Strong / conditional count only from the
+    conclusion phase. `spurious` rejects an incompatible verdict whose reason the profiles
+    contradict (checks.spurious_incompatible)."""
     last: dict[str, dict] = {}
     for m in conversation:
+        if m.get("turn") in ignored:
+            continue  # a verdict the engine already set aside (invented, or not about a non-negotiable)
         v = parse_vrd(m["message"])
-        if v and not (v["status"] == "incompatible" and spurious(v["reason"] or m["message"])):
-            last[m["speaker_id"]] = v
+        if not v or (v["status"] == "incompatible" and spurious(v["reason"] or m["message"])):
+            continue
+        if v["status"] != "incompatible" and m.get("phase", "conclusion") != "conclusion":
+            continue  # a provisional verdict (models add one to every message); only the conclusion decides
+        last[m["speaker_id"]] = v
     if last:
         vs = list(last.values())
         if any(v["status"] == "incompatible" for v in vs):
@@ -260,11 +288,20 @@ class Analysis(BaseModel):
         return v
 
 
-def analysis_user(a: "Agent", b: "Agent", conversation: list[dict]) -> str:
+def analysis_user(a: "Agent", b: "Agent", conversation: list[dict], checks: Optional[list[str]] = None) -> str:
     conv_text = "\n".join(f"{m['speaker']}: {m['message']}" for m in conversation)
+    rules = "\n".join(f"- {x.name}: non-negotiables: {'; '.join(get_non_negotiables(x.questionnaire)) or 'none'}; "
+                      f"flexible on: {'; '.join(get_flexible_items(x.questionnaire)) or 'nothing listed'}; "
+                      f"moves in {memory.move_in_phrase(x.questionnaire.get('living', {}).get('move_in_date'))}; "
+                      f"wants a {str(x.questionnaire.get('living', {}).get('lease_type') or '?').lower()}" for x in (a, b))
+    facts = ("## Non-negotiables and flexibility (from the profiles; only a conflict with a listed non-negotiable is a dealbreaker):\n"
+             + rules + "\n\n")
+    if checks:
+        facts += ("## Fact check (verified by code from both profiles; a conflict the clones claimed against these is not real):\n"
+                  + "\n".join(f"- {c}" for c in checks) + "\n\n")
     return (f"## Profile A:\n{build_compressed_profile_summary(a.name, a.questionnaire)}\n\n"
             f"## Profile B:\n{build_compressed_profile_summary(b.name, b.questionnaire)}\n\n"
-            f"## Conversation (all {len(conversation)} turns):\n{conv_text}\n")
+            f"{facts}## Conversation (all {len(conversation)} turns):\n{conv_text}\n")
 
 
 # ---------------------------------------------------------------- LLM calls (cached)
@@ -285,18 +322,69 @@ def _nonempty(t: object) -> str:
     s = str(t or "").strip()
     if not s:
         raise ValueError("empty reply")
-    return s[:1500]
+    return s[:4000]  # a long (Claude) reply keeps its last statements and VRD
 
 
 def turn_llm(system: str, window: list[dict]) -> tuple[str, str]:
-    reply, provider = _cached_call("turn", system, window, json_mode=False, parse=_nonempty, max_tokens=1000, temperature=0.7)
+    # 1800: Claude Sonnet writes longer turns than the Groq models (1000 truncated it); not part of the cache key
+    reply, provider = _cached_call("turn", system, window, json_mode=False, parse=_nonempty, max_tokens=1800, temperature=0.7)
     return str(reply), provider
 
 
 def analysis_llm(system: str, user: str) -> tuple[dict, str]:
+    # 3000: Claude's analysis JSON ran past 1500 tokens; not part of the cache key
     value, provider = _cached_call("analysis", system, [{"role": "user", "content": user}], json_mode=True,
-                                   parse=lambda d: Analysis.model_validate(d), max_tokens=1500, temperature=0.3)
+                                   parse=lambda d: Analysis.model_validate(d), max_tokens=3000, temperature=0.3)
     return value, provider
+
+
+NARRATE_SYSTEM = """You turn a roommate-matching chat between two AI clones into plain English for a human reader.
+The clones write a compact protocol (ACP): HI intro, PFR preferences, CNF friction, FLX offer, VRD verdict.
+Fields: loc location, mv move-in, bd budget, rm room, smk smoking, pet pets, slp sleep, cln cleanliness 1-5,
+gwk guests per week, wfh work from home, nzl noise, usp utilities, groc groceries, dep deposit, nn non-negotiables.
+For EACH numbered message write one short, friendly sentence (max 25 words) in first person, as that speaker,
+saying what the message means. Use only facts in that message: no new numbers, names or details.
+Return JSON: {"lines": ["...", "..."]} with exactly one line per message, in order."""
+
+_NUM = re.compile(r"\d[\d,.]*")
+
+
+def _numbers(t: str) -> set[str]:
+    return {n.replace(",", "").rstrip(".") for n in _NUM.findall(t or "")}
+
+
+def narrate_user(conversation: list[dict]) -> str:
+    return "Messages:\n" + "\n\n".join(f"{i + 1}. {m['speaker']}:\n{m['message']}" for i, m in enumerate(conversation))
+
+
+def narrate_llm(conversation: list[dict]) -> tuple[list[Optional[str]], str]:
+    """One plain-English line per message; a line quoting a number its message doesn't contain is dropped."""
+    n = len(conversation)
+
+    def parse(d: object) -> list[str]:
+        lines = d.get("lines") if isinstance(d, dict) else None
+        if not isinstance(lines, list) or len(lines) != n:
+            raise ValueError(f"need exactly {n} lines")
+        return [str(x).strip() for x in lines]
+
+    lines, provider = _cached_call("narrate", NARRATE_SYSTEM, [{"role": "user", "content": narrate_user(conversation)}],
+                                   json_mode=True, parse=parse, max_tokens=3000, temperature=0.3)
+    out: list[Optional[str]] = []
+    for line, m in zip(lines, conversation):
+        ok = 3 <= len(line.split()) <= 40 and _numbers(line) <= _numbers(m["message"])
+        out.append(line[:240] if ok else None)
+    return out, provider
+
+
+def fill_says(conversation: list[dict], narrate=narrate_llm) -> Optional[str]:
+    """Give every message a "say" line: its own SAY: line, else the narration's. Returns the provider used."""
+    if all(m.get("say") for m in conversation):
+        return None
+    lines, provider = narrate(conversation)
+    for m, line in zip(conversation, lines):
+        if not m.get("say") and line:
+            m["say"] = line
+    return provider
 
 
 # ---------------------------------------------------------------- agents and the loop
@@ -308,7 +396,8 @@ class Agent:
         self.user_id, self.name, self.questionnaire = user_id, name, questionnaire
         self.history: list[dict] = []
         self.modules = set(AUTO_LOAD_MODULES)
-        self.system_prompt = get_initial_system_prompt(name, questionnaire) + (f"\n\n{extra}" if extra else "")
+        self.system_prompt = (get_initial_system_prompt(name, questionnaire) + "\n\n" + memory.field_notes(questionnaire)
+                              + (f"\n\n{extra}" if extra else ""))
 
     def inject(self, module: str) -> None:
         if module in self.modules:
@@ -316,10 +405,15 @@ class Agent:
         self.modules.add(module)
         self.system_prompt += "\n\n" + get_module(module, self.name, self.questionnaire)
 
-    def respond(self, message: str, llm: Callable[[str, list[dict]], tuple[str, str]]) -> tuple[str, str]:
-        self.history.append({"role": "user", "content": message})
-        content, provider = llm(self.system_prompt, self.history[-HISTORY_WINDOW:])
-        self.history.append({"role": "assistant", "content": content})
+    def respond(self, prompt: str, llm: Callable[[str, list[dict]], tuple[str, str]], record: Optional[str] = None) -> tuple[str, str]:
+        """prompt: this turn's full message (memory + the other's labelled reply); record: what stays in
+        history ("X's clone said: ..."). The window starts with a user message and holds at most
+        HISTORY_WINDOW messages including this one."""
+        past = self.history[-(HISTORY_WINDOW - 1):]
+        if past and past[0]["role"] == "assistant":
+            past = past[1:]
+        content, provider = llm(self.system_prompt, [*past, {"role": "user", "content": prompt}])
+        self.history += [{"role": "user", "content": record or prompt}, {"role": "assistant", "content": content}]
         mod = extract_module_request(content)
         if mod:
             self.inject(mod)
@@ -334,7 +428,12 @@ class Negotiation:
     turn_llm: Callable[[str, list[dict]], tuple[str, str]] = turn_llm
     analysis_llm: Callable[[str, str], tuple[dict, str]] = analysis_llm
     spurious: Callable[[str], bool] = lambda t: False  # see decide()
+    fact_check: Callable[[str], list[str]] = lambda t: []  # code's correction for a rejected verdict
+    nn_conflict: Callable[[str], bool] = lambda t: True  # does a verdict's reason name a non-negotiable? (checks.nn_conflict)
+    negotiable: Callable[[str], list[str]] = lambda t: []  # code's note when an early verdict names none
+    narrate: Callable[[list[dict]], tuple[list[Optional[str]], str]] = narrate_llm
     conversation: list[dict] = field(default_factory=list)
+    memory: memory.Memory = field(default_factory=memory.Memory)
     providers: dict[str, int] = field(default_factory=dict)
     ignored: list[int] = field(default_factory=list)  # turns whose "incompatible" was rejected
 
@@ -348,20 +447,34 @@ class Negotiation:
         while True:
             turn_no += 1
             phase = PHASES[phase_idx]
-            reply, provider = speaker.respond(f"{phase['hint']}\n\n{current}", self.turn_llm)
+            sid, oid = ("a", "b") if speaker is self.a else ("b", "a")
+            for topic in memory.mentioned(current):  # the other raised it: have your own answers first
+                if topic in memory.TOPIC_MODULE:
+                    speaker.inject(memory.TOPIC_MODULE[topic])
+            prompt = memory.turn_prompt(hint=phase["hint"], turn=turn_no, total=TOTAL_PHASE_TURNS, phase=phase["name"],
+                                        me=speaker.name, other=other.name, mine=self.memory.told[sid], theirs=self.memory.told[oid],
+                                        checks=self.memory.checks, incoming=current, opening=turn_no == 1,
+                                        nn=get_non_negotiables(speaker.questionnaire), flex=get_flexible_items(speaker.questionnaire))
+            reply, provider = speaker.respond(prompt, self.turn_llm, record=memory.compact(other.name, current))
             self.providers[provider] = self.providers.get(provider, 0) + 1
-            msg = {"speaker": speaker.name, "speaker_id": "a" if speaker is self.a else "b", "message": reply,
+            msg = {"speaker": speaker.name, "speaker_id": sid, "message": reply, "say": memory.say_line(reply),
                    "turn": turn_no, "phase": phase["name"], "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds")}
             self.conversation.append(msg)
+            self.memory.add(sid, reply)
             self.emit({"type": "agent_message", "data": msg})
             v = parse_vrd(reply)
             if (v and v["status"] == "incompatible") or detect_outcome(self.conversation[-3:])["status"] == "incompatible":
-                early = decide(self.conversation, self.spurious)
-                if early["status"] == "incompatible":
+                reason = (v or {}).get("reason") or reply
+                # before the conclusion only a non-negotiable ends the chat (rm2); anything else is negotiated
+                binding = phase["name"] == "conclusion" or self.nn_conflict(reason)
+                early = decide(self.conversation, self.spurious, set(self.ignored)) if binding else None
+                if early and early["status"] == "incompatible":
                     break
                 early = None
                 if (v and v["status"] == "incompatible") or detect_outcome([msg])["status"] == "incompatible":
                     self.ignored.append(turn_no)  # this reply's own verdict was rejected
+                    for line in (self.fact_check(reason) if binding else self.negotiable(reason)):
+                        self.memory.fact(line)
             current = reply
             speaker, other = other, speaker
             phase_turns += 1
@@ -371,27 +484,30 @@ class Negotiation:
                 phase_idx += 1
                 phase_turns = 0
                 new = PHASES[phase_idx]
-                if new["name"] == "negotiation":
-                    self.a.inject("DEALBREAKERS")
-                    self.b.inject("DEALBREAKERS")
-                if new["name"] == "conclusion":
-                    for m in LAZY_MODULES:
-                        self.a.inject(m)
-                        self.b.inject(m)
+                for m in PHASE_MODULES.get(new["name"], ()):
+                    self.a.inject(m)
+                    self.b.inject(m)
                 self.emit({"type": "phase_start", "phase": new["name"], "label": new["label"]})
             if turn_no >= TOTAL_PHASE_TURNS + 2:  # safety limit, as in the original
                 break
-        outcome = early or decide(self.conversation, self.spurious)
+        outcome = early or decide(self.conversation, self.spurious, set(self.ignored))
         self.emit({"type": "analyzing"})
         try:
-            analysis, provider = self.analysis_llm(ANALYSIS_SYSTEM, analysis_user(self.a, self.b, self.conversation))
+            analysis, provider = self.analysis_llm(ANALYSIS_SYSTEM, analysis_user(self.a, self.b, self.conversation, self.memory.checks))
             self.providers[provider] = self.providers.get(provider, 0) + 1
         except text.TextError:
             analysis = None
+        try:
+            provider = fill_says(self.conversation, self.narrate)
+            if provider:
+                self.providers[provider] = self.providers.get(provider, 0) + 1
+        except text.TextError:
+            pass  # the chat still shows the protocol statements
         if analysis and outcome.get("reason") == "Outcome unclear from conversation":
             outcome = {**outcome, "status": analysis["recommendation"], "reason": None, "source": "analysis"}
         elif (analysis and outcome["status"] != "incompatible" and analysis.get("dealbreaker_detected")
-              and analysis["recommendation"] == "incompatible" and not self.spurious(analysis.get("dealbreaker_detail") or "dealbreaker")):
+              and analysis["recommendation"] == "incompatible" and not self.spurious(analysis.get("dealbreaker_detail") or "dealbreaker")
+              and self.nn_conflict(analysis.get("dealbreaker_detail") or "")):  # rm2: only a real non-negotiable overrides the clones
             outcome = {"status": "incompatible", "reason": analysis.get("dealbreaker_detail") or "A dealbreaker came up",
                        "unresolved_topics": [], "source": "analysis"}
         return {"outcome": outcome, "analysis": analysis, "messages": self.conversation, "turns": len(self.conversation)}

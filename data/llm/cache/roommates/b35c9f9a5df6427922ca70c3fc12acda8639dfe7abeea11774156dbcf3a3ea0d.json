@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Since the quiet hours are settled, I need to know how we handle cooking and utility costs, as I cook daily and split bills equally.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally|groc:Split basics (condiments, cleaning)|dep:Yes, up to 1 month's rent|pay:Shared app (Splitwise, etc.)]\nPFR:[cook:Daily — I cook most meals|kitchen:Happy to share and cook together sometimes]",
+  "created": "2026-10-15T16:24:36+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

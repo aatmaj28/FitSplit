@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm happy to share vegetarian staples through Splitwise, and I propose weekend-only gatherings under 10 with notice by Thursday and common-area noise winding down by 11:30pm.\n\nPFR:[groc:Share vegetarian staples (rice, lentils, oil) logged on Splitwise, own food separate, usp:Split equally, dep:Up to 1 month's rent]\nFLX:[gwk:Weekly weekend gatherings under 10, notice by Thursday, common areas wind down by 11:30pm|if you're okay with my friends and me moving to my room or going out after that]\nFLX:[cln:Rotating chore chart with a weekly check-in|if we write a short checklist of what \"tidy\" means for the kitchen and bathroom]",
+  "created": "2026-10-15T16:52:45+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

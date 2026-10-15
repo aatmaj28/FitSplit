@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I cook most meals daily with no strong kitchen preference, and I'd split basics like condiments and cleaning supplies, buy my own food, split utilities equally, and use Splitwise.\n\nPFR:[cook:daily, I cook most meals,kitchen:no strong preference, happy to share and cook together sometimes,groc:split basics (condiments, cleaning supplies),usp:split equally,pay:Splitwise or similar shared app,dep:up to 1 month's rent]\nFLX:[groc:separate personal food, shared basics, or fully shared staples if you prefer|since you're vegetarian, we can split staples and keep our own proteins separate]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:57:14+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

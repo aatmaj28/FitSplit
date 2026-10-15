@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m a student seeking a private room in Boston’s Fenway/Kenmore area, moving in within 1–3 months, budget $1000‑$1400, non‑smoking, no pets.  \nHI:loc=Boston/Fenway|Kenmore,mv=1–3 months,bd=1000-1400,rm=Private room,smk=No smoking indoors,pet=No pets,nn=No smoking indoors;No pets  \nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style,cf=Open,flex=Lease length|Chore split style|Temperature preference",
+  "created": "2026-10-15T16:41:43+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

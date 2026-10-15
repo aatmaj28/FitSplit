@@ -1,0 +1,6 @@
+{
+  "value": "PFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (you); Living‑room tidy Tue/Fri (me); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \n\nVRD:STRONG|r=All compromises accepted; no conflicts with non‑negotiables|open=none",
+  "created": "2026-10-15T15:57:38+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

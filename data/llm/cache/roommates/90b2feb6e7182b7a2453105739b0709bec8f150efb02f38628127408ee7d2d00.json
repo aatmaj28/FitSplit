@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Great alignment on finances and cooking. I am an early riser, so I need the shared kitchen to be clear by 7 AM.\n\nPFR:[slp_sched:Early bird (sleep before 10pm), wake:6am–8am]\nPFR:[temp:Moderate (68–72°F / 20–22°C)]\nFLX:[temp:68-72°F|condition:We agree on a consistent thermostat setting to avoid disputes]",
+  "created": "2026-10-15T16:47:52+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

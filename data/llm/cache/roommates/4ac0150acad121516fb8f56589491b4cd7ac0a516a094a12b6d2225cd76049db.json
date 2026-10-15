@@ -1,0 +1,33 @@
+{
+  "value": {
+    "scores": {
+      "overall": 85,
+      "finances": 90,
+      "lifestyle": 80,
+      "personality": 75,
+      "logistics": 85
+    },
+    "highlights": [
+      "Budget overlap of $1,300–$1,450 and agreed 1–3 month move‑in window",
+      "Sleep schedule compromise to a 9 pm bedtime with a quiet hour after midnight",
+      "Guest policy reduced to occasional (≤1/month) and agreed on moderate cleaning"
+    ],
+    "concerns": [
+      "Initial cleaning standard gap (Priya 4 vs Meera 3)",
+      "Potential noise from social nights despite quiet hour",
+      "Cooking frequency differences (Priya daily vs Meera a few times)"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on moderate cleaning level (cln 3)",
+      "Maintain quiet hour after midnight for both",
+      "Limit guests to occasional visits"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Both roommates share compatible budgets, locations, and work‑from‑home schedules. After negotiating sleep times, guest limits, and cleaning standards, they can coexist smoothly. The match is strong and should proceed."
+  },
+  "created": "2026-10-15T16:21:36+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

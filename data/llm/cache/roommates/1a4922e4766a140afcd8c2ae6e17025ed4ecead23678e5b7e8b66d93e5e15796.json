@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our locations and non-negotiables align well, but my minimum budget is $1100 versus your $1250 cap, leaving a small overlap.\n\nFLX:[bd:1100-1250|Budget overlap is tight but possible if rent is near $1200]\nPFR:[cln:5, slp:Flexible, wfh:Yes]",
+  "created": "2026-10-15T16:39:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

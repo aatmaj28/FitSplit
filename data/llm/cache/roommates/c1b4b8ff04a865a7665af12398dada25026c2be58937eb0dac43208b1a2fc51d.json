@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your late calls and thermostat range work for me; I cook a few times a week, prefer equal utilities and shared basics, so what's your preference on utilities, groceries, deposit?\n\n<<MOD:FINANCIAL>>\nPFR:[cook:A few times a week, no strong kitchen preference, temp:Moderate (68-72°F), usp:Split equally, groc:Split basics (condiments, cleaning), dep:Up to 1 month's rent, pay:Shared app like Splitwise]\nFLX:[cook:Happy to cook together sometimes and share kitchen time|if we keep a simple schedule so we don't crowd each other at dinner]",
+  "created": "2026-10-15T16:52:33+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept adding shared basics like dish soap, paper towels, and trash bags, with food kept separate and logged in Splitwise, and I'll keep my Friday guest quiet after 10pm.\n\nCNF:[groc:aligned(shared basics plus own food separate),usp:aligned,dep:aligned,bath_time:aligned(you before 7am|me 7am onward)]\nFLX:[groc:add dish soap, paper towels, trash bags to shared basics|each logs receipts in Splitwise and we settle monthly]\nFLX:[kitchen:you cook daily, I cook a few times a week|we share the stove at dinner time and clean up right after use]",
+  "created": "2026-10-15T17:00:45+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

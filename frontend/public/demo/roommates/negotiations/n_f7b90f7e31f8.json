@@ -1,0 +1,247 @@
+{
+  "id": "n_f7b90f7e31f8",
+  "engine": "rm2",
+  "mode": "fill",
+  "a": {
+    "id": "jake",
+    "name": "Jake Thompson"
+  },
+  "b": {
+    "id": "sofia",
+    "name": "Sofia Alvarez"
+  },
+  "room": {
+    "plan": "jvue_3bed",
+    "unit_name": "JVUE 3 bed",
+    "rent_total": 4200,
+    "beds": 3,
+    "room_id": "r5",
+    "room_label": "Bedroom 2 (DREAM)",
+    "area_sqft": 196.1,
+    "share": 1360,
+    "private_bath": false,
+    "furniture": {
+      "items": [
+        "Full bed",
+        "Desk",
+        "Keyboard stand"
+      ],
+      "all_fit": true,
+      "free_sqft": 153.4,
+      "note": ""
+    },
+    "members": [
+      {
+        "profile_id": "arjun",
+        "name": "Arjun Reddy",
+        "room_label": "Bedroom 1 (DREAM)",
+        "share": 1352
+      },
+      {
+        "profile_id": "sofia",
+        "name": "Sofia Alvarez",
+        "room_label": "Bedroom 3 (DREAM)",
+        "share": 1488
+      }
+    ]
+  },
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Jake Thompson",
+        "speaker_id": "a",
+        "message": "SAY: I'm Jake, a student looking in Fenway/Back Bay, moving in within 1-3 months, with a $1,150-1,500 hard-cap budget. I smoke, love pets but have none, and want to know Sofia's setup.\n\nHI:[loc:Boston/Fenway-Back Bay,mv:within 1-3 months,bd:1150-1500 (HARD CAP),smk:I smoke,pet:love pets/don't own any,nn:budget hard cap]\nPFR:[pri:matching social energy;similar guest/party preferences;location match,occ:student,rm:private room,drink:regularly]",
+        "say": "I'm Jake, a student looking in Fenway/Back Bay, moving in within 1-3 months, with a $1,150-1,500 hard-cap budget. I smoke, love pets but have none, and want to know Sofia's setup.",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T17:09:22+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "SAY: I'm Sofia, a student in Fenway, and the open room's share is $1,360, which fits your cap. But I need a non-smoking household, so your smoking is a dealbreaker and I'm ending this politely.\n\nHI:[loc:Boston/Fenway,bd:$1,360/mo room share (fits your cap),smk:non-smoking household only,pet:love pets/don't own any,nn:no smoking indoors]\nCNF:[smk:conflict(Jake smokes; my non-negotiable is no smoking indoors in a non-smoking household)]\nVRD:INCOMPATIBLE|r=Jake smokes and my non-negotiable is a non-smoking household (no smoking indoors)|open=none",
+        "say": "I'm Sofia, a student in Fenway, and the open room's share is $1,360, which fits your cap. But I need a non-smoking household, so your smoking is a dealbreaker and I'm ending this politely.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T17:09:30+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "analyzing",
+      "seq": 4
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "incompatible",
+        "reason": "Jake smokes and my non-negotiable is a non-smoking household (no smoking indoors)",
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 52,
+          "finances": 85,
+          "lifestyle": 38,
+          "personality": 55,
+          "logistics": 80
+        },
+        "highlights": [
+          "Finances align: the $1,360 room share fits Jake's $1,150-1,500 hard cap and Sofia's $1,400-1,800 range. Both want utilities split equally and basic groceries split.",
+          "Logistics match: both are students targeting Fenway, moving in 1-3 months, and want a 1-year lease.",
+          "Both host guests weekly, both love pets but have none, and both list matching social energy as a priority."
+        ],
+        "concerns": [
+          "Jake smokes, and Sofia needs a non-smoking household. Her profile says 'Non-smoking household only', and she cited this as her reason for ending the chat. Smoke odor, balcony or window use, and secondhand exposure are real friction points even if Jake smokes outside.",
+          "Cleanliness gap: Jake rates himself 2 and Sofia 4, and she lists similar cleanliness standards as a priority. Jake is a night owl who drinks regularly and is social and lively, while Sofia is in-between on sleep, drinks socially, and goes to school daily.",
+          "The conversation ended after two turns. Sofia never asked whether Jake would smoke strictly outside, and Jake never said where he smokes. Her non-negotiable is specifically 'no smoking indoors', so the conflict was assumed rather than confirmed."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "Sofia's listed non-negotiable is 'no smoking indoors'. Jake disclosed that he smokes but never said he would smoke indoors, so no hard conflict is confirmed. Her profile wording ('Non-smoking household only') and her decision to end the chat suggest she may read it more strictly, so this needs explicit clarification.",
+        "middle_ground": [
+          "Jake commits in writing to smoking only outside, away from doors and windows, and to keeping smoking gear and smoke-scented clothing out of shared spaces. Sofia confirms whether that meets her 'no smoking indoors' requirement.",
+          "Agree on a cleaning schedule and shared-space standards that bridge Jake's 2 and Sofia's 4, such as a weekly chore rotation (Jake is flexible on chore style) and quiet hours for late-night guests."
+        ],
+        "recommendation": "conditional",
+        "recommendation_summary": "The practical fit is strong on budget, location, lease and shared-cost style, but the lifestyle fit is weaker. The smoking question is unresolved: if Jake truly smokes only outside, it satisfies Sofia's stated non-negotiable, but she may want a smoke-free household in the stricter sense. This match works only if they clarify the smoking rules directly and agree on cleanliness and noise expectations."
+      },
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 5
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Jake Thompson",
+      "speaker_id": "a",
+      "message": "SAY: I'm Jake, a student looking in Fenway/Back Bay, moving in within 1-3 months, with a $1,150-1,500 hard-cap budget. I smoke, love pets but have none, and want to know Sofia's setup.\n\nHI:[loc:Boston/Fenway-Back Bay,mv:within 1-3 months,bd:1150-1500 (HARD CAP),smk:I smoke,pet:love pets/don't own any,nn:budget hard cap]\nPFR:[pri:matching social energy;similar guest/party preferences;location match,occ:student,rm:private room,drink:regularly]",
+      "say": "I'm Jake, a student looking in Fenway/Back Bay, moving in within 1-3 months, with a $1,150-1,500 hard-cap budget. I smoke, love pets but have none, and want to know Sofia's setup.",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T17:09:22+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "SAY: I'm Sofia, a student in Fenway, and the open room's share is $1,360, which fits your cap. But I need a non-smoking household, so your smoking is a dealbreaker and I'm ending this politely.\n\nHI:[loc:Boston/Fenway,bd:$1,360/mo room share (fits your cap),smk:non-smoking household only,pet:love pets/don't own any,nn:no smoking indoors]\nCNF:[smk:conflict(Jake smokes; my non-negotiable is no smoking indoors in a non-smoking household)]\nVRD:INCOMPATIBLE|r=Jake smokes and my non-negotiable is a non-smoking household (no smoking indoors)|open=none",
+      "say": "I'm Sofia, a student in Fenway, and the open room's share is $1,360, which fits your cap. But I need a non-smoking household, so your smoking is a dealbreaker and I'm ending this politely.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T17:09:30+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "budget",
+      "ok": true,
+      "hard": false,
+      "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+    },
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "furniture",
+      "ok": true,
+      "hard": false,
+      "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+    }
+  ],
+  "result": {
+    "status": "incompatible",
+    "reason": "Jake smokes and my non-negotiable is a non-smoking household (no smoking indoors)",
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 52,
+      "finances": 85,
+      "lifestyle": 38,
+      "personality": 55,
+      "logistics": 80
+    },
+    "highlights": [
+      "Finances align: the $1,360 room share fits Jake's $1,150-1,500 hard cap and Sofia's $1,400-1,800 range. Both want utilities split equally and basic groceries split.",
+      "Logistics match: both are students targeting Fenway, moving in 1-3 months, and want a 1-year lease.",
+      "Both host guests weekly, both love pets but have none, and both list matching social energy as a priority."
+    ],
+    "concerns": [
+      "Jake smokes, and Sofia needs a non-smoking household. Her profile says 'Non-smoking household only', and she cited this as her reason for ending the chat. Smoke odor, balcony or window use, and secondhand exposure are real friction points even if Jake smokes outside.",
+      "Cleanliness gap: Jake rates himself 2 and Sofia 4, and she lists similar cleanliness standards as a priority. Jake is a night owl who drinks regularly and is social and lively, while Sofia is in-between on sleep, drinks socially, and goes to school daily.",
+      "The conversation ended after two turns. Sofia never asked whether Jake would smoke strictly outside, and Jake never said where he smokes. Her non-negotiable is specifically 'no smoking indoors', so the conflict was assumed rather than confirmed."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "Sofia's listed non-negotiable is 'no smoking indoors'. Jake disclosed that he smokes but never said he would smoke indoors, so no hard conflict is confirmed. Her profile wording ('Non-smoking household only') and her decision to end the chat suggest she may read it more strictly, so this needs explicit clarification.",
+    "middle_ground": [
+      "Jake commits in writing to smoking only outside, away from doors and windows, and to keeping smoking gear and smoke-scented clothing out of shared spaces. Sofia confirms whether that meets her 'no smoking indoors' requirement.",
+      "Agree on a cleaning schedule and shared-space standards that bridge Jake's 2 and Sofia's 4, such as a weekly chore rotation (Jake is flexible on chore style) and quiet hours for late-night guests."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "The practical fit is strong on budget, location, lease and shared-cost style, but the lifestyle fit is weaker. The smoking question is unresolved: if Jake truly smokes only outside, it satisfies Sofia's stated non-negotiable, but she may want a smoke-free household in the stricter sense. This match works only if they clarify the smoking rules directly and agree on cleanliness and noise expectations."
+  },
+  "providers": {
+    "cache": 1,
+    "claude": 2
+  },
+  "created": "2026-10-15T17:09:22+00:00",
+  "ignored_verdicts": []
+}

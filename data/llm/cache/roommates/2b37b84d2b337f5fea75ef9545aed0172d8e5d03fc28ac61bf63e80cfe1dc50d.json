@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Quiet hours begin at 9:30pm in shared spaces, so low-volume calls in your room are fine. Your gatherings of up to 10 worry me; I'd want notice and an early end.\n\nCNF:[gwk:friction(I'm very quiet with guests never or very rarely, so weekend friends and gatherings under 10 are a gap), slp:minor(your late family calls vs my before-10pm bedtime, workable with your offer)]\nFLX:[nzl:calls in your room at low volume are fine until about 10pm|after that, headphones or texting please, gwk:small gatherings of 4 or fewer are OK|with advance notice and ending by 9pm]\nPFR:[cln:your 4 vs my 5 is a small gap, and a rotating chore chart covers it]",
+  "created": "2026-10-15T16:54:04+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept splitting staples and basics with personal food separate, settled monthly on Splitwise, and I need rent at or under $1,400, which is firm.\n\nFLX:[groc:agree to split staples (rice, lentils, spices, oil) plus basics, personal items and snacks separate|settle monthly through Splitwise]\nCNF:[bd:ok(your target of $1,400 or less fits my hard cap, so we're aligned as long as rent stays within it)]",
+  "created": "2026-10-15T16:57:25+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

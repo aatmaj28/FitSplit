@@ -37,6 +37,7 @@ export type Part =
 
 const STMT = /\b(HI|PFR|CNF|FLX|VRD)\s*:/g;
 const MOD = /<<\s*MOD:\s*(\w+)\s*>>/gi;
+const SAY = /^\s*[*_]*\s*SAY\s*[*_]*\s*:/i;
 
 function fieldsOf(body: string): { fields: Field[]; value: string } {
   let s = body.trim();
@@ -63,6 +64,7 @@ export function parseAcp(message: string): { parts: Part[]; modules: string[] } 
   const text = message.replace(MOD, " ");
   const parts: Part[] = [];
   for (const line of text.split(/\n+/)) {
+    if (SAY.test(line)) continue; // the plain-English line is shown on its own (NegotiationMessage.say)
     const starts = [...line.matchAll(STMT)];
     if (!starts.length) {
       const t = line.trim();

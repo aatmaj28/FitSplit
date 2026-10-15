@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our locations and budgets align well, and I appreciate your no-pets rule as I don't keep animals either.\n\nPFR:[pet:I love pets but don't have any]\nPFR:[nn:No smoking indoors;Non-smoking household only]\nDo you have any preferences regarding noise levels or work-from-home schedules?",
+  "created": "2026-10-15T16:23:06+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

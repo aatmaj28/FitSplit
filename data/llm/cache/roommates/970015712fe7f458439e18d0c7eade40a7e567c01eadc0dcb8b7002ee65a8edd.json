@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I wake early and keep weekends quiet for study, which clashes with your frequent social gatherings.\n\nPFR:[slp:Wake 6am–8am|nzl:Occasional friends over (weekends)|gwk:Once a month or less]\nCNF:[social:Mismatch (You prefer weekly lively gatherings vs. my need for quiet study time)]\nVRD:[CONDITIONAL]|r=Significant friction in social/noise levels|open=[noise accommodation, guest notice]",
+  "created": "2026-10-15T16:31:54+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

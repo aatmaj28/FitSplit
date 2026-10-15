@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can't do 3 months, but I'll keep the house quiet after 10 PM to respect your early schedule.\n\nFLX:[nzl:Strict quiet hours after 10 PM|slp:Will avoid noise during your 6-8 AM wake-up window]\nVRD:CONDITIONAL|r=Lease term mismatch (3 vs 6 months)|open=lease_negotiation",
+  "created": "2026-10-15T16:37:56+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

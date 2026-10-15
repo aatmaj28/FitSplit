@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm happy to split only grocery basics, split utilities equally, pay a deposit up to one month's rent via Splitwise, and cook daily in a vegetarian kitchen, since I'm vegetarian too.\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app (Splitwise)]\nPFR:[cook:daily, I cook most meals (South Indian, vegetarian), kitchen:no meat cooked or stored, happy to share and cook together sometimes]\nFLX:[groc:personal food bought separately|basics tracked in Splitwise, and I'm open to adjusting which items count as basics]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:54:26+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

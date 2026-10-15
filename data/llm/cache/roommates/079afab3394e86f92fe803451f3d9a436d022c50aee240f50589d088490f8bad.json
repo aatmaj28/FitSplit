@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep before 10pm, wake before 6am, want spotless 5/5 cleanliness with a chore chart, rarely have guests, and don't WFH; what are your sleep, cleanliness, guests, WFH habits?\n\nPFR:[slp:early bird, asleep before 10pm, wake before 6am, cln:5 with rotating chore chart, gwk:never/very rarely, nzl:very quiet, wfh:no, at office/school daily]\nCNF:[slp:check(what are your bedtime and wake time?), cln:check(your cleanliness 1-5?), gwk:check(guests per week and noise level?), wfh:check(home during the day?)]\n\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:53:49+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

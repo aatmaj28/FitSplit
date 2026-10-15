@@ -1,0 +1,506 @@
+{
+  "id": "n_50c07611e023",
+  "engine": "rm2",
+  "mode": "fill",
+  "a": {
+    "id": "rohan",
+    "name": "Rohan Mehta"
+  },
+  "b": {
+    "id": "arjun",
+    "name": "Arjun Reddy"
+  },
+  "room": {
+    "plan": "jvue_3bed",
+    "unit_name": "JVUE 3 bed",
+    "rent_total": 4200,
+    "beds": 3,
+    "room_id": "r5",
+    "room_label": "Bedroom 2 (DREAM)",
+    "area_sqft": 196.1,
+    "share": 1360,
+    "private_bath": false,
+    "furniture": {
+      "items": [
+        "Queen bed",
+        "Desk",
+        "Bookshelf"
+      ],
+      "all_fit": true,
+      "free_sqft": 152.0,
+      "note": ""
+    },
+    "members": [
+      {
+        "profile_id": "arjun",
+        "name": "Arjun Reddy",
+        "room_label": "Bedroom 1 (DREAM)",
+        "share": 1352
+      },
+      {
+        "profile_id": "sofia",
+        "name": "Sofia Alvarez",
+        "room_label": "Bedroom 3 (DREAM)",
+        "share": 1488
+      }
+    ]
+  },
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I'm Rohan, a student looking in Boston/Fenway, moving in within 1–3 months, with a $1,100–1,400 hard-cap budget, a non-smoking home, and no pets (I love them). What are your smoking, pet and budget limits?\n\nHI:[name:Rohan Mehta,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;budget hard cap]\nPFR:[pri:budget compatibility;similar cleanliness standards;respect for quiet/work time]\n\n<<MOD:FINANCIAL>>",
+        "say": "I'm Rohan, a student looking in Boston/Fenway, moving in within 1–3 months, with a $1,100–1,400 hard-cap budget, a non-smoking home, and no pets (I love them). What are your smoking, pet and budget limits?",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:58:01+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: I'm Arjun, a student in Boston/Fenway, moving in within 1–3 months, budget $1,200–1,500, non-smoking, no pets, and no parties ever; our budgets overlap at $1,200–1,400.\n\nHI:[name:Arjun Reddy,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1200-1500,smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;no parties ever]\nPFR:[pri:respectful of quiet/work time;similar cleanliness standards;budget compatibility]\n\n<<MOD:FINANCIAL>>",
+        "say": "I'm Arjun, a student in Boston/Fenway, moving in within 1–3 months, budget $1,200–1,500, non-smoking, no pets, and no parties ever; our budgets overlap at $1,200–1,400.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:58:08+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: Our budgets overlap, and the $1,360/mo Bedroom 2 share fits my cap. I have no conflict with your no-smoking or no-parties rules, so I'd like to talk about guests next.\n\nCNF:[smk:aligned(no indoor smoking),bd:aligned($1,360 fits within 1100-1400 cap),parties:no conflict(no parties ever is fine with me)]\nPFR:[rm:Bedroom 2 private room at $1,360/mo,lease:1-year lease,usp:split equally]\n\n<<MOD:SOCIAL>>",
+        "say": "Our budgets overlap, and the $1,360/mo Bedroom 2 share fits my cap. I have no conflict with your no-smoking or no-parties rules, so I'd like to talk about guests next.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:58:16+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: I sleep after midnight, wake 8-10am, rate cleanliness 3/5, work from home with quiet needed 1-5pm weekdays, and host guests monthly or less; what are yours?\n\nPFR:[slp:night owl(after midnight),wake:8am-10am,cln:3,clean_sched:rotating chore chart]\nPFR:[wfh:yes full-time remote,quiet:1-5pm weekdays,nzl:very quiet,gwk:once a month or less,notice:always give notice]\n\n<<MOD:SOCIAL>>",
+        "say": "I sleep after midnight, wake 8-10am, rate cleanliness 3/5, work from home with quiet needed 1-5pm weekdays, and host guests monthly or less; what are yours?",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:58:24+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I sleep before 10pm, wake 6-8am, rate cleanliness 4/5, cook daily, am out at school on weekdays, and rarely have guests, so I'm offering quiet-hour compromises.\n\nPFR:[slp:early bird(before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,cook:daily,wfh:no(out at school most days),gwk:never/very rarely,notice:always]\nCNF:[slp:mismatch(early bird vs after midnight),cln:minor gap(4 vs 3, within 1 point)]\nFLX:[nzl:I keep morning cooking quiet and your 1-5pm weekday quiet hours are easy since I'm out|late-night noise stays low after 10pm, or you use headphones]\n\n<<MOD:ROUTINES>>",
+        "say": "I sleep before 10pm, wake 6-8am, rate cleanliness 4/5, cook daily, am out at school on weekdays, and rarely have guests, so I'm offering quiet-hour compromises.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:58:31+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: I accept your quiet-hour offer: after 10pm I'll use headphones and keep the common areas quiet, and I'll do my evening cooking before 9pm; the 4 vs 3 cleanliness gap is fine with the chore chart.\n\nCNF:[slp:mismatch(night owl vs early bird)|manageable with quiet-hours plan,cln:minor gap(3 vs 4)|fine with rotating chore chart]\nFLX:[nzl:headphones and quiet common areas after 10pm, cooking done before 9pm|you keep early-morning noise low before 8am]",
+        "say": "I accept your quiet-hour offer: after 10pm I'll use headphones and keep the common areas quiet, and I'll do my evening cooking before 9pm; the 4 vs 3 cleanliness gap is fine with the chore chart.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:58:38+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I agree to keep mornings quiet before 8am, with light kitchen noise only, and your plan works for me; I also prefer a moderate 68-72°F apartment temperature.\n\nFLX:[nzl:I keep mornings before 8am quiet (no loud noise, minimal kitchen clatter, headphones for podcasts)|you keep your after-10pm quiet-hours plan]\nPFR:[temp:moderate 68-72°F,sched:mostly consistent, out at the Kennedy School most days,quiet:headphones handle it]\n\n<<MOD:LIFESTYLE>>",
+        "say": "I agree to keep mornings quiet before 8am, with light kitchen noise only, and your plan works for me; I also prefer a moderate 68-72°F apartment temperature.",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:58:45+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: I split utilities equally, share basics like condiments and cleaning supplies, can pay up to one month's rent as deposit via Splitwise, and cook a few times a week.\n\nCNF:[temp:aligned(68-72°F matches my preference)]\nPFR:[usp:split equally,groc:split basics only (condiments, cleaning),dep:up to 1 month's rent,pay:Splitwise,cook:a few times a week,kitchen:no strong preference]\nFLX:[groc:I can adjust the grocery arrangement|you buy your own daily cooking ingredients and we split only shared basics]\n\n<<MOD:FINANCIAL>>",
+        "say": "I split utilities equally, share basics like condiments and cleaning supplies, can pay up to one month's rent as deposit via Splitwise, and cook a few times a week.",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:58:52+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I accept your grocery adjustment: we each buy our own cooking ingredients and split only shared basics. I'll keep gatherings to small weekend friend visits with notice, no parties.\n\nFLX:[groc:I buy my own daily cooking ingredients, since I cook most meals|we split only shared basics (condiments, cleaning supplies) via Splitwise]\nCNF:[parties:minor gap(your no-parties-ever vs my rare parties with notice)|resolved by small friend visits only, always with advance notice, no parties]",
+        "say": "I accept your grocery adjustment: we each buy our own cooking ingredients and split only shared basics. I'll keep gatherings to small weekend friend visits with notice, no parties.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:59:01+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: Small weekend friend visits work for me if I get a day's notice and they wrap up by 10pm, but no parties ever, since that's a firm limit for me.\n\nCNF:[parties:resolved(no parties, small friend visits only)|this is a hard limit for me, and I'm glad we're aligned]\nFLX:[gwk:small weekend visits OK|24-hour notice and wrap up by 10pm to match your early bedtime]\nPFR:[groc:agreed(own cooking ingredients, split shared basics via Splitwise)]",
+        "say": "Small weekend friend visits work for me if I get a day's notice and they wrap up by 10pm, but no parties ever, since that's a firm limit for me.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:59:07+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I accept the 24-hour notice and 10pm wrap-up, and propose a weekly rotating chore chart with a Sunday common-area reset to bridge our 4 vs 3 cleanliness gap.\n\nCNF:[gwk:aligned(24-hour notice, visits wrap up by 10pm, no parties)]\nFLX:[cln:weekly rotating chore chart with a Sunday common-area reset|each of us finishes assigned chores by Sunday evening, and I'm happy to take the first week]",
+        "say": "I accept the 24-hour notice and 10pm wrap-up, and propose a weekly rotating chore chart with a Sunday common-area reset to bridge our 4 vs 3 cleanliness gap.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:59:14+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Arjun Reddy",
+        "speaker_id": "b",
+        "message": "SAY: I accept the weekly chore chart with the Sunday reset, and I'll keep late-night noise low after 10pm. With no non-negotiable conflicts, I see us as a strong match.\n\nCNF:[cln:resolved(3 vs 4 gap bridged by rotating chore chart, Sunday common-area reset, chores done by Sunday evening)]\nFLX:[nzl:I'm a night owl, so I'll use headphones and keep the kitchen and common areas quiet after 10pm|your before-8am quiet plan covers my 8-10am wake time]\nVRD:STRONG|r=No smoking or party conflicts, $1,360 rent fits your cap, and the guest, noise and cleaning arrangements are agreed|open=none",
+        "say": "I accept the weekly chore chart with the Sunday reset, and I'll keep late-night noise low after 10pm. With no non-negotiable conflicts, I see us as a strong match.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:59:19+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "SAY: I agree we're a strong match: no smoking or party conflicts, $1,360 fits my cap, and I'm out most days so your 1-5pm weekday quiet hours won't affect me.\n\nCNF:[slp:aligned(my early bedtime and your 10pm quiet after-hours plan cover our different schedules)|nzl:no conflict]\nVRD:STRONG|r=No non-negotiable conflicts on smoking, parties or budget; guests, cleaning chart, groceries and quiet hours are all agreed|open=none",
+        "say": "I agree we're a strong match: no smoking or party conflicts, $1,360 fits my cap, and I'm out most days so your 1-5pm weekday quiet hours won't affect me.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:59:23+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 84,
+          "finances": 92,
+          "lifestyle": 74,
+          "personality": 82,
+          "logistics": 90
+        },
+        "highlights": [
+          "Both hold identical non-negotiables on smoking (no indoor smoking). Rohan's guest habits (never or very rarely, small weekend visits only) fit Arjun's 'no parties ever' rule, so neither non-negotiable is in conflict.",
+          "Budgets overlap at $1,200–1,400, and the $1,360/mo Bedroom 2 share fits Rohan's hard cap. Both want equal utility splits, a Splitwise setup, and a 1-year lease with a 1–3 month move-in window.",
+          "They worked through their differences concretely: after-10pm headphones, cooking done before 9pm, quiet before 8am, 24-hour guest notice with a 10pm wrap-up, and a rotating chore chart with a Sunday reset. Both are students who love pets and are non-smokers."
+        ],
+        "concerns": [
+          "Sleep schedules differ sharply (Rohan sleeps before 10pm and wakes 6-8am; Arjun sleeps after midnight and wakes 8-10am). Shared walls, bathroom use, and late-night kitchen activity could still cause friction beyond what the agreed quiet-hours plan covers.",
+          "Arjun works from home full-time, so he will be in the apartment during the day and Rohan will not. Rohan gets little solo time on weekdays, and Arjun's 1-5pm quiet needs will mean ongoing coordination, though Rohan's school schedule should make this easy.",
+          "Cleanliness differs slightly (4 vs 3), and Rohan's budget cap leaves little margin if costs rise. The agreement rests on a chore chart and Sunday reset that both must keep following, and on utility costs that could push total spend over Rohan's cap."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Keep the written chore chart with the Sunday-evening common-area reset, and review it after the first month. If the 4 vs 3 cleanliness gap causes friction, adjust the task split or add a mid-week quick-tidy.",
+          "Confirm the quiet-hours schedule in writing (before 8am quiet, after 10pm headphones and quiet common areas, 1-5pm weekday work quiet). Consider white noise or a door-seal for the shared wall if the room layout allows, and agree on a quick check-in if a guest evening runs over 10pm."
+        ],
+        "recommendation": "strong",
+        "recommendation_summary": "Rohan and Arjun have no conflicts on either person's non-negotiables, and their finances, lease terms, and guest rules line up well. Their opposite sleep schedules are the main risk, but they have already agreed on specific quiet-hour and chore arrangements that address it. This is a strong match if they stick to the agreed routines."
+      },
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I'm Rohan, a student looking in Boston/Fenway, moving in within 1–3 months, with a $1,100–1,400 hard-cap budget, a non-smoking home, and no pets (I love them). What are your smoking, pet and budget limits?\n\nHI:[name:Rohan Mehta,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;budget hard cap]\nPFR:[pri:budget compatibility;similar cleanliness standards;respect for quiet/work time]\n\n<<MOD:FINANCIAL>>",
+      "say": "I'm Rohan, a student looking in Boston/Fenway, moving in within 1–3 months, with a $1,100–1,400 hard-cap budget, a non-smoking home, and no pets (I love them). What are your smoking, pet and budget limits?",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:58:01+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: I'm Arjun, a student in Boston/Fenway, moving in within 1–3 months, budget $1,200–1,500, non-smoking, no pets, and no parties ever; our budgets overlap at $1,200–1,400.\n\nHI:[name:Arjun Reddy,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1200-1500,smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;no parties ever]\nPFR:[pri:respectful of quiet/work time;similar cleanliness standards;budget compatibility]\n\n<<MOD:FINANCIAL>>",
+      "say": "I'm Arjun, a student in Boston/Fenway, moving in within 1–3 months, budget $1,200–1,500, non-smoking, no pets, and no parties ever; our budgets overlap at $1,200–1,400.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:58:08+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: Our budgets overlap, and the $1,360/mo Bedroom 2 share fits my cap. I have no conflict with your no-smoking or no-parties rules, so I'd like to talk about guests next.\n\nCNF:[smk:aligned(no indoor smoking),bd:aligned($1,360 fits within 1100-1400 cap),parties:no conflict(no parties ever is fine with me)]\nPFR:[rm:Bedroom 2 private room at $1,360/mo,lease:1-year lease,usp:split equally]\n\n<<MOD:SOCIAL>>",
+      "say": "Our budgets overlap, and the $1,360/mo Bedroom 2 share fits my cap. I have no conflict with your no-smoking or no-parties rules, so I'd like to talk about guests next.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:58:16+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: I sleep after midnight, wake 8-10am, rate cleanliness 3/5, work from home with quiet needed 1-5pm weekdays, and host guests monthly or less; what are yours?\n\nPFR:[slp:night owl(after midnight),wake:8am-10am,cln:3,clean_sched:rotating chore chart]\nPFR:[wfh:yes full-time remote,quiet:1-5pm weekdays,nzl:very quiet,gwk:once a month or less,notice:always give notice]\n\n<<MOD:SOCIAL>>",
+      "say": "I sleep after midnight, wake 8-10am, rate cleanliness 3/5, work from home with quiet needed 1-5pm weekdays, and host guests monthly or less; what are yours?",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:58:24+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I sleep before 10pm, wake 6-8am, rate cleanliness 4/5, cook daily, am out at school on weekdays, and rarely have guests, so I'm offering quiet-hour compromises.\n\nPFR:[slp:early bird(before 10pm),wake:6am-8am,cln:4,clean_sched:rotating chore chart,cook:daily,wfh:no(out at school most days),gwk:never/very rarely,notice:always]\nCNF:[slp:mismatch(early bird vs after midnight),cln:minor gap(4 vs 3, within 1 point)]\nFLX:[nzl:I keep morning cooking quiet and your 1-5pm weekday quiet hours are easy since I'm out|late-night noise stays low after 10pm, or you use headphones]\n\n<<MOD:ROUTINES>>",
+      "say": "I sleep before 10pm, wake 6-8am, rate cleanliness 4/5, cook daily, am out at school on weekdays, and rarely have guests, so I'm offering quiet-hour compromises.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:58:31+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: I accept your quiet-hour offer: after 10pm I'll use headphones and keep the common areas quiet, and I'll do my evening cooking before 9pm; the 4 vs 3 cleanliness gap is fine with the chore chart.\n\nCNF:[slp:mismatch(night owl vs early bird)|manageable with quiet-hours plan,cln:minor gap(3 vs 4)|fine with rotating chore chart]\nFLX:[nzl:headphones and quiet common areas after 10pm, cooking done before 9pm|you keep early-morning noise low before 8am]",
+      "say": "I accept your quiet-hour offer: after 10pm I'll use headphones and keep the common areas quiet, and I'll do my evening cooking before 9pm; the 4 vs 3 cleanliness gap is fine with the chore chart.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:58:38+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I agree to keep mornings quiet before 8am, with light kitchen noise only, and your plan works for me; I also prefer a moderate 68-72°F apartment temperature.\n\nFLX:[nzl:I keep mornings before 8am quiet (no loud noise, minimal kitchen clatter, headphones for podcasts)|you keep your after-10pm quiet-hours plan]\nPFR:[temp:moderate 68-72°F,sched:mostly consistent, out at the Kennedy School most days,quiet:headphones handle it]\n\n<<MOD:LIFESTYLE>>",
+      "say": "I agree to keep mornings quiet before 8am, with light kitchen noise only, and your plan works for me; I also prefer a moderate 68-72°F apartment temperature.",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:58:45+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: I split utilities equally, share basics like condiments and cleaning supplies, can pay up to one month's rent as deposit via Splitwise, and cook a few times a week.\n\nCNF:[temp:aligned(68-72°F matches my preference)]\nPFR:[usp:split equally,groc:split basics only (condiments, cleaning),dep:up to 1 month's rent,pay:Splitwise,cook:a few times a week,kitchen:no strong preference]\nFLX:[groc:I can adjust the grocery arrangement|you buy your own daily cooking ingredients and we split only shared basics]\n\n<<MOD:FINANCIAL>>",
+      "say": "I split utilities equally, share basics like condiments and cleaning supplies, can pay up to one month's rent as deposit via Splitwise, and cook a few times a week.",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:58:52+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I accept your grocery adjustment: we each buy our own cooking ingredients and split only shared basics. I'll keep gatherings to small weekend friend visits with notice, no parties.\n\nFLX:[groc:I buy my own daily cooking ingredients, since I cook most meals|we split only shared basics (condiments, cleaning supplies) via Splitwise]\nCNF:[parties:minor gap(your no-parties-ever vs my rare parties with notice)|resolved by small friend visits only, always with advance notice, no parties]",
+      "say": "I accept your grocery adjustment: we each buy our own cooking ingredients and split only shared basics. I'll keep gatherings to small weekend friend visits with notice, no parties.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:59:01+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: Small weekend friend visits work for me if I get a day's notice and they wrap up by 10pm, but no parties ever, since that's a firm limit for me.\n\nCNF:[parties:resolved(no parties, small friend visits only)|this is a hard limit for me, and I'm glad we're aligned]\nFLX:[gwk:small weekend visits OK|24-hour notice and wrap up by 10pm to match your early bedtime]\nPFR:[groc:agreed(own cooking ingredients, split shared basics via Splitwise)]",
+      "say": "Small weekend friend visits work for me if I get a day's notice and they wrap up by 10pm, but no parties ever, since that's a firm limit for me.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:59:07+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I accept the 24-hour notice and 10pm wrap-up, and propose a weekly rotating chore chart with a Sunday common-area reset to bridge our 4 vs 3 cleanliness gap.\n\nCNF:[gwk:aligned(24-hour notice, visits wrap up by 10pm, no parties)]\nFLX:[cln:weekly rotating chore chart with a Sunday common-area reset|each of us finishes assigned chores by Sunday evening, and I'm happy to take the first week]",
+      "say": "I accept the 24-hour notice and 10pm wrap-up, and propose a weekly rotating chore chart with a Sunday common-area reset to bridge our 4 vs 3 cleanliness gap.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:59:14+00:00"
+    },
+    {
+      "speaker": "Arjun Reddy",
+      "speaker_id": "b",
+      "message": "SAY: I accept the weekly chore chart with the Sunday reset, and I'll keep late-night noise low after 10pm. With no non-negotiable conflicts, I see us as a strong match.\n\nCNF:[cln:resolved(3 vs 4 gap bridged by rotating chore chart, Sunday common-area reset, chores done by Sunday evening)]\nFLX:[nzl:I'm a night owl, so I'll use headphones and keep the kitchen and common areas quiet after 10pm|your before-8am quiet plan covers my 8-10am wake time]\nVRD:STRONG|r=No smoking or party conflicts, $1,360 rent fits your cap, and the guest, noise and cleaning arrangements are agreed|open=none",
+      "say": "I accept the weekly chore chart with the Sunday reset, and I'll keep late-night noise low after 10pm. With no non-negotiable conflicts, I see us as a strong match.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:59:19+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "SAY: I agree we're a strong match: no smoking or party conflicts, $1,360 fits my cap, and I'm out most days so your 1-5pm weekday quiet hours won't affect me.\n\nCNF:[slp:aligned(my early bedtime and your 10pm quiet after-hours plan cover our different schedules)|nzl:no conflict]\nVRD:STRONG|r=No non-negotiable conflicts on smoking, parties or budget; guests, cleaning chart, groceries and quiet hours are all agreed|open=none",
+      "say": "I agree we're a strong match: no smoking or party conflicts, $1,360 fits my cap, and I'm out most days so your 1-5pm weekday quiet hours won't affect me.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:59:23+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "budget",
+      "ok": true,
+      "hard": false,
+      "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+    },
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "furniture",
+      "ok": true,
+      "hard": false,
+      "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 84,
+      "finances": 92,
+      "lifestyle": 74,
+      "personality": 82,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both hold identical non-negotiables on smoking (no indoor smoking). Rohan's guest habits (never or very rarely, small weekend visits only) fit Arjun's 'no parties ever' rule, so neither non-negotiable is in conflict.",
+      "Budgets overlap at $1,200–1,400, and the $1,360/mo Bedroom 2 share fits Rohan's hard cap. Both want equal utility splits, a Splitwise setup, and a 1-year lease with a 1–3 month move-in window.",
+      "They worked through their differences concretely: after-10pm headphones, cooking done before 9pm, quiet before 8am, 24-hour guest notice with a 10pm wrap-up, and a rotating chore chart with a Sunday reset. Both are students who love pets and are non-smokers."
+    ],
+    "concerns": [
+      "Sleep schedules differ sharply (Rohan sleeps before 10pm and wakes 6-8am; Arjun sleeps after midnight and wakes 8-10am). Shared walls, bathroom use, and late-night kitchen activity could still cause friction beyond what the agreed quiet-hours plan covers.",
+      "Arjun works from home full-time, so he will be in the apartment during the day and Rohan will not. Rohan gets little solo time on weekdays, and Arjun's 1-5pm quiet needs will mean ongoing coordination, though Rohan's school schedule should make this easy.",
+      "Cleanliness differs slightly (4 vs 3), and Rohan's budget cap leaves little margin if costs rise. The agreement rests on a chore chart and Sunday reset that both must keep following, and on utility costs that could push total spend over Rohan's cap."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Keep the written chore chart with the Sunday-evening common-area reset, and review it after the first month. If the 4 vs 3 cleanliness gap causes friction, adjust the task split or add a mid-week quick-tidy.",
+      "Confirm the quiet-hours schedule in writing (before 8am quiet, after 10pm headphones and quiet common areas, 1-5pm weekday work quiet). Consider white noise or a door-seal for the shared wall if the room layout allows, and agree on a quick check-in if a guest evening runs over 10pm."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Rohan and Arjun have no conflicts on either person's non-negotiables, and their finances, lease terms, and guest rules line up well. Their opposite sleep schedules are the main risk, but they have already agreed on specific quiet-hour and chore arrangements that address it. This is a strong match if they stick to the agreed routines."
+  },
+  "providers": {
+    "claude": 14
+  },
+  "created": "2026-10-15T16:57:55+00:00",
+  "ignored_verdicts": []
+}

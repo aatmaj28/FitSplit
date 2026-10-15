@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 95,
+      "finances": 100,
+      "lifestyle": 90,
+      "personality": 95,
+      "logistics": 95
+    },
+    "highlights": [
+      "Both are students in the same geographic area (Fenway/Kenmore) with overlapping budgets ($1000-$1450) and identical non-negotiables regarding smoking and pets.",
+      "Strong alignment on cleanliness (both rated 4/5) and financial responsibility, agreeing to split utilities and basic groceries equally with a rotating chore chart.",
+      "Effective communication regarding lifestyle differences; they successfully negotiated a 7 AM kitchen clearance rule and quiet hours after 10 PM to accommodate Ananya's early bird schedule and Priya's hybrid work needs."
+    ],
+    "concerns": [
+      "Priya's hybrid work schedule requires occasional quiet hours, which may conflict with Ananya's early morning routine if not strictly managed, though they agreed on a 7 AM kitchen cutoff.",
+      "Priya plans to have occasional weekend guests, while Ananya prefers very minimal guests; this requires strict adherence to the agreed-upon 'small groups only' and 'quiet after 10 PM' conditions.",
+      "Ananya's strict early sleep schedule (before 10 PM) means any late-night socializing by Priya must be extremely rare and quiet to avoid disrupting the household dynamic."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Implement a strict 7 AM kitchen clearance rule to ensure Ananya can use the space for her early morning routine without interference.",
+      "Agree to a maximum of one small guest group per week for Priya, with mandatory advance notice and a strict quiet time after 10 PM."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "This is a strong match due to identical non-negotiables, compatible budgets, and shared values regarding cleanliness and financial responsibility. The couple has already successfully negotiated specific compromises regarding kitchen usage and guest policies to accommodate their differing sleep schedules and work styles."
+  },
+  "created": "2026-10-15T16:49:07+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

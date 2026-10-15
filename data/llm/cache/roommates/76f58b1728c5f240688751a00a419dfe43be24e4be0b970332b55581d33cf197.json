@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m an early‑to‑bed student who sleeps 6–8 am, keeps my space tidy (cln 4), rarely has guests, likes quiet, and works from home a few days a week.  \nPFR:slp_sched=Early to bed (6–8 am)|cln=4(tidy)|guests=Rarely (less than once a month)|nzl=Quiet|wfh=Hybrid (few days a week)  \nCNF:cln=4 vs. 3 (gap ≥ 1) → potential friction on cleanliness standards.",
+  "created": "2026-10-15T16:19:29+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can offer strict quiet hours and door-closing for your early mornings, but I need flexibility for my social energy and late-night schedule.\n\nCNF:[slp:conflict(6am wake vs late nights), gwk:conflict(weekly guests vs quiet need)]\nFLX:[slp:offer(Strict quiet hours after 10pm and before 7am)|condition(You respect my late-night activity), gwk:offer(Door-closing policy and reduced noise)|condition(You allow weekly small gatherings)]",
+  "created": "2026-10-15T16:28:39+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

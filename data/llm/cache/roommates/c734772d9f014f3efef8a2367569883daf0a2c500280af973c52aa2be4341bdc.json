@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:FINANCIAL>>\nSAY: I split utilities equally and basics, with a deposit up to one month's rent; what is your exact budget?\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning), dep:Yes, up to 1 month's rent]",
+  "created": "2026-10-15T16:40:52+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

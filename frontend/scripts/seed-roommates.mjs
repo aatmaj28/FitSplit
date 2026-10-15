@@ -14,9 +14,10 @@ const OUT = join(ROOT, "public", "demo", "roommates");
 const API = process.env.API_URL ?? "http://localhost:8000";
 const exportOnly = process.argv.includes("--export-only");
 
-// people first: three students who should click, one who shouldn't, and the rest of Priya's
+// people first, in priority order for a tight model quota: the guided demo's pairs (Priya swipes
+// right on Ananya, Jake and Meera; Ananya + Meera completes the group), then the rest of Priya's
 // Discover deck (every card she can swipe right on has a bundled conversation)
-const FIND = [["priya", "ananya"], ["priya", "meera"], ["ananya", "meera"], ["priya", "jake"], ["priya", "kavya"], ["priya", "rohan"]];
+const FIND = [["priya", "ananya"], ["priya", "jake"], ["priya", "meera"], ["ananya", "meera"], ["priya", "kavya"], ["priya", "rohan"]];
 // apartment first: Arjun (Bedroom 1) and Sofia (Bedroom 3) have the JVUE 3 bed and need someone for Bedroom 2
 const FILL = { plan: "jvue_3bed", unit: "JVUE 3 bed", open: "r5", members: [["arjun", "r4"], ["sofia", "r6"]], candidates: ["rohan", "jake", "kavya"] };
 
@@ -33,6 +34,21 @@ async function api(path, body) {
   const json = await res.json();
   if (!res.ok) throw new Error(`${path}: ${res.status} ${JSON.stringify(json).slice(0, 300)}`);
   return json;
+}
+
+// the previous bundle: a pair whose new conversation can't be generated (quota) keeps its old one
+const previous = existsSync(join(OUT, "scenarios.json")) ? JSON.parse(readFileSync(join(OUT, "scenarios.json"), "utf8")) : null;
+const kept = []; // [label, id] of conversations kept from the previous bundle
+
+async function finishOrKeep(rec, label, oldId) {
+  try {
+    return await finish(rec, label);
+  } catch (e) {
+    if (!oldId || !existsSync(join(DATA, "negotiations", `${oldId}.json`))) throw e;
+    console.log(`\r  ${label}: could not regenerate (${String(e.message).slice(0, 120)}); keeping the previous conversation ${oldId}`);
+    kept.push([label, oldId]);
+    return api(`/api/roommates/negotiations/${oldId}`);
+  }
 }
 
 async function finish(rec, label) {
@@ -57,8 +73,9 @@ const scenarios = { find: { pairs: [], groups: [] }, fill: [] };
 
 console.log("Find roommates:");
 for (const [a, b] of FIND) {
+  const oldId = previous?.find.pairs.find((p) => p.a === a && p.b === b)?.id;
   let rec = await api("/api/roommates/negotiations", { a, b });
-  if (!exportOnly || rec.status === "complete") rec = await finish(rec, `${byId[a].name} + ${byId[b].name}`);
+  if (!exportOnly || rec.status === "complete") rec = await finishOrKeep(rec, `${byId[a].name} + ${byId[b].name}`, oldId);
   scenarios.find.pairs.push({ a, b, id: rec.id, status: rec.result?.status ?? null });
 }
 scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: [...new Set(FIND.flat())], size: 3 });
@@ -90,8 +107,9 @@ for (const candidate of FILL.candidates) {
   const out = await api("/api/roommates/fill-room", { candidate, members: FILL.members.map(([id]) => id), room, rule: "all" });
   const recs = [];
   for (const n of out.negotiations) {
+    const oldId = previous?.fill.find((f) => f.candidate === candidate)?.negotiations.find((x) => x.member.id === n.member.id)?.id;
     const rec = await api(`/api/roommates/negotiations/${n.id}`);
-    recs.push(exportOnly && rec.status !== "complete" ? rec : await finish(rec, `${byId[candidate].name} + ${n.member.name}`));
+    recs.push(exportOnly && rec.status !== "complete" ? rec : await finishOrKeep(rec, `${byId[candidate].name} + ${n.member.name}`, oldId));
   }
   const status = await api("/api/roommates/fill-room/status", { ids: recs.map((r) => r.id), rule: "all" });
   scenarios.fill.push({ id: `fill_${candidate}`, candidate, members: FILL.members.map(([id, rid]) => ({ id, room_id: rid })), room, ...status, layout: placed });
@@ -111,6 +129,19 @@ for (const f of existsSync(join(DATA, "negotiations")) ? readdirSync(join(DATA, 
 }
 if (seeded.size) scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: [...new Set(FIND.flat())], size: 3 });
 
+// every bundled conversation gets plain-English lines (rm2 clones write their own SAY lines; a
+// conversation kept from engine rm1 gets them from one cached narration call)
+for (const id of [...scenarios.find.pairs.map((p) => p.id), ...scenarios.fill.flatMap((f) => f.negotiations.map((n) => n.id))]) {
+  const rec = await api(`/api/roommates/negotiations/${id}`);
+  if (rec.status !== "complete" || !rec.messages.length || rec.messages.every((m) => m.say)) continue;
+  try {
+    const out = await api(`/api/roommates/negotiations/${id}/narrate`, {});
+    console.log(`  narrated ${rec.a.name} + ${rec.b.name}: ${out.messages.filter((m) => m.say).length}/${out.messages.length} lines`);
+  } catch (e) {
+    console.log(`  narration of ${rec.a.name} + ${rec.b.name} failed: ${String(e.message).slice(0, 120)}`);
+  }
+}
+
 // bundle for offline replay
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(join(OUT, "negotiations"), { recursive: true });
@@ -123,6 +154,7 @@ writeFileSync(join(OUT, "profiles.json"), JSON.stringify(profiles, null, 2));
 writeFileSync(join(OUT, "questionnaire.json"), JSON.stringify(await api("/api/roommates/questionnaire"), null, 2));
 writeFileSync(join(OUT, "scenarios.json"), JSON.stringify(scenarios, null, 2));
 const usage = await api("/api/llm/usage");
+if (kept.length) console.log(`\nkept from the previous bundle (not regenerated): ${kept.map(([l, id]) => `${l} (${id})`).join(", ")}`);
 console.log(`\nbundled ${ids.length} negotiations in public/demo/roommates. API calls so far:`,
   JSON.stringify(Object.fromEntries(Object.entries(usage.providers).map(([k, v]) => [k, v.calls]))), `Claude left: ${usage.claude_remaining}`);
 await server.close();

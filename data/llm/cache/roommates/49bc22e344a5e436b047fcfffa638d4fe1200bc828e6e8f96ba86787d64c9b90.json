@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the immediate cleanup condition for the rotating chore chart, and I am ready to finalize the lease terms.\nPFR:clean_sched=Rotating chore chart|clean_condition=Immediate cleanup post-cooking\nFLX:lease:Accept 1-year lease|condition:Standard terms",
+  "created": "2026-10-15T16:44:10+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

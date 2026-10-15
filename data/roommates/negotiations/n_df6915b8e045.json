@@ -1,0 +1,486 @@
+{
+  "id": "n_df6915b8e045",
+  "engine": "rm2",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "meera",
+    "name": "Meera Patel"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": false,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Priya wants a 1-year lease, Meera a 6-month lease; neither is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": true,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Priya moves in 1–3 months, Meera within 1 month; Priya is flexible on it"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm Priya, a student looking for a private room in Boston/Fenway or Mission Hill, moving in 1-3 months, with a budget of $1100-1450; I need a non-smoking household.\n\nHI:[loc:Boston/Fenway / Mission Hill, mv:1–3 months, bd:1100-1450, smk:Non-smoking household only, pet:I love pets but don't have any, nn:No smoking indoors; Non-smoking household only]\nPFR:[rm:Private room, pri:Similar cleanliness standards; Respectful of quiet/work time; Budget compatibility]",
+        "say": "I'm Priya, a student looking for a private room in Boston/Fenway or Mission Hill, moving in 1-3 months, with a budget of $1100-1450; I need a non-smoking household.",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I’m also looking for a private room in Boston/Fenway or Mission Hill, moving in within a month, budget $1300‑1650, non‑smoking, pet‑loving, with similar priorities.  \nHI:[loc:Boston/Fenway / Mission Hill, mv:Within 1 month, bd:1300-1650, smk:Non-smoking household only, pet:I love pets but don’t have any, nn:Non-smoking household only]  \nPFR:[rm:Private room, pri:Matching social energy; Location match; Honest communication style]",
+        "say": "I’m also looking for a private room in Boston/Fenway or Mission Hill, moving in within a month, budget $1300‑1650, non‑smoking, pet‑loving, with similar priorities.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I’m a student, looking for a private room in Fenway/Mission Hill, moving in 1–3 months, budget $1100–$1450, non-smoking, pet-loving, prioritizing cleanliness, quiet work time, and budget match.  \n\nPFR:[loc:Boston/Fenway / Mission Hill, mv:1–3 months, bd:1100-1450, smk:Non-smoking household only, pet:I love pets but don’t have any, rm:Private room, pri:Similar cleanliness standards; Respectful of quiet/work time; Budget compatibility]",
+        "say": "I’m a student, looking for a private room in Fenway/Mission Hill, moving in 1–3 months, budget $1100–$1450, non-smoking, pet-loving, prioritizing cleanliness, quiet work time, and budget match.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I'm a night owl (asleep after midnight), rate cleanliness 3/5, have small guest gatherings weekly, and work hybrid. What are your sleep hours, cleanliness level, guest habits, and WFH days?\n\n<<MOD:ROUTINES>>\nPFR:[slp:Night owl, asleep after midnight, wake 8am-10am, cln:3 (clean as you go), gwk:About 1 weekly, gatherings under 10 people, wfh:Hybrid, a few days a week, nzl:Social and lively]\nCNF:[nzl:possible friction(your quiet/work time vs my late nights and weekly guests)]\nFLX:[nzl:I can keep it down during your work hours|if you tell me which hours you need quiet]",
+        "say": "I'm a night owl (asleep after midnight), rate cleanliness 3/5, have small guest gatherings weekly, and work hybrid. What are your sleep hours, cleanliness level, guest habits, and WFH days?",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I wake 6-8am, rate cleanliness 4/5 with a rotating chore chart, host guests about monthly with notice, work hybrid, and need quiet a few times a week; weekly guests and late nights may clash.\n\nPFR:[slp:Somewhere in between, wake 6am-8am, cln:4 (tidy), clean_sched:Rotating chore chart, gwk:Occasionally (once a month or less), always give notice, gatherings under 10 people, wfh:Hybrid, a few days a week, quiet:a few times a week]\nCNF:[gwk:mild friction(your weekly guests vs my monthly), slp:mild friction(your after-midnight nights vs my 6am-8am wake-ups)]\nFLX:[gwk:I can be fine with weekly small gatherings|if you give advance notice and keep them to weekends and under 10 people]",
+        "say": "I wake 6-8am, rate cleanliness 4/5 with a rotating chore chart, host guests about monthly with notice, work hybrid, and need quiet a few times a week; weekly guests and late nights may clash.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I'm happy to take your rotating chore chart and give notice for weekend-only guests under 10, and I'll keep my late nights quiet in shared areas on your work days.\n\nFLX:[cln:Rotating chore chart works for me, a 3 vs 4 gap is small|if tasks are clearly split and we agree on what \"tidy\" means for the kitchen and common areas]\nFLX:[gwk:Weekend-only gatherings under 10 with advance notice|if we can adjust for your deadline or heavy-work weekends]\nFLX:[nzl:Low noise in common areas after midnight and on your quiet work days|if you tell me which days and hours you need quiet]",
+        "say": "I'm happy to take your rotating chore chart and give notice for weekend-only guests under 10, and I'll keep my late nights quiet in shared areas on your work days.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: Thanks, those work for me. I cook vegetarian meals daily, call family in India late in the evening, and keep the thermostat around 68-72°F. Are you okay with that?\n\n<<MOD:LIFESTYLE>>\nPFR:[cook:Daily vegetarian, happy to share the kitchen and cook together sometimes, temp:Moderate (68-72°F), notes:Late-evening calls to family in India, quiet:A few times a week on WFH days]\nFLX:[nzl:I'll tell you my quiet days ahead of time, a few times a week|if common areas stay low-noise on those days and after midnight]",
+        "say": "Thanks, those work for me. I cook vegetarian meals daily, call family in India late in the evening, and keep the thermostat around 68-72°F. Are you okay with that?",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: Your late calls and thermostat range work for me; I cook a few times a week, prefer equal utilities and shared basics, so what's your preference on utilities, groceries, deposit?\n\n<<MOD:FINANCIAL>>\nPFR:[cook:A few times a week, no strong kitchen preference, temp:Moderate (68-72°F), usp:Split equally, groc:Split basics (condiments, cleaning), dep:Up to 1 month's rent, pay:Shared app like Splitwise]\nFLX:[cook:Happy to cook together sometimes and share kitchen time|if we keep a simple schedule so we don't crowd each other at dinner]",
+        "say": "Your late calls and thermostat range work for me; I cook a few times a week, prefer equal utilities and shared basics, so what's your preference on utilities, groceries, deposit?",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: On money, I also want utilities split equally, shared basics split, up to one month's rent as deposit, and payments tracked on Splitwise. I'm open to sharing vegetarian staples too.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning), own food bought separately, dep:Yes, up to 1 month's rent, pay:Splitwise]\nFLX:[groc:I can share staples like rice, lentils, and oil|if we log them on Splitwise and you're fine with them being vegetarian]",
+        "say": "On money, I also want utilities split equally, shared basics split, up to one month's rent as deposit, and payments tracked on Splitwise. I'm open to sharing vegetarian staples too.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I'm happy to share vegetarian staples through Splitwise, and I propose weekend-only gatherings under 10 with notice by Thursday and common-area noise winding down by 11:30pm.\n\nPFR:[groc:Share vegetarian staples (rice, lentils, oil) logged on Splitwise, own food separate, usp:Split equally, dep:Up to 1 month's rent]\nFLX:[gwk:Weekly weekend gatherings under 10, notice by Thursday, common areas wind down by 11:30pm|if you're okay with my friends and me moving to my room or going out after that]\nFLX:[cln:Rotating chore chart with a weekly check-in|if we write a short checklist of what \"tidy\" means for the kitchen and bathroom]",
+        "say": "I'm happy to share vegetarian staples through Splitwise, and I propose weekend-only gatherings under 10 with notice by Thursday and common-area noise winding down by 11:30pm.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: Weekly gatherings are more than I'm used to, so I can do up to two weekend gatherings a month, under 10 people, with Thursday notice and a quiet-down by 11:30pm.\n\nCNF:[gwk:gap(your weekly vs my once a month or less; I wake 6am-8am and want quiet late)]\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if other weekends stay low-key and after-hours socializing moves to your room or out]\nFLX:[cln:Rotating chore chart with weekly check-in works; I'll draft the \"tidy\" checklist for kitchen and bathroom|if you edit it with me before move-in]",
+        "say": "Weekly gatherings are more than I'm used to, so I can do up to two weekend gatherings a month, under 10 people, with Thursday notice and a quiet-down by 11:30pm.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "SAY: I can accept two weekend gatherings a month under 10 people, with Thursday notice and 11:30pm quiet, plus small hangouts in my room, so it's a conditional match pending your okay on those hangouts and late-night noise.\n\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if I can still have 2-3 friends over in my room on other weekends, keeping the common areas quiet]\nFLX:[cln:Rotating chore chart with weekly check-in, you draft the \"tidy\" checklist|I'll edit it with you before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking, location, room type, budget overlap, money split, cooking, and chores; the remaining gap is my social, night-owl rhythm versus your early mornings|open=small friend hangouts in my room on non-gathering weekends, late-night noise after 11:30pm",
+        "say": "I can accept two weekend gatherings a month under 10 people, with Thursday notice and 11:30pm quiet, plus small hangouts in my room, so it's a conditional match pending your okay on those hangouts and late-night noise.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm fine with 2-3 friends in your room on other weekends if they keep it quiet after 11:30pm, so this is a conditional match pending written quiet-hour terms.\n\nFLX:[nzl:2-3 friends in your room on non-gathering weekends, door closed, voices low after 11:30pm|if weeknights stay quiet, since I wake between 6am and 8am]\nFLX:[cln:Rotating chore chart and \"tidy\" checklist, which I'll draft and we'll edit together|if we finalize it before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking household, location, private room, budget overlap, equal utilities, shared staples via Splitwise, and chores. The gap is your late-night social rhythm against my early mornings.|open=late-night noise after 11:30pm on weeknights, room hangout volume on weekends",
+        "say": "I'm fine with 2-3 friends in your room on other weekends if they keep it quiet after 11:30pm, so this is a conditional match pending written quiet-hour terms.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T17:09:02+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "conditional",
+        "reason": "Aligned on non-smoking, location, room type, budget overlap, money split, cooking, and chores; the remaining gap is my social, night-owl rhythm versus your early mornings",
+        "unresolved_topics": [
+          "lease length",
+          "small friend hangouts in my room on non-gathering weekends",
+          "late-night noise after 11:30pm"
+        ],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 74,
+          "finances": 82,
+          "lifestyle": 66,
+          "personality": 74,
+          "logistics": 68
+        },
+        "highlights": [
+          "Both share the same non-negotiable (non-smoking household), so there is no dealbreaker. They also match on location (Fenway/Mission Hill), room type (private room), drinking (socially), pet attitude (love pets, have none) and hybrid WFH schedules.",
+          "Finances align well: equal utilities, shared basics (and vegetarian staples) logged on Splitwise, and a deposit of up to one month's rent. The budgets overlap at $1300-1450, which is workable even though Meera's range is higher.",
+          "Both negotiated constructively. They agreed on a rotating chore chart with a weekly check-in, a Priya-drafted 'tidy' checklist, and a compromise on guests (two weekend gatherings a month under 10 people, Thursday notice, quiet by 11:30pm). Daily vegetarian cooking, late calls to India and a 68-72°F thermostat were accepted without friction."
+        ],
+        "concerns": [
+          "Sleep schedule mismatch: Meera is a night owl (asleep after midnight, wakes 8-10am) and Priya wakes at 6-8am and needs quiet a few times a week on WFH days. Late-night noise, especially on weeknights, is still an open item.",
+          "Social energy gap: Meera lists matching social energy as a priority and wants weekly guests, while Priya hosts about monthly. The compromise of two gatherings a month plus 2-3 friends in Meera's room may leave Meera feeling restricted over time, and Priya may find even this more than she is used to.",
+          "Logistics mismatch: Meera moves in within a month on a 6-month lease, while Priya moves in 1-3 months out and wants a 1-year lease. The conversation never addressed this. Their cleanliness ratings also differ (3 vs 4), and 'tidy' is not yet defined in writing."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Put the quiet-hour terms in writing: common areas quiet by 11:30pm, weeknights fully quiet, and room hangouts of 2-3 friends with the door closed and voices low. Add a shared calendar of Priya's quiet/WFH days.",
+          "Align the lease and move-in timing: pick a move-in date around the 1-month mark, then start with a 6-month lease with an option to renew to 12 months, or sign a 12-month lease with a sublet/replacement clause. Finalize the 'tidy' checklist before move-in and review the guest arrangement after 2-3 months."
+        ],
+        "recommendation": "conditional",
+        "recommendation_summary": "Priya and Meera are aligned on the non-negotiable (non-smoking), location, money handling and chore structure, and both showed real willingness to compromise. The main risks are the sleep-schedule and social-energy differences, plus the unresolved lease-length and move-in timing gap. A written agreement on quiet hours, guest limits and lease terms would make this a workable match."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": false,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Priya wants a 1-year lease, Meera a 6-month lease; neither is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": true,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Priya moves in 1–3 months, Meera within 1 month; Priya is flexible on it"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm Priya, a student looking for a private room in Boston/Fenway or Mission Hill, moving in 1-3 months, with a budget of $1100-1450; I need a non-smoking household.\n\nHI:[loc:Boston/Fenway / Mission Hill, mv:1–3 months, bd:1100-1450, smk:Non-smoking household only, pet:I love pets but don't have any, nn:No smoking indoors; Non-smoking household only]\nPFR:[rm:Private room, pri:Similar cleanliness standards; Respectful of quiet/work time; Budget compatibility]",
+      "say": "I'm Priya, a student looking for a private room in Boston/Fenway or Mission Hill, moving in 1-3 months, with a budget of $1100-1450; I need a non-smoking household.",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I’m also looking for a private room in Boston/Fenway or Mission Hill, moving in within a month, budget $1300‑1650, non‑smoking, pet‑loving, with similar priorities.  \nHI:[loc:Boston/Fenway / Mission Hill, mv:Within 1 month, bd:1300-1650, smk:Non-smoking household only, pet:I love pets but don’t have any, nn:Non-smoking household only]  \nPFR:[rm:Private room, pri:Matching social energy; Location match; Honest communication style]",
+      "say": "I’m also looking for a private room in Boston/Fenway or Mission Hill, moving in within a month, budget $1300‑1650, non‑smoking, pet‑loving, with similar priorities.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I’m a student, looking for a private room in Fenway/Mission Hill, moving in 1–3 months, budget $1100–$1450, non-smoking, pet-loving, prioritizing cleanliness, quiet work time, and budget match.  \n\nPFR:[loc:Boston/Fenway / Mission Hill, mv:1–3 months, bd:1100-1450, smk:Non-smoking household only, pet:I love pets but don’t have any, rm:Private room, pri:Similar cleanliness standards; Respectful of quiet/work time; Budget compatibility]",
+      "say": "I’m a student, looking for a private room in Fenway/Mission Hill, moving in 1–3 months, budget $1100–$1450, non-smoking, pet-loving, prioritizing cleanliness, quiet work time, and budget match.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I'm a night owl (asleep after midnight), rate cleanliness 3/5, have small guest gatherings weekly, and work hybrid. What are your sleep hours, cleanliness level, guest habits, and WFH days?\n\n<<MOD:ROUTINES>>\nPFR:[slp:Night owl, asleep after midnight, wake 8am-10am, cln:3 (clean as you go), gwk:About 1 weekly, gatherings under 10 people, wfh:Hybrid, a few days a week, nzl:Social and lively]\nCNF:[nzl:possible friction(your quiet/work time vs my late nights and weekly guests)]\nFLX:[nzl:I can keep it down during your work hours|if you tell me which hours you need quiet]",
+      "say": "I'm a night owl (asleep after midnight), rate cleanliness 3/5, have small guest gatherings weekly, and work hybrid. What are your sleep hours, cleanliness level, guest habits, and WFH days?",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I wake 6-8am, rate cleanliness 4/5 with a rotating chore chart, host guests about monthly with notice, work hybrid, and need quiet a few times a week; weekly guests and late nights may clash.\n\nPFR:[slp:Somewhere in between, wake 6am-8am, cln:4 (tidy), clean_sched:Rotating chore chart, gwk:Occasionally (once a month or less), always give notice, gatherings under 10 people, wfh:Hybrid, a few days a week, quiet:a few times a week]\nCNF:[gwk:mild friction(your weekly guests vs my monthly), slp:mild friction(your after-midnight nights vs my 6am-8am wake-ups)]\nFLX:[gwk:I can be fine with weekly small gatherings|if you give advance notice and keep them to weekends and under 10 people]",
+      "say": "I wake 6-8am, rate cleanliness 4/5 with a rotating chore chart, host guests about monthly with notice, work hybrid, and need quiet a few times a week; weekly guests and late nights may clash.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I'm happy to take your rotating chore chart and give notice for weekend-only guests under 10, and I'll keep my late nights quiet in shared areas on your work days.\n\nFLX:[cln:Rotating chore chart works for me, a 3 vs 4 gap is small|if tasks are clearly split and we agree on what \"tidy\" means for the kitchen and common areas]\nFLX:[gwk:Weekend-only gatherings under 10 with advance notice|if we can adjust for your deadline or heavy-work weekends]\nFLX:[nzl:Low noise in common areas after midnight and on your quiet work days|if you tell me which days and hours you need quiet]",
+      "say": "I'm happy to take your rotating chore chart and give notice for weekend-only guests under 10, and I'll keep my late nights quiet in shared areas on your work days.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: Thanks, those work for me. I cook vegetarian meals daily, call family in India late in the evening, and keep the thermostat around 68-72°F. Are you okay with that?\n\n<<MOD:LIFESTYLE>>\nPFR:[cook:Daily vegetarian, happy to share the kitchen and cook together sometimes, temp:Moderate (68-72°F), notes:Late-evening calls to family in India, quiet:A few times a week on WFH days]\nFLX:[nzl:I'll tell you my quiet days ahead of time, a few times a week|if common areas stay low-noise on those days and after midnight]",
+      "say": "Thanks, those work for me. I cook vegetarian meals daily, call family in India late in the evening, and keep the thermostat around 68-72°F. Are you okay with that?",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: Your late calls and thermostat range work for me; I cook a few times a week, prefer equal utilities and shared basics, so what's your preference on utilities, groceries, deposit?\n\n<<MOD:FINANCIAL>>\nPFR:[cook:A few times a week, no strong kitchen preference, temp:Moderate (68-72°F), usp:Split equally, groc:Split basics (condiments, cleaning), dep:Up to 1 month's rent, pay:Shared app like Splitwise]\nFLX:[cook:Happy to cook together sometimes and share kitchen time|if we keep a simple schedule so we don't crowd each other at dinner]",
+      "say": "Your late calls and thermostat range work for me; I cook a few times a week, prefer equal utilities and shared basics, so what's your preference on utilities, groceries, deposit?",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: On money, I also want utilities split equally, shared basics split, up to one month's rent as deposit, and payments tracked on Splitwise. I'm open to sharing vegetarian staples too.\n\n<<MOD:FINANCIAL>>\nPFR:[usp:Split equally, groc:Split basics (condiments, cleaning), own food bought separately, dep:Yes, up to 1 month's rent, pay:Splitwise]\nFLX:[groc:I can share staples like rice, lentils, and oil|if we log them on Splitwise and you're fine with them being vegetarian]",
+      "say": "On money, I also want utilities split equally, shared basics split, up to one month's rent as deposit, and payments tracked on Splitwise. I'm open to sharing vegetarian staples too.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I'm happy to share vegetarian staples through Splitwise, and I propose weekend-only gatherings under 10 with notice by Thursday and common-area noise winding down by 11:30pm.\n\nPFR:[groc:Share vegetarian staples (rice, lentils, oil) logged on Splitwise, own food separate, usp:Split equally, dep:Up to 1 month's rent]\nFLX:[gwk:Weekly weekend gatherings under 10, notice by Thursday, common areas wind down by 11:30pm|if you're okay with my friends and me moving to my room or going out after that]\nFLX:[cln:Rotating chore chart with a weekly check-in|if we write a short checklist of what \"tidy\" means for the kitchen and bathroom]",
+      "say": "I'm happy to share vegetarian staples through Splitwise, and I propose weekend-only gatherings under 10 with notice by Thursday and common-area noise winding down by 11:30pm.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: Weekly gatherings are more than I'm used to, so I can do up to two weekend gatherings a month, under 10 people, with Thursday notice and a quiet-down by 11:30pm.\n\nCNF:[gwk:gap(your weekly vs my once a month or less; I wake 6am-8am and want quiet late)]\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if other weekends stay low-key and after-hours socializing moves to your room or out]\nFLX:[cln:Rotating chore chart with weekly check-in works; I'll draft the \"tidy\" checklist for kitchen and bathroom|if you edit it with me before move-in]",
+      "say": "Weekly gatherings are more than I'm used to, so I can do up to two weekend gatherings a month, under 10 people, with Thursday notice and a quiet-down by 11:30pm.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "SAY: I can accept two weekend gatherings a month under 10 people, with Thursday notice and 11:30pm quiet, plus small hangouts in my room, so it's a conditional match pending your okay on those hangouts and late-night noise.\n\nFLX:[gwk:Up to 2 weekend gatherings a month, under 10 people, notice by Thursday, common areas quiet by 11:30pm|if I can still have 2-3 friends over in my room on other weekends, keeping the common areas quiet]\nFLX:[cln:Rotating chore chart with weekly check-in, you draft the \"tidy\" checklist|I'll edit it with you before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking, location, room type, budget overlap, money split, cooking, and chores; the remaining gap is my social, night-owl rhythm versus your early mornings|open=small friend hangouts in my room on non-gathering weekends, late-night noise after 11:30pm",
+      "say": "I can accept two weekend gatherings a month under 10 people, with Thursday notice and 11:30pm quiet, plus small hangouts in my room, so it's a conditional match pending your okay on those hangouts and late-night noise.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm fine with 2-3 friends in your room on other weekends if they keep it quiet after 11:30pm, so this is a conditional match pending written quiet-hour terms.\n\nFLX:[nzl:2-3 friends in your room on non-gathering weekends, door closed, voices low after 11:30pm|if weeknights stay quiet, since I wake between 6am and 8am]\nFLX:[cln:Rotating chore chart and \"tidy\" checklist, which I'll draft and we'll edit together|if we finalize it before move-in]\n\nVRD:CONDITIONAL|r=Aligned on non-smoking household, location, private room, budget overlap, equal utilities, shared staples via Splitwise, and chores. The gap is your late-night social rhythm against my early mornings.|open=late-night noise after 11:30pm on weeknights, room hangout volume on weekends",
+      "say": "I'm fine with 2-3 friends in your room on other weekends if they keep it quiet after 11:30pm, so this is a conditional match pending written quiet-hour terms.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T17:09:02+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "lease",
+      "ok": false,
+      "hard": false,
+      "topic": "lease length",
+      "detail": "Priya wants a 1-year lease, Meera a 6-month lease; neither is flexible on it"
+    },
+    {
+      "id": "move_in",
+      "ok": true,
+      "hard": false,
+      "topic": "move-in date",
+      "detail": "Priya moves in 1–3 months, Meera within 1 month; Priya is flexible on it"
+    }
+  ],
+  "result": {
+    "status": "conditional",
+    "reason": "Aligned on non-smoking, location, room type, budget overlap, money split, cooking, and chores; the remaining gap is my social, night-owl rhythm versus your early mornings",
+    "unresolved_topics": [
+      "lease length",
+      "small friend hangouts in my room on non-gathering weekends",
+      "late-night noise after 11:30pm"
+    ],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 74,
+      "finances": 82,
+      "lifestyle": 66,
+      "personality": 74,
+      "logistics": 68
+    },
+    "highlights": [
+      "Both share the same non-negotiable (non-smoking household), so there is no dealbreaker. They also match on location (Fenway/Mission Hill), room type (private room), drinking (socially), pet attitude (love pets, have none) and hybrid WFH schedules.",
+      "Finances align well: equal utilities, shared basics (and vegetarian staples) logged on Splitwise, and a deposit of up to one month's rent. The budgets overlap at $1300-1450, which is workable even though Meera's range is higher.",
+      "Both negotiated constructively. They agreed on a rotating chore chart with a weekly check-in, a Priya-drafted 'tidy' checklist, and a compromise on guests (two weekend gatherings a month under 10 people, Thursday notice, quiet by 11:30pm). Daily vegetarian cooking, late calls to India and a 68-72°F thermostat were accepted without friction."
+    ],
+    "concerns": [
+      "Sleep schedule mismatch: Meera is a night owl (asleep after midnight, wakes 8-10am) and Priya wakes at 6-8am and needs quiet a few times a week on WFH days. Late-night noise, especially on weeknights, is still an open item.",
+      "Social energy gap: Meera lists matching social energy as a priority and wants weekly guests, while Priya hosts about monthly. The compromise of two gatherings a month plus 2-3 friends in Meera's room may leave Meera feeling restricted over time, and Priya may find even this more than she is used to.",
+      "Logistics mismatch: Meera moves in within a month on a 6-month lease, while Priya moves in 1-3 months out and wants a 1-year lease. The conversation never addressed this. Their cleanliness ratings also differ (3 vs 4), and 'tidy' is not yet defined in writing."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Put the quiet-hour terms in writing: common areas quiet by 11:30pm, weeknights fully quiet, and room hangouts of 2-3 friends with the door closed and voices low. Add a shared calendar of Priya's quiet/WFH days.",
+      "Align the lease and move-in timing: pick a move-in date around the 1-month mark, then start with a 6-month lease with an option to renew to 12 months, or sign a 12-month lease with a sublet/replacement clause. Finalize the 'tidy' checklist before move-in and review the guest arrangement after 2-3 months."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "Priya and Meera are aligned on the non-negotiable (non-smoking), location, money handling and chore structure, and both showed real willingness to compromise. The main risks are the sleep-schedule and social-energy differences, plus the unresolved lease-length and move-in timing gap. A written agreement on quiet hours, guest limits and lease terms would make this a workable match."
+  },
+  "providers": {
+    "cache": 14
+  },
+  "created": "2026-10-15T17:09:02+00:00",
+  "ignored_verdicts": []
+}

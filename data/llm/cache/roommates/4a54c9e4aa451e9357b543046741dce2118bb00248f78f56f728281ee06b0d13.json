@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student looking for a private room in Boston/Fenway, moving in within 1–3 months, with a hard budget cap of $1,100-1,400. I need a non-smoking home, and I'm asking Sofia about her smoking, pets, and non-negotiables.\n\nHI:[loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(HARD_CAP),smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors;budget hard cap,occ:student,rm:private room]\nPFR:[pri:budget compatibility;similar cleanliness standards;respect for quiet/work time,ask_sofia:smk,pet,nn,pri,cln]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:59:37+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

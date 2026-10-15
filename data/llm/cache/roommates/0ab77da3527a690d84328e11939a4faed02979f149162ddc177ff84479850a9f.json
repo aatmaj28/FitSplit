@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 95,
+      "finances": 90,
+      "lifestyle": 95,
+      "personality": 90,
+      "logistics": 95
+    },
+    "highlights": [
+      "Both have identical budget caps (1100‑1450) and non‑smoking rules",
+      "Sleep windows (10 pm‑7 am), cleanliness level (4/5), and low‑noise expectations align perfectly",
+      "Concrete compromises on guest visits, chore rotation, and early‑morning WFH noise were mutually accepted"
+    ],
+    "concerns": [
+      "Rohan’s occasional office commute vs Priya’s hybrid WFH could cause minor schedule overlap",
+      "Weekend guest visits rely on 12‑hour notice, requiring good communication",
+      "Noise limit of 60 dB may need monitoring during music or video calls"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Maintain 12‑hour notice for any weekend guest and use headphones/private space for video calls",
+      "Rotate chore responsibilities weekly to balance workload"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Rohan show strong compatibility across finances, lifestyle, and logistics, with all major preferences aligned and mutually agreed compromises. Minor coordination points are easily managed, making them a solid roommate match."
+  },
+  "created": "2026-10-15T15:58:51+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m fine with shifting to a 9 pm bedtime for a quiet hour after midnight and agree we’ll keep our rooms tidy and guests rare.  \nPFR:slp_sched=Adjust to 9 pm bedtime|cln=3(moderate)  \nVRD:STRONG|open=none",
+  "created": "2026-10-15T16:21:02+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

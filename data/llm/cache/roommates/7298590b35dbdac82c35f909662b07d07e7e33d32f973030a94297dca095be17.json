@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Sofia, a student in Fenway, and the open room's share is $1,360, which fits your cap. But I need a non-smoking household, so your smoking is a dealbreaker and I'm ending this politely.\n\nHI:[loc:Boston/Fenway,bd:$1,360/mo room share (fits your cap),smk:non-smoking household only,pet:love pets/don't own any,nn:no smoking indoors]\nCNF:[smk:conflict(Jake smokes; my non-negotiable is no smoking indoors in a non-smoking household)]\nVRD:INCOMPATIBLE|r=Jake smokes and my non-negotiable is a non-smoking household (no smoking indoors)|open=none",
+  "created": "2026-10-15T17:09:30+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

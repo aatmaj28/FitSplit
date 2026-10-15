@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:ROUTINES>>\nPFR:[slp_sched:Somewhere in between|wake:6am–8am|cln:4(tidy)|clean_sched:Rotating chore chart]\nPFR:[wfh:Hybrid (a few days a week)|quiet:Occasionally — a few times a week]\nCNF:[nzl:friction(you prefer very quiet/minimal guests, I have occasional weekend friends and need quiet for WFH days)]",
+  "created": "2026-10-15T16:23:08+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

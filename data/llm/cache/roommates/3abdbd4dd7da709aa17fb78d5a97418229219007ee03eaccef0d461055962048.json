@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m a student in Boston Fenway, moving in 1–3 months, budget $1,100–$1,450, prioritizing cleanliness and quiet work time; could you share your exact budget and move‑in date?  \nPFR:pri=Similar cleanliness standards|Respectful of quiet/work time|Budget compatibility  \nFLX:bd=Offer flexibility within 100 USD if needed, condition=must keep within 1–3 month move‑in window.",
+  "created": "2026-10-15T16:19:28+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

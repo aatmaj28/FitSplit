@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student in Boston with a $1150-1500 budget, moving in 1-3 months; I smoke, which conflicts with your non-smoking rule.\n\nHI:loc:Boston/Fenway|mv:1–3 months|bd:1150-1500|smk:I smoke|pet:I love pets but don't have any|nn:Budget hard cap (cannot exceed max)\nCNF:smk:conflict(I smoke; you require non-smoking household)\nVRD:INCOMPATIBLE|r=Smoking policy conflict is a non-negotiable for both parties|open=none",
+  "created": "2026-10-15T16:49:32+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

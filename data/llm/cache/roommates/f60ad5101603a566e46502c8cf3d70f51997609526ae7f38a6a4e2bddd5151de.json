@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Rohan, a student looking in Boston/Fenway, moving in within 1–3 months, with a $1,100–1,400 hard-cap budget, a non-smoking home, and no pets (I love them). What are your smoking, pet and budget limits?\n\nHI:[name:Rohan Mehta,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1100-1400(hard cap),smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;budget hard cap]\nPFR:[pri:budget compatibility;similar cleanliness standards;respect for quiet/work time]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:58:01+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

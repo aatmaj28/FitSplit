@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 82,
+      "finances": 75,
+      "lifestyle": 70,
+      "personality": 85,
+      "logistics": 80
+    },
+    "highlights": [
+      "Perfect alignment on non-negotiables: both require a strictly non-smoking household and are located in the same Boston neighborhood (Fenway/Mission Hill).",
+      "Successful negotiation on social noise: Meera agreed to limit gatherings to after 8 PM, and Priya agreed to respect Meera's late-night study habits until 2 AM.",
+      "Clear agreement on household management: both agreed to split utilities equally and use a rotating chore chart, with Priya maintaining a weekly deep-clean routine."
+    ],
+    "concerns": [
+      "Budget overlap is narrow: Priya's ceiling is $1450 while Meera's floor is $1300, leaving only a $150 window for rent negotiation.",
+      "Significant difference in cleanliness standards: Priya rates herself 4/5 (tidy) while Meera rates herself 3/5 (moderate), which could cause friction despite the agreed chore chart.",
+      "Lease duration mismatch: Priya is looking for a 1-3 month stay, while Meera is seeking a 6-month lease, which may complicate the agreement."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Establish a strict 'quiet hours' protocol: no loud guests before 8 PM and no noise after 2 AM to accommodate both early rising and night owl habits.",
+      "Implement a written rotating chore chart for shared spaces to bridge the gap between Priya's higher cleanliness standard and Meera's moderate standard."
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "This is a strong potential match given the alignment on location, non-smoking rules, and successful negotiation of noise and chore compromises. However, the narrow budget overlap and significant difference in lease duration (1-3 months vs. 6 months) require immediate clarification to ensure the arrangement is viable for both parties."
+  },
+  "created": "2026-10-15T16:34:37+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

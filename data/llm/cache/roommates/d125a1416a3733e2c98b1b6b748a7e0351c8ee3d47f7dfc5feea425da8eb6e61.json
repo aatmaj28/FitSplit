@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm happy to take your rotating chore chart and give notice for weekend-only guests under 10, and I'll keep my late nights quiet in shared areas on your work days.\n\nFLX:[cln:Rotating chore chart works for me, a 3 vs 4 gap is small|if tasks are clearly split and we agree on what \"tidy\" means for the kitchen and common areas]\nFLX:[gwk:Weekend-only gatherings under 10 with advance notice|if we can adjust for your deadline or heavy-work weekends]\nFLX:[nzl:Low noise in common areas after midnight and on your quiet work days|if you tell me which days and hours you need quiet]",
+  "created": "2026-10-15T16:52:16+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

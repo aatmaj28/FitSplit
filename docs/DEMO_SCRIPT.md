@@ -26,17 +26,18 @@ attached, so fewer 'how big is the bedroom?' calls."
 
 **0:45 Step 2: Roombae, students match.** (Shift + →)
 This is **Discover**, a swipe deck. Press **→** (or drag the card right) on **Ananya**. The clones talk
-for a few seconds, then: "It's a match!" (strong, 92). Click **Keep swiping**.
+for a few seconds, then: "It's a match!" (strong, 95). Click **Keep swiping**.
 Press **→** on **Jake**: "Your clones didn't click: Jake smokes, and you need a non-smoking home."
-Click **Keep swiping**, then **←** to pass on Kavya, and **→** on **Meera**: a conditional match (lease
-length). Click **Find a place together**.
+Click **Keep swiping**, then **←** to pass on Kavya, and **→** on **Meera**: a conditional match (the lease
+length and her weekend gatherings are still open). Click **Find a place together**.
 Say: "Students swipe like on a dating app, but before anyone meets, each student's AI clone talks to
 the other's: budget, sleep, guests, dealbreakers. This is our teammate Tanvi's roommate engine and her
-swipe deck. Jake is out in two turns because Priya won't live with a smoker. Meera matches, with one
-open point: the lease length."
+swipe deck. Jake is out in two turns because Priya won't live with a smoker. Meera matches, and the
+app says what's still open: the lease length, and how often she has friends over."
 Point at the group card: "And it only shows listings where every fair-split share fits each
 person's budget." Click **Save group & see it in 3D** on JVUE 3 bed.
-Optional: **Watch the conversation** on a match screen replays the chat (pause, 1×/2×/4×, Skip to verdict).
+Optional: **Watch the conversation** on a match screen replays the chat in plain English (pause,
+1×/2×/4×, Skip to verdict; "details" shows the clones' protocol).
 
 **1:25 Step 3: see it in 3D and check the furniture.**
 Click **Bedroom 1** (the DREAM card on the right), then **Edit layout**, **Will my stuff fit?**, +1 queen

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm 4/5 tidy, wake 6-8am, work from home a few days weekly, host guests monthly with notice, and call family in India late evenings, so I'll keep calls quiet.\n\nPFR:[cln:4,clean_sched:rotating chore chart,slp:somewhere in between,wake:6am-8am,wfh:hybrid (a few days a week),gwk:occasionally (once a month or less, always with notice),nzl:small gatherings only (<10 people)]\nCNF:[slp:minor(I call family in India late evening, and you sleep before 10pm)]\nFLX:[calls:take them in my room, keep volume low, wrap up by about 9:30pm on your sleep nights|if that works for you]\n<<MOD:LIFESTYLE>>",
+  "created": "2026-10-15T16:56:53+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

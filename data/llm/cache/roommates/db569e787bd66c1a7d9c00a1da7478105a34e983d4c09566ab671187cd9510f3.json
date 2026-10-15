@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the chore arrangement and confirm we are a strong match for living together.\n\nPFR:[clean_sched:Rotating chore chart, condition:Kitchen cleared by 7 AM daily]\nVRD:STRONG|r=Non-negotiables met; aligned on cleanliness, sleep, and finances|open=none",
+  "created": "2026-10-15T16:48:50+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

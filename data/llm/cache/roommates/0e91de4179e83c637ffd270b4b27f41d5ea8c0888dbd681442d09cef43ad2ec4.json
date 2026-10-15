@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree on equal utilities, split basics, Splitwise, and a deposit up to one month's rent ($1,360), and I'll keep the bathroom split with me showering before 7am.\n\nPFR:[usp:split equally,groc:split basics (condiments, cleaning),dep:up to 1 month's rent,pay:Splitwise or similar shared app]\nCNF:[usp:aligned,groc:aligned,dep:aligned,pay:aligned,bath_time:aligned(I take before 7am|you take 7am onward)]\nFLX:[groc:open to adding other shared basics|each person's own food stays separate and costs are logged in Splitwise]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T17:00:39+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

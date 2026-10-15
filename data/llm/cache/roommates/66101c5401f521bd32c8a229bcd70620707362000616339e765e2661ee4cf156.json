@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student seeking a private room in Boston for 1-3 months with a budget of $1100-$1450.\n\nHI:[loc:Boston/Fenway / Mission Hill|mv:1–3 months|bd:1100-1450(flex+100_private)|rm:Private room|occ:Student]\nPFR:[pri:Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility]\nWhat are your location preferences and budget range for this move?",
+  "created": "2026-10-15T16:23:05+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the shared basics and kitchen plan, and Friday guests are fine if I get a Thursday heads-up; I'll cook around 6pm so we don't overlap on the stove.\n\nCNF:[groc:aligned(shared basics plus own food separate, monthly Splitwise settle),kitchen:aligned(shared stove, clean up right after use)]\nFLX:[gwk:Friday guest OK|notice by Thursday via text, quiet after 10pm since I sleep before 10]\nFLX:[kitchen:I cook around 6pm|you take the stove after 7:30pm if you cook that night]",
+  "created": "2026-10-15T17:00:51+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

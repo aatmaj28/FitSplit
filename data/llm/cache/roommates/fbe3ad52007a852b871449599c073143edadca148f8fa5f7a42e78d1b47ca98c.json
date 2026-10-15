@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 25,
+      "finances": 85,
+      "lifestyle": 20,
+      "personality": 40,
+      "logistics": 70
+    },
+    "highlights": [
+      "Both are students in the same Boston neighborhood with compatible non-smoking household rules.",
+      "Budget ranges overlap significantly ($1300-$1450), and both agree to split expenses equally.",
+      "Both are hybrid workers who understand the need for focused work time."
+    ],
+    "concerns": [
+      "Fundamental conflict on guest frequency: Priya requires a quiet home with guests once a month or less, while Meera hosts weekly.",
+      "Sleep schedule mismatch: Priya is an early riser (6am) while Meera is a night owl (sleeps after midnight), creating noise friction.",
+      "Cleanliness standards differ, with Priya rating herself a 5 and Meera a 3, which may lead to ongoing friction."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Meera explicitly stated that weekly guests are a core part of her life and cannot be reduced to monthly, which directly violates Priya's non-negotiable need for a quiet household with rare guests.",
+    "middle_ground": [
+      "Strict quiet hours from 10 PM to 7 AM to accommodate Priya's early wake-up and Meera's late nights.",
+      "Door-closing policy during guest visits to minimize noise bleed, though this does not resolve the frequency conflict."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "This match is incompatible due to a hard conflict on social frequency. Priya's non-negotiable need for a quiet home with rare guests is fundamentally incompatible with Meera's core lifestyle of hosting weekly gatherings."
+  },
+  "created": "2026-10-15T16:29:26+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

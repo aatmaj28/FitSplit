@@ -1,0 +1,442 @@
+{
+  "id": "n_6c194346bfbe",
+  "engine": "rm2",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "kavya",
+    "name": "Kavya Nair"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm Priya, a student looking in Boston (Fenway/Mission Hill), budget $1100-1450, moving in within 1–3 months; non-smoking household only, no pets but I love them. What about you?\n\nHI:[loc:Boston/Fenway/Mission Hill, mv:within 1–3 months, bd:1100-1450 (flex +100 for private room), smk:non-smoking household only, pet:none but love pets, nn:no smoking indoors/non-smoking household only]\nPFR:[rm:private room, pri:similar cleanliness standards/respectful of quiet and work time/budget compatibility]\nFLX:[mv:flexible on exact date|within the 1–3 month window]",
+        "say": "I'm Priya, a student looking in Boston (Fenway/Mission Hill), budget $1100-1450, moving in within 1–3 months; non-smoking household only, no pets but I love them. What about you?",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:53:31+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: I'm Kavya, a student looking in Fenway or Cambridgeport, budget $900-1250 (firm cap), moving in within 1–3 months, non-smoking, no pets (I'm allergic). Will you keep pets in the home?\n\nHI:[loc:Boston/Fenway or Cambridgeport, mv:within 1–3 months, bd:900-1250 (hard cap), smk:non-smoking household only, pet:none, allergic to pets, nn:budget hard cap; no pets]\nPFR:[rm:private room, pri:similar cleanliness standards/budget compatibility/compatible sleep schedule]\nCNF:[pet:check(Fenway overlaps and budget overlaps at 1100-1250; you have no pets, but will any pets live in or stay at the apartment?)]\n\n<<MOD:FINANCIAL>>",
+        "say": "I'm Kavya, a student looking in Fenway or Cambridgeport, budget $900-1250 (firm cap), moving in within 1–3 months, non-smoking, no pets (I'm allergic). Will you keep pets in the home?",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:53:38+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: No pets will live in the apartment with me, so your allergy isn't a problem, and the 1100-1250 overlap in our budgets works for me.\n\nPFR:[pet:none, no pets will live in or stay at the apartment, bd:overlap 1100-1250 works]\nFLX:[mv:flexible on exact date|within the 1–3 month window, to match whatever lease timing we find]\n\n<<MOD:FINANCIAL>>",
+        "say": "No pets will live in the apartment with me, so your allergy isn't a problem, and the 1100-1250 overlap in our budgets works for me.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T16:53:42+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: I sleep before 10pm, wake before 6am, want spotless 5/5 cleanliness with a chore chart, rarely have guests, and don't WFH; what are your sleep, cleanliness, guests, WFH habits?\n\nPFR:[slp:early bird, asleep before 10pm, wake before 6am, cln:5 with rotating chore chart, gwk:never/very rarely, nzl:very quiet, wfh:no, at office/school daily]\nCNF:[slp:check(what are your bedtime and wake time?), cln:check(your cleanliness 1-5?), gwk:check(guests per week and noise level?), wfh:check(home during the day?)]\n\n<<MOD:ROUTINES>>",
+        "say": "I sleep before 10pm, wake before 6am, want spotless 5/5 cleanliness with a chore chart, rarely have guests, and don't WFH; what are your sleep, cleanliness, guests, WFH habits?",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:53:49+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I wake 6-8am with an in-between bedtime, cleanliness 4 with a chore chart, rare guests, hybrid work, and late-evening family calls that may clash with your early bedtime.\n\nPFR:[slp:in-between schedule, wake 6am-8am, cln:4 (tidy), rotating chore chart works, gwk:occasionally (once a month or less) with notice, small gatherings under 10, nzl:occasional friends over on weekends, wfh:hybrid (a few days a week), quiet time a few times a week]\nCNF:[slp:check(I call family in India late in the evening, which may overlap with your before-10pm bedtime)]\nFLX:[nzl:calls in my room, low volume|if you tell me your latest quiet-hours cutoff, I'll work around it]\n\n<<MOD:ROUTINES>>",
+        "say": "I wake 6-8am with an in-between bedtime, cleanliness 4 with a chore chart, rare guests, hybrid work, and late-evening family calls that may clash with your early bedtime.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:53:58+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: Quiet hours begin at 9:30pm in shared spaces, so low-volume calls in your room are fine. Your gatherings of up to 10 worry me; I'd want notice and an early end.\n\nCNF:[gwk:friction(I'm very quiet with guests never or very rarely, so weekend friends and gatherings under 10 are a gap), slp:minor(your late family calls vs my before-10pm bedtime, workable with your offer)]\nFLX:[nzl:calls in your room at low volume are fine until about 10pm|after that, headphones or texting please, gwk:small gatherings of 4 or fewer are OK|with advance notice and ending by 9pm]\nPFR:[cln:your 4 vs my 5 is a small gap, and a rotating chore chart covers it]",
+        "say": "Quiet hours begin at 9:30pm in shared spaces, so low-volume calls in your room are fine. Your gatherings of up to 10 worry me; I'd want notice and an early end.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:54:04+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I can agree to weekend gatherings of 4 or fewer with advance notice, ending by 9pm, and I'll take family calls in my room at low volume, wrapping up by 10pm.\n\nFLX:[gwk:gatherings capped at 4 people, with notice, ending by 9pm|instead of my usual under-10 limit]\nFLX:[nzl:calls in my room at low volume, wrapped up by 10pm|on the occasional late call I'll text or use headphones]\nPFR:[cln:a 4 vs 5 gap is fine with a rotating chore chart, and I'm open to how the chores are split]",
+        "say": "I can agree to weekend gatherings of 4 or fewer with advance notice, ending by 9pm, and I'll take family calls in my room at low volume, wrapping up by 10pm.",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T16:54:09+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: Your 4-guest cap and 10pm calls work; I split utilities equally, share grocery basics, cook daily in a vegetarian kitchen; how do you cook and split costs?\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app like Splitwise]\nPFR:[cook:daily, I cook most meals, kitchen:strict vegetarian, no meat cooked or stored in shared kitchen]\nCNF:[groc:check(are you fine splitting only basics?), cook:check(how often do you cook, and would you keep meat out of the kitchen?)]\n\n<<MOD:FINANCIAL>>",
+        "say": "Your 4-guest cap and 10pm calls work; I split utilities equally, share grocery basics, cook daily in a vegetarian kitchen; how do you cook and split costs?",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:54:19+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'm happy to split only grocery basics, split utilities equally, pay a deposit up to one month's rent via Splitwise, and cook daily in a vegetarian kitchen, since I'm vegetarian too.\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app (Splitwise)]\nPFR:[cook:daily, I cook most meals (South Indian, vegetarian), kitchen:no meat cooked or stored, happy to share and cook together sometimes]\nFLX:[groc:personal food bought separately|basics tracked in Splitwise, and I'm open to adjusting which items count as basics]\n\n<<MOD:FINANCIAL>>",
+        "say": "I'm happy to split only grocery basics, split utilities equally, pay a deposit up to one month's rent via Splitwise, and cook daily in a vegetarian kitchen, since I'm vegetarian too.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:54:26+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: I accept your grocery and Splitwise terms, and I propose a weekly rotating chore chart, 24-hour notice for guests, and quiet morning cooking before 7am to fit your sleep.\n\nPFR:[cln:weekly rotating chore chart with a shared-space checklist (kitchen, bathroom, floors), and I'll take the kitchen wipe-down on my cooking days|if you take a bathroom slot each rotation]\nFLX:[gwk:24-hour notice for any guests, within your 4-person cap and 9pm end|if you text me the day before, I'm fine]\nFLX:[nzl:I'll keep early-morning kitchen noise low before 7am, using no loud appliances|if you keep shared-space noise down after 9:30pm]",
+        "say": "I accept your grocery and Splitwise terms, and I propose a weekly rotating chore chart, 24-hour notice for guests, and quiet morning cooking before 7am to fit your sleep.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:54:33+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I accept the weekly rotating chart with a bathroom slot each rotation, text notice the day before any guests, and keeping shared-space noise down after 9:30pm.\n\nFLX:[cln:I'll take a bathroom slot every rotation|you keep the kitchen wipe-down on your cooking days]\nFLX:[gwk:I'll text you the day before any guest visit|guests stay within the 4-person cap and end by 9pm]\nFLX:[nzl:shared-space noise stays down after 9:30pm, and my family calls stay in my room|your kitchen noise stays low before 7am]",
+        "say": "I accept the weekly rotating chart with a bathroom slot each rotation, text notice the day before any guests, and keeping shared-space noise down after 9:30pm.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T16:54:40+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Kavya Nair",
+        "speaker_id": "b",
+        "message": "SAY: Your terms work and the 1100-1250 budget overlap fits my cap, so I'm giving a conditional match, with two open items: your calls running to 10pm against my early bedtime, and how often you host gatherings.\n\nCNF:[slp:check(I sleep before 10pm and wake before 6am, so calls wrapping at 10pm are tight)]\nFLX:[nzl:calls and gatherings wrapped up by 9:30pm instead of 10pm|gatherings stay at once a month or less, as you said]\nVRD:CONDITIONAL|r=No non-negotiable conflicts: budget overlap fits my cap, no pets, non-smoking household. Cleanliness, chores, costs, and cooking are aligned, but my early sleep schedule needs quieter evenings.|open=call end time (9:30pm vs 10pm), gathering frequency",
+        "say": "Your terms work and the 1100-1250 budget overlap fits my cap, so I'm giving a conditional match, with two open items: your calls running to 10pm against my early bedtime, and how often you host gatherings.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:54:46+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "SAY: I'll wrap up calls by 9:30pm in my room, keep gatherings to once a month or less with guests gone by 9pm, so those two open items are resolved and I'm calling it a strong match.\n\nFLX:[nzl:family calls stay in my room and end by 9:30pm instead of late evening|you're fine with quiet, low-volume talking before then]\nPFR:[gwk:gatherings once a month or less, 24-hour text notice, within your 4-person cap and done by 9pm]\nVRD:STRONG|r=No non-negotiable conflicts: both households are non-smoking, I have no pets, and the budget overlap fits your cap. Cleanliness, chores, costs, and cooking are aligned, and the evening noise and gathering concerns are resolved.|open=none",
+        "say": "I'll wrap up calls by 9:30pm in my room, keep gatherings to once a month or less with guests gone by 9pm, so those two open items are resolved and I'm calling it a strong match.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T16:54:53+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "conditional",
+        "reason": "No non-negotiable conflicts: budget overlap fits my cap, no pets, non-smoking household. Cleanliness, chores, costs, and cooking are aligned, but my early sleep schedule needs quieter evenings",
+        "unresolved_topics": [
+          "call end time (9:30pm vs 10pm)",
+          "gathering frequency"
+        ],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 84,
+          "finances": 88,
+          "lifestyle": 78,
+          "personality": 82,
+          "logistics": 90
+        },
+        "highlights": [
+          "Both are non-smoking-household-only, and no pets will live in or stay at the apartment, so Kavya's pet allergy and 'No pets' non-negotiable are fully met alongside Priya's non-smoking requirement.",
+          "Budgets overlap at $1100-1250, which sits within Kavya's hard cap of $1250. Both agreed to split utilities equally, split only grocery basics, and use Splitwise with a deposit of up to one month's rent.",
+          "Both are vegetarian and cook daily (Priya makes South Indian food), so they agreed to a no-meat kitchen. They also agreed on a weekly rotating chore chart with a bathroom slot for Priya and kitchen wipe-down for Kavya, which bridges Priya's cleanliness 4 and Kavya's 5."
+        ],
+        "concerns": [
+          "Kavya sleeps before 10pm and wakes before 6am, while Priya calls family in India late in the evening. Priya agreed to end calls by 9:30pm in her room, but time-zone-driven calls may be hard to keep to that cutoff over a year.",
+          "Kavya's profile says guests 'never/very rarely' and 'very quiet'. Priya has friends over on weekends and hosts gatherings. The cap of 4 people, 24-hour notice, a 9pm end and once a month or less narrows this, but Priya may feel restricted and Kavya may still find it intrusive.",
+          "Priya's 4 vs Kavya's 5 on cleanliness could cause friction over time. The budget is also tight for Kavya: her cap is $1250, and Priya's range extends up to $1450, so Priya must accept a place at or below $1250 for the match to work."
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Set a firm shared-space quiet time from 9:30pm, with Priya's family calls kept in her room (headphones or texts after 9:30pm), and review it after the first month. If the calls consistently run late, shift them to mornings or weekends.",
+          "Pick a place at or under $1250 for a private room. Hold gatherings to once a month or less, with at most 4 people, 24-hour text notice and a 9pm end. Add a short monthly check-in to adjust the chore chart and the guest and noise rules."
+        ],
+        "recommendation": "strong",
+        "recommendation_summary": "There are no non-negotiable conflicts: both want a non-smoking household, no pets will be kept, and the budget overlap of $1100-1250 fits Kavya's hard cap. The conversation settled the main friction points (calls, guests, chores, cooking and costs) with specific agreements. The remaining risk is the lifestyle gap between Kavya's early, quiet routine and Priya's social and call habits, which depends on Priya keeping to the 9:30pm and 9pm limits."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm Priya, a student looking in Boston (Fenway/Mission Hill), budget $1100-1450, moving in within 1–3 months; non-smoking household only, no pets but I love them. What about you?\n\nHI:[loc:Boston/Fenway/Mission Hill, mv:within 1–3 months, bd:1100-1450 (flex +100 for private room), smk:non-smoking household only, pet:none but love pets, nn:no smoking indoors/non-smoking household only]\nPFR:[rm:private room, pri:similar cleanliness standards/respectful of quiet and work time/budget compatibility]\nFLX:[mv:flexible on exact date|within the 1–3 month window]",
+      "say": "I'm Priya, a student looking in Boston (Fenway/Mission Hill), budget $1100-1450, moving in within 1–3 months; non-smoking household only, no pets but I love them. What about you?",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:53:31+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: I'm Kavya, a student looking in Fenway or Cambridgeport, budget $900-1250 (firm cap), moving in within 1–3 months, non-smoking, no pets (I'm allergic). Will you keep pets in the home?\n\nHI:[loc:Boston/Fenway or Cambridgeport, mv:within 1–3 months, bd:900-1250 (hard cap), smk:non-smoking household only, pet:none, allergic to pets, nn:budget hard cap; no pets]\nPFR:[rm:private room, pri:similar cleanliness standards/budget compatibility/compatible sleep schedule]\nCNF:[pet:check(Fenway overlaps and budget overlaps at 1100-1250; you have no pets, but will any pets live in or stay at the apartment?)]\n\n<<MOD:FINANCIAL>>",
+      "say": "I'm Kavya, a student looking in Fenway or Cambridgeport, budget $900-1250 (firm cap), moving in within 1–3 months, non-smoking, no pets (I'm allergic). Will you keep pets in the home?",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:53:38+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: No pets will live in the apartment with me, so your allergy isn't a problem, and the 1100-1250 overlap in our budgets works for me.\n\nPFR:[pet:none, no pets will live in or stay at the apartment, bd:overlap 1100-1250 works]\nFLX:[mv:flexible on exact date|within the 1–3 month window, to match whatever lease timing we find]\n\n<<MOD:FINANCIAL>>",
+      "say": "No pets will live in the apartment with me, so your allergy isn't a problem, and the 1100-1250 overlap in our budgets works for me.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T16:53:42+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: I sleep before 10pm, wake before 6am, want spotless 5/5 cleanliness with a chore chart, rarely have guests, and don't WFH; what are your sleep, cleanliness, guests, WFH habits?\n\nPFR:[slp:early bird, asleep before 10pm, wake before 6am, cln:5 with rotating chore chart, gwk:never/very rarely, nzl:very quiet, wfh:no, at office/school daily]\nCNF:[slp:check(what are your bedtime and wake time?), cln:check(your cleanliness 1-5?), gwk:check(guests per week and noise level?), wfh:check(home during the day?)]\n\n<<MOD:ROUTINES>>",
+      "say": "I sleep before 10pm, wake before 6am, want spotless 5/5 cleanliness with a chore chart, rarely have guests, and don't WFH; what are your sleep, cleanliness, guests, WFH habits?",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:53:49+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I wake 6-8am with an in-between bedtime, cleanliness 4 with a chore chart, rare guests, hybrid work, and late-evening family calls that may clash with your early bedtime.\n\nPFR:[slp:in-between schedule, wake 6am-8am, cln:4 (tidy), rotating chore chart works, gwk:occasionally (once a month or less) with notice, small gatherings under 10, nzl:occasional friends over on weekends, wfh:hybrid (a few days a week), quiet time a few times a week]\nCNF:[slp:check(I call family in India late in the evening, which may overlap with your before-10pm bedtime)]\nFLX:[nzl:calls in my room, low volume|if you tell me your latest quiet-hours cutoff, I'll work around it]\n\n<<MOD:ROUTINES>>",
+      "say": "I wake 6-8am with an in-between bedtime, cleanliness 4 with a chore chart, rare guests, hybrid work, and late-evening family calls that may clash with your early bedtime.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:53:58+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: Quiet hours begin at 9:30pm in shared spaces, so low-volume calls in your room are fine. Your gatherings of up to 10 worry me; I'd want notice and an early end.\n\nCNF:[gwk:friction(I'm very quiet with guests never or very rarely, so weekend friends and gatherings under 10 are a gap), slp:minor(your late family calls vs my before-10pm bedtime, workable with your offer)]\nFLX:[nzl:calls in your room at low volume are fine until about 10pm|after that, headphones or texting please, gwk:small gatherings of 4 or fewer are OK|with advance notice and ending by 9pm]\nPFR:[cln:your 4 vs my 5 is a small gap, and a rotating chore chart covers it]",
+      "say": "Quiet hours begin at 9:30pm in shared spaces, so low-volume calls in your room are fine. Your gatherings of up to 10 worry me; I'd want notice and an early end.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:54:04+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I can agree to weekend gatherings of 4 or fewer with advance notice, ending by 9pm, and I'll take family calls in my room at low volume, wrapping up by 10pm.\n\nFLX:[gwk:gatherings capped at 4 people, with notice, ending by 9pm|instead of my usual under-10 limit]\nFLX:[nzl:calls in my room at low volume, wrapped up by 10pm|on the occasional late call I'll text or use headphones]\nPFR:[cln:a 4 vs 5 gap is fine with a rotating chore chart, and I'm open to how the chores are split]",
+      "say": "I can agree to weekend gatherings of 4 or fewer with advance notice, ending by 9pm, and I'll take family calls in my room at low volume, wrapping up by 10pm.",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T16:54:09+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: Your 4-guest cap and 10pm calls work; I split utilities equally, share grocery basics, cook daily in a vegetarian kitchen; how do you cook and split costs?\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app like Splitwise]\nPFR:[cook:daily, I cook most meals, kitchen:strict vegetarian, no meat cooked or stored in shared kitchen]\nCNF:[groc:check(are you fine splitting only basics?), cook:check(how often do you cook, and would you keep meat out of the kitchen?)]\n\n<<MOD:FINANCIAL>>",
+      "say": "Your 4-guest cap and 10pm calls work; I split utilities equally, share grocery basics, cook daily in a vegetarian kitchen; how do you cook and split costs?",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:54:19+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'm happy to split only grocery basics, split utilities equally, pay a deposit up to one month's rent via Splitwise, and cook daily in a vegetarian kitchen, since I'm vegetarian too.\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app (Splitwise)]\nPFR:[cook:daily, I cook most meals (South Indian, vegetarian), kitchen:no meat cooked or stored, happy to share and cook together sometimes]\nFLX:[groc:personal food bought separately|basics tracked in Splitwise, and I'm open to adjusting which items count as basics]\n\n<<MOD:FINANCIAL>>",
+      "say": "I'm happy to split only grocery basics, split utilities equally, pay a deposit up to one month's rent via Splitwise, and cook daily in a vegetarian kitchen, since I'm vegetarian too.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:54:26+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: I accept your grocery and Splitwise terms, and I propose a weekly rotating chore chart, 24-hour notice for guests, and quiet morning cooking before 7am to fit your sleep.\n\nPFR:[cln:weekly rotating chore chart with a shared-space checklist (kitchen, bathroom, floors), and I'll take the kitchen wipe-down on my cooking days|if you take a bathroom slot each rotation]\nFLX:[gwk:24-hour notice for any guests, within your 4-person cap and 9pm end|if you text me the day before, I'm fine]\nFLX:[nzl:I'll keep early-morning kitchen noise low before 7am, using no loud appliances|if you keep shared-space noise down after 9:30pm]",
+      "say": "I accept your grocery and Splitwise terms, and I propose a weekly rotating chore chart, 24-hour notice for guests, and quiet morning cooking before 7am to fit your sleep.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:54:33+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I accept the weekly rotating chart with a bathroom slot each rotation, text notice the day before any guests, and keeping shared-space noise down after 9:30pm.\n\nFLX:[cln:I'll take a bathroom slot every rotation|you keep the kitchen wipe-down on your cooking days]\nFLX:[gwk:I'll text you the day before any guest visit|guests stay within the 4-person cap and end by 9pm]\nFLX:[nzl:shared-space noise stays down after 9:30pm, and my family calls stay in my room|your kitchen noise stays low before 7am]",
+      "say": "I accept the weekly rotating chart with a bathroom slot each rotation, text notice the day before any guests, and keeping shared-space noise down after 9:30pm.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T16:54:40+00:00"
+    },
+    {
+      "speaker": "Kavya Nair",
+      "speaker_id": "b",
+      "message": "SAY: Your terms work and the 1100-1250 budget overlap fits my cap, so I'm giving a conditional match, with two open items: your calls running to 10pm against my early bedtime, and how often you host gatherings.\n\nCNF:[slp:check(I sleep before 10pm and wake before 6am, so calls wrapping at 10pm are tight)]\nFLX:[nzl:calls and gatherings wrapped up by 9:30pm instead of 10pm|gatherings stay at once a month or less, as you said]\nVRD:CONDITIONAL|r=No non-negotiable conflicts: budget overlap fits my cap, no pets, non-smoking household. Cleanliness, chores, costs, and cooking are aligned, but my early sleep schedule needs quieter evenings.|open=call end time (9:30pm vs 10pm), gathering frequency",
+      "say": "Your terms work and the 1100-1250 budget overlap fits my cap, so I'm giving a conditional match, with two open items: your calls running to 10pm against my early bedtime, and how often you host gatherings.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:54:46+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "SAY: I'll wrap up calls by 9:30pm in my room, keep gatherings to once a month or less with guests gone by 9pm, so those two open items are resolved and I'm calling it a strong match.\n\nFLX:[nzl:family calls stay in my room and end by 9:30pm instead of late evening|you're fine with quiet, low-volume talking before then]\nPFR:[gwk:gatherings once a month or less, 24-hour text notice, within your 4-person cap and done by 9pm]\nVRD:STRONG|r=No non-negotiable conflicts: both households are non-smoking, I have no pets, and the budget overlap fits your cap. Cleanliness, chores, costs, and cooking are aligned, and the evening noise and gathering concerns are resolved.|open=none",
+      "say": "I'll wrap up calls by 9:30pm in my room, keep gatherings to once a month or less with guests gone by 9pm, so those two open items are resolved and I'm calling it a strong match.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T16:54:53+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "conditional",
+    "reason": "No non-negotiable conflicts: budget overlap fits my cap, no pets, non-smoking household. Cleanliness, chores, costs, and cooking are aligned, but my early sleep schedule needs quieter evenings",
+    "unresolved_topics": [
+      "call end time (9:30pm vs 10pm)",
+      "gathering frequency"
+    ],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 84,
+      "finances": 88,
+      "lifestyle": 78,
+      "personality": 82,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are non-smoking-household-only, and no pets will live in or stay at the apartment, so Kavya's pet allergy and 'No pets' non-negotiable are fully met alongside Priya's non-smoking requirement.",
+      "Budgets overlap at $1100-1250, which sits within Kavya's hard cap of $1250. Both agreed to split utilities equally, split only grocery basics, and use Splitwise with a deposit of up to one month's rent.",
+      "Both are vegetarian and cook daily (Priya makes South Indian food), so they agreed to a no-meat kitchen. They also agreed on a weekly rotating chore chart with a bathroom slot for Priya and kitchen wipe-down for Kavya, which bridges Priya's cleanliness 4 and Kavya's 5."
+    ],
+    "concerns": [
+      "Kavya sleeps before 10pm and wakes before 6am, while Priya calls family in India late in the evening. Priya agreed to end calls by 9:30pm in her room, but time-zone-driven calls may be hard to keep to that cutoff over a year.",
+      "Kavya's profile says guests 'never/very rarely' and 'very quiet'. Priya has friends over on weekends and hosts gatherings. The cap of 4 people, 24-hour notice, a 9pm end and once a month or less narrows this, but Priya may feel restricted and Kavya may still find it intrusive.",
+      "Priya's 4 vs Kavya's 5 on cleanliness could cause friction over time. The budget is also tight for Kavya: her cap is $1250, and Priya's range extends up to $1450, so Priya must accept a place at or below $1250 for the match to work."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Set a firm shared-space quiet time from 9:30pm, with Priya's family calls kept in her room (headphones or texts after 9:30pm), and review it after the first month. If the calls consistently run late, shift them to mornings or weekends.",
+      "Pick a place at or under $1250 for a private room. Hold gatherings to once a month or less, with at most 4 people, 24-hour text notice and a 9pm end. Add a short monthly check-in to adjust the chore chart and the guest and noise rules."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "There are no non-negotiable conflicts: both want a non-smoking household, no pets will be kept, and the budget overlap of $1100-1250 fits Kavya's hard cap. The conversation settled the main friction points (calls, guests, chores, cooking and costs) with specific agreements. The remaining risk is the lifestyle gap between Kavya's early, quiet routine and Priya's social and call habits, which depends on Priya keeping to the 9:30pm and 9pm limits."
+  },
+  "providers": {
+    "claude": 14
+  },
+  "created": "2026-10-15T16:53:28+00:00",
+  "ignored_verdicts": []
+}

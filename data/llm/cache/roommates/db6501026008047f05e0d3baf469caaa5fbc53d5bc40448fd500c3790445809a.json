@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm a student in Boston/Fenway, moving in within 1–3 months, budget $1,400-1,800, non-smoking household only, love pets but have none, and my one non-negotiable is no smoking indoors.\n\nHI:[loc:Boston/Fenway,mv:within 1–3 months,bd:1400-1800,smk:non-smoking household only,pet:love pets but have none,nn:no smoking indoors,occ:student,rm:private room]\nPFR:[pri:honest communication style;matching social energy;similar cleanliness standards]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:59:45+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

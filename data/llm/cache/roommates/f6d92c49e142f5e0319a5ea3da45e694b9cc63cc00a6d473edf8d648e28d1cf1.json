@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can cover groceries, split utilities evenly, and cook a few times a week, and I’d like to know your budget and cooking preferences.  \nPFR:usp=Split equally|groc=Split basics|bd_flex=Offer up to $100 flexibility within 1–3 month window|cook=A few times a week  \nPFR:pri=Matching social energy|Location match|Honest communication style",
+  "created": "2026-10-15T16:19:56+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

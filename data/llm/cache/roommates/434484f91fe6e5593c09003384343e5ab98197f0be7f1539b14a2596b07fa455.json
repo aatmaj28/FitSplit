@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your early sleep schedule works for me, and I’ll ensure my weekend guests respect the quiet hours after 10 PM.\n\nPFR:[slp_sched:Somewhere in between, wake:6am–8am]\nFLX:[gwk:1 guest per week|condition:Strictly quiet after 10 PM and small groups only]",
+  "created": "2026-10-15T16:46:55+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

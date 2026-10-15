@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I’m happy with the 9 pm bedtime, moderate cleaning, and occasional guests; I’ll keep my budget and cooking schedule consistent.  \nPFR:slp_sched=9 pm bedtime|cln=3(moderate)|guests=Occasional (≤1/month)|wfh=Hybrid (few days a week)|bd=1100-1450(flex+100_private)|cook=A few times a week|usp=Split equally|groc=Split basics  \nVRD:STRONG|open=none",
+  "created": "2026-10-15T16:21:18+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

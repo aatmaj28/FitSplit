@@ -1,0 +1,6 @@
+{
+  "value": "VRD:INCOMPATIBLE|r=Pet preference conflicts with non‑negotiable allergy/no‑pets requirement|open=none",
+  "created": "2026-10-15T15:55:40+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

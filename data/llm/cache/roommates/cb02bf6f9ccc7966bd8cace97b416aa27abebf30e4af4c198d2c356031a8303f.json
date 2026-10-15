@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 10,
+      "finances": 85,
+      "lifestyle": 15,
+      "personality": 40,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are students in the same Boston area (Fenway) with overlapping move-in timelines.",
+      "Budgets are highly compatible, with significant overlap between $1150 and $1450.",
+      "Both prefer to split bills and groceries equally."
+    ],
+    "concerns": [
+      "Jake smokes, which directly violates Priya's non-negotiable requirement for a non-smoking household.",
+      "Significant mismatch in cleanliness standards (Priya 4/5 vs Jake 2/5).",
+      "Lifestyle clash between Priya's quiet work environment and Jake's regular socializing and guest frequency."
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Priya has a strict non-negotiable for a non-smoking household, while Jake identifies as a smoker. This is a hard conflict that cannot be resolved.",
+    "middle_ground": [
+      "No viable middle ground exists for the smoking policy as it is a non-negotiable for Priya.",
+      "They could agree on a strict 'no smoking indoors' rule if Jake were willing to quit or smoke exclusively outside, but this is not a standard compromise for a 'non-smoking household' requirement."
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "This match is incompatible due to a direct conflict with Priya's non-negotiable requirement for a non-smoking household, as Jake is a smoker. Additionally, there are significant differences in cleanliness standards and social energy that would likely lead to friction."
+  },
+  "created": "2026-10-15T16:49:41+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

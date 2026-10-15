@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree to split utilities equally and use a rotating chore chart for shared spaces, which keeps things fair and simple.\n\nPFR:[usp:Split equally|cln:4(tidy)|clean_sched:Rotating chore chart]\nFLX:[clean_sched:Weekly rotating chart for kitchen and bathroom|condition:We both stick to the schedule]",
+  "created": "2026-10-15T16:33:45+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

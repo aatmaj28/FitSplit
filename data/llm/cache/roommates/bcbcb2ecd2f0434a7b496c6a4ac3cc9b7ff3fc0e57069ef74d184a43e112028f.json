@@ -1,0 +1,6 @@
+{
+  "value": "SAY: My hard cap is $1250, so we need rent near $1200 to make this work; I agree to split utilities and groceries equally.\n\nPFR:[bd:1250, dep:Yes, up to 1 month's rent, usp:Split equally, groc:Split basics (condiments, cleaning)]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:41:10+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

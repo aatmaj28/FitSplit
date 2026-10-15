@@ -121,6 +121,25 @@ def test_daily_quota_cools_provider_down(ledger, monkeypatch):
     assert len(groq_calls) == 1  # skipped while cooling down
 
 
-def test_default_chain_is_free_first():
-    assert [p for p, _ in text.TEXT_CHAIN] == ["groq", "groq", "groq", "gemini", "claude"]
-    assert text.TEXT_CHAIN[0][1] == "openai/gpt-oss-120b" and text.TEXT_CHAIN[-1][1] == "claude-sonnet-5-5"
+def test_default_chain_order():
+    # today's default puts Claude first (Groq / Gemini out of quota); the overnight order is one env var away
+    assert [p for p, _ in text.TEXT_CHAIN] == ["claude", "groq", "groq", "groq", "gemini"]
+    assert text.TEXT_CHAIN[0][1] == "claude-sonnet-5-5" and text.TEXT_CHAIN[1][1] == "openai/gpt-oss-120b"
+    overnight = [m for p in text.OVERNIGHT_ORDER.split(",") for m in text.PROVIDER_MODELS[p]]
+    assert [p for p, _ in overnight] == ["groq", "groq", "groq", "gemini", "claude"]
+
+
+def test_transient_errors_are_retried_on_the_same_provider(monkeypatch):
+    calls = []
+
+    def flaky(system, messages, **k):
+        calls.append(1)
+        if len(calls) < 3:
+            raise RuntimeError("APIConnectionError: Connection error.")
+        return "ok", {}
+
+    monkeypatch.setitem(text.CALLS, "claude", flaky)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    waits = []
+    res = text.complete("s", "u", json_mode=False, sleep=waits.append, chain=[("claude", "claude-sonnet-5-5")])
+    assert res.text == "ok" and len(calls) == 3 and waits == list(text.TRANSIENT_WAITS)

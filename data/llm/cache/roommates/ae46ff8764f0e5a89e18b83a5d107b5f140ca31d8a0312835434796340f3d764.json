@@ -1,0 +1,6 @@
+{
+  "value": "SAY: We're aligned on no indoor smoking and on valuing cleanliness, and the $1,360/mo share fits my budget, so I'd like to know your sleep schedule, cleaning habits and quiet hours.\n\nCNF:[smk:aligned(both no smoking indoors),cln:aligned(both prioritize similar cleanliness standards)]\nPFR:[ask_sofia:slp,cln(1-5),nzl,quiet_hours]\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:59:52+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

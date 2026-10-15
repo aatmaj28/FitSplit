@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I respect your need for quiet study time and am flexible on noise; please confirm your WFH schedule to ensure we balance our different rhythms.\n\nFLX:[nzl:Can limit loud gatherings to evenings only|condition:Respect quiet hours during your study blocks]\nPFR:[wfh:Hybrid (a few days a week)]",
+  "created": "2026-10-15T16:32:12+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

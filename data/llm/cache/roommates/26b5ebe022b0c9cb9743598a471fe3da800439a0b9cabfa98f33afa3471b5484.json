@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Rent at or under $1,400 works for me; I propose a weekly rotating chore chart, and I can shift my move-in date within the 1-3 month window to suit you.\n\nFLX:[chore:weekly rotating chart, kitchen and bathroom split evenly, swap weeks if either of us is swamped|we both agree on the list in week one]\nFLX:[mv:flexible anywhere in my 1-3 month window|you pick the date that fits your lease handoff]",
+  "created": "2026-10-15T16:57:33+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

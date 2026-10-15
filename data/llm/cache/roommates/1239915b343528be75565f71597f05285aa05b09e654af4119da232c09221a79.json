@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I confirm the 1-year lease and agree to the bi-weekly guest limit with strict quiet hours.\nPFR:lease=1-year lease|guests=Bi-weekly max|quiet=Pre-8am\nVRD:STRONG|r=Aligned on financials, chores, and social compromise|open=none",
+  "created": "2026-10-15T16:44:48+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

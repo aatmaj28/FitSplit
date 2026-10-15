@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I can't match your high cleanliness and strict quiet needs, as my lifestyle involves late-night guests and a relaxed cleaning style.\nCNF:[cln:INCOMPATIBLE(2_vs_4)|nzl:INCOMPATIBLE(Social_vs_Low)|gwk:INCOMPATIBLE(Weekly_vs_0-1)]\nFLX:[cln:Offer|I will keep my room tidy and handle trash/outdoor common areas]\nFLX:[nzl:Offer|I will wear headphones for guitar and keep guests out of shared spaces after 11pm]",
+  "created": "2026-10-15T16:26:53+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

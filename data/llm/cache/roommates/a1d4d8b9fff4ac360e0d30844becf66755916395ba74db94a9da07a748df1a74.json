@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Jake, a student in Fenway/Back Bay with a $1150-1500 budget, and I need to flag that I smoke, which conflicts with your non-negotiables.\n\nCNF:smk:conflict(I smoke vs your non-smoking household requirement)\nVRD:INCOMPATIBLE|r=Smoking policy is a hard non-negotiable for both parties|open=none",
+  "created": "2026-10-15T16:31:20+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

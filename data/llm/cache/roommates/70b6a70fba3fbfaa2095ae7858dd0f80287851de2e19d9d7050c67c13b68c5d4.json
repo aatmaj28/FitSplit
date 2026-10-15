@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I acknowledge the sleep schedule clash, but I am open to your bi-weekly guest compromise if strict early morning quiet hours are respected.\nPFR:guests=Never / very rarely,notice=Always give notice\nFLX:guests:Accept bi-weekly guest frequency|condition:Strict adherence to quiet hours (before 8am) and advance notice",
+  "created": "2026-10-15T16:42:50+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the weekly chore chart with the Sunday reset, and I'll keep late-night noise low after 10pm. With no non-negotiable conflicts, I see us as a strong match.\n\nCNF:[cln:resolved(3 vs 4 gap bridged by rotating chore chart, Sunday common-area reset, chores done by Sunday evening)]\nFLX:[nzl:I'm a night owl, so I'll use headphones and keep the kitchen and common areas quiet after 10pm|your before-8am quiet plan covers my 8-10am wake time]\nVRD:STRONG|r=No smoking or party conflicts, $1,360 rent fits your cap, and the guest, noise and cleaning arrangements are agreed|open=none",
+  "created": "2026-10-15T16:59:19+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

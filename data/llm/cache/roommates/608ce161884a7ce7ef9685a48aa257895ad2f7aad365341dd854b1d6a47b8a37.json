@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I agree to keep mornings quiet before 8am, with light kitchen noise only, and your plan works for me; I also prefer a moderate 68-72°F apartment temperature.\n\nFLX:[nzl:I keep mornings before 8am quiet (no loud noise, minimal kitchen clatter, headphones for podcasts)|you keep your after-10pm quiet-hours plan]\nPFR:[temp:moderate 68-72°F,sched:mostly consistent, out at the Kennedy School most days,quiet:headphones handle it]\n\n<<MOD:LIFESTYLE>>",
+  "created": "2026-10-15T16:58:45+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

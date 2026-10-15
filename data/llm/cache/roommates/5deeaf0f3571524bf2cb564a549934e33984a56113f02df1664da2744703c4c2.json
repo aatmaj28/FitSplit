@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'll split vegetarian staples with you and keep personal food separate, and I can keep rent at or under your $1,400 cap, so our budgets fit.\n\nFLX:[groc:split staples (rice, lentils, spices, oil) plus basics, keep personal items and snacks separate|log everything in Splitwise and settle monthly]\nCNF:[bd:ok(my range of 1100-1450 overlaps your 1100-1400 cap, so I'll target 1400 or less)]\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:57:20+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

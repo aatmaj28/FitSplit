@@ -1,0 +1,6 @@
+{
+  "value": "CNF:pet:conflict(User loves pets|Kavya allergic to pets, no pets allowed)  \nVRD:INCOMPATIBLE|r=Pet preference conflicts with non‑negotiable allergy/no‑pets requirement|open=none",
+  "created": "2026-10-15T15:55:07+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

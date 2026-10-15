@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Priya, a student looking in Boston (Fenway/Mission Hill), budget $1100-1450, moving in within 1–3 months; non-smoking household only, no pets but I love them. What about you?\n\nHI:[loc:Boston/Fenway/Mission Hill, mv:within 1–3 months, bd:1100-1450 (flex +100 for private room), smk:non-smoking household only, pet:none but love pets, nn:no smoking indoors/non-smoking household only]\nPFR:[rm:private room, pri:similar cleanliness standards/respectful of quiet and work time/budget compatibility]\nFLX:[mv:flexible on exact date|within the 1–3 month window]",
+  "created": "2026-10-15T16:53:31+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

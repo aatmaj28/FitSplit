@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your 4-guest cap and 10pm calls work; I split utilities equally, share grocery basics, cook daily in a vegetarian kitchen; how do you cook and split costs?\n\nPFR:[usp:split equally, groc:split basics only (condiments, cleaning supplies), dep:up to 1 month's rent, pay:shared app like Splitwise]\nPFR:[cook:daily, I cook most meals, kitchen:strict vegetarian, no meat cooked or stored in shared kitchen]\nCNF:[groc:check(are you fine splitting only basics?), cook:check(how often do you cook, and would you keep meat out of the kitchen?)]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:54:19+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

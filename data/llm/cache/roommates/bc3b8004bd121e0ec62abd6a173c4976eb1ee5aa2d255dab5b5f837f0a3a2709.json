@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I sleep after midnight, clean moderately, enjoy weekly guests, work from home a few days, and ask about your sleep, cleaning, guests, noise, and WFH habits.  \nPFR:slp_sched=Night owl (sleep after midnight)|cln=3(moderate)|guests=Regularly (weekly)|nzl=Social and lively|wfh=Hybrid (a few days a week)  \nPFR:pri=Matching social energy|Location match|Honest communication style",
+  "created": "2026-10-15T16:19:29+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

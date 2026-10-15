@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm  \n\n<<MOD:ROUTINES>>  \nI usually wake around 7 am, brew coffee, and head to campus by 8:30 am. Evenings are for study or a short workout; I keep the kitchen tidy and do a quick clean‑up after meals. I’m happy to coordinate chores weekly to keep the space at a 4/5 cleanliness level.  \n\nWhat’s your typical sleep window, cleaning routine, and any guest habits you foresee?  \n\nVRD:STRONG|r=Shared preferences on sleep, cleanliness, and low‑noise environment; awaiting your routine details|open=guest_policy specifics, daily routine coordination",
+  "created": "2026-10-15T15:56:37+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

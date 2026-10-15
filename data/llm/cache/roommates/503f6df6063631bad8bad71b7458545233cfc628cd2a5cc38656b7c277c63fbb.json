@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I noticed your pet situation aligns with my no-pet rule, but our move-in timing and budget ranges need clarification to proceed.\n\nPFR:[mv:1–3 months|bd:1000-1400]\nFLX:[mv:1-3 months|condition:Short-term lease availability]",
+  "created": "2026-10-15T16:35:09+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

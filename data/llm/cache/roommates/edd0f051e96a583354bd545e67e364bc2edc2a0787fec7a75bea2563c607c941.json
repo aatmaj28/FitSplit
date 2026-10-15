@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:SOCIAL>>\nSAY: My social schedule is fairly balanced; I have occasional weekend friends but always give notice and keep gatherings small.\nPFR:[guests:Occasionally (once a month or less)|notice:Always give notice|parties:Small gatherings only (< 10 people)]\nPFR:[nzl:Occasional friends over (weekends)]",
+  "created": "2026-10-15T16:23:41+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

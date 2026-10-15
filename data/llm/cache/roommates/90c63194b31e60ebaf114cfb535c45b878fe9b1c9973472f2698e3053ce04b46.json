@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I am a student seeking a private room in Fenway or Kenmore for $1000-$1400 with a 1-3 month move-in.\n\nHI:[loc:Boston/Fenway / Kenmore|mv:1–3 months|bd:1000-1400(flex+100_private)|rm:Private room|occ:Student]\nPFR:[pri:Similar cleanliness standards;Compatible sleep schedule;Honest communication style]\nPFR:[nn:No smoking indoors;No pets]",
+  "created": "2026-10-15T16:23:06+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

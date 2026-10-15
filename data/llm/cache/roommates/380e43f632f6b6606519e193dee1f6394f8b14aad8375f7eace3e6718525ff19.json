@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your terms work and the 1100-1250 budget overlap fits my cap, so I'm giving a conditional match, with two open items: your calls running to 10pm against my early bedtime, and how often you host gatherings.\n\nCNF:[slp:check(I sleep before 10pm and wake before 6am, so calls wrapping at 10pm are tight)]\nFLX:[nzl:calls and gatherings wrapped up by 9:30pm instead of 10pm|gatherings stay at once a month or less, as you said]\nVRD:CONDITIONAL|r=No non-negotiable conflicts: budget overlap fits my cap, no pets, non-smoking household. Cleanliness, chores, costs, and cooking are aligned, but my early sleep schedule needs quieter evenings.|open=call end time (9:30pm vs 10pm), gathering frequency",
+  "created": "2026-10-15T16:54:46+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

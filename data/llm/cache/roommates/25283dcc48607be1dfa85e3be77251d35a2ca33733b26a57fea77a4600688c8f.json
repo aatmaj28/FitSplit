@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your profile aligns well with my needs, but I need to confirm if your sleep schedule matches my quiet work hours.\n\nPFR:[slp:Quiet work hours, Compatible sleep schedule]\nFLX:[gwk:0 guests per week|condition:respecting quiet time]\nVRD:[STRONG]|r=[Shared non-negotiables and compatible location/budget]|open=[sleep schedule, cleanliness habits]",
+  "created": "2026-10-15T16:45:42+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

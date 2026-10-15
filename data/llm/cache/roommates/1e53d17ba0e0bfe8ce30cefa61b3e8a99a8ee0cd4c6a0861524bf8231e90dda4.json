@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I accept the weekly rotating chart with a bathroom slot each rotation, text notice the day before any guests, and keeping shared-space noise down after 9:30pm.\n\nFLX:[cln:I'll take a bathroom slot every rotation|you keep the kitchen wipe-down on your cooking days]\nFLX:[gwk:I'll text you the day before any guest visit|guests stay within the 4-person cap and end by 9pm]\nFLX:[nzl:shared-space noise stays down after 9:30pm, and my family calls stay in my room|your kitchen noise stays low before 7am]",
+  "created": "2026-10-15T16:54:40+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

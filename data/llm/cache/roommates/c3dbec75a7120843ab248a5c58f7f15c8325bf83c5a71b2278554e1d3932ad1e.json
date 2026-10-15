@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I require a 1-3 month stay, so the 6-month lease is a hard mismatch. I am an early bird, cook daily, and need a very quiet, guest-free environment.\n\nCNF:[mv:1-3 months max (conflict with 6-month requirement)]\nPFR:[slp:Early bird (sleep before 10pm, wake 6-8am)|cln:4|cook:Daily|gwk:Rarely|nzl:Very quiet|wfh:No]",
+  "created": "2026-10-15T16:35:41+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm Arjun, a student in Boston/Fenway, moving in within 1–3 months, budget $1,200–1,500, non-smoking, no pets, and no parties ever; our budgets overlap at $1,200–1,400.\n\nHI:[name:Arjun Reddy,occ:Student,loc:Boston/Fenway,mv:within 1–3 months,bd:1200-1500,smk:non-smoking household only,pet:none(love pets),nn:no smoking indoors;no parties ever]\nPFR:[pri:respectful of quiet/work time;similar cleanliness standards;budget compatibility]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T16:58:08+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

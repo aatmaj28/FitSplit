@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm glad quiet after 10pm and notice for parties work for me; I cook a few times a week, shower 15-30 minutes, and prefer 68-72°F, so let's stagger mornings.\n\nFLX:[gwk:Friday guests quiet after 10pm|always give notice, small gatherings under 10]\nPFR:[cook:a few times a week,bath_time:15-30 min,temp:68-72°F,social:4(extroverted)]\nCNF:[bath:minor overlap(both wake 6am-8am, shared bathroom)|stagger shower times]\n<<MOD:LIFESTYLE>>",
+  "created": "2026-10-15T17:00:15+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I cook a few times a week and agree to split basics; please confirm the chore chart details for shared spaces.\n\nPFR:[cook:A few times a week|groc:Split basics (condiments, cleaning)]\nFLX:[usp:Split equally|condition:Simple chore chart for shared spaces]",
+  "created": "2026-10-15T16:33:26+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b"
+}

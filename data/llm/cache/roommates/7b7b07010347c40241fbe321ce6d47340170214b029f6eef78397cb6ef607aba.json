@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I wake 6-8am with an in-between bedtime, cleanliness 4 with a chore chart, rare guests, hybrid work, and late-evening family calls that may clash with your early bedtime.\n\nPFR:[slp:in-between schedule, wake 6am-8am, cln:4 (tidy), rotating chore chart works, gwk:occasionally (once a month or less) with notice, small gatherings under 10, nzl:occasional friends over on weekends, wfh:hybrid (a few days a week), quiet time a few times a week]\nCNF:[slp:check(I call family in India late in the evening, which may overlap with your before-10pm bedtime)]\nFLX:[nzl:calls in my room, low volume|if you tell me your latest quiet-hours cutoff, I'll work around it]\n\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T16:53:58+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}
