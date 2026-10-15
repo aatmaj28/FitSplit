@@ -10,8 +10,10 @@ and a place in Boston). The product name lives in one constant: `frontend/src/br
   furniture fits, gets a fair rent split (with an AI check of its inputs) and applies together. The
   application lands in LeaseHub.
 
-Everything is sample data (fictional students, an agent and a sample realty, listings with facts only
-from `data/floorplans/meta.json`), and the whole demo works offline from bundled data.
+Honesty note (kept here, not in the UI): everything is sample data. The students, the agent (Dana
+Brooks) and the group chat messages are fictional; listing facts come only from
+`data/floorplans/meta.json`; syndication badges and 3D view counts are simulated. The whole demo
+works offline from bundled data in `frontend/public/demo/`.
 
 ## Quick start
 

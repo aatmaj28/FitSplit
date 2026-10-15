@@ -98,7 +98,7 @@ async function run(tag, { offline = false, phone = false } = {}) {
   check(true, `${tag}: JVUE 3 bed fits every budget`);
 
   // My matches: counts, incompatible toggle, replay
-  await page.getByRole("link", { name: /My matches/ }).click();
+  await page.getByRole("link", { name: /Matches/i }).click();
   await page.locator("[data-counts]").waitFor({ timeout: 10000 });
   check((await page.locator("[data-counts]").getAttribute("data-counts")) === "1,1,1", `${tag}: My matches counts 1 strong, 1 conditional, 1 incompatible`);
   check((await page.locator("[data-match]").count()) === 2, `${tag}: incompatible hidden by default`);

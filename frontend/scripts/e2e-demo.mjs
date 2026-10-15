@@ -43,6 +43,8 @@ async function flow(offline) {
   await page.goto(`${APP}/demo`);
   await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); });
   await page.goto(`${APP}/demo`);
+  await page.getByRole("button", { name: "Reset and start the demo" }).waitFor({ timeout: 15000 });
+  await page.waitForTimeout(1500); // the timeline fades in
   await shot("demo_start.png");
   await page.getByRole("button", { name: "Reset and start the demo" }).click();
   await page.waitForURL(/\/leasehub\/listings\/new/);
@@ -204,6 +206,11 @@ async function portalShots() {
   await page.waitForTimeout(300);
   await page.screenshot({ path: join(OUT, "roombae_replay.png") });
   await page.keyboard.press("Escape");
+  // the group chat: house rules pinned on top, the roommates' chat, each pair's replay
+  await go("/roombae/group-chat", 1500);
+  await page.locator("[data-house-rules] li").first().waitFor({ timeout: 10000 });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: join(OUT, "roombae_group_chat.png") });
   await go("/roombae/fill-room", 2500);
   await page.locator("[data-candidate='rohan']").click();
   await page.waitForTimeout(5000); // a few turns of Rohan + Arjun playing back
