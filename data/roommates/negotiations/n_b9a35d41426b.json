@@ -1,0 +1,136 @@
+{
+  "id": "n_b9a35d41426b",
+  "engine": "rm1",
+  "mode": "fill",
+  "a": {
+    "id": "kavya",
+    "name": "Kavya Nair"
+  },
+  "b": {
+    "id": "arjun",
+    "name": "Arjun Reddy"
+  },
+  "room": {
+    "plan": "jvue_3bed",
+    "unit_name": "JVUE 3 bed",
+    "rent_total": 4200,
+    "beds": 3,
+    "room_id": "r5",
+    "room_label": "Bedroom 2 (DREAM)",
+    "area_sqft": 196.1,
+    "share": 1360,
+    "private_bath": false,
+    "furniture": {
+      "items": [
+        "Twin bed",
+        "Desk",
+        "Bookshelf"
+      ],
+      "all_fit": true,
+      "free_sqft": 165.0,
+      "note": ""
+    },
+    "members": [
+      {
+        "profile_id": "arjun",
+        "name": "Arjun Reddy",
+        "room_label": "Bedroom 1 (DREAM)",
+        "share": 1352
+      },
+      {
+        "profile_id": "sofia",
+        "name": "Sofia Alvarez",
+        "room_label": "Bedroom 3 (DREAM)",
+        "share": 1488
+      }
+    ]
+  },
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "budget",
+          "ok": false,
+          "hard": true,
+          "detail": "$1,360/mo is above Kavya Nair's hard cap ($1,250)"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Twin bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "incompatible",
+        "reason": "$1,360/mo is above Kavya Nair's hard cap ($1,250)",
+        "unresolved_topics": [],
+        "source": "exact_check"
+      },
+      "analysis": null,
+      "checks": [
+        {
+          "id": "budget",
+          "ok": false,
+          "hard": true,
+          "detail": "$1,360/mo is above Kavya Nair's hard cap ($1,250)"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Twin bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 1
+    }
+  ],
+  "messages": [],
+  "checks": [
+    {
+      "id": "budget",
+      "ok": false,
+      "hard": true,
+      "detail": "$1,360/mo is above Kavya Nair's hard cap ($1,250)"
+    },
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "furniture",
+      "ok": true,
+      "hard": false,
+      "detail": "Twin bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+    }
+  ],
+  "result": {
+    "status": "incompatible",
+    "reason": "$1,360/mo is above Kavya Nair's hard cap ($1,250)",
+    "unresolved_topics": [],
+    "source": "exact_check"
+  },
+  "analysis": null,
+  "providers": {},
+  "created": "2026-10-15T09:11:01+00:00"
+}

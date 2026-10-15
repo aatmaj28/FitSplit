@@ -239,3 +239,17 @@ def test_analysis_dealbreaker_overrides_soft_verdict():
 
     out = engine.Negotiation(a, b, turn_llm=llm.turn, analysis_llm=analysis).run()
     assert (out["outcome"]["status"], out["outcome"]["source"]) == ("incompatible", "analysis")
+
+
+def test_lease_mismatch_caps_a_strong_verdict(store):
+    from app.roommates.checks import logistics_checks
+
+    p = {x["id"]: x for x in PROFILES}
+    checks = logistics_checks(p["priya"]["name"], p["priya"]["questionnaire"], p["meera"]["name"], p["meera"]["questionnaire"])
+    lease = next(c for c in checks if c["id"] == "lease")
+    assert not lease["ok"] and "1-year lease" in lease["detail"] and "6-month lease" in lease["detail"]
+    # Ananya lists lease length as flexible: fine
+    assert all(c["ok"] for c in logistics_checks("A", p["ananya"]["questionnaire"], "M", p["meera"]["questionnaire"]) if c["id"] == "lease")
+    rec = service.start("priya", "meera")  # the fake clones agree on everything ("strong" by analysis)
+    assert rec["result"]["status"] == "conditional" and rec["result"]["source"] == "exact_check"
+    assert "lease length" in rec["result"]["unresolved_topics"]

@@ -18,6 +18,7 @@ import numpy as np
 from . import cache
 from .config import PARSED_DIR, get_config
 from .debug import write_debug_images
+from .geometry import extras
 from .geometry.gaps import GapFills, find_gap_fills
 from .geometry.preprocess import Prepped, preprocess
 from .geometry.rooms import Segmentation, enclosed_floor, segment_rooms
@@ -375,6 +376,10 @@ def parse_floorplan(image_bytes: bytes, filename: Optional[str] = None, *, wall_
                   "holes": [_to_orig(hh, s) for hh in p["holes"]]} for k, p in enumerate(polys)]
     footprint = _footprint(seg, walls_3d, wr.mask, types, cfg)
     footprint_out = [_to_orig(p, s) for p in footprint]
+    # export-only extra for the 3D view (not used by anything above)
+    openings_out = [{"id": f"o{k + 1}", "kind": o["kind"], "axis": o["axis"], "polygon": _to_orig(o["rect"], s),
+                     "width_ft": _r(o["width_px"] / final_ppf)} for k, o in enumerate(extras.openings(fills.gaps, final_ppf, seg.door_px))
+                    ] if final_ppf else []
 
     # unit + sanity check
     unit = {
@@ -413,6 +418,7 @@ def parse_floorplan(image_bytes: bytes, filename: Optional[str] = None, *, wall_
         "walls": walls_out,
         "rooms": rooms_out,
         "footprint": footprint_out,
+        "openings": openings_out,
         "unit": unit,
         "warnings": warnings,
         # ---- extras beyond the spec (debugging, provenance, later steps)

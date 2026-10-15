@@ -87,9 +87,31 @@ def spurious_incompatible(text: str, a: dict, b: dict, budget_settled: bool) -> 
     return bool(reasons) and not any(reasons)
 
 
+# logistics both sides state exactly; a mismatch nobody is flexible on is still open after any chat
+LOGISTICS = (("lease_type", "Lease length", "lease", "{a} wants a {va}, {b} a {vb}"),
+             ("move_in_date", "Move-in date", "move_in", "{a} moves in {va}, {b} {vb}"))
+
+
+def logistics_checks(a_name: str, a: dict, b_name: str, b: dict) -> list[dict]:
+    """Soft checks (never end a match): a "strong" verdict is capped at "conditional" while one fails."""
+    out = []
+    for key, flex_item, cid, text in LOGISTICS:
+        va, vb = a.get("living", {}).get(key), b.get("living", {}).get(key)
+        if not va or not vb or va == vb or "No preference" in (va, vb) or "Flexible" in (va, vb):
+            continue
+        flexible = [n for n, q in ((a_name, a), (b_name, b)) if flex_item in (q.get("dealbreakers", {}).get("flexible_on") or [])]
+        detail = text.format(a=a_name.split(" ")[0], b=b_name.split(" ")[0], va=va.lower(), vb=vb.lower())
+        out.append({"id": cid, "ok": bool(flexible), "hard": False, "topic": flex_item.lower(),
+                    "detail": detail + (f"; {flexible[0].split(' ')[0]} is flexible on it" if flexible else "; neither is flexible on it")})
+    return out
+
+
 def exact_checks(candidate: dict, member: dict, room: Optional[RoomContext]) -> list[dict]:
-    """candidate / member: profiles {"name", "questionnaire"}."""
+    """candidate / member: profiles {"name", "questionnaire"}. Without a room ("find roommates") the
+    two also have to agree on lease terms; with a room the unit's lease is a given."""
     checks = [gender_check(candidate["name"], candidate["questionnaire"], member["name"], member["questionnaire"])]
+    if room is None:
+        checks += logistics_checks(candidate["name"], candidate["questionnaire"], member["name"], member["questionnaire"])
     if room:
         checks.insert(0, budget_check(candidate["name"], candidate["questionnaire"], room.share))
         if room.furniture is not None:

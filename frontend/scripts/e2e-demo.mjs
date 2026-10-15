@@ -25,7 +25,10 @@ async function flow(offline) {
   if (offline) await page.route("**/api/**", (r) => r.abort());
   const shot = async (name, locator) => {
     if (!shots || offline) return;
-    await (locator ?? page).screenshot({ path: join(OUT, name), ...(locator ? {} : { fullPage: false }) });
+    // element shots: the floating demo bar would cover the bottom of the element
+    if (locator) await page.addStyleTag({ content: "[data-demo-step]{visibility:hidden!important}" });
+    await (locator ?? page).screenshot({ path: join(OUT, name) });
+    if (locator) await page.addStyleTag({ content: "[data-demo-step]{visibility:visible!important}" });
   };
   const step = async (expect) => {
     if (expect) await page.waitForSelector(`[data-demo-step="${expect}"]`, { timeout: 5000 }).catch(() => {});
@@ -146,14 +149,18 @@ async function portalShots() {
   await page.screenshot({ path: join(OUT, "roombae_listings.png"), fullPage: true });
   await go("/roombae/fill-room", 2500);
   await page.locator("[data-candidate='rohan']").click();
+  await page.waitForTimeout(5000); // a few turns of Rohan + Arjun playing back
+  await page.screenshot({ path: join(OUT, "roombae_fill_room.png") });
   await page.getByRole("button", { name: "Skip to result" }).click();
   await page.waitForTimeout(800);
   await page.getByRole("tab", { name: /with Sofia/ }).click();
   await page.getByRole("button", { name: "Skip to result" }).click();
-  await page.locator("[data-group-verdict]").waitFor({ timeout: 10000 });
-  console.log("fill a room, Rohan:", await page.locator("[data-group-verdict]").getAttribute("data-group-verdict"));
+  const verdict = page.locator("[data-group-verdict]");
+  await verdict.waitFor({ timeout: 10000 });
+  console.log("fill a room, Rohan:", await verdict.getAttribute("data-group-verdict"));
   await page.waitForTimeout(1500);
-  await page.screenshot({ path: join(OUT, "roombae_fill_room.png"), fullPage: true });
+  await verdict.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: join(OUT, "roombae_fill_room_verdict.png") });
   await go("/leasehub/listings/jvue_3bed", 3500);
   await page.screenshot({ path: join(OUT, "leasehub_listing.png") });
   await page.close();

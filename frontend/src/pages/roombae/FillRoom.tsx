@@ -18,7 +18,7 @@ function Interview({ fill, member, candidate, onDone, watched }: { fill: Fill; m
   if (!n) return null;
   if (error) return <ErrorState title="Can't show this conversation">{error}</ErrorState>;
   if (!events.length) return <PageLoading label="Connecting the clones…" />;
-  return <NegotiationView key={n.id} events={events} animate={!watched} a={{ name: candidate.name, color: candidate.color }} b={{ name: member.name, color: member.color }} onDone={onDone} />;
+  return <NegotiationView key={n.id} events={events} animate={!watched} a={{ name: candidate.name, color: candidate.color }} b={{ name: member.name, color: member.color }} onDone={onDone} showChecks={false} />;
 }
 
 export default function FillRoom() {

@@ -1,0 +1,28 @@
+{
+  "value": {
+    "scores": {
+      "overall": 85,
+      "finances": 80,
+      "lifestyle": 88,
+      "personality": 84,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are non‑smoking households and have agreed on a strict no‑smoking rule",
+      "Sleep schedules align after discussion (both early‑night/early‑morning)",
+      "Cleanliness standards are comparable (4/5) and both are willing to rotate chores"
+    ],
+    "concerns": [
+      "Meera initially listed herself as a social drinker, but later clarified low noise after 10 pm and early‑night schedule, which may still feel slightly more social than Ananya’s very quiet preference",
+      "Pet preference mismatch (Meera loves pets but currently has none) could become an issue if she later wants a pet"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "The two profiles and their conversation show strong alignment on key criteria—non‑smoking, sleep schedule, cleanliness, and financial range—without any hard conflicts. Both parties have confirmed the no‑smoking rule and are willing to share chores, making a strong match appropriate."
+  },
+  "created": "2026-10-15T09:01:32+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

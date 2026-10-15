@@ -168,12 +168,14 @@ export function ResultCard({ result, analysis, checks }: { result: Outcome; anal
  * The clones' conversation. With `animate`, events play back like a live chat (typing dots, then
  * the message statement by statement); live SSE events simply keep extending `events`.
  */
-export function NegotiationView({ events, animate = true, a, b, onDone }: {
+export function NegotiationView({ events, animate = true, a, b, onDone, showChecks = true }: {
   events: NegotiationEvent[];
   animate?: boolean;
   a: { name: string; color: string };
   b: { name: string; color: string };
   onDone?: () => void;
+  /** off when the page shows the exact checks itself */
+  showChecks?: boolean;
 }) {
   const [speed, setSpeed] = useState(1);
   const [raw, setRaw] = useState(false);
@@ -248,7 +250,7 @@ export function NegotiationView({ events, animate = true, a, b, onDone }: {
         </div>
       </div>
 
-      {checks && checks.checks.length > 0 && (
+      {showChecks && checks && checks.checks.length > 0 && (
         <div className="rounded-xl bg-slate-50 px-3 py-2 ring-1 ring-slate-200">
           <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Exact checks</div>
           <ChecksList checks={checks.checks} />

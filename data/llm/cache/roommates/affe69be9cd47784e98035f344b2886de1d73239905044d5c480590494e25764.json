@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:CONDITIONAL|r=Here’s how I handle each area; let me know how you fit in.  \nPFR:slp=I usually finish studying around 1 AM and sleep until 8 AM. I’m okay with quiet after 10 PM and can shift to a 9 AM–5 PM quiet window if needed.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I’m happy to add a rotating cleaning rota.  \ngwk=I have a friend who visits about once a month; I’ll give a heads‑up and keep it low‑key.  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance?",
+  "created": "2026-10-15T09:08:49+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

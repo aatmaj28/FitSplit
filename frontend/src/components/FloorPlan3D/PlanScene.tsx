@@ -122,7 +122,7 @@ export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight,
             onHover={setHoverId}
           />
         ))}
-        <Walls model={model} height={wallHeight} ghost={show2D} cut={cut} />
+        <Walls model={model} height={wallHeight} ghost={show2D} cut={cut} openings={view === "3d"} />
         {show2D && imageUrl && <PlanImage model={model} url={imageUrl} />}
         {furniture && (
           <FurnitureLayer
@@ -463,7 +463,8 @@ function Ground({ model }: { model: PlanModel }) {
   );
 }
 
-/** One continuous floor under walls + hallways (rooms sit on top of it). */
+/** One continuous floor under walls + hallways (rooms sit on top of it): any floor no room covers
+ *  shows the slab, in the neutral hallway color. */
 function Slab({ model }: { model: PlanModel }) {
   const geos = useMemo(() => model.footprint.map((p) => flatGeometry(p)), [model]);
   useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
@@ -586,7 +587,41 @@ function withCutaway<M extends THREE.Material>(mat: M, uniforms: CutUniforms, de
   return mat;
 }
 
-function Walls({ model, height, ghost, cut }: { model: PlanModel; height: number; ghost: boolean; cut: Cut | null }) {
+// doors and windows (ft): heads line up, windows sit on a sill
+const HEAD_FT = 6.9;
+const SILL_FT = 2.8;
+const FRAME = "#9a7b5e";
+const GLASS = "#a9d6ea";
+
+type Piece = { size: [number, number, number]; pos: [number, number, number] };
+
+/** Boxes that turn the parser's openings into doors and windows: the wall above every opening, the
+ *  sill below windows (both cut away like walls), glass, and door frames. */
+function openingPieces(model: PlanModel, height: number): { wall: Piece[]; glass: Piece[]; frame: Piece[] } {
+  const head = Math.min(HEAD_FT, height - 0.3);
+  const wall: Piece[] = [], glass: Piece[] = [], frame: Piece[] = [];
+  for (const o of model.openings) {
+    const along = o.axis === "h" ? o.x1 - o.x0 : o.z1 - o.z0;
+    const deep = o.axis === "h" ? o.z1 - o.z0 : o.x1 - o.x0;
+    const [cx, cz] = [(o.x0 + o.x1) / 2, (o.z0 + o.z1) / 2];
+    const box = (l: number, h: number, d: number, y: number, shift = 0): Piece => ({
+      size: o.axis === "h" ? [l, h, d] : [d, h, l],
+      pos: o.axis === "h" ? [cx + shift, y, cz] : [cx, y, cz + shift],
+    });
+    if (height - head > 0.05) wall.push(box(along, height - head, deep, (head + height) / 2));
+    if (o.kind === "window") {
+      wall.push(box(along, SILL_FT, deep, SILL_FT / 2));
+      glass.push(box(along, head - SILL_FT, 0.05, (SILL_FT + head) / 2));
+      frame.push(box(along, 0.1, deep * 0.6, SILL_FT + 0.05), box(along, 0.1, deep * 0.6, head - 0.05));
+    } else if (o.kind === "door" && along > 0.6) {
+      const post = 0.12;
+      frame.push(box(post, head, deep, head / 2, -along / 2 + post / 2), box(post, head, deep, head / 2, along / 2 - post / 2), box(along, 0.14, deep, head - 0.07));
+    }
+  }
+  return { wall, glass, frame };
+}
+
+function Walls({ model, height, ghost, cut, openings }: { model: PlanModel; height: number; ghost: boolean; cut: Cut | null; openings: boolean }) {
   const geos = useMemo(() => model.walls.map((w) => wallGeometry(w.outer, w.holes)), [model]);
   useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
   const uniforms = useMemo<CutUniforms>(
@@ -598,7 +633,9 @@ function Walls({ model, height, ghost, cut }: { model: PlanModel; height: number
     [uniforms],
   );
   const depthMat = useMemo(() => withCutaway(new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking }), uniforms, true), [uniforms]);
-  useEffect(() => () => [...mats, depthMat].forEach((m) => m.dispose()), [mats, depthMat]);
+  // door frames fade with the walls they sit in
+  const frameMat = useMemo(() => withCutaway(new THREE.MeshStandardMaterial({ color: FRAME, roughness: 0.7, transparent: true }), uniforms, false), [uniforms]);
+  useEffect(() => () => [...mats, depthMat, frameMat].forEach((m) => m.dispose()), [mats, depthMat, frameMat]);
   useEffect(() => {
     for (const m of mats) {
       m.opacity = ghost ? 0.45 : 1; // see-through walls while the 2D plan is shown, so the drawn walls stay visible
@@ -614,13 +651,32 @@ function Walls({ model, height, ghost, cut }: { model: PlanModel; height: number
       uniforms.uCutY.value = cut.y;
     }
   });
+  const pieces = useMemo(() => (openings ? openingPieces(model, height) : { wall: [], glass: [], frame: [] }), [model, height, openings]);
   // drawn after the floor plates / doorway zones (transparent too), so those show through faded walls
   return (
-    <group scale={[1, height, 1]}>
-      {geos.map((g, i) => (
-        <mesh key={i} geometry={g} material={mats} customDepthMaterial={depthMat} castShadow={!ghost} receiveShadow renderOrder={10} />
+    <>
+      <group scale={[1, height, 1]}>
+        {geos.map((g, i) => (
+          <mesh key={i} geometry={g} material={mats} customDepthMaterial={depthMat} castShadow={!ghost} receiveShadow renderOrder={10} />
+        ))}
+      </group>
+      {pieces.wall.map((p, i) => (
+        <mesh key={`w${i}`} position={p.pos} material={mats[1]} customDepthMaterial={depthMat} castShadow={!ghost} receiveShadow renderOrder={10}>
+          <boxGeometry args={p.size} />
+        </mesh>
       ))}
-    </group>
+      {pieces.frame.map((p, i) => (
+        <mesh key={`f${i}`} position={p.pos} material={frameMat} customDepthMaterial={depthMat} castShadow receiveShadow renderOrder={10}>
+          <boxGeometry args={p.size} />
+        </mesh>
+      ))}
+      {pieces.glass.map((p, i) => (
+        <mesh key={`g${i}`} position={p.pos} renderOrder={11}>
+          <boxGeometry args={p.size} />
+          <meshStandardMaterial color={GLASS} transparent opacity={0.38} roughness={0.08} metalness={0.1} depthWrite={false} />
+        </mesh>
+      ))}
+    </>
   );
 }
 

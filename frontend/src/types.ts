@@ -53,6 +53,10 @@ export interface ParsedPlan {
   walls: Wall[];
   rooms: Room[];
   footprint?: Pt[][];
+  /** floor inside the unit that no room covers (halls), opened so wall-side slivers are gone */
+  hallways?: { polygon: Pt[]; area_sqft: number }[];
+  /** door / window gaps the parser found in the walls (original-image px) */
+  openings?: Opening[];
   unit: Unit;
   warnings: string[];
   cached?: boolean;
@@ -65,4 +69,12 @@ export interface PlanSummary {
   rooms?: number;
   semantics_provider?: string;
   thumbnail_url?: string;
+}
+
+export interface Opening {
+  id: string;
+  kind: "door" | "window" | "opening"; // opening: wider than a door (archway, open-plan boundary)
+  axis: "h" | "v"; // h: gap in a horizontal wall (spans x), v: in a vertical wall (spans y)
+  polygon: Pt[]; // rectangle in original-image px
+  width_ft: number;
 }

@@ -1,0 +1,412 @@
+{
+  "id": "n_43ec9850ce60",
+  "engine": "rm1",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "ananya",
+    "name": "Ananya Iyer"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\n<<MOD:FINANCIAL>>\nVRD:CONDITIONAL|r=Awaiting your budget and utility split details|open=financial terms\u0000",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Shared sleep window and cleanliness level; guest policy flexible with condition|open=none",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nCNF:gwk:status(Aligned) (I prefer no regular guests; occasional close‑friend visits okay)\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows and cleanliness match; guest policy compatible with minor flexibility|open=none",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Our sleep windows, cleanliness rating, and guest limits align; I’m open to occasional quiet visits|open=Please share your daily routine, kitchen use, and any preferred cleaning schedule.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nPFR:cook=Daily – I prepare most meals; kitchen use shared, happy to cook together occasionally|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=15‑30 min\nCNF:none:status(Aligned)\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows, cleanliness rating, and guest policy all align; please share your typical daily routine, kitchen habits, and preferred cleaning schedule\u0000",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, open to cooking together a few times a week|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=Under 15 min\nFLX:clean_sched=Flexible to a bi‑weekly chore rotation if you prefer fewer schedule checks|condition=Both parties confirm completion via a shared checklist\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00, and give a heads‑up 12 hrs in advance\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; compromises offered on chore frequency and guest notifications|open=Please confirm if the bi‑weekly chore option works for you and share any other routine preferences.",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=Flexible to add a few evenings (up to 2 days /week) if you need quiet work time, provided I’m not cooking at that moment\nFLX:gwk=1|condition=Close‑friend visits only, no overnight stays after 22:00, heads‑up 12 hrs prior\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables upheld; compromises on chore frequency, guest notice, and occasional WFH evenings accepted|open=none",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=Flexible to add a few evenings (up to 2 days /week) if you need quiet work time, provided I’m not cooking at that moment\nFLX:gwk=1|condition=Close‑friend visits only, no overnight stays after 22:00, heads‑up 12 hrs prior\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables upheld; compromises on chore frequency, guest notice, and occasional WFH evenings accepted|open=none",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=I can extend quiet‑work evenings to 2 days /week if you let me know the evenings you’ll be cooking so I can plan around it\nFLX:clean_sched=If you prefer a weekly rotation instead, we can keep a simple checklist and rotate tasks each Sunday\nCNF:none:status(Aligned)\n<<DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; flexible options offered for WFH evenings and chore rotation|open=none",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=I can extend quiet‑work evenings to 2 days /week if you let me know the evenings you’ll be cooking so I can plan around it\nFLX:clean_sched=If you prefer a weekly rotation instead, we can keep a simple checklist and rotate tasks each Sunday\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; flexible options offered for WFH evenings and chore rotation|open=none",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "VRD:STRONG MATCH|r=All preferences, non‑negotiables, and flexible compromises align; ready to move forward together.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:08:29+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 92,
+          "finances": 95,
+          "lifestyle": 90,
+          "personality": 93,
+          "logistics": 94
+        },
+        "highlights": [
+          "Identical rent range and split‑equally budget",
+          "Matching sleep windows (22:00‑07:00) and quiet evenings",
+          "Both prefer non‑smoking, no pets in the home"
+        ],
+        "concerns": [
+          "Priya mentions loving pets while Ananya prefers no pets – resolved by agreeing no pets in the house",
+          "Slight difference in preferred chore rotation (weekly vs bi‑weekly) – both accepted flexible schedule",
+          "Ananya drinks never vs Priya drinks socially – low‑impact social difference"
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Agree on a bi‑weekly chore rotation with a shared checklist (flexible to weekly if needed)",
+          "Limit guest visits to close friends, no overnight stays after 22:00 with 12‑hour notice"
+        ],
+        "recommendation": "strong",
+        "recommendation_summary": "Priya and Ananya align on budget, sleep schedule, cleanliness, and non‑negotiables. Minor differences around pets, chore frequency, and drinking habits have been mutually accommodated, making this a strong roommate match."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\n<<MOD:FINANCIAL>>\nVRD:CONDITIONAL|r=Awaiting your budget and utility split details|open=financial terms\u0000",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Shared sleep window and cleanliness level; guest policy flexible with condition|open=none",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nCNF:gwk:status(Aligned) (I prefer no regular guests; occasional close‑friend visits okay)\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows and cleanliness match; guest policy compatible with minor flexibility|open=none",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Our sleep windows, cleanliness rating, and guest limits align; I’m open to occasional quiet visits|open=Please share your daily routine, kitchen use, and any preferred cleaning schedule.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nPFR:cook=Daily – I prepare most meals; kitchen use shared, happy to cook together occasionally|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=15‑30 min\nCNF:none:status(Aligned)\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows, cleanliness rating, and guest policy all align; please share your typical daily routine, kitchen habits, and preferred cleaning schedule\u0000",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, open to cooking together a few times a week|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=Under 15 min\nFLX:clean_sched=Flexible to a bi‑weekly chore rotation if you prefer fewer schedule checks|condition=Both parties confirm completion via a shared checklist\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00, and give a heads‑up 12 hrs in advance\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; compromises offered on chore frequency and guest notifications|open=Please confirm if the bi‑weekly chore option works for you and share any other routine preferences.",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=Flexible to add a few evenings (up to 2 days /week) if you need quiet work time, provided I’m not cooking at that moment\nFLX:gwk=1|condition=Close‑friend visits only, no overnight stays after 22:00, heads‑up 12 hrs prior\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables upheld; compromises on chore frequency, guest notice, and occasional WFH evenings accepted|open=none",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=Flexible to add a few evenings (up to 2 days /week) if you need quiet work time, provided I’m not cooking at that moment\nFLX:gwk=1|condition=Close‑friend visits only, no overnight stays after 22:00, heads‑up 12 hrs prior\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables upheld; compromises on chore frequency, guest notice, and occasional WFH evenings accepted|open=none",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=I can extend quiet‑work evenings to 2 days /week if you let me know the evenings you’ll be cooking so I can plan around it\nFLX:clean_sched=If you prefer a weekly rotation instead, we can keep a simple checklist and rotate tasks each Sunday\nCNF:none:status(Aligned)\n<<DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; flexible options offered for WFH evenings and chore rotation|open=none",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=I can extend quiet‑work evenings to 2 days /week if you let me know the evenings you’ll be cooking so I can plan around it\nFLX:clean_sched=If you prefer a weekly rotation instead, we can keep a simple checklist and rotate tasks each Sunday\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; flexible options offered for WFH evenings and chore rotation|open=none",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "VRD:STRONG MATCH|r=All preferences, non‑negotiables, and flexible compromises align; ready to move forward together.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:08:29+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 90,
+      "personality": 93,
+      "logistics": 94
+    },
+    "highlights": [
+      "Identical rent range and split‑equally budget",
+      "Matching sleep windows (22:00‑07:00) and quiet evenings",
+      "Both prefer non‑smoking, no pets in the home"
+    ],
+    "concerns": [
+      "Priya mentions loving pets while Ananya prefers no pets – resolved by agreeing no pets in the house",
+      "Slight difference in preferred chore rotation (weekly vs bi‑weekly) – both accepted flexible schedule",
+      "Ananya drinks never vs Priya drinks socially – low‑impact social difference"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on a bi‑weekly chore rotation with a shared checklist (flexible to weekly if needed)",
+      "Limit guest visits to close friends, no overnight stays after 22:00 with 12‑hour notice"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Ananya align on budget, sleep schedule, cleanliness, and non‑negotiables. Minor differences around pets, chore frequency, and drinking habits have been mutually accommodated, making this a strong roommate match."
+  },
+  "providers": {
+    "cache": 14
+  },
+  "created": "2026-10-15T09:08:29+00:00",
+  "ignored_verdicts": [
+    11
+  ]
+}

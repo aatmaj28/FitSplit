@@ -212,7 +212,7 @@ def decide(conversation: list[dict], spurious: Callable[[str], bool] = lambda t:
     last: dict[str, dict] = {}
     for m in conversation:
         v = parse_vrd(m["message"])
-        if v and not (v["status"] == "incompatible" and spurious(m["message"])):
+        if v and not (v["status"] == "incompatible" and spurious(v["reason"] or m["message"])):
             last[m["speaker_id"]] = v
     if last:
         vs = list(last.values())

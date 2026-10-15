@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early night, wake around 7 am|cln=4/5, tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions at home|nzl=Low noise after 10 pm\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nCNF:smk=Non-smoking household only|r=Non-smoking is a hard limit for me\nVRD:CONDITIONAL|r=We align on location, cleanliness, sleep schedule, and noise level. The only potential friction is the non-smoking requirement; if that’s acceptable to you, we can move forward.",
+  "created": "2026-10-15T08:59:22+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

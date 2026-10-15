@@ -5,7 +5,7 @@
 import pc from "polygon-clipping";
 import type { MultiPolygon, Polygon, Ring } from "polygon-clipping";
 import type { Pt, RoomType } from "../../types";
-import type { PlanModel } from "./geometry";
+import type { ModelOpening, PlanModel } from "./geometry";
 
 export const IN = 1 / 12; // feet per inch
 export const GRID_FT = 0.25; // 3 inch snap
@@ -163,11 +163,13 @@ export class FitChecker {
   readonly walls: { poly: Polygon; box: Box }[];
   readonly rooms = new Map<string, RoomGeo>();
   private readonly footprint: Pt[][];
+  private readonly openings: ModelOpening[];
   private readonly doorCache = new Map<string, Doorway[]>();
 
   constructor(model: PlanModel) {
     this.walls = model.walls.map((w) => ({ poly: [w.outer as Ring, ...(w.holes as Ring[])], box: boxOf(w.outer) }));
     this.footprint = model.footprint;
+    this.openings = model.openings ?? [];
     for (const { room, poly } of model.rooms) {
       this.rooms.set(room.id, {
         id: room.id,
@@ -205,13 +207,45 @@ export class FitChecker {
     return false;
   }
 
-  /**
-   * Openings of a room: stretches of its outline with no wall next to them (doors, archways,
-   * closet fronts). Ones that lead out of the building are windows and are dropped. Cached.
-   */
+  /** Doorways of a room: the parser's doors on its walls, plus outline gaps they don't cover (closet
+   *  fronts drawn as dashed lines aren't wall gaps to the parser). Cached. */
   doorways(roomId: string): Doorway[] {
     const cached = this.doorCache.get(roomId);
     if (cached) return cached;
+    const fromPlan = this.planDoorways(roomId);
+    const overlapsPlan = (d: Doorway) =>
+      fromPlan.some((p) => overlaps(boxOf(p.zone as Pt[]), boxOf(d.zone as Pt[])) && multiArea(pc.intersection([p.zone], [d.zone])) > 0.5);
+    const out = [...fromPlan, ...this.outlineDoorways(roomId).filter((d) => !overlapsPlan(d))];
+    this.doorCache.set(roomId, out);
+    return out;
+  }
+
+  /** The keep-clear strip in front of each parser door / opening that has this room on one side. */
+  private planDoorways(roomId: string): Doorway[] {
+    const out: Doorway[] = [];
+    for (const o of this.openings) {
+      if (o.kind === "window") continue;
+      const side = o.sides[0] === roomId ? 0 : o.sides[1] === roomId ? 1 : -1;
+      if (side < 0) continue;
+      const lip = 0.2; // the strip starts a little inside the door gap
+      let zone: Ring;
+      if (o.axis === "h") {
+        const [za, zb] = side === 1 ? [o.z1 - lip, o.z1 + CLEAR_FT] : [o.z0 - CLEAR_FT, o.z0 + lip];
+        zone = [[o.x0, za], [o.x1, za], [o.x1, zb], [o.x0, zb]];
+      } else {
+        const [xa, xb] = side === 1 ? [o.x1 - lip, o.x1 + CLEAR_FT] : [o.x0 - CLEAR_FT, o.x0 + lip];
+        zone = [[xa, o.z0], [xb, o.z0], [xb, o.z1], [xa, o.z1]];
+      }
+      out.push({ roomId, to: o.sides[1 - side], width: o.axis === "h" ? o.x1 - o.x0 : o.z1 - o.z0, zone });
+    }
+    return out;
+  }
+
+  /**
+   * Fallback: stretches of the room outline with no wall next to them (doors, archways, closet
+   * fronts). Ones that lead out of the building are windows and are dropped.
+   */
+  private outlineDoorways(roomId: string): Doorway[] {
     const out: Doorway[] = [];
     const room = this.rooms.get(roomId);
     if (room) {
@@ -268,7 +302,6 @@ export class FitChecker {
         out.push({ roomId, to, width, zone });
       }
     }
-    this.doorCache.set(roomId, out);
     return out;
   }
 

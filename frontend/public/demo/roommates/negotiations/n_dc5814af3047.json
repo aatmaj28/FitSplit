@@ -1,0 +1,448 @@
+{
+  "id": "n_dc5814af3047",
+  "engine": "rm1",
+  "mode": "find",
+  "a": {
+    "id": "ananya",
+    "name": "Ananya Iyer"
+  },
+  "b": {
+    "id": "meera",
+    "name": "Meera Patel"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": true,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": false,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches initial criteria|open=none",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=Within 1 month|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=Love pets but none|drink=Socially|slp=Flexible|cln=4|gwk=0|usp=Equal|groc=Shared|dep=200|wfh=Occasional|nzl=Low|cf=Open|pri=Matching social energy;Location match;Honest communication style|nn=Non-smoking household only  \nPFR:pri=Matching social energy;Location match;Honest communication style  \nVRD:STRONG|r=Profile aligns with your stated criteria|open=none",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches your criteria|open=none",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, prefer tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions at home|nzl=Low noise after 10 pm  \nPFR:pri=Matching social energy;Honest communication style;Location match  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and need the same for comfort.  \nVRD:CONDITIONAL|r=We align on location, cleanliness, and social energy; the main friction is my non-smoking requirement, which is a hard limit. If that’s acceptable, we’re good to go.",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions at home|nzl=Low noise after 10 pm\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nCNF:smk=Non-smoking household only|r=Non-smoking is a hard limit for me\nVRD:CONDITIONAL|r=We align on location, cleanliness, sleep schedule, and noise level. The only potential friction is the non-smoking requirement; if that’s acceptable to you, we can move forward.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nPFR:pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style  \n<<MOD:ROUTINES>>",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions|nzl=Low noise after 10 pm\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\n<<MOD:ROUTINES>>",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit.  \nFLX:If you’re comfortable with a strict no-smoking rule, I could also agree to keep the kitchen area smoke-free for any guests.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which I can’t waive. If that’s acceptable, we can move forward.",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "CNF:smk=Non-smoking household only|r=Non-smoking is a hard limit for me; I cannot accommodate smoking indoors\nFLX:cln=4/5, I could adopt a rotating chore chart with you, allocating 2 days per week for shared spaces; if you agree, I’ll handle the kitchen cleanup after each use\nFLX:slp=Early night, I could adjust my wake time to 6:30 am if you need a bit more quiet in the morning, but I’ll still keep noise low after 10 pm\nVRD:CONDITIONAL|r=We align on sleep schedule, cleanliness, and social energy. The only friction is the non-smoking requirement, which is non-negotiable. If that’s acceptable, we can proceed.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit for me.  \nFLX:cln=I can adopt a rotating chore chart—2 days per week for shared spaces—and handle kitchen cleanup after each use.  \nFLX:slp=I can shift my wake time to 6:30 am if that helps with morning quiet, while keeping noise low after 10 pm.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which is non-negotiable. If that’s acceptable, we can proceed.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "CNF:smk=Non‑smoking household only|r=I’m in a non‑smoking household and that’s a hard limit for me\nFLX:cln=I can adopt a rotating chore chart—2 days per week for shared spaces—and handle kitchen cleanup after each use\nFLX:slp=I can shift my wake time to 6:30 am if that helps with morning quiet, while keeping noise low after 10 pm\nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non‑smoking requirement, which is non‑negotiable. If that’s acceptable, we can proceed.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "VRD:STRONG MATCH|r=All key criteria align—sleep schedule, cleanliness, social energy, and the non‑smoking rule is respected. We’re ready to move forward.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "VRD:STRONG MATCH|r=All key criteria align—sleep schedule, cleanliness, social energy, and the non‑smoking rule is respected. We’re ready to move forward.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:08:37+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "conditional",
+        "source": "exact_check",
+        "reason": "The clones agreed on everything else, but move-in date is still open: Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it.",
+        "unresolved_topics": [
+          "move-in date"
+        ]
+      },
+      "analysis": {
+        "scores": {
+          "overall": 85,
+          "finances": 80,
+          "lifestyle": 88,
+          "personality": 84,
+          "logistics": 90
+        },
+        "highlights": [
+          "Both are non‑smoking households and have agreed on a strict no‑smoking rule",
+          "Sleep schedules align after discussion (both early‑night/early‑morning)",
+          "Cleanliness standards are comparable (4/5) and both are willing to rotate chores"
+        ],
+        "concerns": [
+          "Meera initially listed herself as a social drinker, but later clarified low noise after 10 pm and early‑night schedule, which may still feel slightly more social than Ananya’s very quiet preference",
+          "Pet preference mismatch (Meera loves pets but currently has none) could become an issue if she later wants a pet"
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [],
+        "recommendation": "strong",
+        "recommendation_summary": "The two profiles and their conversation show strong alignment on key criteria—non‑smoking, sleep schedule, cleanliness, and financial range—without any hard conflicts. Both parties have confirmed the no‑smoking rule and are willing to share chores, making a strong match appropriate."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "lease",
+          "ok": true,
+          "hard": false,
+          "topic": "lease length",
+          "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+        },
+        {
+          "id": "move_in",
+          "ok": false,
+          "hard": false,
+          "topic": "move-in date",
+          "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches initial criteria|open=none",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=Within 1 month|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=Love pets but none|drink=Socially|slp=Flexible|cln=4|gwk=0|usp=Equal|groc=Shared|dep=200|wfh=Occasional|nzl=Low|cf=Open|pri=Matching social energy;Location match;Honest communication style|nn=Non-smoking household only  \nPFR:pri=Matching social energy;Location match;Honest communication style  \nVRD:STRONG|r=Profile aligns with your stated criteria|open=none",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches your criteria|open=none",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, prefer tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions at home|nzl=Low noise after 10 pm  \nPFR:pri=Matching social energy;Honest communication style;Location match  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and need the same for comfort.  \nVRD:CONDITIONAL|r=We align on location, cleanliness, and social energy; the main friction is my non-smoking requirement, which is a hard limit. If that’s acceptable, we’re good to go.",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions at home|nzl=Low noise after 10 pm\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nCNF:smk=Non-smoking household only|r=Non-smoking is a hard limit for me\nVRD:CONDITIONAL|r=We align on location, cleanliness, sleep schedule, and noise level. The only potential friction is the non-smoking requirement; if that’s acceptable to you, we can move forward.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nPFR:pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style  \n<<MOD:ROUTINES>>",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=Early night, wake around 7 am|cln=4/5, tidy shared spaces|gwk=0 guests|wfh=Occasional study sessions|nzl=Low noise after 10 pm\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\n<<MOD:ROUTINES>>",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit.  \nFLX:If you’re comfortable with a strict no-smoking rule, I could also agree to keep the kitchen area smoke-free for any guests.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which I can’t waive. If that’s acceptable, we can move forward.",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "CNF:smk=Non-smoking household only|r=Non-smoking is a hard limit for me; I cannot accommodate smoking indoors\nFLX:cln=4/5, I could adopt a rotating chore chart with you, allocating 2 days per week for shared spaces; if you agree, I’ll handle the kitchen cleanup after each use\nFLX:slp=Early night, I could adjust my wake time to 6:30 am if you need a bit more quiet in the morning, but I’ll still keep noise low after 10 pm\nVRD:CONDITIONAL|r=We align on sleep schedule, cleanliness, and social energy. The only friction is the non-smoking requirement, which is non-negotiable. If that’s acceptable, we can proceed.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit for me.  \nFLX:cln=I can adopt a rotating chore chart—2 days per week for shared spaces—and handle kitchen cleanup after each use.  \nFLX:slp=I can shift my wake time to 6:30 am if that helps with morning quiet, while keeping noise low after 10 pm.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which is non-negotiable. If that’s acceptable, we can proceed.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "CNF:smk=Non‑smoking household only|r=I’m in a non‑smoking household and that’s a hard limit for me\nFLX:cln=I can adopt a rotating chore chart—2 days per week for shared spaces—and handle kitchen cleanup after each use\nFLX:slp=I can shift my wake time to 6:30 am if that helps with morning quiet, while keeping noise low after 10 pm\nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non‑smoking requirement, which is non‑negotiable. If that’s acceptable, we can proceed.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "VRD:STRONG MATCH|r=All key criteria align—sleep schedule, cleanliness, social energy, and the non‑smoking rule is respected. We’re ready to move forward.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "VRD:STRONG MATCH|r=All key criteria align—sleep schedule, cleanliness, social energy, and the non‑smoking rule is respected. We’re ready to move forward.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:08:37+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "lease",
+      "ok": true,
+      "hard": false,
+      "topic": "lease length",
+      "detail": "Ananya wants a 1-year lease, Meera a 6-month lease; Ananya is flexible on it"
+    },
+    {
+      "id": "move_in",
+      "ok": false,
+      "hard": false,
+      "topic": "move-in date",
+      "detail": "Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it"
+    }
+  ],
+  "result": {
+    "status": "conditional",
+    "source": "exact_check",
+    "reason": "The clones agreed on everything else, but move-in date is still open: Ananya moves in 1–3 months, Meera within 1 month; neither is flexible on it.",
+    "unresolved_topics": [
+      "move-in date"
+    ]
+  },
+  "analysis": {
+    "scores": {
+      "overall": 85,
+      "finances": 80,
+      "lifestyle": 88,
+      "personality": 84,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both are non‑smoking households and have agreed on a strict no‑smoking rule",
+      "Sleep schedules align after discussion (both early‑night/early‑morning)",
+      "Cleanliness standards are comparable (4/5) and both are willing to rotate chores"
+    ],
+    "concerns": [
+      "Meera initially listed herself as a social drinker, but later clarified low noise after 10 pm and early‑night schedule, which may still feel slightly more social than Ananya’s very quiet preference",
+      "Pet preference mismatch (Meera loves pets but currently has none) could become an issue if she later wants a pet"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "The two profiles and their conversation show strong alignment on key criteria—non‑smoking, sleep schedule, cleanliness, and financial range—without any hard conflicts. Both parties have confirmed the no‑smoking rule and are willing to share chores, making a strong match appropriate."
+  },
+  "providers": {
+    "cache": 14
+  },
+  "created": "2026-10-15T09:08:37+00:00",
+  "ignored_verdicts": []
+}

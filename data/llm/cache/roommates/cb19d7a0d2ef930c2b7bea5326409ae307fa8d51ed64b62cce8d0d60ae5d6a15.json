@@ -1,0 +1,28 @@
+{
+  "value": {
+    "scores": {
+      "overall": 90,
+      "finances": 80,
+      "lifestyle": 85,
+      "personality": 80,
+      "logistics": 90
+    },
+    "highlights": [
+      "Budget overlap 1300‑1450",
+      "Cleanliness standards 4/5 and 3/4 compatible",
+      "Guest policy compromise of up to 2 guests/month with advance notice"
+    ],
+    "concerns": [],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on weekly 15‑minute quick‑tidy and deeper clean every other week",
+      "Allow up to 2 guests per month if scheduled a week in advance"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Meera share the same location, overlapping budget, similar cleanliness and sleep habits, and have resolved guest and cleaning concerns. Their profiles and conversation show strong compatibility with no hard conflicts."
+  },
+  "created": "2026-10-15T08:58:44+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

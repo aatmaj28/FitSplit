@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=Within 1 month|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=Love pets but none|drink=Socially|slp=Flexible|cln=4|gwk=0|usp=Equal|groc=Shared|dep=200|wfh=Occasional|nzl=Low|cf=Open|pri=Matching social energy;Location match;Honest communication style|nn=Non-smoking household only  \nPFR:pri=Matching social energy;Location match;Honest communication style  \nVRD:STRONG|r=Profile aligns with your stated criteria|open=none",
+  "created": "2026-10-15T08:58:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

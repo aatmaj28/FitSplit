@@ -5,7 +5,7 @@ export const ACCENT_SOFT = "#5eead4"; // teal-300
 
 export const WALL_SIDE = "#e7e1d8"; // light warm gray
 export const WALL_CAP = "#d3cbbf"; // tops a shade darker, reads like a cut plan
-export const SLAB = "#f3efe9";
+export const SLAB = "#e9e5df"; // neutral "hallway" floor: shows wherever no room polygon covers the plan
 export const GROUND = "#eef1f4";
 export const BACKGROUND = "#f8fafc";
 

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import type { ParsedPlan, Pt, Room } from "../../types";
+import type { Opening, ParsedPlan, Pt, Room } from "../../types";
 
 /** Used only when a plan has no scale (the backend reports why in `scale.notes`). */
 export const FALLBACK_PPF = 30;
@@ -10,12 +10,26 @@ export interface RoomEntry {
   labelAt: Pt; // feet, scene (x, z)
 }
 
+export interface ModelOpening {
+  id: string;
+  kind: "door" | "window" | "opening";
+  axis: "h" | "v"; // h: in a horizontal wall (runs along x), v: in a vertical wall (runs along z)
+  x0: number;
+  z0: number;
+  x1: number;
+  z1: number;
+  sides: [string | null, string | null]; // room id (or null: hall / outside) before and after the wall
+  outside: boolean; // one side is out of the building: an exterior window or door
+}
+
 export interface PlanModel {
   ppf: number;
   scaleMissing: boolean;
   walls: { outer: Pt[]; holes: Pt[][] }[];
   rooms: RoomEntry[];
   footprint: Pt[][];
+  /** door / window gaps that separate two spaces (from the parser), in feet */
+  openings: ModelOpening[];
   image: { w: number; h: number }; // feet: the original image spans [0, w] x [0, h]
   bounds: { minX: number; maxX: number; minZ: number; maxZ: number; cx: number; cz: number; sx: number; sz: number };
 }
@@ -54,6 +68,7 @@ export function buildModel(plan: ParsedPlan): PlanModel {
     walls,
     rooms,
     footprint,
+    openings: modelOpenings(plan.openings ?? [], ft, rooms, footprint),
     image: { w: plan.image_size.w / ppf, h: plan.image_size.h / ppf },
     bounds: {
       minX, maxX, minZ, maxZ,
@@ -168,4 +183,36 @@ export function pointInPoly([x, y]: Pt, poly: Pt[]): boolean {
     if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
   }
   return inside;
+}
+
+/**
+ * Parser openings kept when they separate two spaces: rooms on both sides, or a room and the outside.
+ * A gap ray can also cross a fixture (a bathtub), with the same room on both sides: dropped. In an
+ * outside wall only a door-sized gap (2.2-3.5 ft, the unit's entry) or one onto a balcony is a door;
+ * anything else there is a window (the parser can't always see the glass lines).
+ */
+function modelOpenings(raw: Opening[], ft: (p: Pt) => Pt, rooms: RoomEntry[], footprint: Pt[][]): ModelOpening[] {
+  const roomAt = (p: Pt) => rooms.find((r) => pointInPoly(p, r.poly))?.room.id ?? null;
+  const inside = (p: Pt) => footprint.some((f) => pointInPoly(p, f));
+  const out: ModelOpening[] = [];
+  for (const o of raw) {
+    const pts = o.polygon.map(ft);
+    const xs = pts.map((p) => p[0]), zs = pts.map((p) => p[1]);
+    const [x0, x1, z0, z1] = [Math.min(...xs), Math.max(...xs), Math.min(...zs), Math.max(...zs)];
+    const [cx, cz] = [(x0 + x1) / 2, (z0 + z1) / 2];
+    // ft beyond the wall faces: near points find the rooms, far points test for the outside
+    // (thick double-line outer walls still count as "inside" the footprint close up)
+    const at = (d: number): [Pt, Pt] => (o.axis === "h" ? [[cx, z0 - d], [cx, z1 + d]] : [[x0 - d, cz], [x1 + d, cz]]);
+    const [a, b] = at(0.75);
+    const [fa, fb] = at(2);
+    const sides: [string | null, string | null] = [roomAt(a), roomAt(b)];
+    const outside = !inside(fa) || !inside(fb);
+    if (!outside && (sides[0] === sides[1] || (!sides[0] && !sides[1]))) continue; // same space on both sides
+    if (outside && !sides[0] && !sides[1]) continue;
+    const balcony = sides.some((id) => rooms.find((r) => r.room.id === id)?.room.type === "balcony");
+    const doorSized = o.kind === "door" && o.width_ft >= 2.2 && o.width_ft <= 3.5;
+    const kind = outside && !balcony && !doorSized ? "window" : o.kind;
+    out.push({ id: o.id, kind, axis: o.axis, x0, z0, x1, z1, sides, outside });
+  }
+  return out;
 }

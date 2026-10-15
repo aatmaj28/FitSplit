@@ -1,7 +1,7 @@
 import type { RoomType } from "../../types";
 import type { PlanModel } from "./geometry";
 import type { Angle } from "./PlanScene";
-import { ROOM_COLORS, ROOM_LABELS } from "./theme";
+import { ROOM_COLORS, ROOM_LABELS, SLAB } from "./theme";
 
 const pill = "pointer-events-auto rounded-full bg-white/90 shadow-sm ring-1 ring-slate-200 backdrop-blur";
 
@@ -122,6 +122,12 @@ export function Legend({ model, editing = false }: { model: PlanModel; editing?:
           {ROOM_LABELS[t]}
         </span>
       ))}
+      {model.footprint.length > 0 && (
+        <span className="inline-flex items-center gap-1.5" title="Floor no room covers: halls, landings">
+          <span className="h-2.5 w-2.5 rounded-sm ring-1 ring-black/10" style={{ background: SLAB }} />
+          Hallway
+        </span>
+      )}
       {editing && (
         <>
           <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-green-500" />Fits</span>

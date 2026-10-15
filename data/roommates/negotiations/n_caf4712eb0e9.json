@@ -1,0 +1,469 @@
+{
+  "id": "n_caf4712eb0e9",
+  "engine": "rm1",
+  "mode": "fill",
+  "a": {
+    "id": "rohan",
+    "name": "Rohan Mehta"
+  },
+  "b": {
+    "id": "sofia",
+    "name": "Sofia Alvarez"
+  },
+  "room": {
+    "plan": "jvue_3bed",
+    "unit_name": "JVUE 3 bed",
+    "rent_total": 4200,
+    "beds": 3,
+    "room_id": "r5",
+    "room_label": "Bedroom 2 (DREAM)",
+    "area_sqft": 196.1,
+    "share": 1360,
+    "private_bath": false,
+    "furniture": {
+      "items": [
+        "Queen bed",
+        "Desk",
+        "Bookshelf"
+      ],
+      "all_fit": true,
+      "free_sqft": 152.0,
+      "note": ""
+    },
+    "members": [
+      {
+        "profile_id": "arjun",
+        "name": "Arjun Reddy",
+        "room_label": "Bedroom 1 (DREAM)",
+        "share": 1352
+      },
+      {
+        "profile_id": "sofia",
+        "name": "Sofia Alvarez",
+        "room_label": "Bedroom 3 (DREAM)",
+        "share": 1488
+      }
+    ]
+  },
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time|nn=No smoking indoors, Budget hard cap.  \n\nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time.  \n\nVRD:STRONG|r=Ready to discuss further.",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:45+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards|nn=No smoking indoors  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nVRD:STRONG|r=Looking forward to chatting about how we can fit together.",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:45+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time|nn=No smoking indoors, Budget hard cap.  \n\nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time.  \n\nVRD:STRONG|r=Looking forward to chatting about how we can fit together.",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T09:08:45+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=Night owl|cln=4|gwk=0|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=conflict_detected  \nVRD:INCOMPATIBLE|r=No smoking indoors is a hard non‑negotiable for me, so we cannot continue.",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:45+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nFLX:gwk=1|condition=If guests stay no later than 10 PM on weekdays and we keep noise low, I’m comfortable with occasional visits.  \n\nPFR:slp=Night owl – I usually study or work until 1 AM and need quiet after that.  \ncln=4 – I keep my space tidy and expect shared areas to be cleaned weekly; I’m happy to set a rotating cleaning schedule.  \ngwk=1 – I have one close friend who might visit on weekends; I’ll make sure it’s low‑key.  \nwfh=Yes – I work from home several days a week, so I need a quiet environment during typical work hours (9 AM–5 PM).  \nnzl=Low – I prefer a calm atmosphere, especially during work/study times.  \n\nCNF:nn=No smoking indoors|status=clear  \n\nVRD:STRONG|r=We seem well‑aligned on sleep, cleanliness, guests, and WFH needs; let’s continue the conversation.",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:46+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:STRONG|r=We seem well‑aligned on sleep, cleanliness, guests, and WFH needs; let’s continue the conversation.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:47+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nPFR:slp=I finish studying around 1 AM and need a quiet environment after midnight. I usually sleep 2–3 AM and wake at 8 AM. I’m flexible to adjust if your work schedule requires a different quiet window.  \ncln=I keep my room spotless, vacuum twice a week, and expect shared spaces cleaned at least once a week. I’m happy to coordinate a cleaning rota.  \ngwk=My guest is a friend who might visit once a month; I’ll keep it low‑key and inform you beforehand.  \nwfh=I work from home 4 days a week (9 AM–5 PM), so I need a quiet space during those hours. I’m open to setting a “quiet hours” rule (e.g., 9 AM–5 PM on weekdays).  \nnzl=I’m a low‑noise person, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, how often you host guests, your work‑from‑home schedule, and your noise tolerance?  \n\nVRD:CONDITIONAL|r=Awaiting your details to confirm full alignment.",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T09:08:48+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:CONDITIONAL|r=Here’s how I handle each area; let me know how you fit in.  \nPFR:slp=I usually finish studying around 1 AM and sleep until 8 AM. I’m okay with quiet after 10 PM and can shift to a 9 AM–5 PM quiet window if needed.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I’m happy to add a rotating cleaning rota.  \ngwk=I have a friend who visits about once a month; I’ll give a heads‑up and keep it low‑key.  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance?",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:49+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM to 8 AM. I’m willing to adopt a 9 AM–5 PM quiet window on weekdays if that’s what you need for work.  \ncln=I vacuum twice a week and do a quick tidy of shared spaces every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give you a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.  \n\nVRD:CONDITIONAL|r=Looking forward to aligning our routines.",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:08:59+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:CONDITIONAL|r=Here are my details; let’s see where we align and where a tweak might help.  \nPFR:slp=I typically finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:09:17+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.  \n\nVRD:CONDITIONAL|r=Awaiting your details to confirm alignment.",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T09:09:40+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nVRD:STRONG MATCH|r=Our sleep schedules, cleaning routines, guest policy, WFH needs, and noise tolerance align well. We’re ready to move forward.",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:10:04+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "a",
+        "message": "VRD:STRONG MATCH|r=Our sleep schedules, cleaning routines, guest policy, WFH needs, and noise tolerance align well. We’re ready to move forward.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T09:10:29+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 90,
+          "finances": 80,
+          "lifestyle": 85,
+          "personality": 80,
+          "logistics": 90
+        },
+        "highlights": [
+          "Sleep schedules and quiet windows align",
+          "Both maintain similar cleaning standards and rotating schedules",
+          "Guest policy and noise tolerance are compatible"
+        ],
+        "concerns": [],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [],
+        "recommendation": "strong",
+        "recommendation_summary": "Rohan and Sofia share nearly identical routines, cleanliness expectations, guest policies, and work-from-home needs, making them a strong match for a shared living arrangement."
+      },
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time|nn=No smoking indoors, Budget hard cap.  \n\nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time.  \n\nVRD:STRONG|r=Ready to discuss further.",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:45+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards|nn=No smoking indoors  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nVRD:STRONG|r=Looking forward to chatting about how we can fit together.",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:45+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time|nn=No smoking indoors, Budget hard cap.  \n\nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time.  \n\nVRD:STRONG|r=Looking forward to chatting about how we can fit together.",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T09:08:45+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=Night owl|cln=4|gwk=0|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=conflict_detected  \nVRD:INCOMPATIBLE|r=No smoking indoors is a hard non‑negotiable for me, so we cannot continue.",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:45+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nFLX:gwk=1|condition=If guests stay no later than 10 PM on weekdays and we keep noise low, I’m comfortable with occasional visits.  \n\nPFR:slp=Night owl – I usually study or work until 1 AM and need quiet after that.  \ncln=4 – I keep my space tidy and expect shared areas to be cleaned weekly; I’m happy to set a rotating cleaning schedule.  \ngwk=1 – I have one close friend who might visit on weekends; I’ll make sure it’s low‑key.  \nwfh=Yes – I work from home several days a week, so I need a quiet environment during typical work hours (9 AM–5 PM).  \nnzl=Low – I prefer a calm atmosphere, especially during work/study times.  \n\nCNF:nn=No smoking indoors|status=clear  \n\nVRD:STRONG|r=We seem well‑aligned on sleep, cleanliness, guests, and WFH needs; let’s continue the conversation.",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:46+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:STRONG|r=We seem well‑aligned on sleep, cleanliness, guests, and WFH needs; let’s continue the conversation.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:47+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nPFR:slp=I finish studying around 1 AM and need a quiet environment after midnight. I usually sleep 2–3 AM and wake at 8 AM. I’m flexible to adjust if your work schedule requires a different quiet window.  \ncln=I keep my room spotless, vacuum twice a week, and expect shared spaces cleaned at least once a week. I’m happy to coordinate a cleaning rota.  \ngwk=My guest is a friend who might visit once a month; I’ll keep it low‑key and inform you beforehand.  \nwfh=I work from home 4 days a week (9 AM–5 PM), so I need a quiet space during those hours. I’m open to setting a “quiet hours” rule (e.g., 9 AM–5 PM on weekdays).  \nnzl=I’m a low‑noise person, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, how often you host guests, your work‑from‑home schedule, and your noise tolerance?  \n\nVRD:CONDITIONAL|r=Awaiting your details to confirm full alignment.",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T09:08:48+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:CONDITIONAL|r=Here’s how I handle each area; let me know how you fit in.  \nPFR:slp=I usually finish studying around 1 AM and sleep until 8 AM. I’m okay with quiet after 10 PM and can shift to a 9 AM–5 PM quiet window if needed.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I’m happy to add a rotating cleaning rota.  \ngwk=I have a friend who visits about once a month; I’ll give a heads‑up and keep it low‑key.  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance?",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:49+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM to 8 AM. I’m willing to adopt a 9 AM–5 PM quiet window on weekdays if that’s what you need for work.  \ncln=I vacuum twice a week and do a quick tidy of shared spaces every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give you a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.  \n\nVRD:CONDITIONAL|r=Looking forward to aligning our routines.",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:08:59+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=clear  \nVRD:CONDITIONAL|r=Here are my details; let’s see where we align and where a tweak might help.  \nPFR:slp=I typically finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:09:17+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \n\nPFR:Could you share your typical sleep hours, cleaning routine, guest frequency, WFH schedule, and noise tolerance? That’ll help us spot any friction and see where I can adapt.  \n\nVRD:CONDITIONAL|r=Awaiting your details to confirm alignment.",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T09:09:40+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nVRD:STRONG MATCH|r=Our sleep schedules, cleaning routines, guest policy, WFH needs, and noise tolerance align well. We’re ready to move forward.",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:10:04+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "a",
+      "message": "VRD:STRONG MATCH|r=Our sleep schedules, cleaning routines, guest policy, WFH needs, and noise tolerance align well. We’re ready to move forward.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T09:10:29+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "budget",
+      "ok": true,
+      "hard": false,
+      "detail": "$1,360/mo is within Rohan Mehta's $1,400 max"
+    },
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "furniture",
+      "ok": true,
+      "hard": false,
+      "detail": "Queen bed, Desk, Bookshelf fits in Bedroom 2 (DREAM)"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 90,
+      "finances": 80,
+      "lifestyle": 85,
+      "personality": 80,
+      "logistics": 90
+    },
+    "highlights": [
+      "Sleep schedules and quiet windows align",
+      "Both maintain similar cleaning standards and rotating schedules",
+      "Guest policy and noise tolerance are compatible"
+    ],
+    "concerns": [],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "Rohan and Sofia share nearly identical routines, cleanliness expectations, guest policies, and work-from-home needs, making them a strong match for a shared living arrangement."
+  },
+  "providers": {
+    "cache": 4,
+    "groq": 10
+  },
+  "created": "2026-10-15T09:08:45+00:00",
+  "ignored_verdicts": [
+    4
+  ]
+}

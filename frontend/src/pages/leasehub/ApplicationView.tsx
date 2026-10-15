@@ -63,7 +63,7 @@ export default function ApplicationView() {
             <h2 className="font-semibold text-slate-900">Rent split check</h2>
             {app.rentCheck ? (
               <p className={`mt-2 rounded-lg px-3 py-2 text-sm ${app.rentCheck.verdict === "ok" ? "bg-emerald-50 text-emerald-900" : "bg-amber-50 text-amber-900"}`}>
-                {app.rentCheck.verdict === "ok" ? "AI checked ✓ " : "AI check: "}{app.rentCheck.note}
+                {app.rentCheck.note}
               </p>
             ) : <p className="mt-2 text-sm text-slate-500">No AI check attached.</p>}
             <p className="mt-2 text-xs text-slate-400">The AI reviews the split's inputs against the floor plan (bedroom count, private baths, sizes). The numbers are computed by code.</p>

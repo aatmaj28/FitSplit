@@ -1,0 +1,25 @@
+{
+  "value": {
+    "scores": {
+      "overall": 90,
+      "finances": 80,
+      "lifestyle": 85,
+      "personality": 80,
+      "logistics": 90
+    },
+    "highlights": [
+      "Sleep schedules and quiet windows align",
+      "Both maintain similar cleaning standards and rotating schedules",
+      "Guest policy and noise tolerance are compatible"
+    ],
+    "concerns": [],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "Rohan and Sofia share nearly identical routines, cleanliness expectations, guest policies, and work-from-home needs, making them a strong match for a shared living arrangement."
+  },
+  "created": "2026-10-15T09:10:56+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit.  \nFLX:If you’re comfortable with a strict no-smoking rule, I could also agree to keep the kitchen area smoke-free for any guests.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which I can’t waive. If that’s acceptable, we can move forward.",
+  "created": "2026-10-15T08:59:58+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

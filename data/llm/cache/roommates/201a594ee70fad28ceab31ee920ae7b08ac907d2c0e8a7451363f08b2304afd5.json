@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nFLX:gwk=1|condition=If guests stay no later than 10 PM on weekdays and we keep noise low, I’m comfortable with occasional visits.  \n\nPFR:slp=Night owl – I usually study or work until 1 AM and need quiet after that.  \ncln=4 – I keep my space tidy and expect shared areas to be cleaned weekly; I’m happy to set a rotating cleaning schedule.  \ngwk=1 – I have one close friend who might visit on weekends; I’ll make sure it’s low‑key.  \nwfh=Yes – I work from home several days a week, so I need a quiet environment during typical work hours (9 AM–5 PM).  \nnzl=Low – I prefer a calm atmosphere, especially during work/study times.  \n\nCNF:nn=No smoking indoors|status=clear  \n\nVRD:STRONG|r=We seem well‑aligned on sleep, cleanliness, guests, and WFH needs; let’s continue the conversation.",
+  "created": "2026-10-15T09:08:46+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

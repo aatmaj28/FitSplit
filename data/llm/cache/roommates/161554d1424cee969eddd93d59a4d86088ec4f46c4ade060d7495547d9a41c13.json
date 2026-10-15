@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=I finish studying around 1 AM and sleep from 2–3 AM until 8 AM. I’m comfortable with a quiet window of 9 AM–5 PM on weekdays for work.  \ncln=I vacuum twice a week and do a quick tidy of shared areas every Sunday. I can add a rotating cleaning rota to cover the rest of the week.  \ngwk=I have a close friend who may visit once a month; I’ll give a 48‑hour heads‑up and keep the visit low‑key (no loud music after 10 PM).  \nwfh=I work from home 4 days a week (9 AM–5 PM) and need a silent environment during those hours.  \nnzl=I keep noise low, especially during work/study times; I avoid loud music or TV after 10 PM.  \nVRD:STRONG MATCH|r=Our sleep schedules, cleaning routines, guest policy, WFH needs, and noise tolerance align well. We’re ready to move forward.",
+  "created": "2026-10-15T09:10:04+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

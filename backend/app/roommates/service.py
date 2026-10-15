@@ -29,7 +29,7 @@ NEGOTIATIONS = DATA / "negotiations"
 _lock = threading.Lock()
 _one_at_a_time = threading.Semaphore(1)  # live runs queue up: one model conversation at a time (rate limits)
 RUNNING: dict[str, dict] = {}  # id -> live record (until finished and saved)
-VERDICT_VERSION = 2  # bump when verdict logic changes (turns stay cached, verdicts are recomputed)
+VERDICT_VERSION = 3  # bump when verdict logic changes (turns stay cached, verdicts are recomputed)
 
 
 class NotFound(LookupError):
@@ -139,7 +139,13 @@ def _run(rec: dict, a: dict, b: dict, room: Optional[RoomContext], runner) -> No
                               spurious=lambda t: spurious_incompatible(t, a["questionnaire"], b["questionnaire"], room is not None))
             with _one_at_a_time:
                 out = runner(neg)
-            rec.update(messages=out["messages"], analysis=out["analysis"], result=out["outcome"], providers=neg.providers,
+            result = out["outcome"]
+            soft = [c for c in checks if not c["ok"] and not c["hard"] and c.get("topic")]
+            if soft and result["status"] == "strong":  # the clones agreed, but the profiles still disagree on this
+                result = {"status": "conditional", "source": "exact_check",
+                          "reason": f"The clones agreed on everything else, but {soft[0]['topic']} is still open: {soft[0]['detail']}.",
+                          "unresolved_topics": [c["topic"] for c in soft][:2]}
+            rec.update(messages=out["messages"], analysis=out["analysis"], result=result, providers=neg.providers,
                        ignored_verdicts=neg.ignored)
         rec["status"] = "complete"
         _emit(rec, {"type": "complete", "result": rec["result"], "analysis": rec["analysis"], "checks": rec["checks"]})

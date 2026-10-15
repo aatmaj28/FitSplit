@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nCNF:smk=Non-smoking household only|r=I’m in a non-smoking household and that’s a hard limit for me.  \nFLX:cln=I can adopt a rotating chore chart—2 days per week for shared spaces—and handle kitchen cleanup after each use.  \nFLX:slp=I can shift my wake time to 6:30 am if that helps with morning quiet, while keeping noise low after 10 pm.  \nVRD:CONDITIONAL|r=We align on sleep, cleanliness, and social energy. The only friction is the non-smoking requirement, which is non-negotiable. If that’s acceptable, we can proceed.",
+  "created": "2026-10-15T09:00:28+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

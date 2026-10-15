@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early night, wake 7 am|cln=4/5, tidy shared spaces|gwk=0|wfh=Occasional study|nzl=Low|cf=Open|pri=Matching social energy;Honest communication style  \nPFR:pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style  \n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T08:59:34+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}
