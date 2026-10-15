@@ -25,11 +25,42 @@ function autofill(plan: ParsedPlan) {
   };
 }
 
+const PARSE_STEPS = ["Reading the floor plan", "Finding walls", "Measuring rooms", "Building 3D"];
+
+/** What a live parse is doing, step by step (timed to a typical 15-20 s parse; a fast cached answer never shows it). */
+function ParseProgress({ started }: { started: number }) {
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 200);
+    return () => clearInterval(t);
+  }, []);
+  const s = (now - started) / 1000;
+  if (s < 0.4) return null;
+  const active = Math.min(PARSE_STEPS.length - 1, Math.floor(s / 4.2));
+  return (
+    <ol className="space-y-2 rounded-xl bg-blue-50/70 p-3 ring-1 ring-blue-100" aria-label="Parsing the floor plan" data-parse-progress>
+      {PARSE_STEPS.map((label, i) => (
+        <li key={label} className="flex items-center gap-2.5 text-sm">
+          {i < active ? (
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-500 text-[11px] font-bold text-white" aria-hidden>✓</span>
+          ) : i === active ? (
+            <span className="h-5 w-5 animate-spin rounded-full border-2 border-blue-200 border-t-blue-600" aria-hidden />
+          ) : (
+            <span className="h-5 w-5 rounded-full border-2 border-slate-200" aria-hidden />
+          )}
+          <span className={i < active ? "text-slate-700" : i === active ? "font-semibold text-slate-900" : "text-slate-400"}>{label}{i === active ? "…" : ""}</span>
+        </li>
+      ))}
+      <li className="pl-7 text-xs tabular-nums text-slate-400">{Math.floor(s)} s</li>
+    </ol>
+  );
+}
+
 export default function NewListing() {
   const offline = useOffline();
   const { listings } = useDemo();
   const [parsed, setParsed] = useState<Parsed | null>(null);
-  const [busy, setBusy] = useState<{ name: string; started: number } | null>(null);
+  const [busy, setBusy] = useState<{ name: string; started: number; live?: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ title: "", rent: 0, beds: 0, baths: 0, sqft: 0 });
   const [published, setPublished] = useState(0); // syndication targets confirmed so far
@@ -57,7 +88,7 @@ export default function NewListing() {
   const upload = async (file: File) => {
     setError(null);
     const t0 = performance.now();
-    setBusy({ name: file.name, started: Date.now() });
+    setBusy({ name: file.name, started: Date.now(), live: true });
     try {
       const r = await parseUpload(file);
       use({ ...r, seconds: (performance.now() - t0) / 1000, cached: Boolean(r.plan.cached) }, listing(r.plan.plan_name)?.title);
@@ -101,8 +132,9 @@ export default function NewListing() {
           <section className="space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <h2 className="font-semibold text-slate-900">1. Floor plan</h2>
             <UploadBox onFile={upload} busy={busy} disabled={offline === true} disabledReason="Uploads are unavailable right now; pick one of these floor plans instead" />
+            {busy?.live && <ParseProgress started={busy.started} />}
             {error && <ErrorState title="Upload failed">{error}</ErrorState>}
-            <p className="text-xs text-slate-500">Known plans come back from the cache instantly; a new plan takes 10-30 s (vision model reads labels, OpenCV measures walls and rooms).</p>
+            <p className="text-xs text-slate-500">Plans you've uploaded before come back instantly; a new plan takes 15-20 s (an AI model reads the labels, then we measure every wall and room).</p>
           </section>
           <section className="space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <h2 className="font-semibold text-slate-900">Or pick one of your floor plans</h2>

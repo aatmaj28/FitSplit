@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router";
-import { listing, money } from "../../data/listings";
+import { baths, listing, money } from "../../data/listings";
 import { demo, useDemo } from "../../data/store";
 import { useProfiles } from "../../roommates/hooks";
-import { Avatar, VerdictBadge } from "../../roommates/NegotiationView";
+import { Avatar } from "../../roommates/NegotiationView";
 import { EmptyState } from "../ui";
 import { L } from "./LeaseHubLayout";
 
@@ -15,7 +15,6 @@ export default function ApplicationView() {
   const l = listing(app.listingId);
   const total = app.members.reduce((s, m) => s + m.share, 0);
   const prof = (pid: string | null) => profiles.find((p) => p.id === pid);
-  const first = (pid: string) => prof(pid)?.name.split(" ")[0] ?? pid;
   return (
     <div className="space-y-4" data-application-view={app.id}>
       <div className="text-sm"><Link to="/leasehub" className="text-slate-500 hover:text-slate-800">← Dashboard</Link></div>
@@ -57,35 +56,36 @@ export default function ApplicationView() {
           </div>
           {app.message && <blockquote className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-sm italic text-slate-600">"{app.message}"</blockquote>}
         </section>
-        <div className="space-y-4">
-          <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200" aria-label="AI rent check">
-            <h2 className="font-semibold text-slate-900">Rent split check</h2>
-            {app.rentCheck ? (
-              <p className={`mt-2 rounded-lg px-3 py-2 text-sm ${app.rentCheck.verdict === "ok" ? "bg-emerald-50 text-emerald-900" : "bg-amber-50 text-amber-900"}`}>
-                {app.rentCheck.note}
-              </p>
-            ) : <p className="mt-2 text-sm text-slate-500">No AI check attached.</p>}
-            <p className="mt-2 text-xs text-slate-400">The AI reviews the split's inputs against the floor plan (bedroom count, private baths, sizes). The numbers are computed by code.</p>
+        {l ? (
+          <section className="self-start overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200" aria-label="Listing" data-application-listing={l.id}>
+            <Link to={`/leasehub/listings/${l.id}`} className="block bg-slate-50" aria-label={`Open ${l.title}`}>
+              <img src={l.image} alt={`${l.title} floor plan`} className="h-56 w-full object-contain p-4" />
+            </Link>
+            <div className="space-y-3 border-t border-slate-100 p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-900">{l.title}</h2>
+                  <p className="text-sm text-slate-500">{l.location}</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg font-bold tabular-nums text-slate-900">{money(l.rent)}</div>
+                  <div className="text-xs text-slate-500">per month</div>
+                </div>
+              </div>
+              <dl className="grid grid-cols-3 gap-2 text-center">
+                {[["Beds", String(l.beds)], ["Baths", baths(l.baths).replace(/ baths?$/, "")], ["Sq ft", l.sqft.toLocaleString()]].map(([k, v]) => (
+                  <div key={k} className="rounded-xl bg-slate-50 px-2 py-2">
+                    <dd className="text-base font-semibold tabular-nums text-slate-900">{v}</dd>
+                    <dt className="text-[11px] uppercase tracking-wide text-slate-500">{k}</dt>
+                  </div>
+                ))}
+              </dl>
+              <Link to={`/leasehub/listings/${l.id}`} className={`flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold ${L.primary}`}>
+                Open listing with 3D floor plan →
+              </Link>
+            </div>
           </section>
-          <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200" aria-label="Compatibility">
-            <h2 className="font-semibold text-slate-900">Roommate compatibility</h2>
-            {app.compatibility ? (
-              <>
-                <div className="mt-2 flex items-center gap-2 text-sm text-slate-600">Group verdict <VerdictBadge status={app.compatibility.status} /></div>
-                <ul className="mt-2 space-y-1.5 text-sm">
-                  {app.compatibility.pairs.map((p) => (
-                    <li key={`${p.a}-${p.b}`} className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-1.5">
-                      <span className="text-slate-700">{first(p.a)} & {first(p.b)}</span>
-                      <span className="flex items-center gap-1.5"><VerdictBadge status={p.status} />{p.overall != null && <span className="text-xs tabular-nums text-slate-500">{p.overall}/100</span>}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-2 text-xs text-slate-400">Each pair's AI clones negotiated budget, routines, guests and dealbreakers on Roombae before applying.</p>
-              </>
-            ) : <p className="mt-2 text-sm text-slate-500">Applied without Roombae matching.</p>}
-          </section>
-          {l && <Link to={`/leasehub/listings/${l.id}`} className="block text-sm font-medium text-blue-700 hover:text-blue-900">Open {l.title} with its 3D floor plan →</Link>}
-        </div>
+        ) : null}
       </div>
     </div>
   );

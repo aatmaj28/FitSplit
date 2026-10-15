@@ -58,8 +58,8 @@ little confetti. Optional: **Download summary** gives a one-page PDF (listing, r
 rent).
 
 **2:35 Step 6: LeaseHub, the agent receives it.** (Shift + →)
-Say: "The agent gets one application: who's in which room, shares that add up to the rent, the AI
-rent check and the clones' compatibility verdict. No back-and-forth, no wasted showings."
+Say: "The agent gets one application: who's in which room and shares that add up to the rent, next to
+the listing and its 3D floor plan. No back-and-forth, no wasted showings."
 Close: "One floor plan in: a 3D listing for the agent, and a matched, pre-checked group for the
 landlord."
 

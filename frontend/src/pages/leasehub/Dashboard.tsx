@@ -1,3 +1,5 @@
+import { animate, useInView, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { listing, money } from "../../data/listings";
 import { useDemo, type AgentListing } from "../../data/store";
@@ -13,6 +15,46 @@ export function listingInfo(a: AgentListing) {
 // time saved: an estimate, and labelled as one
 const Q_PER_VIEW = 1 / 3; // one in three viewers would otherwise ask "how big is the room?"
 const MIN_PER_QUESTION = 5;
+
+const TONE = {
+  blue: "bg-blue-50 text-blue-700 ring-blue-100",
+  indigo: "bg-indigo-50 text-indigo-700 ring-indigo-100",
+  emerald: "bg-emerald-50 text-emerald-700 ring-emerald-100",
+};
+const ICON: Record<string, string> = {
+  questions: "M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.4-4 8-9 8a9.9 9.9 0 0 1-4.3-.9L3 20l1.4-3.7A7.4 7.4 0 0 1 3 12c0-4.4 4-8 9-8s9 3.6 9 8Z",
+  clock: "M12 6v6l4 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
+  group: "M17 20v-2a4 4 0 0 0-3-3.9M7 20v-2a4 4 0 0 1 3-3.9m4-6.1a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 9v-1a3 3 0 0 0-2.2-2.9M6.2 13.1A3 3 0 0 0 4 16v1",
+};
+
+/** A big number that counts up once when it comes into view. */
+function CountUp({ value, decimals = 0, suffix = "" }: { value: number; decimals?: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const seen = useInView(ref, { once: true });
+  const reduce = useReducedMotion();
+  const [shown, setShown] = useState(reduce ? value : 0);
+  useEffect(() => {
+    if (!seen) return;
+    if (reduce) return setShown(value);
+    const controls = animate(0, value, { duration: 1.2, ease: [0.2, 0.7, 0.3, 1], onUpdate: setShown });
+    return () => controls.stop();
+  }, [seen, value, reduce]);
+  return <span ref={ref} className="tabular-nums" data-count-to={value}>{shown.toFixed(decimals)}{suffix}</span>;
+}
+
+function TimeTile({ icon, value, decimals, suffix, label, tone, exact = false }: { icon: string; value: number; decimals?: number; suffix?: string; label: string; tone: keyof typeof TONE; exact?: boolean }) {
+  return (
+    <div className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-100">
+      <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ring-1 ${TONE[tone]}`} aria-hidden>
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={ICON[icon]} /></svg>
+      </span>
+      <div className="min-w-0">
+        <div className="text-3xl font-bold leading-none tracking-tight text-slate-900">{exact ? "" : "≈ "}<CountUp value={value} decimals={decimals} suffix={suffix} /></div>
+        <div className="mt-1.5 text-xs leading-snug text-slate-500">{label}</div>
+      </div>
+    </div>
+  );
+}
 
 export default function Dashboard() {
   const { listings, applications, showings } = useDemo();
@@ -36,13 +78,17 @@ export default function Dashboard() {
         <Stat label="Showing requests" value={showings.length} />
       </div>
 
-      <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white shadow-sm" aria-label="Time saved estimate">
-        <div className="text-[11px] font-semibold uppercase tracking-wide text-blue-100">Time saved (estimate)</div>
-        <div className="mt-1 flex flex-wrap items-end gap-x-8 gap-y-2">
-          <div><span className="text-3xl font-bold">≈ {questions}</span> <span className="text-blue-100">room-size questions answered by the 3D view</span></div>
-          <div><span className="text-3xl font-bold">≈ {hours.toFixed(1)} h</span> <span className="text-blue-100">of calls and emails</span></div>
+      <section className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200" aria-label="Time saved estimate" data-time-saved>
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="font-semibold text-slate-900">Time saved with 3D floor plans</h2>
+          <span className="text-xs text-slate-400" title={`3D tours ÷ 3 × ${MIN_PER_QUESTION} min per "how big is the room?" question`}>estimate ⓘ</span>
         </div>
-        <p className="mt-2 text-xs text-blue-100">Estimate: 3D tours ÷ 3 × {MIN_PER_QUESTION} min per "how big is the room?" question. Group applications arrive with exact shares and furniture checked, so fewer wasted showings.</p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <TimeTile icon="questions" value={questions} label="room-size questions answered by the 3D view" tone="blue" />
+          <TimeTile icon="clock" value={hours} decimals={1} suffix=" h" label="of calls and emails saved" tone="indigo" />
+          <TimeTile icon="group" value={applications.length} exact label="group applications with shares and checks attached" tone="emerald" />
+        </div>
+        <p className="mt-3 text-xs text-slate-400">Estimate: one in three 3D tours would otherwise be a "how big is the room?" call or email, about {MIN_PER_QUESTION} minutes each. Group applications arrive with exact shares and furniture checked, so fewer wasted showings.</p>
       </section>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">

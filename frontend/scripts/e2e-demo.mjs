@@ -150,7 +150,8 @@ async function flow(offline) {
   const text = await view.innerText();
   check(/Priya Sharma/.test(text) && /Ananya Iyer/.test(text) && /Meera Patel/.test(text), `${tag}: agent sees all three roommates`);
   check(/\$4,200\s*= rent ✓/.test(text), `${tag}: agent sees shares totalling the rent`);
-  check(/AI check/.test(text) && /Strong match|Conditional match/.test(text), `${tag}: agent sees the AI rent check and the compatibility verdict`);
+  check(/JVUE 3 bed/.test(text) && /\$4,200/.test(text) && /Open listing with 3D floor plan/.test(text) && !/Rent split check|Roommate compatibility/.test(text),
+    `${tag}: agent sees the listing next to the roommates (no rent check / compatibility cards)`);
   await shot("demo_step6_application.png");
 
   // the dashboard now lists the new application
