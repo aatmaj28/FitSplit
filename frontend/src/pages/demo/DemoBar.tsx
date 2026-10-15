@@ -3,6 +3,15 @@ import { useLocation, useNavigate } from "react-router";
 import { demo } from "../../data/store";
 import { demoActive, demoStep, setDemoActive, setDemoStep, STEPS } from "./steps";
 
+const MIN_KEY = "fitsplit.demo.bar.min"; // minimized or expanded, for this browser session
+function readMin(): boolean {
+  try {
+    return sessionStorage.getItem(MIN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 /** Floating step bar for the guided demo (shown inside both portals while demo mode is on). */
 export function DemoBar() {
   const { pathname, hash, search } = useLocation();
@@ -50,16 +59,38 @@ export function DemoBar() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [on, idx]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [min, setMinState] = useState(() => readMin());
+  const setMin = (v: boolean) => {
+    setMinState(v);
+    try {
+      if (v) sessionStorage.setItem(MIN_KEY, "1");
+      else sessionStorage.removeItem(MIN_KEY);
+    } catch {
+      /* ignore */
+    }
+  };
   useEffect(() => {
     if (!on) return;
     // lets sticky page controls (the chat's "Jump to latest") sit above the floating bar
-    document.documentElement.style.setProperty("--demo-bar-h", "6.5rem");
+    document.documentElement.style.setProperty("--demo-bar-h", min ? "3.5rem" : "6.5rem");
     return () => {
       document.documentElement.style.removeProperty("--demo-bar-h");
     };
-  }, [on]);
+  }, [on, min]);
   if (!on) return null;
   const step = STEPS[idx];
+  if (min) {
+    return (
+      <>
+        <div className="h-16" aria-hidden />
+        <button type="button" onClick={() => setMin(false)} data-demo-step={step.n} aria-label={`Step ${step.n} of ${STEPS.length}: ${step.title}. Expand the step bar`}
+          className="fixed bottom-3 right-3 z-[60] flex items-center gap-2 rounded-full bg-slate-900/95 py-2 pl-2 pr-3.5 text-xs font-semibold text-white shadow-xl ring-1 ring-white/10 backdrop-blur transition hover:bg-slate-800 sm:bottom-4 sm:right-4">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-teal-400 text-[11px] font-bold text-slate-900">{step.n}</span>
+          Step {step.n} of {STEPS.length} <span aria-hidden>▴</span>
+        </button>
+      </>
+    );
+  }
   return (
     <>
     <div className="h-32" aria-hidden />
@@ -88,6 +119,7 @@ export function DemoBar() {
           <button type="button" onClick={() => go(idx - 1)} disabled={idx === 0} className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium hover:bg-white/20 disabled:opacity-40">← Back</button>
           <button type="button" onClick={() => go(idx + 1)} disabled={idx === STEPS.length - 1} className="rounded-full bg-teal-400 px-3 py-1.5 text-xs font-semibold text-slate-900 hover:bg-teal-300 disabled:opacity-40">Next →</button>
           <button type="button" onClick={() => { demo.reset(); go(0); }} className="rounded-full px-2 py-1.5 text-xs text-slate-300 hover:text-white" title="Start the demo over">Reset demo</button>
+          <button type="button" onClick={() => setMin(true)} className="rounded-full px-2 py-1.5 text-xs text-slate-300 hover:text-white" aria-label="Minimize step bar" title="Minimize">▾</button>
           <button type="button" onClick={() => { setDemoActive(false); setOn(false); }} className="rounded-full px-2 py-1.5 text-xs text-slate-400 hover:text-white" aria-label="Exit demo">✕</button>
         </div>
       </div>
