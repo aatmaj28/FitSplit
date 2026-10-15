@@ -15,7 +15,9 @@
     "e2e:viewer": "node scripts/e2e-viewer.mjs",
     "screenshots:views": "node scripts/screenshots-views.mjs",
     "e2e:rentcheck": "node scripts/e2e-rentcheck.mjs",
-    "precompute:rentcheck": "node scripts/precompute-rentcheck.mjs"
+    "precompute:rentcheck": "node scripts/precompute-rentcheck.mjs",
+    "e2e:demo": "node scripts/e2e-demo.mjs",
+    "seed:roommates": "node scripts/seed-roommates.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
