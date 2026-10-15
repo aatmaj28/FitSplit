@@ -1,4 +1,8 @@
-"""Eight fictional student profiles (sample data, not real people) for the demo.
+"""Ten fictional student profiles (sample data, not real people) for the demo.
+
+Arjun and Sofia already share a JVUE 3 bed ("hosting"): they fill a room instead of being in the
+Discover deck. Daniel (New York) and Marcus (same-gender roommates only) exist to show the deck's
+filters: Priya never sees them.
 
 Answers use the questionnaire's exact option strings (tests/test_roommates.py checks every value
 against questionnaire.py). Write them with:  .venv/bin/python scripts/seed_roommates.py
@@ -110,6 +114,7 @@ PROFILES = [
     {
         "id": "arjun", "name": "Arjun Reddy", "school": "MIT", "program": "PhD EECS",
         "hometown": "Hyderabad, India", "color": "#2563eb",
+        "hosting": "jvue_3bed",
         "bio": "Third-year PhD, researches from home. Needs quiet afternoons for advisor calls.",
         "furniture": ["queen_bed", "desk"],
         "questionnaire": _q(
@@ -127,6 +132,7 @@ PROFILES = [
     {
         "id": "sofia", "name": "Sofia Alvarez", "school": "Boston University", "program": "MBA",
         "hometown": "Bogotá, Colombia", "color": "#ea580c",
+        "hosting": "jvue_3bed",
         "bio": "MBA student, salsa and brunch person. Social, tidy, partner visits on Fridays.",
         "furniture": ["queen_bed", "dresser", "nightstand"],
         "questionnaire": _q(
@@ -197,6 +203,33 @@ PROFILES = [
             dealbreakers={"non_negotiables": ["Budget hard cap (cannot exceed max)", "No pets"],
                           "top_priorities": ["Similar cleanliness standards", "Budget compatibility", "Compatible sleep schedule"],
                           "flexible_on": ["Lease length", "Move-in date"]},
+        ),
+    },
+    {
+        "id": "daniel", "name": "Daniel Kim", "school": "New York University", "program": "MS Finance",
+        "hometown": "Seoul, South Korea", "color": "#4f46e5",
+        "bio": "Starts at NYU Stern in January. Runner, home cook, quiet on weeknights.",
+        "furniture": ["full_bed", "desk"],
+        "questionnaire": _q(
+            living={"city": "Manhattan", "neighborhood": "East Village", "gender": "Man", "budget_min": 1600, "budget_max": 2100},
+            routines={"cleanliness": 4},
+            lifestyle={"hobbies": "Running, Korean cooking, jazz bars"},
+            dealbreakers={"top_priorities": ["Similar cleanliness standards", "Location match", "Budget compatibility"],
+                          "flexible_on": ["Move-in date", "Grocery arrangement"]},
+        ),
+    },
+    {
+        "id": "marcus", "name": "Marcus Lee", "school": "Boston University", "program": "MS Statistics",
+        "hometown": "Portland, OR", "color": "#0f766e",
+        "bio": "Stats grad student and climber. Prefers living with other guys.",
+        "furniture": ["queen_bed", "desk"],
+        "questionnaire": _q(
+            living={"neighborhood": "Fenway", "gender": "Man", "roommate_gender": "Same gender only",
+                    "budget_min": 1150, "budget_max": 1450},
+            routines={"cleanliness": 4},
+            lifestyle={"hobbies": "Climbing, board games, cycling"},
+            dealbreakers={"top_priorities": ["Similar cleanliness standards", "Respectful of quiet/work time", "Budget compatibility"],
+                          "flexible_on": ["Move-in date", "Chore split style"]},
         ),
     },
 ]

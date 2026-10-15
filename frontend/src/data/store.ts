@@ -1,11 +1,12 @@
 /**
  * One shared mock data store for both portals and the guided demo, so names, units and rents are
  * the same everywhere: the agent's listings (LeaseHub), the students' matched group (Roombae),
- * group applications (Roombae -> LeaseHub) and showing requests. Kept in localStorage;
+ * group applications (Roombae -> LeaseHub), showing requests and the Discover swipes. Kept in localStorage;
  * resetDemo() restores the seeded state (and clears furniture layouts and roommate names).
  */
 import { useSyncExternalStore } from "react";
 import type { Verdict } from "../roommates/api";
+import type { Swipe, SwipeDir } from "../roommates/deck";
 
 export interface AppMember {
   profileId: string | null;
@@ -53,6 +54,8 @@ export interface DemoState {
   applications: Application[];
   showings: Showing[];
   group: { members: string[]; listingId: string | null } | null;
+  /** Discover: who the demo student swiped on, in order */
+  swipes: Swipe[];
 }
 
 const VERSION = 1;
@@ -88,13 +91,14 @@ export function seedState(): DemoState {
       { id: "sh3", listingId: "serenity_1bed", name: "Visiting researcher", when: "Mon 6:00pm", note: "Virtual tour first", status: "requested" },
     ],
     group: null,
+    swipes: [],
   };
 }
 
 function load(): DemoState {
   try {
     const s = JSON.parse(localStorage.getItem(KEY) ?? "null");
-    if (s?.version === VERSION) return s as DemoState;
+    if (s?.version === VERSION) return { ...s, swipes: s.swipes ?? [] } as DemoState;
   } catch {
     /* storage blocked or corrupt: start from the seed */
   }
@@ -142,7 +146,20 @@ export const demo = {
     commit({ ...state, applications: [full, ...state.applications.filter((a) => !(a.listingId === app.listingId && !a.sample && a.status === "new"))] });
     return full;
   },
-  setApplicationStatus(id: string, status: Application["status"]) {
+  swipe(id: string, dir: SwipeDir, negotiation?: string) {
+    const s: Swipe = { id, dir, at: new Date().toISOString(), ...(negotiation ? { negotiation } : {}) };
+    commit({ ...state, swipes: [...state.swipes.filter((x) => x.id !== id), s] });
+  },
+  setSwipeNegotiation(id: string, negotiation: string) {
+    commit({ ...state, swipes: state.swipes.map((x) => (x.id === id ? { ...x, negotiation } : x)) });
+  },
+  unswipe(id: string) {
+    commit({ ...state, swipes: state.swipes.filter((x) => x.id !== id) });
+  },
+  clearSwipes() {
+    commit({ ...state, swipes: [] });
+  },
+    setApplicationStatus(id: string, status: Application["status"]) {
     commit({ ...state, applications: state.applications.map((a) => (a.id === id ? { ...a, status } : a)) });
   },
   reset() {

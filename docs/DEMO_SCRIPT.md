@@ -25,14 +25,18 @@ view and every room's size, and the rent and size fields fill in. It's syndicate
 attached, so fewer 'how big is the bedroom?' calls."
 
 **0:45 Step 2: Roombae, students match.** (Shift + →)
-Click **Meet all matches**. Let the first conversation type for a few seconds, then **Skip to verdict**.
-Then click **Skip to the group**.
-Say: "Before anyone meets, each student's AI clone negotiates with the others: budget, sleep,
-guests, dealbreakers. This is our teammate Tanvi's roommate engine. Jake's clone is stopped in two
-turns, because Priya won't live with a smoker. Priya, Ananya and Meera match. Two of the pairs are
-'conditional' and the app says why: the lease length is still open."
+This is **Discover**, a swipe deck. Press **→** (or drag the card right) on **Ananya**. The clones talk
+for a few seconds, then: "It's a match!" (strong, 92). Click **Keep swiping**.
+Press **→** on **Jake**: "Your clones didn't click: Jake smokes, and you need a non-smoking home."
+Click **Keep swiping**, then **←** to pass on Kavya, and **→** on **Meera**: a conditional match (lease
+length). Click **Find a place together**.
+Say: "Students swipe like on a dating app, but before anyone meets, each student's AI clone talks to
+the other's: budget, sleep, guests, dealbreakers. This is our teammate Tanvi's roommate engine and her
+swipe deck. Jake is out in two turns because Priya won't live with a smoker. Meera matches, with one
+open point: the lease length."
 Point at the group card: "And it only shows listings where every fair-split share fits each
 person's budget." Click **Save group & see it in 3D** on JVUE 3 bed.
+Optional: **Watch the conversation** on a match screen replays the chat (pause, 1×/2×/4×, Skip to verdict).
 
 **1:25 Step 3: see it in 3D and check the furniture.**
 Click **Bedroom 1** (the DREAM card on the right), then **Edit layout**, **Will my stuff fit?**, +1 queen
@@ -64,9 +68,10 @@ landlord."
   needs the backend is uploading a brand-new floor plan.
 - **3D won't render (no WebGL on the projector machine):** switch to `docs/screenshots/`, starting
   at `demo_step1_published.png`, and narrate the same six steps:
-  `demo_step1_new_listing.png` → `demo_step2_group.png` → `demo_step3_furniture.png` →
+  `demo_step1_new_listing.png` → `demo_step2_deck.png` → `demo_step2_match.png` →
+  `demo_step2_noclick.png` → `demo_step2_group.png` → `demo_step3_furniture.png` →
   `demo_step4_rent_check.png` → `demo_step5_apply.png` → `demo_step6_application.png`.
 - **30-second version:** "The agent uploads a floor plan once and gets a 3D listing with room sizes.
-  Students' AI clones negotiate as roommates, the group checks their furniture in 3D and gets a fair
-  split that AI double-checks, then applies together. The agent receives one complete, pre-qualified
-  group application."
+  Students swipe, and their AI clones negotiate as roommates. The group checks their furniture in 3D,
+  gets a fair split that AI double-checks, then applies together. The agent receives one complete,
+  pre-qualified group application."

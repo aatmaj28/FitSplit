@@ -5,9 +5,10 @@ and a place in Boston). The product name lives in one constant: `frontend/src/br
 
 - **Agent side (LeaseHub):** upload a floor plan once when posting. The parser turns it into walls,
   rooms with areas, doors and windows, and the listing goes out with a 3D view and room sizes.
-- **Renter side (Roombae):** AI clones of students negotiate as roommates first. The group then sees
-  the unit in 3D, checks that their furniture fits, gets a fair rent split (with an AI check of its
-  inputs) and applies together. The application lands in LeaseHub.
+- **Renter side (Roombae):** students swipe through each other's cards; on a swipe right their AI
+  clones negotiate as roommates first. The matched group then sees the unit in 3D, checks that their
+  furniture fits, gets a fair rent split (with an AI check of its inputs) and applies together. The
+  application lands in LeaseHub.
 
 Everything is sample data (fictional students, an agent and a sample realty, listings with facts only
 from `data/floorplans/meta.json`), and the whole demo works offline from bundled data.
@@ -51,7 +52,7 @@ frontend/src/
   pages/roombae/        Roombae mock portal     pages/leasehub/   LeaseHub mock portal
   pages/demo/           guided walkthrough + floating step bar
   data/                 listings catalog, plan loader, shared demo store (localStorage, "Reset demo")
-frontend/public/demo/   offline data: 6 parsed plans, 16 rent checks, roommate profiles + 10 negotiations
+frontend/public/demo/   offline data: 6 parsed plans, 16 rent checks, roommate profiles + avatars + 12 negotiations
 frontend/scripts/       checks, e2e tests, screenshot and precompute scripts
 data/                   floor plans + meta.json, parsed plans, rent check cache, roommate data, LLM log/cache
 docs/                   OVERNIGHT_REPORT.md, DEMO_SCRIPT.md, DECISIONS.md, PROGRESS.md, screenshots/
@@ -66,6 +67,9 @@ cd frontend && npm run check && npm run build       # offline logic checks (rent
 node scripts/e2e-viewer.mjs       # 3D: drag from any angle, orbit, touch, resize re-fit
 node scripts/e2e-rentcheck.mjs    # AI check badge, Apply suggestion, offline
 node scripts/e2e-demo.mjs         # the whole 6-step demo, online and with the backend blocked (+ screenshots)
+node scripts/e2e-swipe.mjs        # Discover: deck filters, drag / keys / buttons, match + didn't click, My matches, group
+node scripts/e2e-chat.mjs         # chat replay: follows only near the bottom, Jump to latest, pause / speed / skip
+node scripts/e2e-nav.mjs          # landing entries, portal logos, Home link, portal switcher
 ```
 
 ## The pieces
@@ -96,13 +100,23 @@ ACP/1.0 clone prompts are copied verbatim, and her four-phase negotiation loop, 
 compatibility analysis are ported with documented fixes (13 turns, no double feed, ACP verdicts parsed,
 false "incompatible" triggers removed). Added for FitSplit:
 - local JSON storage, REST + Server-Sent Events;
-- "Find roommates" (people first): pairwise clones, then groups, then listings where every
-  fair-split share fits each budget;
+- "Find roommates" (people first): **Discover**, a Tinder-style swipe deck ported from Tanvi's
+  **Setup Match** page, and **My matches**, ported from her **My Matches** page (verdict counts,
+  "Show incompatible", scores, replay). The deck uses her filters: same city first, then the same
+  metro area, "same gender only" checked both ways, swiped profiles hidden. A swipe right plays the
+  clones' conversation and ends on "It's a match!" or "Your clones didn't click". Matches then form
+  a group, and the group gets listings where every fair-split share fits each budget. Every card in
+  the demo deck has a bundled conversation, so swiping works offline. Swipes live in localStorage,
+  and "Reset demo" clears them;
 - "Fill a room" (apartment first): a ROOM module with the real room, its exact share and the furniture
   fit, an everyone or majority rule, and exact budget / same-gender checks before any model call;
 - verdict guards against invented dealbreakers.
 Text models: Groq gpt-oss-120b -> gpt-oss-20b -> qwen3.8-27b -> Gemini -> Claude Sonnet, every call
-logged in `data/llm/` and Claude capped at 80 calls.
+logged in `data/llm/` and Claude capped (`CLAUDE_CALL_CAP`, 57 in total).
+
+Avatars are illustrations in DiceBear's "Notionists" style (artwork by Zoish, CC0 1.0; DiceBear code
+MIT). `frontend/scripts/make-avatars.mjs` writes them to `public/demo/avatars/` once, so no avatar
+service or library is needed at runtime. Without an avatar, initials are shown.
 
 **Portals and demo.** `/leasehub`: dashboard with a labelled time-saved estimate, new listing
 (upload or sample plan, parse, 3D preview, auto-filled details, publish, simulated syndication),

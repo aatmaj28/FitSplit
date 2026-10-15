@@ -124,7 +124,7 @@ export default function Apply() {
           <ul className="space-y-2">
             {people.map((p, i) => (
               <li key={p.id} className="flex flex-wrap items-center gap-3 rounded-xl bg-slate-50 px-3 py-2" data-member={p.id}>
-                <Avatar name={p.name} color={p.color} />
+                <Avatar id={p.id} name={p.name} color={p.color} />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-medium text-slate-900">{p.name}{p.id === ME && <span className="text-xs font-normal text-slate-400"> (you)</span>}</span>
                   <span className="block text-xs text-slate-500">{p.program}, {p.school}</span>
@@ -138,7 +138,7 @@ export default function Apply() {
             ))}
           </ul>
           {people.length !== rows.length && rows.length > 0 && (
-            <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">This unit has {rows.length} bedrooms but your group has {people.length} people. <Link to={`/roombae/roommates?listing=${l.id}`} className="font-medium underline">Find roommates</Link> first.</p>
+            <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">This unit has {rows.length} bedrooms but your group has {people.length} people. <Link to={`/roombae/discover?listing=${l.id}`} className="font-medium underline">Find roommates</Link> first.</p>
           )}
           {!unique && people.length === rows.length && <p className="text-xs text-rose-700">Two people picked the same room.</p>}
           <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-2 text-sm">

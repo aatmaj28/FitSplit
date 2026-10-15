@@ -7,7 +7,10 @@ import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const server = await createServer({ root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false } });
+const server = await createServer({
+  root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false },
+  cacheDir: "node_modules/.vite-scripts", // never touch the running dev server's optimized deps
+});
 const { computeSplit, bedrooms } = await server.ssrLoadModule("/src/rentSplit.ts");
 const { buildModel } = await server.ssrLoadModule("/src/components/FloorPlan3D/geometry.ts");
 const F = await server.ssrLoadModule("/src/components/FloorPlan3D/furniture.ts");
@@ -142,6 +145,29 @@ for (const name of ["jvue_3bed", "longwood_2bed"]) {
   const closet = p.rooms.filter((r) => r.type === "closet").map((r) => checker.rooms.get(r.id)).sort((x, y) => x.area - y.area)[0];
   const king = { ...bed, id: "king", kind: "king_bed", name: "King bed", w: 76, d: 80, x: (closet.box.minX + closet.box.maxX) / 2, z: (closet.box.minZ + closet.box.maxZ) / 2, roomId: closet.id };
   check(!checker.check(king, [king]).ok, `king bed in ${closet.name} (${closet.area} sq ft): ${F.describe(king, checker.check(king, [king]), closet.name)}`);
+}
+
+// --- Discover deck: Tanvi's filters (location, both-ways gender preference, seen), sorted by location then name
+{
+  const D = await server.ssrLoadModule("/src/roommates/deck.ts");
+  const profiles = JSON.parse(readFileSync(join(ROOT, "public", "demo", "roommates", "profiles.json"), "utf8"));
+  const by = Object.fromEntries(profiles.map((p) => [p.id, p]));
+  const city = (p, c) => ({ ...p, questionnaire: { ...p.questionnaire, living: { ...p.questionnaire.living, city: c } } });
+  const { deck, hidden } = D.discoverDeck(by.priya, profiles, []);
+  check(deck.map((p) => p.id).join(",") === "ananya,jake,kavya,meera,rohan", `deck for Priya: ${deck.map((p) => p.id).join(", ")}`);
+  const why = Object.fromEntries(hidden.map((h) => [h.p.id, h.reason]));
+  check(why.daniel === "location" && why.marcus === "gender" && why.arjun === "hosting" && why.sofia === "hosting", `hidden: ${JSON.stringify(why)}`);
+  check(D.locationScore(by.priya, city(by.ananya, "Cambridge")) === 2 && D.locationScore(by.priya, city(by.ananya, "Manhattan")) === 0 && D.locationScore(by.priya, by.ananya) === 3,
+    "location score: same city 3, same metro 2, elsewhere 0");
+  const cambridge = D.discoverDeck(by.priya, [by.priya, city(by.ananya, "Cambridge"), city(by.meera, "Boston")], []).deck.map((p) => p.id);
+  check(cambridge.join(",") === "meera,ananya", "same city sorts before same metro");
+  check(!D.genderMatch(by.priya, by.marcus) && !D.genderMatch(by.marcus, by.priya) && D.genderMatch(by.marcus, by.rohan), "same-gender-only is checked both ways");
+  const seen = D.discoverDeck(by.priya, profiles, [{ id: "ananya", dir: "like", at: "" }, { id: "kavya", dir: "pass", at: "" }]).deck.map((p) => p.id);
+  check(seen.join(",") === "jake,meera,rohan", "swiped profiles (liked or passed) are hidden");
+  const noCity = D.discoverDeck(city(by.priya, ""), profiles, []).deck.map((p) => p.id);
+  check(noCity.includes("daniel"), "without a city of your own nobody is hidden for location (as in Tanvi's)");
+  check(/^Jake smokes, and you need a non-smoking home\.$/.test(D.noClickReason(by.priya, by.jake, { result: { status: "incompatible", reason: "smoking", unresolved_topics: [], source: "vrd" } })), "didn't-click line for Jake names the smoking");
+  check(/budgets don't overlap/.test(D.noClickReason(by.daniel, by.kavya, { result: { status: "incompatible", reason: "", unresolved_topics: [], source: "vrd" } })), "didn't-click line for budgets that don't overlap");
 }
 
 await server.close();

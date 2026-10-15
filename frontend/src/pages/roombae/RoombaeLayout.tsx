@@ -1,6 +1,7 @@
 import { Suspense } from "react";
-import { Link, NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet, useLocation } from "react-router";
 import { DemoBar } from "../demo/DemoBar";
+import { Avatar } from "../../roommates/NegotiationView";
 import { PortalBar, RoombaeMark } from "../portals";
 import { PageLoading, PoweredBy, SampleBadge } from "../ui";
 
@@ -14,6 +15,8 @@ const nav = ({ isActive }: { isActive: boolean }) =>
   `rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${isActive ? "bg-[#fff1ec] text-[#b8392a]" : "text-slate-600 hover:text-slate-900"}`;
 
 export default function RoombaeLayout() {
+  const { pathname } = useLocation();
+  const finding = /^\/roombae\/(discover|matches|roommates)/.test(pathname);
   return (
     <div className="flex min-h-full flex-col bg-[#fbf8f5]">
       <PortalBar current="roombae" />
@@ -24,13 +27,13 @@ export default function RoombaeLayout() {
           </Link>
           <nav className="order-3 -mx-1 flex w-full gap-1 overflow-x-auto sm:order-none sm:w-auto" aria-label="Roombae">
             <NavLink to="/roombae/listings" className={nav}>Listings</NavLink>
-            <NavLink to="/roombae/roommates" className={nav}>Find roommates</NavLink>
+            <NavLink to="/roombae/discover" className={() => nav({ isActive: finding })}>Find roommates</NavLink>
             <NavLink to="/roombae/fill-room" className={nav}>Fill a room</NavLink>
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <SampleBadge />
             <span className="flex items-center gap-1.5 rounded-full bg-slate-100 py-0.5 pl-0.5 pr-2.5 text-xs font-medium text-slate-700" title="Signed in as the demo student">
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-teal-600 text-[10px] font-semibold text-white">PS</span>
+              <Avatar id="priya" name="Priya Sharma" color="#0d9488" size={6} />
               Priya S.
             </span>
           </div>

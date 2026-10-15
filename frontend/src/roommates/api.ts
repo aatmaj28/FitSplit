@@ -20,6 +20,8 @@ export interface Profile {
   furniture: Furniture[];
   questionnaire: Questionnaire;
   sample?: boolean;
+  /** already rents this unit with an open room ("Fill a room"), so not in the Discover deck */
+  hosting?: string;
 }
 
 export interface QuestionSpec {
@@ -50,6 +52,8 @@ export interface NegotiationMessage {
   turn: number;
   phase: "introduction" | "exploration" | "negotiation" | "conclusion";
   timestamp: string;
+  /** one plain-English line saying what the message means (written once per message, cached) */
+  say?: string;
 }
 
 export interface Check {

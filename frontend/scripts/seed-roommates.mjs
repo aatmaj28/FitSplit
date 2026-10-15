@@ -14,12 +14,16 @@ const OUT = join(ROOT, "public", "demo", "roommates");
 const API = process.env.API_URL ?? "http://localhost:8000";
 const exportOnly = process.argv.includes("--export-only");
 
-// people first: three students who should click, and one who shouldn't
-const FIND = [["priya", "ananya"], ["priya", "meera"], ["ananya", "meera"], ["priya", "jake"]];
+// people first: three students who should click, one who shouldn't, and the rest of Priya's
+// Discover deck (every card she can swipe right on has a bundled conversation)
+const FIND = [["priya", "ananya"], ["priya", "meera"], ["ananya", "meera"], ["priya", "jake"], ["priya", "kavya"], ["priya", "rohan"]];
 // apartment first: Arjun (Bedroom 1) and Sofia (Bedroom 3) have the JVUE 3 bed and need someone for Bedroom 2
 const FILL = { plan: "jvue_3bed", unit: "JVUE 3 bed", open: "r5", members: [["arjun", "r4"], ["sofia", "r6"]], candidates: ["rohan", "jake", "kavya"] };
 
-const server = await createServer({ root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false } });
+const server = await createServer({
+  root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false },
+  cacheDir: "node_modules/.vite-scripts", // never touch the running dev server's optimized deps
+});
 const { computeSplit } = await server.ssrLoadModule("/src/rentSplit.ts");
 const { buildModel } = await server.ssrLoadModule("/src/components/FloorPlan3D/geometry.ts");
 const F = await server.ssrLoadModule("/src/components/FloorPlan3D/furniture.ts");

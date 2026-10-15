@@ -22,6 +22,7 @@
   "dependencies": {
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
+    "framer-motion": "13.4.6",
     "polygon-clipping": "^0.15.7",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -29,6 +30,8 @@
     "three": "^0.186.1"
   },
   "devDependencies": {
+    "@dicebear/core": "9.4.3",
+    "@dicebear/notionists": "9.4.3",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

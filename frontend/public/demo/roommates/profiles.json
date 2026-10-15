@@ -266,6 +266,7 @@
     "program": "PhD EECS",
     "hometown": "Hyderabad, India",
     "color": "#2563eb",
+    "hosting": "jvue_3bed",
     "bio": "Third-year PhD, researches from home. Needs quiet afternoons for advisor calls.",
     "furniture": [
       "queen_bed",
@@ -352,6 +353,7 @@
     "program": "MBA",
     "hometown": "Bogotá, Colombia",
     "color": "#ea580c",
+    "hosting": "jvue_3bed",
     "bio": "MBA student, salsa and brunch person. Social, tidy, partner visits on Fridays.",
     "furniture": [
       "queen_bed",
@@ -689,6 +691,174 @@
         "flexible_on": [
           "Lease length",
           "Move-in date"
+        ],
+        "custom_dealbreaker": ""
+      }
+    },
+    "sample": true
+  },
+  {
+    "id": "daniel",
+    "name": "Daniel Kim",
+    "school": "New York University",
+    "program": "MS Finance",
+    "hometown": "Seoul, South Korea",
+    "color": "#4f46e5",
+    "bio": "Starts at NYU Stern in January. Runner, home cook, quiet on weeknights.",
+    "furniture": [
+      "full_bed",
+      "desk"
+    ],
+    "questionnaire": {
+      "living": {
+        "city": "Manhattan",
+        "neighborhood": "East Village",
+        "occupation": "Student",
+        "gender": "Man",
+        "move_in_date": "1–3 months",
+        "lease_type": "1-year lease",
+        "budget_min": 1600,
+        "budget_max": 2100,
+        "budget_flexibility": "Can flex up to ~$100",
+        "room_type": "Private room",
+        "bathroom_preference": "No preference",
+        "roommate_gender": "No preference",
+        "pets": "I love pets but don't have any",
+        "smoking": "Non-smoking household only",
+        "drinking": "Socially"
+      },
+      "financial": {
+        "utilities_split": "Split equally",
+        "groceries_split": "Split basics (condiments, cleaning)",
+        "security_deposit": "Yes, up to 1 month's rent",
+        "payment_style": "Shared app (Splitwise, etc.)"
+      },
+      "routines": {
+        "sleep_schedule": "Somewhere in between",
+        "wake_time": "6am–8am",
+        "cooking_habits": "A few times a week",
+        "kitchen_sharing": "No strong preference",
+        "bathroom_time": "15–30 minutes",
+        "common_space_usage": "Balanced use",
+        "cleanliness": 4,
+        "cleaning_schedule": "Rotating chore chart"
+      },
+      "social": {
+        "noise_level": "Occasional friends over (weekends)",
+        "overnight_guests": "Occasionally (once a month or less)",
+        "guest_notice": "Always give notice",
+        "parties": "Small gatherings only (< 10 people)",
+        "introvert_extrovert": 3
+      },
+      "lifestyle": {
+        "work_from_home": "Hybrid (a few days a week)",
+        "quiet_hours_needed": "Occasionally — a few times a week",
+        "schedule_predictability": "Mostly consistent with some variation",
+        "temperature_preference": "Moderate (68–72°F / 20–22°C)",
+        "hobbies": "Running, Korean cooking, jazz bars",
+        "lifestyle_notes": ""
+      },
+      "personality": {
+        "conflict_style": "Cool off first, then discuss",
+        "communication_style": "Group chat / text for everything",
+        "roommate_relationship": "Friendly but independent"
+      },
+      "dealbreakers": {
+        "non_negotiables": [
+          "No smoking indoors"
+        ],
+        "top_priorities": [
+          "Similar cleanliness standards",
+          "Location match",
+          "Budget compatibility"
+        ],
+        "flexible_on": [
+          "Move-in date",
+          "Grocery arrangement"
+        ],
+        "custom_dealbreaker": ""
+      }
+    },
+    "sample": true
+  },
+  {
+    "id": "marcus",
+    "name": "Marcus Lee",
+    "school": "Boston University",
+    "program": "MS Statistics",
+    "hometown": "Portland, OR",
+    "color": "#0f766e",
+    "bio": "Stats grad student and climber. Prefers living with other guys.",
+    "furniture": [
+      "queen_bed",
+      "desk"
+    ],
+    "questionnaire": {
+      "living": {
+        "city": "Boston",
+        "neighborhood": "Fenway",
+        "occupation": "Student",
+        "gender": "Man",
+        "move_in_date": "1–3 months",
+        "lease_type": "1-year lease",
+        "budget_min": 1150,
+        "budget_max": 1450,
+        "budget_flexibility": "Can flex up to ~$100",
+        "room_type": "Private room",
+        "bathroom_preference": "No preference",
+        "roommate_gender": "Same gender only",
+        "pets": "I love pets but don't have any",
+        "smoking": "Non-smoking household only",
+        "drinking": "Socially"
+      },
+      "financial": {
+        "utilities_split": "Split equally",
+        "groceries_split": "Split basics (condiments, cleaning)",
+        "security_deposit": "Yes, up to 1 month's rent",
+        "payment_style": "Shared app (Splitwise, etc.)"
+      },
+      "routines": {
+        "sleep_schedule": "Somewhere in between",
+        "wake_time": "6am–8am",
+        "cooking_habits": "A few times a week",
+        "kitchen_sharing": "No strong preference",
+        "bathroom_time": "15–30 minutes",
+        "common_space_usage": "Balanced use",
+        "cleanliness": 4,
+        "cleaning_schedule": "Rotating chore chart"
+      },
+      "social": {
+        "noise_level": "Occasional friends over (weekends)",
+        "overnight_guests": "Occasionally (once a month or less)",
+        "guest_notice": "Always give notice",
+        "parties": "Small gatherings only (< 10 people)",
+        "introvert_extrovert": 3
+      },
+      "lifestyle": {
+        "work_from_home": "Hybrid (a few days a week)",
+        "quiet_hours_needed": "Occasionally — a few times a week",
+        "schedule_predictability": "Mostly consistent with some variation",
+        "temperature_preference": "Moderate (68–72°F / 20–22°C)",
+        "hobbies": "Climbing, board games, cycling",
+        "lifestyle_notes": ""
+      },
+      "personality": {
+        "conflict_style": "Cool off first, then discuss",
+        "communication_style": "Group chat / text for everything",
+        "roommate_relationship": "Friendly but independent"
+      },
+      "dealbreakers": {
+        "non_negotiables": [
+          "No smoking indoors"
+        ],
+        "top_priorities": [
+          "Similar cleanliness standards",
+          "Respectful of quiet/work time",
+          "Budget compatibility"
+        ],
+        "flexible_on": [
+          "Move-in date",
+          "Chore split style"
         ],
         "custom_dealbreaker": ""
       }

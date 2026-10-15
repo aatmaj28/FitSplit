@@ -19,8 +19,8 @@ export const STEPS: Step[] = [
   },
   {
     n: 2, side: "Roombae", title: "Students match",
-    hint: "Meet all matches: the clones negotiate. Priya, Ananya and Meera click; Jake's smoking ends his chat. Save the group.",
-    path: () => `/roombae/roommates?listing=${DEMO_LISTING}`, matches: (p) => p.startsWith("/roombae/roommates"),
+    hint: "Swipe right on Ananya: it's a match. Right on Jake: the clones didn't click (he smokes). Pass Kavya, like Meera, then Find a place together and save the group.",
+    path: () => `/roombae/discover?listing=${DEMO_LISTING}`, matches: (p) => /^\/roombae\/(discover|matches|roommates)/.test(p),
   },
   {
     n: 3, side: "Roombae", title: "See it in 3D + furniture fit",

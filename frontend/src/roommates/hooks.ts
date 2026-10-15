@@ -29,17 +29,27 @@ export function useQuestionnaire() {
   return useAsync<QuestionnaireSchema>(loadQuestionnaire);
 }
 
-/** Finished negotiation records by id (for scores and verdicts in summaries). */
-export function useNegotiationRecords(ids: string[]): Record<string, NegotiationRecord> {
+/** Negotiation records by id (for scores and verdicts in summaries); live ones are re-read until they finish. */
+export function useNegotiationRecords(ids: string[], pollMs = 4000): Record<string, NegotiationRecord> {
   const [recs, setRecs] = useState<Record<string, NegotiationRecord>>({});
+  const [tick, setTick] = useState(0);
   const key = ids.join(",");
   useEffect(() => {
     let alive = true;
-    for (const id of ids) loadNegotiation(id).then((r) => alive && setRecs((m) => ({ ...m, [id]: r })), () => {});
+    for (const id of ids) {
+      if (recs[id]?.status === "complete") continue;
+      loadNegotiation(id).then((r) => alive && setRecs((m) => ({ ...m, [id]: r })), () => {});
+    }
     return () => {
       alive = false;
     };
-  }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [key, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  const running = ids.some((id) => recs[id]?.status === "running");
+  useEffect(() => {
+    if (!running) return;
+    const t = setInterval(() => setTick((n) => n + 1), pollMs);
+    return () => clearInterval(t);
+  }, [running, pollMs]);
   return recs;
 }
 

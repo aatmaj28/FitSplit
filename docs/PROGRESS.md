@@ -22,3 +22,16 @@ Branch: `overnight` (baseline on `main`). Checks after every phase: `cd frontend
 - Phases 3-6 first pass done: roommate engine port + API + SSE, Roombae and LeaseHub portals, guided demo, root dev:all. Regenerating Meera/fill negotiations with verdict guards (log: scratchpad seed_roommates4.log). Claude calls 17/80.
 - Phase 7 done: openings export + doors/windows/frames in 3D, door-based keep-clear zones, hallway color, verdict guards + lease check, scenarios final (find: strong / conditional / conditional / incompatible; fill: Rohan match, Jake no, Kavya exact budget no). All suites green: pytest 42, check, build, e2e viewer / rentcheck / demo (online + offline).
 - Phase 8 done: report, demo script, README; fixed cold-start Vite dep optimization; all suites green from a cold `npm run dev:all` (pytest 42, check 49, e2e viewer 10, rentcheck 17, demo 42).
+
+## 2026-10-15 fixes (from the tour)
+
+| Fix | Status | Notes |
+|---|---|---|
+| 1 Chat auto scroll + replay controls | done | NegotiationView scroll box, Jump to latest, pause / 1×2×4× / Skip to verdict; `scripts/e2e-chat.mjs` |
+| 2 Navigation | done | landing with 3 entries, PortalBar (Home + switcher), logos to portal home; `scripts/e2e-nav.mjs` |
+| 3 Swipe to match | done | Discover + My matches (Tanvi's Setup Match / My Matches), avatars, deck filters; `scripts/e2e-swipe.mjs` (online, offline, phone) |
+| 4 Clone conversation quality | todo | |
+| 5 Reset view button | todo | |
+| 6 Demo step bar sync | todo | |
+
+API budget for these fixes: Groq first, Claude at most 40 more calls (cap 57 in total), everything cached.

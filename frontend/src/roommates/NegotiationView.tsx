@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ButtonHTMLAttributes } from "react";
 import { parseAcp, type Part } from "./acp";
 import type { Analysis, Check, NegotiationEvent, NegotiationMessage, Outcome, Verdict } from "./api";
+import { avatarUrl, tint } from "./people";
 
 const PHASES = [
   { id: "introduction", label: "Introduction" },
@@ -37,10 +38,20 @@ export function ScoreBars({ scores }: { scores: Analysis["scores"] }) {
   );
 }
 
-export function Avatar({ name, color, size = 8 }: { name: string; color: string; size?: number }) {
+/** A student's illustrated avatar (bundled SVG) in a circle, or their initials without an id. */
+export function Avatar({ name, color, size = 8, id }: { name: string; color: string; size?: number; id?: string }) {
+  const [broken, setBroken] = useState(false);
+  const px = size * 4;
+  if (id && !broken) {
+    return (
+      <span className="inline-flex shrink-0 overflow-hidden rounded-full" style={{ background: tint(color), width: px, height: px }} aria-hidden>
+        <img src={avatarUrl(id)} alt="" draggable={false} onError={() => setBroken(true)} className="h-full w-full scale-[1.18] object-cover" style={{ transformOrigin: "50% 30%" }} />
+      </span>
+    );
+  }
   const initials = name.split(" ").map((w) => w[0]).slice(0, 2).join("");
   return (
-    <span className="inline-flex shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white" style={{ background: color, width: size * 4, height: size * 4 }} aria-hidden>
+    <span className="inline-flex shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white" style={{ background: color, width: px, height: px }} aria-hidden>
       {initials}
     </span>
   );
@@ -71,11 +82,11 @@ function PartView({ part }: { part: Part }) {
   );
 }
 
-function Bubble({ msg, side, color, shownParts, raw }: { msg: NegotiationMessage; side: "left" | "right"; color: string; shownParts: number; raw: boolean }) {
+function Bubble({ msg, side, color, who, shownParts, raw }: { msg: NegotiationMessage; side: "left" | "right"; color: string; who?: string; shownParts: number; raw: boolean }) {
   const { parts, modules } = useMemo(() => parseAcp(msg.message), [msg.message]);
   return (
     <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`} data-msg={msg.turn}>
-      <Avatar name={msg.speaker} color={color} />
+      <Avatar name={msg.speaker} color={color} id={who} />
       <div className={`max-w-[85%] space-y-1.5 rounded-2xl px-3 py-2 text-[13px] shadow-sm ring-1 ring-slate-200 ${side === "left" ? "rounded-bl-md bg-white" : "rounded-br-md bg-violet-50/60"}`}>
         <div className="flex items-center gap-2 text-[11px] text-slate-400">
           <span className="font-semibold text-slate-600">{msg.speaker}'s clone</span>
@@ -96,10 +107,10 @@ function Bubble({ msg, side, color, shownParts, raw }: { msg: NegotiationMessage
   );
 }
 
-function Typing({ name, color, side, still }: { name: string; color: string; side: "left" | "right"; still?: boolean }) {
+function Typing({ name, color, who, side, still }: { name: string; color: string; who?: string; side: "left" | "right"; still?: boolean }) {
   return (
     <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`}>
-      <Avatar name={name} color={color} />
+      <Avatar name={name} color={color} id={who} />
       <div className="rounded-2xl bg-white px-3 py-2.5 shadow-sm ring-1 ring-slate-200" aria-label={`${name}'s clone is typing`}>
         <span className="flex gap-1">
           {[0, 1, 2].map((i) => (
@@ -187,8 +198,8 @@ function Ctrl({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 export function NegotiationView({ events, animate = true, a, b, onDone, showChecks = true }: {
   events: NegotiationEvent[];
   animate?: boolean;
-  a: { name: string; color: string };
-  b: { name: string; color: string };
+  a: { name: string; color: string; id?: string };
+  b: { name: string; color: string; id?: string };
   onDone?: () => void;
   /** off when the page shows the exact checks itself */
   showChecks?: boolean;
@@ -285,6 +296,7 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
   const checks = shown.find((e) => e.type === "checks") as Extract<NegotiationEvent, { type: "checks" }> | undefined;
   const side = (m: NegotiationMessage) => (m.speaker_id === "a" ? "left" : "right");
   const color = (m: NegotiationMessage) => (m.speaker_id === "a" ? a.color : b.color);
+  const who = (m: NegotiationMessage) => (m.speaker_id === "a" ? a.id : b.id);
   const phaseIdx = complete ? PHASES.length : PHASES.findIndex((p) => p.id === phase?.phase);
   const playing = !done && !paused;
 
@@ -337,16 +349,16 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
                   <span className="h-px flex-1 bg-slate-200" />
                 </div>
               ) : e.type === "agent_message" ? (
-                <Bubble key={i} msg={e.data} side={side(e.data)} color={color(e.data)} shownParts={99} raw={raw} />
+                <Bubble key={i} msg={e.data} side={side(e.data)} color={color(e.data)} who={who(e.data)} shownParts={99} raw={raw} />
               ) : e.type === "error" ? (
                 <p key={i} className="rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-800">{e.message}</p>
               ) : null,
             )}
             {current?.type === "agent_message" &&
               (step === 0 ? (
-                <Typing name={current.data.speaker} color={color(current.data)} side={side(current.data)} still={!playing} />
+                <Typing name={current.data.speaker} color={color(current.data)} who={who(current.data)} side={side(current.data)} still={!playing} />
               ) : (
-                <Bubble msg={current.data} side={side(current.data)} color={color(current.data)} shownParts={step} raw={raw} />
+                <Bubble msg={current.data} side={side(current.data)} color={color(current.data)} who={who(current.data)} shownParts={step} raw={raw} />
               ))}
             {(current?.type === "analyzing" || (shown.some((e) => e.type === "analyzing") && !complete && !current)) && (
               <p className="flex items-center gap-2 text-xs text-slate-500">

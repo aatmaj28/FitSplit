@@ -39,10 +39,10 @@ export default function Home() {
       </section>
 
       <section className="grid gap-3 sm:grid-cols-2">
-        <Link to="/roombae/roommates" className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-[#e8553e]/50">
+        <Link to="/roombae/discover" className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-[#e8553e]/50">
           <div className={`text-[11px] font-semibold uppercase tracking-wide ${R.text}`}>People first</div>
           <div className="mt-1 text-lg font-semibold text-slate-900">Find roommates <span aria-hidden className="inline-block transition-transform group-hover:translate-x-0.5">→</span></div>
-          <p className="mt-1 text-sm text-slate-600">Answer the questionnaire once. Your clone meets other students' clones and brings back a group, a combined budget and listings that fit all of you.</p>
+          <p className="mt-1 text-sm text-slate-600">Swipe through students nearby. Swipe right and your clones talk first; you get a verdict, then a group and listings that fit all of you.</p>
         </Link>
         <Link to="/roombae/fill-room" className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-violet-300">
           <div className="text-[11px] font-semibold uppercase tracking-wide text-violet-600">Apartment first</div>

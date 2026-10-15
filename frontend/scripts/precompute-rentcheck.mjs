@@ -16,7 +16,10 @@ const FULL = ["jvue_3bed", "longwood_2bed"];
 const DEFAULT_ONLY = ["jvue_1bed", "longwood_1bed", "missionmain_3bed", "serenity_1bed"];
 const names = process.argv.slice(2).length ? process.argv.slice(2) : [...FULL, ...DEFAULT_ONLY];
 
-const server = await createServer({ root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false } });
+const server = await createServer({
+  root: ROOT, logLevel: "error", appType: "custom", server: { middlewareMode: true, hmr: false, ws: false },
+  cacheDir: "node_modules/.vite-scripts", // never touch the running dev server's optimized deps
+});
 const { computeSplit, bedrooms } = await server.ssrLoadModule("/src/rentSplit.ts");
 const RC = await server.ssrLoadModule("/src/rentCheck.ts");
 

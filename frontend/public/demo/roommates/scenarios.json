@@ -24,6 +24,18 @@
         "b": "jake",
         "id": "n_6eb157360e44",
         "status": "incompatible"
+      },
+      {
+        "a": "priya",
+        "b": "kavya",
+        "id": "n_80b50260ef9f",
+        "status": "strong"
+      },
+      {
+        "a": "priya",
+        "b": "rohan",
+        "id": "n_237865066ca8",
+        "status": "strong"
       }
     ],
     "groups": [
@@ -139,7 +151,7 @@
       },
       "layout": [
         {
-          "id": "3s6psfb0",
+          "id": "ljwv7l0g",
           "kind": "queen_bed",
           "name": "Queen bed",
           "w": 60,
@@ -152,7 +164,7 @@
           "z": 12.763506540596325
         },
         {
-          "id": "8kytt3ym",
+          "id": "pmjk63wd",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -165,7 +177,7 @@
           "z": 17.18017320726299
         },
         {
-          "id": "pusrhkg3",
+          "id": "87fn27nf",
           "kind": "bookshelf",
           "name": "Bookshelf",
           "w": 36,
@@ -257,7 +269,7 @@
       },
       "layout": [
         {
-          "id": "82aovirz",
+          "id": "qnn56cfs",
           "kind": "full_bed",
           "name": "Full bed",
           "w": 54,
@@ -270,7 +282,7 @@
           "z": 12.55517320726299
         },
         {
-          "id": "pvmzn881",
+          "id": "4998qmnt",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -283,7 +295,7 @@
           "z": 10.43017320726299
         },
         {
-          "id": "7e515z8y",
+          "id": "eb4g4ikp",
           "kind": "custom",
           "name": "Keyboard stand",
           "w": 54,
@@ -375,7 +387,7 @@
       },
       "layout": [
         {
-          "id": "ui940hpt",
+          "id": "x8w28x09",
           "kind": "twin_bed",
           "name": "Twin bed",
           "w": 39,
@@ -388,7 +400,7 @@
           "z": 12.55517320726299
         },
         {
-          "id": "oe0j9q16",
+          "id": "712hgmzr",
           "kind": "desk",
           "name": "Desk",
           "w": 48,
@@ -401,7 +413,7 @@
           "z": 10.43017320726299
         },
         {
-          "id": "fqnqx8fv",
+          "id": "x57slmkq",
           "kind": "bookshelf",
           "name": "Bookshelf",
           "w": 36,

@@ -1,0 +1,411 @@
+{
+  "id": "n_237865066ca8",
+  "engine": "rm1",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "rohan",
+    "name": "Rohan Mehta"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T15:55:55+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Budget hard cap (cannot exceed max)|pri=Budget compatibility;Similar cleanliness standards;Respectful of quiet/work time\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All criteria compatible|open=none",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T15:56:02+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=Your profile aligns well with my preferences|open=financial details, daily routines]",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T15:56:11+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits if prior notice |condition=Must keep noise low and respect study hours  \n\nVRD:STRONG|r=Preferences shared; awaiting your routines and guest preferences|open=guest_policy, sleep schedule, WFH habits",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T15:56:18+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)\nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm\nCNF:budget:compatible(✓) \nVRD:STRONG|r=Sleep, cleanliness, and low‑noise preferences align; guest policy flexible with notice|open=guest_policy details, any WFH schedule nuances]",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T15:56:31+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm  \n\n<<MOD:ROUTINES>>  \nI usually wake around 7 am, brew coffee, and head to campus by 8:30 am. Evenings are for study or a short workout; I keep the kitchen tidy and do a quick clean‑up after meals. I’m happy to coordinate chores weekly to keep the space at a 4/5 cleanliness level.  \n\nWhat’s your typical sleep window, cleaning routine, and any guest habits you foresee?  \n\nVRD:STRONG|r=Shared preferences on sleep, cleanliness, and low‑noise environment; awaiting your routine details|open=guest_policy specifics, daily routine coordination",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T15:56:37+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)\nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm\nCNF:cleanliness:aligned(✓)|sleep:aligned(✓)|guest_policy:aligned_with_flexibility(✓)\nVRD:STRONG|r=Our sleep windows, cleanliness standards, and low‑noise expectations match; guest policy flexible with notice|open=any further details on your weekly chore schedule or WFH timing]",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T15:56:53+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (evenings)  \nFLX:guest_policy=I can allow a friend over for up to 2 hrs on a Saturday afternoon if you give a 12‑hr heads‑up |condition=Keep music ≤60 dB and clean up immediately after  \nFLX:chore_schedule=I’ll take the kitchen cleanup on Mon/Thu, you can handle living‑room tidying on Tue/Fri |condition=Both stick to the rotating chart; we’ll swap weeks if needed  \nFLX:wfh_hours=If you need to work from home on a weekday morning, I can shift my coffee‑making to 6:30 am and keep the kitchen quiet until 8 am |condition=You’ll keep noise low and limit video calls to a private space if possible  \n\nNo non‑negotiable conflicts detected; budget and smoking remain within hard caps.  \n\nVRD:STRONG|r=All friction points addressed with concrete compromises; awaiting your confirmation on the chore split and guest notice |open=none",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T15:57:08+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "CNF:guest_policy:compromise_accepted(✓)  \nCNF:chore_schedule:compromise_accepted(✓)  \nCNF:wfh_hours:compromise_accepted(✓)  \nPFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (Priya); Living‑room tidy Tue/Fri (you); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \nVRD:STRONG|r=All proposed compromises align with my non‑negotiables and priorities|open=none",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T15:57:26+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "PFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (you); Living‑room tidy Tue/Fri (me); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \n\nVRD:STRONG|r=All compromises accepted; no conflicts with non‑negotiables|open=none",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T15:57:38+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "CNF:guest_policy:accepted(✓)  \nCNF:chore_schedule:accepted(✓)  \nCNF:wfh_hours:accepted(✓)  \nPFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (you); Living‑room tidy Tue/Fri (me); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \nVRD:STRONG|r=All proposed compromises align with my non‑negotiables and priorities; ready to move forward|open=none",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T15:57:55+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Rohan Mehta",
+        "speaker_id": "b",
+        "message": "VRD:STRONG|r=All non‑negotiables and priorities are met; guest policy, chore schedule, and WFH accommodations are agreed |open=none",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T15:58:13+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:All agreed terms captured—guest visits up to 2 hrs Saturday with 12‑hr notice, music ≤60 dB, immediate cleanup; kitchen cleanup Mon/Thu (you), living‑room tidy Tue/Fri (me) with weekly rotation; coffee shifted to 6:30 am, kitchen quiet until 8 am, video calls with headphones in a private corner.  \n\nVRD:STRONG MATCH|r=All non‑negotiables and priorities are satisfied; no outstanding issues.",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T15:58:31+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 95,
+          "finances": 90,
+          "lifestyle": 95,
+          "personality": 90,
+          "logistics": 95
+        },
+        "highlights": [
+          "Both have identical budget caps (1100‑1450) and non‑smoking rules",
+          "Sleep windows (10 pm‑7 am), cleanliness level (4/5), and low‑noise expectations align perfectly",
+          "Concrete compromises on guest visits, chore rotation, and early‑morning WFH noise were mutually accepted"
+        ],
+        "concerns": [
+          "Rohan’s occasional office commute vs Priya’s hybrid WFH could cause minor schedule overlap",
+          "Weekend guest visits rely on 12‑hour notice, requiring good communication",
+          "Noise limit of 60 dB may need monitoring during music or video calls"
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Maintain 12‑hour notice for any weekend guest and use headphones/private space for video calls",
+          "Rotate chore responsibilities weekly to balance workload"
+        ],
+        "recommendation": "strong",
+        "recommendation_summary": "Priya and Rohan show strong compatibility across finances, lifestyle, and logistics, with all major preferences aligned and mutually agreed compromises. Minor coordination points are easily managed, making them a solid roommate match."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T15:55:55+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1400|rm=Private room|gnd=Man|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Budget hard cap (cannot exceed max)|pri=Budget compatibility;Similar cleanliness standards;Respectful of quiet/work time\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All criteria compatible|open=none",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T15:56:02+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=Your profile aligns well with my preferences|open=financial details, daily routines]",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T15:56:11+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits if prior notice |condition=Must keep noise low and respect study hours  \n\nVRD:STRONG|r=Preferences shared; awaiting your routines and guest preferences|open=guest_policy, sleep schedule, WFH habits",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T15:56:18+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)\nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm\nCNF:budget:compatible(✓) \nVRD:STRONG|r=Sleep, cleanliness, and low‑noise preferences align; guest policy flexible with notice|open=guest_policy details, any WFH schedule nuances]",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T15:56:31+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)  \nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm  \n\n<<MOD:ROUTINES>>  \nI usually wake around 7 am, brew coffee, and head to campus by 8:30 am. Evenings are for study or a short workout; I keep the kitchen tidy and do a quick clean‑up after meals. I’m happy to coordinate chores weekly to keep the space at a 4/5 cleanliness level.  \n\nWhat’s your typical sleep window, cleaning routine, and any guest habits you foresee?  \n\nVRD:STRONG|r=Shared preferences on sleep, cleanliness, and low‑noise environment; awaiting your routine details|open=guest_policy specifics, daily routine coordination",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T15:56:37+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (mostly evenings for coursework)|guest_policy=No regular guests; occasional friend visits (max 1‑2 hrs, <once a week)\nFLX:guest_policy=Open to brief weekend visits with at least 12 hr notice|condition=Noise must stay below conversational level after 10 pm\nCNF:cleanliness:aligned(✓)|sleep:aligned(✓)|guest_policy:aligned_with_flexibility(✓)\nVRD:STRONG|r=Our sleep windows, cleanliness standards, and low‑noise expectations match; guest policy flexible with notice|open=any further details on your weekly chore schedule or WFH timing]",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T15:56:53+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "PFR:slp=10pm-7am|cln=4|gwk=0|nzl=Low|wfh=Occasionally (evenings)  \nFLX:guest_policy=I can allow a friend over for up to 2 hrs on a Saturday afternoon if you give a 12‑hr heads‑up |condition=Keep music ≤60 dB and clean up immediately after  \nFLX:chore_schedule=I’ll take the kitchen cleanup on Mon/Thu, you can handle living‑room tidying on Tue/Fri |condition=Both stick to the rotating chart; we’ll swap weeks if needed  \nFLX:wfh_hours=If you need to work from home on a weekday morning, I can shift my coffee‑making to 6:30 am and keep the kitchen quiet until 8 am |condition=You’ll keep noise low and limit video calls to a private space if possible  \n\nNo non‑negotiable conflicts detected; budget and smoking remain within hard caps.  \n\nVRD:STRONG|r=All friction points addressed with concrete compromises; awaiting your confirmation on the chore split and guest notice |open=none",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T15:57:08+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "CNF:guest_policy:compromise_accepted(✓)  \nCNF:chore_schedule:compromise_accepted(✓)  \nCNF:wfh_hours:compromise_accepted(✓)  \nPFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (Priya); Living‑room tidy Tue/Fri (you); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \nVRD:STRONG|r=All proposed compromises align with my non‑negotiables and priorities|open=none",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T15:57:26+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "PFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (you); Living‑room tidy Tue/Fri (me); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \n\nVRD:STRONG|r=All compromises accepted; no conflicts with non‑negotiables|open=none",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T15:57:38+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "CNF:guest_policy:accepted(✓)  \nCNF:chore_schedule:accepted(✓)  \nCNF:wfh_hours:accepted(✓)  \nPFR:guest_policy=Friend visits up to 2 hrs Saturday with 12‑hr notice; music ≤60 dB; clean up immediately after  \nPFR:chore_schedule=Kitchen cleanup Mon/Thu (you); Living‑room tidy Tue/Fri (me); rotate weekly if needed  \nPFR:wfh_hours=Shift coffee to 6:30 am, keep kitchen quiet until 8 am; you use headphones and a private corner for video calls  \nVRD:STRONG|r=All proposed compromises align with my non‑negotiables and priorities; ready to move forward|open=none",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T15:57:55+00:00"
+    },
+    {
+      "speaker": "Rohan Mehta",
+      "speaker_id": "b",
+      "message": "VRD:STRONG|r=All non‑negotiables and priorities are met; guest policy, chore schedule, and WFH accommodations are agreed |open=none",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T15:58:13+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:All agreed terms captured—guest visits up to 2 hrs Saturday with 12‑hr notice, music ≤60 dB, immediate cleanup; kitchen cleanup Mon/Thu (you), living‑room tidy Tue/Fri (me) with weekly rotation; coffee shifted to 6:30 am, kitchen quiet until 8 am, video calls with headphones in a private corner.  \n\nVRD:STRONG MATCH|r=All non‑negotiables and priorities are satisfied; no outstanding issues.",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T15:58:31+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 95,
+      "finances": 90,
+      "lifestyle": 95,
+      "personality": 90,
+      "logistics": 95
+    },
+    "highlights": [
+      "Both have identical budget caps (1100‑1450) and non‑smoking rules",
+      "Sleep windows (10 pm‑7 am), cleanliness level (4/5), and low‑noise expectations align perfectly",
+      "Concrete compromises on guest visits, chore rotation, and early‑morning WFH noise were mutually accepted"
+    ],
+    "concerns": [
+      "Rohan’s occasional office commute vs Priya’s hybrid WFH could cause minor schedule overlap",
+      "Weekend guest visits rely on 12‑hour notice, requiring good communication",
+      "Noise limit of 60 dB may need monitoring during music or video calls"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Maintain 12‑hour notice for any weekend guest and use headphones/private space for video calls",
+      "Rotate chore responsibilities weekly to balance workload"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Rohan show strong compatibility across finances, lifestyle, and logistics, with all major preferences aligned and mutually agreed compromises. Minor coordination points are easily managed, making them a solid roommate match."
+  },
+  "providers": {
+    "cache": 1,
+    "groq": 13
+  },
+  "created": "2026-10-15T15:55:55+00:00",
+  "ignored_verdicts": []
+}

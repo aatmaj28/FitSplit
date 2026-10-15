@@ -30,7 +30,7 @@ export default function ListingDetail() {
         </div>
         <div className="flex flex-wrap gap-2">
           {l.beds > 1 && (
-            <Link to={`/roombae/roommates?listing=${l.id}`} className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50">
+            <Link to={`/roombae/discover?listing=${l.id}`} className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50">
               Find roommates for this unit
             </Link>
           )}

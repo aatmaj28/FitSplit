@@ -42,7 +42,7 @@ export default function ApplicationView() {
               const p = prof(m.profileId);
               return (
                 <li key={m.name} className="flex items-center gap-3 py-2.5" data-applicant={m.profileId ?? m.name}>
-                  {p ? <Avatar name={p.name} color={p.color} /> : <span className="grid h-8 w-8 place-items-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600">{m.name[0]}</span>}
+                  {p ? <Avatar id={p.id} name={p.name} color={p.color} /> : <span className="grid h-8 w-8 place-items-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600">{m.name[0]}</span>}
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-medium text-slate-900">{m.name}</span>
                     <span className="block text-xs text-slate-500">{p ? `${p.program}, ${p.school}` : "Applicant"} · {m.roomLabel}</span>

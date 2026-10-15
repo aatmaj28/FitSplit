@@ -26,7 +26,7 @@ def test_seed_profiles_use_exact_questionnaire_options():
                 if spec["type"] == "multiselect":
                     assert set(v) <= set(opts), (p["id"], key, set(v) - set(opts))
                     assert len(v) <= spec.get("max_select", 99)
-    assert len(PROFILES) == 8 and len({p["school"] for p in PROFILES}) == 5
+    assert len(PROFILES) == 10 and len({p["school"] for p in PROFILES}) == 6
 
 
 @pytest.mark.parametrize("msg,status,reason,topics", [

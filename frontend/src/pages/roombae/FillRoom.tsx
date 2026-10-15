@@ -18,7 +18,7 @@ function Interview({ fill, member, candidate, onDone, watched }: { fill: Fill; m
   if (!n) return null;
   if (error) return <ErrorState title="Can't show this conversation">{error}</ErrorState>;
   if (!events.length) return <PageLoading label="Connecting the clones…" />;
-  return <NegotiationView key={n.id} events={events} animate={!watched} a={{ name: candidate.name, color: candidate.color }} b={{ name: member.name, color: member.color }} onDone={onDone} showChecks={false} />;
+  return <NegotiationView key={n.id} events={events} animate={!watched} a={{ name: candidate.name, color: candidate.color, id: candidate.id }} b={{ name: member.name, color: member.color, id: member.id }} onDone={onDone} showChecks={false} />;
 }
 
 export default function FillRoom() {
@@ -59,7 +59,7 @@ export default function FillRoom() {
           </p>
         </div>
         <div className="inline-flex rounded-full bg-white p-1 text-sm ring-1 ring-slate-200" role="group" aria-label="Mode">
-          <Link to="/roombae/roommates" className="rounded-full px-3 py-1 text-slate-600 hover:text-slate-900">People first</Link>
+          <Link to="/roombae/discover" className="rounded-full px-3 py-1 text-slate-600 hover:text-slate-900">People first</Link>
           <span className="rounded-full bg-violet-50 px-3 py-1 font-medium text-violet-700" aria-current="page">Apartment first</span>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function FillRoom() {
             <ul className="mt-1 space-y-1">
               {members.map((m) => (
                 <li key={m.id} className="flex items-center gap-2 text-sm">
-                  <Avatar name={m.p.name} color={m.p.color} size={6} />
+                  <Avatar id={m.p.id} name={m.p.name} color={m.p.color} size={6} />
                   <span className="flex-1 text-slate-700">{m.p.name} <span className="text-xs text-slate-400">· {m.p.school}</span></span>
                   <span className="text-xs text-slate-500">{m.info.room_label}, {money(m.info.share)}</span>
                 </li>
@@ -122,7 +122,7 @@ export default function FillRoom() {
               <button key={f.id} type="button" onClick={() => setCandId(f.candidate)} aria-pressed={candId === f.candidate} data-candidate={f.candidate}
                 className={`rounded-2xl bg-white p-3.5 text-left shadow-sm ring-1 transition ${candId === f.candidate ? "ring-2 ring-violet-500" : "ring-slate-200 hover:ring-slate-300"}`}>
                 <div className="flex items-center gap-2">
-                  <Avatar name={c.name} color={c.color} />
+                  <Avatar id={c.id} name={c.name} color={c.color} />
                   <div className="min-w-0">
                     <div className="truncate font-semibold text-slate-900">{c.name}</div>
                     <div className="truncate text-xs text-slate-500">{c.program}, {c.school}</div>

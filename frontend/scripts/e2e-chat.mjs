@@ -1,5 +1,6 @@
-// Chat replay: the conversation box follows new messages only while it is near the bottom, the page
-// never scrolls by itself, "Jump to latest" appears when scrolled up, and pause / speed / skip work.
+// Chat replay (opened from the group page): the conversation box follows new messages only while it is
+// near the bottom, nothing else scrolls by itself, "Jump to latest" appears when scrolled up, and
+// pause / speed / skip work.
 //   (dev server running)  node scripts/e2e-chat.mjs [--offline]
 import { chromium } from "playwright";
 
@@ -17,10 +18,10 @@ async function run(offline) {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   if (offline) await page.route("**/api/**", (r) => r.abort());
-  await page.goto(`${APP}/roombae/roommates`);
+  await page.goto(`${APP}/roombae/roommates?with=ananya,meera`);
   await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); });
-  await page.goto(`${APP}/roombae/roommates`);
-  await page.getByRole("button", { name: "Meet all matches" }).click();
+  await page.goto(`${APP}/roombae/roommates?with=ananya,meera`);
+  await page.locator("[data-pair='priya:ananya']").getByRole("button", { name: "Watch" }).click();
   const box = page.locator("[data-chat-scroll]");
   await box.waitFor({ timeout: 10000 });
   const msgs = () => box.locator("[data-msg]").count();
@@ -30,12 +31,13 @@ async function run(offline) {
 
   await page.getByRole("group", { name: "Replay speed" }).getByRole("button", { name: "4×" }).click();
   check((await page.getByRole("button", { name: "4×" }).getAttribute("aria-pressed")) === "true", `${tag}: speed 4× selected`);
-  await page.evaluate(() => window.scrollTo(0, 0));
+  // the replay opens in a dialog: neither the page nor the dialog may move by itself
+  const still = () => page.evaluate(() => window.scrollY + document.querySelector("[data-replay-dialog]").scrollTop);
   for (let i = 0; i < 60 && !(await overflowing()); i++) await page.waitForTimeout(250);
   check(await overflowing(), `${tag}: conversation fills its scroll box`);
   await page.waitForTimeout(1500);
   check((await dist()) <= 60, `${tag}: box follows new messages while at the bottom (${Math.round(await dist())}px from bottom)`);
-  check((await page.evaluate(() => window.scrollY)) === 0, `${tag}: the page itself did not scroll`);
+  check((await still()) === 0, `${tag}: the page and the dialog did not scroll by themselves`);
 
   // the reader scrolls up: stop following, offer a jump
   await page.getByRole("group", { name: "Replay speed" }).getByRole("button", { name: "1×" }).click();

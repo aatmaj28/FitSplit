@@ -16,11 +16,11 @@
       "output_tokens": 17751
     },
     "groq": {
-      "calls": 302,
-      "ok": 145,
-      "errors": 157,
-      "input_tokens": 260844,
-      "output_tokens": 29981
+      "calls": 350,
+      "ok": 171,
+      "errors": 179,
+      "input_tokens": 299560,
+      "output_tokens": 34063
     }
   }
 }

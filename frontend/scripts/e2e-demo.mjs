@@ -60,20 +60,41 @@ async function flow(offline) {
   check(true, `${tag}: published, syndication badges ticked`);
   await shot("demo_step1_published.png");
 
-  // 2. students match (skip the animation to the group)
+  // 2. students match: swipe right on Ananya (match) and Jake (didn't click), pass Kavya, like Meera
   await next();
-  check((await step(2)) === 2 && page.url().includes("/roombae/roommates"), `${tag}: step 2 opens the roommate finder`);
-  await page.getByRole("button", { name: "Meet all matches" }).click();
-  await page.locator(".animate-bounce").first().waitFor({ timeout: 10000 }); // typing dots of the first clone
-  await page.waitForTimeout(6000);
-  await shot("demo_step2_negotiation.png");
-  await page.getByRole("button", { name: "Skip to verdict" }).click();
-  await page.locator("[data-verdict]").first().waitFor({ timeout: 10000 });
-  check(true, `${tag}: a negotiation replays and ends with a verdict card`);
-  await page.getByRole("button", { name: /Skip to the group/ }).first().click().catch(() => {});
+  check((await step(2)) === 2 && page.url().includes("/roombae/discover"), `${tag}: step 2 opens Discover (swipe to match)`);
+  await page.locator("[data-card]").waitFor({ timeout: 10000 });
+  await page.waitForTimeout(600);
+  await shot("demo_step2_deck.png");
+  await page.keyboard.press("ArrowRight"); // Ananya
+  await page.locator("[data-flow='talking']").waitFor({ timeout: 5000 });
+  await page.waitForTimeout(1500);
+  await shot("demo_step2_talking.png");
+  const match = page.locator("[data-flow='match']");
+  await match.waitFor({ timeout: 15000 });
+  check((await match.getAttribute("data-verdict")) === "strong", `${tag}: Ananya: it's a match (strong)`);
+  await page.waitForTimeout(500);
+  await shot("demo_step2_match.png");
+  await page.getByRole("button", { name: "Keep swiping" }).click();
+  await page.waitForTimeout(400);
+  await page.keyboard.press("ArrowRight"); // Jake
+  await page.locator("[data-flow='noclick']").waitFor({ timeout: 15000 });
+  check(/smokes/.test(await page.locator("[data-noclick-reason]").textContent()), `${tag}: Jake: the clones didn't click (smoking)`);
+  await page.waitForTimeout(500);
+  await shot("demo_step2_noclick.png");
+  await page.getByRole("button", { name: "Keep swiping" }).click();
+  await page.waitForTimeout(400);
+  await page.keyboard.press("ArrowLeft"); // Kavya: pass
+  await page.waitForTimeout(800);
+  await page.keyboard.press("ArrowRight"); // Meera
+  await match.waitFor({ timeout: 15000 });
+  check((await match.getAttribute("data-verdict")) === "conditional", `${tag}: Meera: it's a match (conditional)`);
+  await page.getByRole("button", { name: "Find a place together" }).click();
+  await page.waitForURL(/\/roombae\/roommates/);
+  check((await step(2)) === 2, `${tag}: the step bar stays on step 2 on the group page`);
   const group = page.locator("[data-group]");
   await group.waitFor({ timeout: 10000 });
-  check((await group.getAttribute("data-group")) === "priya,ananya,meera", `${tag}: matched group is Priya, Ananya, Meera`);
+  check((await group.getAttribute("data-group")) === "ananya,meera,priya", `${tag}: matched group is Priya, Ananya, Meera`);
   await page.locator("[data-fit='jvue_3bed']").getByText("Fits every budget").waitFor({ timeout: 15000 });
   check(true, `${tag}: JVUE 3 bed fits every budget`);
   await shot("demo_step2_group.png", group);
@@ -147,6 +168,26 @@ async function portalShots() {
   await page.screenshot({ path: join(OUT, "roombae_home.png") });
   await go("/roombae/listings", 2500);
   await page.screenshot({ path: join(OUT, "roombae_listings.png"), fullPage: true });
+  // Discover: the deck, then three likes and a pass, then My matches with every verdict
+  await go("/roombae/discover", 1500);
+  await page.screenshot({ path: join(OUT, "roombae_discover_deck.png") });
+  for (const key of ["ArrowRight", "ArrowRight", "ArrowLeft", "ArrowRight"]) {
+    await page.keyboard.press(key);
+    if (key === "ArrowLeft") {
+      await page.waitForTimeout(800);
+      continue;
+    }
+    await page.locator("[data-flow='match'], [data-flow='noclick']").waitFor({ timeout: 15000 });
+    await page.waitForTimeout(700);
+    const flow = await page.locator("[data-flow='match'], [data-flow='noclick']").getAttribute("data-flow");
+    await page.screenshot({ path: join(OUT, flow === "match" ? `roombae_discover_match_${await page.locator("[data-flow='match']").getAttribute("data-verdict")}.png` : "roombae_discover_didnt_click.png") });
+    await page.getByRole("button", { name: "Keep swiping" }).click();
+    await page.waitForTimeout(500);
+  }
+  await go("/roombae/matches", 1500);
+  await page.getByLabel("Show incompatible").check();
+  await page.waitForTimeout(400);
+  await page.screenshot({ path: join(OUT, "roombae_my_matches.png") });
   await go("/roombae/fill-room", 2500);
   await page.locator("[data-candidate='rohan']").click();
   await page.waitForTimeout(5000); // a few turns of Rohan + Arjun playing back
