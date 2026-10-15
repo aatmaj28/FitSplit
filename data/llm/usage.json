@@ -2,18 +2,18 @@
   "since": "2026-10-15T08:06:06+00:00",
   "providers": {
     "gemini": {
-      "calls": 53,
+      "calls": 54,
       "ok": 0,
-      "errors": 53,
+      "errors": 54,
       "input_tokens": 0,
       "output_tokens": 0
     },
     "claude": {
-      "calls": 110,
-      "ok": 105,
+      "calls": 111,
+      "ok": 106,
       "errors": 5,
-      "input_tokens": 364419,
-      "output_tokens": 94008
+      "input_tokens": 368218,
+      "output_tokens": 94822
     },
     "groq": {
       "calls": 621,

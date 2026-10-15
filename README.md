@@ -1,170 +1,285 @@
-# FitSplit: floor plan to 3D, furniture fit, fair rent split, roommate matching
+# FitSplit
 
-Hackathon prototype for **LeaseHub** (agents post listings) and **Roombae** (students find roommates
-and a place in Boston). The product name lives in one constant: `frontend/src/brand.ts`.
+**One floor plan. Everything fits.**
 
-- **Agent side (LeaseHub):** upload a floor plan once when posting. The parser turns it into walls,
-  rooms with areas, doors and windows, and the listing goes out with a 3D view and room sizes.
-- **Renter side (Roombae):** students swipe through each other's cards; on a swipe right their AI
-  clones negotiate as roommates first. The matched group then sees the unit in 3D, checks that their
-  furniture fits, gets a fair rent split (with an AI check of its inputs) and applies together. The
-  application lands in LeaseHub.
+FitSplit turns a single apartment floor plan into everything renters and agents need. You get a 3D
+model with real room sizes, a check that your furniture fits, a fair rent split that AI double-checks,
+and roommates matched by AI clones that talk to each other first. It powers two portals: **LeaseHub**,
+where agents post listings, and **Roombae**, where students find roommates and a place together.
 
-Honesty note (kept here, not in the UI): everything is sample data. The students, the agent (Dana
-Brooks) and the group chat messages are fictional; listing facts come only from
-`data/floorplans/meta.json`; syndication badges and 3D view counts are simulated. The whole demo
-works offline from bundled data in `frontend/public/demo/`.
+![FitSplit home](docs/screenshots/landing.png)
 
-## Quick start
+## The problem
+
+- **Agents (LeaseHub)** answer the same questions on every listing: how big is the bedroom, will my
+  bed fit, who pays what. Group applications arrive incomplete or fall apart because the roommates
+  never talked about guests, noise or budgets.
+- **Renters (Roombae)** pick roommates from a short chat, guess at room sizes from a flat drawing,
+  and argue about who pays for the bigger room.
+
+FitSplit answers all of that from the floor plan the agent already has. The renters arrive as a
+matched group with an agreed split, so the agent receives one complete application.
+
+## Features
+
+- **Floor plan to 3D.** Upload a floor plan image and get walls, rooms with areas, doors and windows,
+  and a 3D model. It has Top / Corner / Front / Side views, a wall cutaway, touch controls and Reset
+  view.
+- **Furniture fit.** Place a bed, desk or dresser (or a custom size) in any room. Green means it fits
+  against the real walls; red means it hits a wall or another piece. Doorways are kept clear, and
+  "Will my stuff fit?" places a whole set along the walls.
+- **Fair rent split with an AI check.** Each bedroom's own area (plus a private bath) is private, and
+  shared space is split evenly. Shares are whole dollars that always add up to the rent. A vision
+  model checks the inputs against the drawing (bedroom count, private baths, room sizes, extras like a
+  private balcony) and suggests fixes. The AI never changes a number.
+- **AI roommate matching.**
+  - **Swipe deck:** students near you, filtered by city or metro area and by gender preference
+    (checked both ways).
+  - **Clone conversations:** swipe right and each student's AI clone negotiates with the other's
+    about budget, sleep, guests, cleaning and dealbreakers. The result is "It's a match!" or "Your
+    clones didn't click", with the reason. You can replay any conversation in plain English, with
+    pause, speed and skip.
+  - **My matches:** every verdict, with scores and the topics still open.
+  - **Group chat:** the house rules your clones agreed on (quiet hours, guests, chores, costs), plus
+    a chat for the roommates.
+- **Group apply.** You only see listings where every fair-split share fits each person's budget. Each
+  roommate's name and exact share is filled in, and you get a PDF summary of the application.
+- **Agent view (LeaseHub).** A dashboard, a new listing flow (upload, parse, 3D preview, auto-filled
+  details, publish) and group applications next to the listing and its 3D plan.
+- **Guided 3-minute demo** at `/demo` that walks through both portals. It works fully offline.
+
+| 3D view and furniture fit | Swipe to match |
+|---|---|
+| ![3D view](docs/screenshots/demo_step3_furniture.png) | ![Swipe deck](docs/screenshots/roombae_discover_deck.png) |
+
+| Fair rent split + AI check | Agent's application view |
+|---|---|
+| ![Rent split](docs/screenshots/demo_step4_rent_check.png) | ![Application view](docs/screenshots/demo_step6_application.png) |
+
+## How it works
+
+```
+floor plan image ─┬─► OpenCV: walls, rooms, doors/windows, scale ─┐
+                  └─► vision model: room names, printed sizes ────┴─► plan JSON ─► 3D view, furniture fit, rent split
+                                                                                         │
+student profiles ──► AI clones negotiate (4 phases, shared memory) ──► verdict + scores ─┴─► swipe, matches, group, apply
+```
+
+- **Floor plan parser** (`backend/app/geometry`, `pipeline.py`). OpenCV finds walls and door and
+  window gaps, then closes the rooms off. A vision model (Gemini, then Claude, then Groq) reads the
+  room names and printed dimensions, which set the scale. Results are cached by image hash, so a known
+  plan comes back instantly and never calls a model again.
+- **FastAPI backend.** It serves parsing, plans, the AI rent check, the roommate engine (REST plus a
+  streamed conversation) and an LLM layer. That layer counts every call, caps Claude and caches every
+  answer on disk.
+- **React + three.js frontend.** React Three Fiber renders the 3D model. Furniture fit and the rent
+  split are computed in the browser. Everything the guided demo needs is bundled in
+  `frontend/public/demo/`, so it runs with the backend stopped.
+- **Roommate engine** (`backend/app/roommates`). It is based on **Tanvi's AI Roommate Finder**
+  ([github.com/Tanvi-15/AI-Roommate-Finder](https://github.com/Tanvi-15/AI-Roommate-Finder)): her
+  7-section questionnaire, her ACP clone protocol and four-phase negotiation, her compatibility
+  analysis, and her Setup Match / My Matches flow. FitSplit adds:
+  - a shared memory, so each clone uses what the other already said;
+  - exact checks in code (budget, same-gender rules);
+  - rooms and rent shares from real floor plans;
+  - plain-English lines for every message;
+  - the group's house rules.
+
+## Tech stack
+
+| Layer | Tools |
+|---|---|
+| Backend | Python 3.11, FastAPI, Uvicorn, OpenCV, NumPy, Pillow, Pydantic, pytest |
+| AI | Gemini Flash (vision), Claude Opus (vision) and Sonnet (text), Groq (gpt-oss-120b / 20b, qwen3.8-27b); SDKs `google-genai`, `anthropic`, `groq` |
+| Frontend | React 19, TypeScript 7, Vite 8, Tailwind CSS 4, React Router 7, three.js + React Three Fiber + drei, Framer Motion, jsPDF |
+| Tests | pytest (backend), Node checks on the real TS modules, Playwright browser tests (in Google Chrome) |
+
+## Folder structure
+
+```
+backend/
+  app/              FastAPI app: parser (geometry/, semantics/, pipeline.py), rent check,
+                    roommates/ (engine, memory, checks, house rules), llm/ (chain, usage cap, cache)
+  scripts/          parse_all.py, seed_roommates.py
+  tests/            pytest suite (never calls a real model)
+frontend/
+  src/              pages/ (home, roombae/, leasehub/, demo/), components/FloorPlan3D/, roommates/
+  public/demo/      bundled plans, rent checks, profiles, conversations, avatars, house rules
+  scripts/          checks, browser tests, data and screenshot scripts
+data/               floor plans + meta.json, parsed plans, roommate data, LLM call log + cache
+docs/               demo script, decisions, reports, screenshots
+scripts/dev-all.mjs starts the API and the web app together
+```
+
+## Setup on a new laptop
+
+### Prerequisites
+
+| Tool | Version | Notes |
+|---|---|---|
+| Git | 2.x | |
+| Python | **3.11** (tested 3.11.16) | the backend's pinned packages are tested on 3.11 |
+| uv | 0.5 or newer (tested 0.12) | recommended; plain `venv` + `pip` works too |
+| Node.js | **22 LTS or newer** (tested 24.21) | Vite 8 needs Node 20.19+ / 22.12+ |
+| npm | 10 or newer (tested 11.19) | comes with Node |
+| Google Chrome | any recent | only for the browser tests |
+
+macOS and Linux work as is. On Windows, use WSL: `dev:all` starts the API from `backend/.venv/bin`.
+
+### Install
 
 ```bash
-npm run dev:all          # from the repo root: API on :8000 (if backend/.venv exists) + web app on :5173
+git clone https://github.com/aatmaj28/FitSplit.git
+cd FitSplit
+
+# backend (Python 3.11)
+cd backend
+uv venv --python 3.11 .venv
+VIRTUAL_ENV=.venv uv pip install -r requirements.txt -r requirements-dev.txt
+#   without uv:  python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt -r requirements-dev.txt
+cp .env.example .env        # then add your keys (all optional, see below)
+cd ..
+
+# frontend
+cd frontend && npm install && cd ..
 ```
 
-Open http://localhost:5173/demo for the guided 6-step walkthrough (Shift + arrow keys move between
-steps), or http://localhost:5173 for the entry page. Without the backend (or without any API quota)
-the web app still runs every demo screen from `frontend/public/demo/`.
-
-First-time setup:
+### Run
 
 ```bash
-cd backend && uv venv --python 3.11 .venv && VIRTUAL_ENV=.venv uv pip install -r requirements.txt -r requirements-dev.txt
-cp .env.example .env     # GEMINI_API_KEY, ANTHROPIC_API_KEY, GROQ_API_KEY (only needed for new uploads / live AI)
-cd ../frontend && npm install
+npm run dev:all             # from the repo root: API on :8000 and the web app on :5173
 ```
 
-## What's where
+| URL | What |
+|---|---|
+| http://localhost:5173 | FitSplit home |
+| http://localhost:5173/demo | guided 3-minute tour |
+| http://localhost:5173/roombae | Roombae (renters) |
+| http://localhost:5173/leasehub | LeaseHub (agents) |
+| http://localhost:5173/dev | parser lab (every parsed plan, raw output) |
+| http://localhost:8000/docs | API docs (FastAPI) |
+| http://localhost:8000/api/llm/usage | API calls per provider, Claude calls left |
 
-```
-backend/app/
-  main.py               FastAPI: parse, plans, rent check, LLM usage; mounts the roommate router
-  pipeline.py           floor plan pipeline (OpenCV geometry + vision semantics), output JSON, caching
-  geometry/             preprocess, walls, gaps (door/window gaps), rooms, scale, extras (exported openings)
-  semantics/            vision providers (Gemini -> Claude -> Groq), prompt, validation
-  rentcheck.py          POST /api/rent-check: vision check of a rent split's inputs (never its numbers)
-  llm/                  usage ledger + Claude call cap, text chain, vision helper, result cache
-  roommates/            roommate finder (port of Tanvi's AI-Roommate-Finder, see below; memory.py = engine rm2)
-backend/scripts/        parse_all.py, seed_roommates.py, groq_models.py
-backend/tests/          pytest (no test ever reaches a real provider)
-frontend/src/
-  main.tsx              routes: / , /demo, /roombae/*, /leasehub/*, /dev (parser lab)
-  components/FloorPlan3D/  the 3D viewer (lazy chunk): presets, cutaway, furniture fit, doors/windows
-  components/RentSplit.tsx, RentCheck.tsx   rent split cards + "AI checked" badge
-  roommates/            client, ACP rendering, chat replay (NegotiationView), Discover deck filters (deck.ts),
-                        avatars + card facts (people.ts), replay dialog, questionnaire
-  pages/roombae/        Roombae mock portal (Discover, My matches, Find a place together, listings, fill a room, apply)
-  pages/leasehub/       LeaseHub mock portal    pages/portals.tsx  portal bar (Home + Roombae / LeaseHub switch)
-  pages/demo/           guided walkthrough + floating step bar
-  data/                 listings catalog, plan loader, shared demo store (localStorage, "Reset demo")
-frontend/public/demo/   offline data: 6 parsed plans, 16 rent checks, roommate profiles + avatars + 12 negotiations
-frontend/scripts/       checks, e2e tests, screenshot and precompute scripts
-data/                   floor plans + meta.json, parsed plans, rent check cache, roommate data, LLM log/cache
-docs/                   OVERNIGHT_REPORT.md, DEMO_SCRIPT.md, DECISIONS.md, PROGRESS.md, screenshots/
-```
+Stop with Ctrl+C. Without `backend/.venv`, `dev:all` starts only the web app, and the demo still
+works from the bundled data.
+
+## API keys
+
+All three keys are **optional**. The guided demo, every bundled floor plan, the bundled clone
+conversations, rent checks and house rules all run **without any keys**. Keys only matter for new
+work: a new floor plan, a changed rent split, or a conversation between two students who haven't
+talked yet.
+
+Put them in `backend/.env` (copied from `backend/.env.example`, which ships with empty values), then
+restart `npm run dev:all`.
+
+| Key | Get it at | Used for |
+|---|---|---|
+| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/app/apikey) | vision (first choice): reading a new floor plan, AI rent checks; a last-resort text model |
+| `ANTHROPIC_API_KEY` | [Anthropic Console](https://console.anthropic.com/settings/keys) | vision fallback (Claude Opus); clone conversations and house rules (Claude Sonnet, first for text) |
+| `GROQ_API_KEY` | [GroqCloud](https://console.groq.com/keys) | free text models for clone conversations; vision last resort |
+
+| Feature | Needs |
+|---|---|
+| Uploading a new floor plan, AI check of a new split | a vision key: Gemini or Anthropic (Groq as a last resort) |
+| A new clone conversation, house rules for a new group | a text key: Anthropic or Groq (Gemini as a last resort) |
+| Everything in the guided demo | nothing |
+
+Settings, in `backend/.env` or the shell:
+
+- **`CLAUDE_CALL_CAP`** (default `250`): a hard cap on the total number of Claude calls, counted in
+  `data/llm/usage.json`. Once it's reached, Claude is skipped and the next provider is used.
+- **`TEXT_CHAIN_ORDER`** (default `claude,groq,gemini`): the order of the text providers. Use
+  `groq,gemini,claude` to put the free Groq models first. The vision order is always Gemini, then
+  Claude, then Groq.
+- **`PROVIDER_TIMEOUT_S`** (default `30`): how long one vision provider may take before the next
+  one is tried.
+- Model overrides are listed in `backend/.env.example`.
+
+Every call is logged without prompts, answers or keys in `data/llm/calls.jsonl`, and account ids
+are redacted. Every answer is cached in `data/llm/cache/` and `data/parsed/`, so nothing is paid for
+twice.
+
+## Guided demo
+
+1. `npm run dev:all`, then open http://localhost:5173/demo.
+2. Click **Reset and start the demo**. A step bar follows you through both portals:
+   - Next / Back, or Shift + arrows, or Page Down / Page Up;
+   - minimize it to a small pill in the corner.
+3. The six steps:
+   1. LeaseHub: the agent posts a JVUE 3 bed;
+   2. Roombae: swipe to match;
+   3. 3D view and furniture fit;
+   4. fair rent split + AI check;
+   5. apply as a group;
+   6. LeaseHub: the agent receives the application.
+
+The full talk track is in [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md). **Reset demo** restores the
+starting data at any time.
 
 ## Tests
 
 ```bash
-cd backend && .venv/bin/python -m pytest -q        # 42 tests: API, parser extras, rent check, LLM chain, roommates
-cd frontend && npm run check && npm run build       # offline logic checks (rent split, fit, keys) + type check + build
-# with `npm run dev:all` running:
-node scripts/e2e-viewer.mjs       # 3D: drag from any angle, orbit, touch, resize re-fit
-node scripts/e2e-rentcheck.mjs    # AI check badge, Apply suggestion, offline
-node scripts/e2e-demo.mjs         # the whole 6-step demo, online and with the backend blocked (+ screenshots)
-node scripts/e2e-swipe.mjs        # Discover: deck filters, drag / keys / buttons, match + didn't click, My matches, group
-node scripts/e2e-chat.mjs         # chat replay: follows only near the bottom, Jump to latest, pause / speed / skip
-node scripts/e2e-nav.mjs          # landing entries, portal logos, Home link, portal switcher
+npm test                                   # from the root: backend pytest + frontend offline checks
+
+cd backend && .venv/bin/python -m pytest -q   # backend: API, parser extras, rent check, LLM chain, roommates
+cd frontend && npm run check && npm run build # offline logic checks + type check + production build
 ```
 
-## The pieces
-
-**3D viewer** (`<FloorPlan3D plan={json} editable />`). 1 scene unit = 1 ft, top view matches the
-image. Camera presets Top / Corner / Front / Side, rotate 45°, re-fit on resize. Walls between the
-camera and the selected room fade (shader cutaway, no shadows from faded parts). Doors and windows
-come from the parser's openings: the wall above each opening, sill + glass for windows, wood frames
-for doors. Leftover floor (halls) shows in a neutral hallway color. Touch: one finger moves the
-selected piece, two fingers orbit / zoom. Phones get a foldable room sheet.
-
-**Furniture fit.** "Edit layout": add library pieces or custom W×D×H, or "Will my stuff fit?" to place
-a set along the walls. 2D check in feet: red if a piece overlaps a wall, another piece or leaves its
-room (1.5" tolerance). Doorways (parser doors plus outline gaps such as closet fronts) get a 2.5 ft
-keep-clear zone: auto-place avoids it, and a piece in it gets an amber note. Layouts persist per plan.
-
-**Rent split.** Fair split: each bedroom's own area plus a private bath is private; that share of
-the rent is split by private area and the rest equally. Or by room size only. Shares are whole
-dollars that always sum to the rent. **AI check** (`POST /api/rent-check`): one vision call with
-the plan image checks the inputs (bedroom count, private baths, areas within 15%, extras like a
-private balcony) and writes a note for the roommates. It never changes numbers: suggestions are input
-toggles the user applies, and a note quoting any number we didn't send is replaced by a template.
-Results are cached by an input key computed the same way in Python and TypeScript.
-
-**Roommate finder** (`backend/app/roommates/`). The engine is a port of **Tanvi's (GitHub Tanvi-15)
-[AI-Roommate-Finder](https://github.com/Tanvi-15/AI-Roommate-Finder)**: her 7-section questionnaire and
-ACP/1.0 clone prompts are copied verbatim, and her four-phase negotiation loop, keyword verdict and
-compatibility analysis are ported with documented fixes (13 turns, no double feed, ACP verdicts parsed,
-false "incompatible" triggers removed). Engine rm2 (`roommates/memory.py`) makes the clones use what the
-other said:
-- each turn labels who is speaking and carries a memory of what each side has already stated;
-- each clone gets its own profile when the phase needs it;
-- only a real non-negotiable ends a chat early;
-- every message has a plain-English line, shown in the chat with the protocol folded under "details".
-
-Added for FitSplit:
-- local JSON storage, REST + Server-Sent Events;
-- "Find roommates" (people first): **Discover**, a Tinder-style swipe deck ported from Tanvi's
-  **Setup Match** page, and **My matches**, ported from her **My Matches** page (verdict counts,
-  "Show incompatible", scores, replay). The deck uses her filters: same city first, then the same
-  metro area, "same gender only" checked both ways, swiped profiles hidden. A swipe right plays the
-  clones' conversation and ends on "It's a match!" or "Your clones didn't click". Matches then form
-  a group, and the group gets listings where every fair-split share fits each budget. Every card in
-  the demo deck has a bundled conversation, so swiping works offline. Swipes live in localStorage,
-  and "Reset demo" clears them;
-- "Fill a room" (apartment first): a ROOM module with the real room, its exact share and the furniture
-  fit, an everyone or majority rule, and exact budget / same-gender checks before any model call;
-- verdict guards against invented dealbreakers.
-Text models: Groq gpt-oss-120b -> gpt-oss-20b -> qwen3.8-27b -> Gemini -> Claude Sonnet, every call
-logged in `data/llm/` and Claude capped (`CLAUDE_CALL_CAP`, 57 in total).
-
-Avatars are illustrations in DiceBear's "Notionists" style (artwork by Zoish, CC0 1.0; DiceBear code
-MIT). `frontend/scripts/make-avatars.mjs` writes them to `public/demo/avatars/` once, so no avatar
-service or library is needed at runtime. Without an avatar, initials are shown.
-
-**Portals and demo.** `/leasehub`: dashboard with a labelled time-saved estimate, new listing
-(upload or sample plan, parse, 3D preview, auto-filled details, publish, simulated syndication),
-listing page, group application view. `/roombae`: home, listings (fair-split room prices, filters),
-listing detail, roommate finder, fill a room, group apply. `/demo` drives the real pages; one shared
-store keeps names, units and rents consistent; "Reset demo" restores the seed.
-
-## Floor plan parser (backend)
+Browser tests run against a running `npm run dev:all` and drive Google Chrome:
 
 ```bash
-cd backend
-.venv/bin/python scripts/parse_all.py                         # all plans (uses cache when present)
-.venv/bin/python scripts/parse_all.py --reuse-semantics       # re-run OpenCV only (no API calls)
-.venv/bin/python scripts/parse_all.py --provider claude --no-cache --only jvue_3bed
-curl -F image=@../data/floorplans/jvue_3bed.png localhost:8000/api/parse
-curl localhost:8000/api/plans/jvue_3bed      # parsed JSON;  /api/plans/jvue_3bed/image?max_side=320 thumbnail
-curl localhost:8000/api/llm/usage            # API calls per provider + Claude calls left
+cd frontend
+node scripts/e2e-demo.mjs        # the whole guided demo, online and with the backend blocked (refreshes docs/screenshots)
+node scripts/e2e-swipe.mjs       # Discover, My matches, group (online, offline, phone)
+node scripts/e2e-chat.mjs        # conversation replay: scrolling, pause, speed, skip
+node scripts/e2e-stepbar.mjs     # the demo step bar on every page
+node scripts/e2e-nav.mjs         # home page and portal navigation
+node scripts/e2e-reset.mjs       # 3D Reset view
+node scripts/e2e-viewer.mjs      # 3D drag, orbit, touch, resize
+node scripts/e2e-rentcheck.mjs   # AI check badge and suggestions
 ```
 
-Results are cached by image hash + the params that change the output; vision answers are cached
-separately in `data/parsed/_semantics/`, so geometry re-runs need no network. With `data/parsed/`
-present the API never calls a provider for a known plan.
+## Troubleshooting
 
-Output: all coordinates are original-image pixels; `scale.pixels_per_foot` is in the same pixels.
-Fields: `source_image, image_size, semantics_provider, scale, walls (+holes), rooms, footprint,
-openings, unit, warnings`, plus per room `area_sqft_final` (printed dims if present, else measured)
-+ `area_source`, bedroom `closet_ids` + `area_with_closets_sqft`, `printed_dims_text`,
-`shared_region_with`, and `checks` / `processing` for debugging. `openings` (door / window / opening
-rectangles) are an export-only extra built from the gap rays segmentation already computes.
+- **Port 5173 or 8000 already in use.** Stop the other process, e.g. `lsof -ti tcp:8000 | xargs kill`
+  (same for 5173), then restart `npm run dev:all`. The web app always calls the API on :8000, so
+  nothing else should be listening there. If 5173 is taken, Vite moves to the next free port and
+  prints it.
+- **"Uploads are unavailable right now".** The API isn't running. Check the `[api]` lines in the
+  terminal and make sure `backend/.venv` exists.
+- **A new upload fails with "no provider" (502).** No vision key is set, or all of them are out of
+  quota. Add `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` to `backend/.env` and restart.
+- **Quota or rate-limit errors (429).** Each provider falls back to the next one. Groq's free models
+  have per-minute and daily token limits, and Gemini's free tier has a daily quota. When Claude
+  reaches `CLAUDE_CALL_CAP`, Claude is skipped. Check http://localhost:8000/api/llm/usage.
+- **A new floor plan takes about 40 s.** An overloaded Gemini can hang until `PROVIDER_TIMEOUT_S`
+  (30 s) before Claude answers (about 8 s). Lower the timeout, or leave `GEMINI_API_KEY` empty to
+  skip Gemini.
+- **First run: the 3D view doesn't load** ("Failed to fetch dynamically imported module"). Vite is
+  still pre-bundling dependencies, so reload the page. If it keeps happening, stop the server, run
+  `rm -rf frontend/node_modules/.vite` and start again.
+- **Browser tests can't start Chrome.** Install Google Chrome, or run `npx playwright install
+  chromium` in `frontend/` and set `PW_CHANNEL=chromium`.
+- **`pip install` fails on OpenCV or NumPy.** Use Python 3.11.
 
-Tuning: every kernel and threshold is in `DEFAULT_CONFIG` (`backend/app/config.py`), per-plan
-overrides in `PLAN_CONFIGS`; after edits run `parse_all.py --reuse-semantics` and look at
-`data/parsed/<plan>/rooms_overlay.png`.
+## About the data
 
-## Notes
+Everything in the app is sample data:
+- The students, the agent (Dana Brooks) and the group chat messages are fictional.
+- Listing facts come only from `data/floorplans/meta.json`.
+- Syndication badges, 3D view counts and the time-saved figures are illustrative.
 
-- Roombae and LeaseHub appear by name only. The portals use original styling and simple original
-  marks, not their logos or assets.
-- `external/` (the cloned roommate-finder repo) is gitignored, as are all `.env` files and
-  `test_keys.py`. Provider errors are logged with account identifiers redacted.
+Roombae and LeaseHub appear by name only. The portals use original styling and simple original
+marks, not their logos. Avatars are DiceBear "Notionists" illustrations (artwork CC0, code MIT),
+pre-generated into `frontend/public/demo/avatars/`.
+
+More detail: [`docs/DECISIONS.md`](docs/DECISIONS.md) (every design decision),
+[`docs/FIXES_2026-10-15.md`](docs/FIXES_2026-10-15.md),
+[`docs/OVERNIGHT_REPORT.md`](docs/OVERNIGHT_REPORT.md) and
+[`docs/notes/roommate_engine_analysis.md`](docs/notes/roommate_engine_analysis.md).
+
+---
+
+**Built by Tanvi Deshpande and Aatmaj Salunke.** The roommate engine builds on Tanvi's
+[AI Roommate Finder](https://github.com/Tanvi-15/AI-Roommate-Finder).
