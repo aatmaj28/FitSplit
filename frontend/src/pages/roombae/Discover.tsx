@@ -118,7 +118,7 @@ function talkLine(m: NegotiationMessage): string {
 type Complete = Extract<NegotiationEvent, { type: "complete" }>;
 
 /** Plays the clones' conversation fast (typing, then one line per message), then hands over the verdict. */
-function ClonesTalking({ me, other, events, onDone, onSkip }: { me: Profile; other: Profile; events: NegotiationEvent[]; onDone: () => void; onSkip: () => void }) {
+function ClonesTalking({ me, other, events, onDone, onSkip, onLeave }: { me: Profile; other: Profile; events: NegotiationEvent[]; onDone: () => void; onSkip: () => void; onLeave: () => void }) {
   const msgs = events.filter((e): e is Extract<NegotiationEvent, { type: "agent_message" }> => e.type === "agent_message").map((e) => e.data);
   const complete = events.some((e) => e.type === "complete");
   const [n, setN] = useState(0);
@@ -152,6 +152,11 @@ function ClonesTalking({ me, other, events, onDone, onSkip }: { me: Profile; oth
       <button type="button" onClick={onSkip} disabled={!complete} className="mt-5 rounded-full px-3 py-1 text-xs font-medium text-white/80 ring-1 ring-white/40 hover:text-white disabled:opacity-40">
         {complete ? "Skip to the verdict" : "Still talking…"}
       </button>
+      {!complete && (
+        <button type="button" onClick={onLeave} className="mt-3 text-xs text-white/75 underline-offset-2 hover:text-white hover:underline">
+          Keep swiping; the verdict will be in My matches
+        </button>
+      )}
     </div>
   );
 }
@@ -238,18 +243,18 @@ function AfterLike({ me, other, negId, failed, onReplay, onGroup, onClose }: {
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gradient-to-br p-5 ${bg}`} role="dialog" aria-modal="true" aria-label={`You and ${firstName(other)}`}>
       <motion.div className="w-full max-w-md py-8" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 26 }} key={stage}>
-        {failed || error || !negId ? (
+        {failed || error ? (
           <div className="text-center text-white" data-flow="offline">
             <h2 className="text-2xl font-bold">Your like is saved</h2>
             <p className="mt-2 text-sm text-white/85">{firstName(other)}'s clone isn't in the bundled demo, and a live conversation needs the backend (and a free model quota). It will show in My matches once it runs.</p>
             <button type="button" onClick={onClose} className="mt-5 rounded-full bg-white px-5 py-2 text-sm font-semibold text-slate-800">Keep swiping</button>
           </div>
         ) : stage === "talking" || !done ? (
-          <ClonesTalking me={me} other={other} events={events} onDone={() => setStage("result")} onSkip={() => setStage("result")} />
+          <ClonesTalking me={me} other={other} events={events} onDone={() => setStage("result")} onSkip={() => setStage("result")} onLeave={onClose} />
         ) : match ? (
-          <MatchCard me={me} other={other} done={done} onReplay={() => onReplay(negId)} onGroup={() => onGroup(done)} onClose={onClose} />
+          <MatchCard me={me} other={other} done={done} onReplay={() => negId && onReplay(negId)} onGroup={() => onGroup(done)} onClose={onClose} />
         ) : (
-          <NoClickCard me={me} other={other} done={done} onReplay={() => onReplay(negId)} onClose={onClose} />
+          <NoClickCard me={me} other={other} done={done} onReplay={() => negId && onReplay(negId)} onClose={onClose} />
         )}
       </motion.div>
     </div>
@@ -332,17 +337,18 @@ export default function Discover() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Discover</h1>
-          <p className="max-w-2xl text-sm text-slate-500">
+          <p className="hidden max-w-2xl text-sm text-slate-500 sm:block">
             Swipe right on anyone you'd live with. Your AI clone then talks to theirs about budget, sleep, guests and dealbreakers, so you only meet the ones who click.
             {target && <> Looking for roommates for <span className="font-medium text-slate-700">{target.title}</span>.</>}
           </p>
+          <p className="text-sm text-slate-500 sm:hidden">Swipe right and your clones talk first.</p>
         </div>
         <FindTabs />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <section className="flex flex-col items-center" aria-label="Students near you">
-          <div className="relative h-[min(32rem,70vh)] w-full max-w-[22rem]" data-deck={deck.map((p) => p.id).join(",")}>
+          <div className="relative h-[min(30rem,56svh)] w-full max-w-[22rem] sm:h-[min(32rem,70vh)]" data-deck={deck.map((p) => p.id).join(",")}>
             {deck.slice(1, 3).reverse().map((p) => {
               const depth = deck.indexOf(p);
               return (
@@ -365,7 +371,7 @@ export default function Discover() {
               </div>
             )}
           </div>
-          <div className="mt-5 flex items-center gap-6">
+          <div className="mt-4 flex items-center gap-6 sm:mt-5">
             <button type="button" onClick={() => card.current?.swipe("pass")} disabled={!top} aria-label="Pass"
               className="grid h-16 w-16 place-items-center rounded-full bg-white text-3xl text-rose-500 shadow-lg ring-1 ring-slate-200 transition hover:scale-105 hover:bg-rose-50 disabled:opacity-40">✕</button>
             <button type="button" onClick={() => card.current?.swipe("like")} disabled={!top} aria-label="Like"
