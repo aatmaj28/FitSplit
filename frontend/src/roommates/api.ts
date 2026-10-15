@@ -53,7 +53,7 @@ export interface NegotiationMessage {
 }
 
 export interface Check {
-  id: "budget" | "gender" | "furniture" | "bathroom";
+  id: "budget" | "gender" | "furniture" | "bathroom" | "lease" | "move_in";
   ok: boolean;
   hard: boolean;
   detail: string;

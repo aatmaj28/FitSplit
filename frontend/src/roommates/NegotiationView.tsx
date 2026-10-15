@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ButtonHTMLAttributes } from "react";
 import { parseAcp, type Part } from "./acp";
 import type { Analysis, Check, NegotiationEvent, NegotiationMessage, Outcome, Verdict } from "./api";
 
@@ -74,7 +74,7 @@ function PartView({ part }: { part: Part }) {
 function Bubble({ msg, side, color, shownParts, raw }: { msg: NegotiationMessage; side: "left" | "right"; color: string; shownParts: number; raw: boolean }) {
   const { parts, modules } = useMemo(() => parseAcp(msg.message), [msg.message]);
   return (
-    <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`}>
+    <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`} data-msg={msg.turn}>
       <Avatar name={msg.speaker} color={color} />
       <div className={`max-w-[85%] space-y-1.5 rounded-2xl px-3 py-2 text-[13px] shadow-sm ring-1 ring-slate-200 ${side === "left" ? "rounded-bl-md bg-white" : "rounded-br-md bg-violet-50/60"}`}>
         <div className="flex items-center gap-2 text-[11px] text-slate-400">
@@ -96,14 +96,14 @@ function Bubble({ msg, side, color, shownParts, raw }: { msg: NegotiationMessage
   );
 }
 
-function Typing({ name, color, side }: { name: string; color: string; side: "left" | "right" }) {
+function Typing({ name, color, side, still }: { name: string; color: string; side: "left" | "right"; still?: boolean }) {
   return (
     <div className={`flex items-end gap-2 ${side === "right" ? "flex-row-reverse" : ""}`}>
       <Avatar name={name} color={color} />
       <div className="rounded-2xl bg-white px-3 py-2.5 shadow-sm ring-1 ring-slate-200" aria-label={`${name}'s clone is typing`}>
         <span className="flex gap-1">
           {[0, 1, 2].map((i) => (
-            <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: `${i * 0.15}s` }} />
+            <span key={i} className={`h-1.5 w-1.5 rounded-full bg-slate-400 ${still ? "" : "animate-bounce"}`} style={{ animationDelay: `${i * 0.15}s` }} />
           ))}
         </span>
       </div>
@@ -113,7 +113,7 @@ function Typing({ name, color, side }: { name: string; color: string; side: "lef
 
 export function ChecksList({ checks }: { checks: Check[] }) {
   if (!checks.length) return null;
-  const label: Record<Check["id"], string> = { budget: "Budget", gender: "Roommate gender", furniture: "Furniture", bathroom: "Bathroom" };
+  const label: Record<Check["id"], string> = { budget: "Budget", gender: "Roommate gender", furniture: "Furniture", bathroom: "Bathroom", lease: "Lease length", move_in: "Move-in date" };
   return (
     <ul className="space-y-1 text-xs">
       {checks.map((c) => (
@@ -164,9 +164,25 @@ export function ResultCard({ result, analysis, checks }: { result: Outcome; anal
   );
 }
 
+const SPEEDS = [1, 2, 4] as const;
+let lastSpeed: number = 1; // the chosen speed carries over to the next conversation
+const NEAR_BOTTOM_PX = 56;
+
+function Ctrl({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button type="button" {...props} className="rounded-full px-2 py-0.5 text-slate-500 ring-1 ring-slate-200 hover:text-slate-800">
+      {children}
+    </button>
+  );
+}
+
 /**
  * The clones' conversation. With `animate`, events play back like a live chat (typing dots, then
  * the message statement by statement); live SSE events simply keep extending `events`.
+ *
+ * The messages scroll inside their own box, and the box follows new messages only while it is
+ * already near the bottom. Scrolling up stops following and shows "Jump to latest" when more
+ * arrive. The page itself never scrolls.
  */
 export function NegotiationView({ events, animate = true, a, b, onDone, showChecks = true }: {
   events: NegotiationEvent[];
@@ -177,21 +193,63 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
   /** off when the page shows the exact checks itself */
   showChecks?: boolean;
 }) {
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeedState] = useState(lastSpeed);
+  const setSpeed = (s: number) => {
+    lastSpeed = s;
+    setSpeedState(s);
+  };
+  const [paused, setPaused] = useState(false);
   const [raw, setRaw] = useState(false);
   const [pos, setPos] = useState(animate ? 0 : events.length); // events fully shown
   const [step, setStep] = useState(0); // 0 = typing dots, n = parts of events[pos] shown
-  const end = useRef<HTMLDivElement>(null);
+  const box = useRef<HTMLDivElement>(null);
+  const resultEl = useRef<HTMLDivElement>(null);
+  const follow = useRef(true);
+  const jumpingUntil = useRef(0);
+  const [unseen, setUnseen] = useState(false);
+
+  /** Scroll the box to the newest message; a finished chat lands on the top of the verdict card. */
+  const toLatest = (smooth: boolean) => {
+    const el = box.current;
+    if (!el) return;
+    const max = el.scrollHeight - el.clientHeight;
+    const top = resultEl.current ? Math.min(max, resultEl.current.offsetTop - 12) : max;
+    if (smooth) jumpingUntil.current = Date.now() + 700;
+    el.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
+  };
+  const onScroll = () => {
+    const el = box.current;
+    if (!el) return;
+    const near = el.scrollHeight - el.scrollTop - el.clientHeight <= NEAR_BOTTOM_PX;
+    if (!near && Date.now() < jumpingUntil.current) return; // our own smooth scroll is still on its way
+    follow.current = near;
+    if (near) setUnseen(false);
+  };
+  const jump = () => {
+    follow.current = true;
+    setUnseen(false);
+    toLatest(true);
+  };
   const skip = () => {
     setPos(events.length);
     setStep(0);
+    setPaused(false);
+    follow.current = true;
+  };
+  const replay = () => {
+    setPos(0);
+    setStep(0);
+    setPaused(false);
+    follow.current = true;
+    setUnseen(false);
+    box.current?.scrollTo({ top: 0 });
   };
   useEffect(() => {
     if (!animate) setPos(events.length);
   }, [animate, events.length]);
 
   useEffect(() => {
-    if (pos >= events.length) return;
+    if (paused || pos >= events.length) return;
     const e = events[pos];
     const next = () => {
       setPos((p) => p + 1);
@@ -204,15 +262,21 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
     const n = parseAcp(e.data.message).parts.length || 1;
     const t = setTimeout(step >= n ? next : () => setStep((s) => s + 1), (step === 0 ? 650 : step >= n ? 350 : 260) / speed);
     return () => clearTimeout(t);
-  }, [pos, step, events, speed]);
+  }, [pos, step, events, speed, paused]);
 
   const done = pos >= events.length && events.some((e) => e.type === "complete");
+  const doneFired = useRef(false);
   useEffect(() => {
-    if (done) onDone?.();
+    if (done && !doneFired.current) {
+      doneFired.current = true; // once per conversation, not again after a replay
+      onDone?.();
+    }
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    end.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }); // returns a Promise in newer browsers: not a cleanup
-  }, [pos, step]);
+  // new content: follow it if the reader is at the bottom, otherwise offer a jump
+  useLayoutEffect(() => {
+    if (follow.current) toLatest(false);
+    else setUnseen(true);
+  }, [pos, step]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const shown = events.slice(0, pos);
   const current = pos < events.length ? events[pos] : null;
@@ -222,9 +286,10 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
   const side = (m: NegotiationMessage) => (m.speaker_id === "a" ? "left" : "right");
   const color = (m: NegotiationMessage) => (m.speaker_id === "a" ? a.color : b.color);
   const phaseIdx = complete ? PHASES.length : PHASES.findIndex((p) => p.id === phase?.phase);
+  const playing = !done && !paused;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3" data-replay={done ? "done" : paused ? "paused" : "playing"}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <ol className="flex flex-wrap gap-1 text-[11px]" aria-label="Negotiation phases">
           {PHASES.map((p, i) => (
@@ -233,18 +298,22 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
             </li>
           ))}
         </ol>
-        <div className="flex items-center gap-1.5 text-[11px]">
-          <button type="button" onClick={() => setRaw((r) => !r)} aria-pressed={raw} className="rounded-full px-2 py-0.5 text-slate-500 ring-1 ring-slate-200 hover:text-slate-800">
-            {raw ? "Readable" : "Raw ACP"}
-          </button>
-          {!done && (
+        <div className="flex flex-wrap items-center gap-1.5 text-[11px]" role="toolbar" aria-label="Replay controls">
+          <Ctrl onClick={() => setRaw((r) => !r)} aria-pressed={raw}>{raw ? "Readable" : "Raw ACP"}</Ctrl>
+          {done ? (
+            <Ctrl onClick={replay}>↺ Replay</Ctrl>
+          ) : (
             <>
-              <button type="button" onClick={() => setSpeed((s) => (s >= 4 ? 1 : s * 2))} className="rounded-full px-2 py-0.5 text-slate-500 ring-1 ring-slate-200 hover:text-slate-800">
-                {speed}×
-              </button>
-              <button type="button" onClick={skip} className="rounded-full px-2 py-0.5 text-slate-500 ring-1 ring-slate-200 hover:text-slate-800">
-                Skip to result
-              </button>
+              <Ctrl onClick={() => setPaused((p) => !p)} aria-label={paused ? "Play" : "Pause"}>{paused ? "▶ Play" : "❚❚ Pause"}</Ctrl>
+              <span className="inline-flex overflow-hidden rounded-full ring-1 ring-slate-200" role="group" aria-label="Replay speed">
+                {SPEEDS.map((s) => (
+                  <button key={s} type="button" onClick={() => setSpeed(s)} aria-pressed={speed === s}
+                    className={`px-2 py-0.5 tabular-nums ${speed === s ? "bg-violet-600 font-semibold text-white" : "text-slate-500 hover:text-slate-800"}`}>
+                    {s}×
+                  </button>
+                ))}
+              </span>
+              <Ctrl onClick={skip}>Skip to verdict</Ctrl>
             </>
           )}
         </div>
@@ -257,33 +326,48 @@ export function NegotiationView({ events, animate = true, a, b, onDone, showChec
         </div>
       )}
 
-      <div className="flex flex-col gap-3" aria-live="polite">
-        {shown.map((e, i) =>
-          e.type === "phase_start" ? (
-            <div key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-              <span className="h-px flex-1 bg-slate-200" />
-              {e.label}
-              <span className="h-px flex-1 bg-slate-200" />
-            </div>
-          ) : e.type === "agent_message" ? (
-            <Bubble key={i} msg={e.data} side={side(e.data)} color={color(e.data)} shownParts={99} raw={raw} />
-          ) : e.type === "error" ? (
-            <p key={i} className="rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-800">{e.message}</p>
-          ) : null,
+      <div className="relative">
+        <div ref={box} onScroll={onScroll} data-chat-scroll className="relative max-h-[min(62vh,38rem)] overflow-y-auto rounded-xl pr-1">
+          <div className="flex flex-col gap-3 pb-1" aria-live="polite">
+            {shown.map((e, i) =>
+              e.type === "phase_start" ? (
+                <div key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+                  <span className="h-px flex-1 bg-slate-200" />
+                  {e.label}
+                  <span className="h-px flex-1 bg-slate-200" />
+                </div>
+              ) : e.type === "agent_message" ? (
+                <Bubble key={i} msg={e.data} side={side(e.data)} color={color(e.data)} shownParts={99} raw={raw} />
+              ) : e.type === "error" ? (
+                <p key={i} className="rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-800">{e.message}</p>
+              ) : null,
+            )}
+            {current?.type === "agent_message" &&
+              (step === 0 ? (
+                <Typing name={current.data.speaker} color={color(current.data)} side={side(current.data)} still={!playing} />
+              ) : (
+                <Bubble msg={current.data} side={side(current.data)} color={color(current.data)} shownParts={step} raw={raw} />
+              ))}
+            {(current?.type === "analyzing" || (shown.some((e) => e.type === "analyzing") && !complete && !current)) && (
+              <p className="flex items-center gap-2 text-xs text-slate-500">
+                <span className="h-3 w-3 animate-spin rounded-full border-2 border-violet-300 border-t-violet-600" aria-hidden /> Scoring the conversation…
+              </p>
+            )}
+            {complete && (
+              <div ref={resultEl}>
+                <ResultCard result={complete.result} analysis={complete.analysis} checks={[]} />
+              </div>
+            )}
+          </div>
+        </div>
+        {unseen && (
+          // sticky: stays on screen (above the demo bar) even when the box's bottom is below the fold
+          <div className="pointer-events-none sticky bottom-[calc(var(--demo-bar-h,0px)+1rem)] z-10 -mt-12 flex h-12 items-center justify-center">
+            <button type="button" onClick={jump} className="pointer-events-auto rounded-full bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg shadow-violet-900/20 hover:bg-violet-700">
+              Jump to latest ↓
+            </button>
+          </div>
         )}
-        {current?.type === "agent_message" &&
-          (step === 0 ? (
-            <Typing name={current.data.speaker} color={color(current.data)} side={side(current.data)} />
-          ) : (
-            <Bubble msg={current.data} side={side(current.data)} color={color(current.data)} shownParts={step} raw={raw} />
-          ))}
-        {(current?.type === "analyzing" || (shown.some((e) => e.type === "analyzing") && !complete && !current)) && (
-          <p className="flex items-center gap-2 text-xs text-slate-500">
-            <span className="h-3 w-3 animate-spin rounded-full border-2 border-violet-300 border-t-violet-600" aria-hidden /> Scoring the conversation…
-          </p>
-        )}
-        {complete && <ResultCard result={complete.result} analysis={complete.analysis} checks={[]} />}
-        <div ref={end} />
       </div>
     </div>
   );

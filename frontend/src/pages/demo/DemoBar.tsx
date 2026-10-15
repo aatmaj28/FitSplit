@@ -35,6 +35,14 @@ export function DemoBar() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [on, idx]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!on) return;
+    // lets sticky page controls (the chat's "Jump to latest") sit above the floating bar
+    document.documentElement.style.setProperty("--demo-bar-h", "6.5rem");
+    return () => {
+      document.documentElement.style.removeProperty("--demo-bar-h");
+    };
+  }, [on]);
   if (!on) return null;
   const step = STEPS[idx];
   return (

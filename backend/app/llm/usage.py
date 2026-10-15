@@ -25,7 +25,8 @@ LLM_DIR = DATA_DIR / "llm"
 USAGE_PATH = LLM_DIR / "usage.json"
 CALLS_PATH = LLM_DIR / "calls.jsonl"
 LOCK_PATH = LLM_DIR / ".usage.lock"
-CLAUDE_CAP = int(os.getenv("CLAUDE_CALL_CAP", "80"))  # whole overnight run
+# hard cap on Claude calls: 80 for the overnight run (17 used), then "40 more" for the 2026-10-15 fixes
+CLAUDE_CAP = int(os.getenv("CLAUDE_CALL_CAP", "57"))
 
 _purpose: contextvars.ContextVar[str] = contextvars.ContextVar("llm_purpose", default="semantics")
 

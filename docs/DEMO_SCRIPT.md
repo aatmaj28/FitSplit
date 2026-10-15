@@ -25,7 +25,7 @@ view and every room's size, and the rent and size fields fill in. It's syndicate
 attached, so fewer 'how big is the bedroom?' calls."
 
 **0:45 Step 2: Roombae, students match.** (Shift + →)
-Click **Meet all matches**. Let the first conversation type for a few seconds, then **Skip to result**.
+Click **Meet all matches**. Let the first conversation type for a few seconds, then **Skip to verdict**.
 Then click **Skip to the group**.
 Say: "Before anyone meets, each student's AI clone negotiates with the others: budget, sleep,
 guests, dealbreakers. This is our teammate Tanvi's roommate engine. Jake's clone is stopped in two

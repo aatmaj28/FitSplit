@@ -67,7 +67,7 @@ async function flow(offline) {
   await page.locator(".animate-bounce").first().waitFor({ timeout: 10000 }); // typing dots of the first clone
   await page.waitForTimeout(6000);
   await shot("demo_step2_negotiation.png");
-  await page.getByRole("button", { name: "Skip to result" }).click();
+  await page.getByRole("button", { name: "Skip to verdict" }).click();
   await page.locator("[data-verdict]").first().waitFor({ timeout: 10000 });
   check(true, `${tag}: a negotiation replays and ends with a verdict card`);
   await page.getByRole("button", { name: /Skip to the group/ }).first().click().catch(() => {});
@@ -151,10 +151,10 @@ async function portalShots() {
   await page.locator("[data-candidate='rohan']").click();
   await page.waitForTimeout(5000); // a few turns of Rohan + Arjun playing back
   await page.screenshot({ path: join(OUT, "roombae_fill_room.png") });
-  await page.getByRole("button", { name: "Skip to result" }).click();
+  await page.getByRole("button", { name: "Skip to verdict" }).click();
   await page.waitForTimeout(800);
   await page.getByRole("tab", { name: /with Sofia/ }).click();
-  await page.getByRole("button", { name: "Skip to result" }).click();
+  await page.getByRole("button", { name: "Skip to verdict" }).click();
   const verdict = page.locator("[data-group-verdict]");
   await verdict.waitFor({ timeout: 10000 });
   console.log("fill a room, Rohan:", await verdict.getAttribute("data-group-verdict"));
