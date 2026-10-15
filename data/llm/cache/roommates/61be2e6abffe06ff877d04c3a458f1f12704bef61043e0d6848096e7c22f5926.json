@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10 pm–6 am (quiet evenings, early mornings for classes)|cln=4 (clean kitchen & bathroom, tidy common areas)|wfh=Rare (mostly on campus, occasional remote work evenings)|nzl=Low (prefer calm environment, music low after 9 pm)\nFLX:slp=Flexible to 11 pm–7 am if needed, provided quiet hours are respected|condition=No loud activities after designated sleep time\nCNF:gwk:status=aligned? (I usually have 0‑1 guests weekly; are you comfortable with up to 2 guests with prior notice?) \nCNF:wfh:status=aligned? (Do you also work remotely only occasionally, mainly on campus?) \nVRD:CONDITIONAL|r=Need confirmation on guest frequency and remote‑work patterns|open=guest policy, WFH schedule)",
+  "created": "2026-10-15T08:33:09+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

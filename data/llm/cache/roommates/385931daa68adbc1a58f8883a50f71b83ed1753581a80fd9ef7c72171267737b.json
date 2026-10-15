@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1150-1500|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no pet|wfh=No|nlz=Quiet work environment|cf=Direct|pri=Respectful of quiet/work time;Similar cleanliness standards;Budget compatibility  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1150-1500|rm=Private room|gnd=Man|smk=Non-smoking household only|drink=Socially|pet=Love pets but no pet|wfh=No|nlz=Quiet work environment|cf=Direct|pri=Respectful of quiet/work time;Similar cleanliness standards;Budget compatibility  \nVRD:CONDITIONAL|r=Awaiting further details to confirm lifestyle fit|open=financial, routines, social, lifestyle",
+  "created": "2026-10-15T08:50:21+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

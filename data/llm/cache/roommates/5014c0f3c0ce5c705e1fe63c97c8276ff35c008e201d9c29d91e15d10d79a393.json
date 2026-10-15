@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Night owl|cln=4|gwk=0|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nCNF:nn=No smoking indoors|status=conflict_detected  \nVRD:INCOMPATIBLE|r=No smoking indoors is a hard non‑negotiable for me, so we cannot continue.",
+  "created": "2026-10-15T08:49:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

@@ -7,6 +7,7 @@
     GET  /api/plans/{name}/image     original image (?max_side=320 for a thumbnail)
     POST /api/rent-check             AI check of a rent split's inputs (?cache_only=1: never call a model)
     GET  /api/llm/usage              API calls per provider tonight + the Claude cap
+    /api/roommates/...               roommate finder (app/roommates/api.py)
 
     uvicorn app.main:app --reload --port 8000      (from /backend)
 """
@@ -27,6 +28,7 @@ from . import cache, rentcheck
 from .config import FLOORPLANS_DIR, PARSED_DIR, PROVIDER_ORDER, PROVIDER_TIMEOUT_S, provider_settings
 from .llm import usage as llm_usage
 from .llm.vision import VisionError
+from .roommates.api import router as roommates_router
 from .pipeline import PIPELINE_VERSION, parse_floorplan
 from .semantics import SemanticsError
 
@@ -38,6 +40,7 @@ _DEFAULT_KEY = cache.cache_key(None, None, None)
 app = FastAPI(title="Floor plan parser", version=PIPELINE_VERSION)
 # the frontend (next step) will call this from another origin during the hackathon
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.include_router(roommates_router)
 
 
 @app.get("/api/health")

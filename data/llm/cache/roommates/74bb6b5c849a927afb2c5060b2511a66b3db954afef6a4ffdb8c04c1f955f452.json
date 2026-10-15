@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 20,
+      "finances": 0,
+      "lifestyle": 30,
+      "personality": 40,
+      "logistics": 20
+    },
+    "highlights": [
+      "Both are students living in Boston/Fenway",
+      "Both non‑smoking and love pets but have none",
+      "Both prefer split equally for rent and basics"
+    ],
+    "concerns": [
+      "Budget mismatch: Rohan max $1400 vs Sofia's share $1488",
+      "Different guest frequency: Rohan rarely, Sofia weekly",
+      "Sleep schedules differ (early bird vs flexible)"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Budget incompatibility – Rohan cannot exceed $1400 while Sofia expects a higher rent share, making the financial arrangement impossible.",
+    "middle_ground": [
+      "Rohan could consider a smaller private space to reduce his share",
+      "Sofia could adjust her rent expectation or find a larger unit to split"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The primary conflict is a non‑negotiable budget mismatch, preventing a viable financial arrangement. Even with potential compromises, the gap is too large for a sustainable roommate match."
+  },
+  "created": "2026-10-15T08:40:23+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

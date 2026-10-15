@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Flexible, usually sleeps 11 pm–7 am|cln=4 (tidy, likes dishes done promptly)|gwk=0 (rarely have guests, prefer quiet evenings)|wfh=Occasionally, work from home 1–2 days a week, need a quiet space|rtn=Cook simple meals at home, clean up right after, enjoy short evening walks in the neighborhood  \n\nPFR:slp=Your preferred sleep hours?|cln=How strict are you on cleanliness (1‑5)?|gwk=Do you often have friends over or host gatherings?|wfh=Do you work from home regularly and need a dedicated workspace?|rtn=Any particular daily routines you’d like to share?  \n\nVRD:STRONG|r=Preferences exchanged, looking for alignment|open=none",
+  "created": "2026-10-15T08:30:04+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

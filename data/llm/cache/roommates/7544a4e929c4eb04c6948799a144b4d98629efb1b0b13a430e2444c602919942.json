@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nPFR:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+  "created": "2026-10-15T08:50:13+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

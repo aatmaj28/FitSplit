@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nPFR:cook=Daily – I prepare most meals; kitchen use shared, happy to cook together occasionally|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=15‑30 min\nCNF:none:status(Aligned)\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows, cleanliness rating, and guest policy all align; please share your typical daily routine, kitchen habits, and preferred cleaning schedule\u0000",
+  "created": "2026-10-15T08:27:13+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

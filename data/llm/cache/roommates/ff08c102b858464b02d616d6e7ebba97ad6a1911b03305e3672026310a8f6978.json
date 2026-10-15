@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time.  \n\nFLX:gwk:offer(1 guest per week|condition=guest stays no later than 10pm, no noise after 10pm).  \nFLX:nzl:offer(allow occasional 20‑minute conversation in common area|condition=noise < 50 dB).  \nFLX:cln:offer(rotate chores weekly|condition=each roommate cleans shared spaces within 2 days of use).  \n\nVRD:CONDITIONAL|r=We’re aligned on sleep, cleanliness, WFH, and can agree on a controlled guest policy and noise level. open=final guest_policy, chore schedule.",
+  "created": "2026-10-15T08:47:38+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

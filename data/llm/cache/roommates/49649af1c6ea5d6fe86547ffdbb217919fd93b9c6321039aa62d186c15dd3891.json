@@ -1,0 +1,6 @@
+{
+  "value": "CNF:bd:INCOMPATIBLE(budget max $1500, our room $1,488 exceeds your cap)  \nVRD:INCOMPATIBLE|r=Budget exceeds your maximum limit|open=none",
+  "created": "2026-10-15T08:40:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

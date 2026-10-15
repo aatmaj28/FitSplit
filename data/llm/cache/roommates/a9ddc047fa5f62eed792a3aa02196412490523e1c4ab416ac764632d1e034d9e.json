@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 20,
+      "finances": 70,
+      "lifestyle": 15,
+      "personality": 40,
+      "logistics": 60
+    },
+    "highlights": [
+      "Both are students in Boston/Fenway with similar budget ranges",
+      "Both enjoy pets and have similar guest frequency",
+      "Both prefer private rooms and have similar communication styles"
+    ],
+    "concerns": [
+      "Smoking conflict: Jake smokes while Sofia requires a non‑smoking household",
+      "Different sleep schedules: Jake is a night owl vs Sofia’s early riser",
+      "Cleaning standards differ: Jake rates 2/5, Sofia rates 5/5"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Smoking indoors is a non‑negotiable for Sofia, while Jake smokes regularly. This conflict cannot be reconciled within the given constraints.",
+    "middle_ground": [
+      "Designated outdoor smoking area with strict no‑smoke rule inside",
+      "Agree on a shared cleaning schedule to balance differing standards"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The smoking conflict is a hard, non‑negotiable dealbreaker that overrides other compatible factors. Despite some shared preferences, the roommates cannot coexist under the stated conditions."
+  },
+  "created": "2026-10-15T08:55:01+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

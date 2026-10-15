@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=11 pm–7 am, need quiet after 10 pm for study;cln=4 (tidy, dishes done same night);gwk=0 (rarely host, occasional over‑night guest with prior notice);wfh=1–2 days /week, need a desk and minimal background noise;rtn=Cook simple meals, clean kitchen immediately, enjoy evening walks on the Charles River  \n\nCNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \n\nVRD:STRONG|r=All routine preferences match|open=none",
+  "created": "2026-10-15T08:30:17+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

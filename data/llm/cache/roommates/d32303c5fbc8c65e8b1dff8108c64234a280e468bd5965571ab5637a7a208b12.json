@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Direct|pri=Matching social energy;Similar guest/party preferences;Location match  \nCNF:smk=Yes|r=I smoke, so a non-smoking household would be a conflict|  \nFLX:smk=Open to designated outdoor smoking area|condition=If it’s a shared space, I’ll keep it outside and away from windows.  \nVRD:CONDITIONAL|r=Need your sleep schedule, cleaning habits, guest policy, and noise tolerance to confirm fit|open=financial, routines, social, lifestyle",
+  "created": "2026-10-15T08:54:31+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

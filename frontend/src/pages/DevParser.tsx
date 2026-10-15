@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { loadPlan, loadPlanList, parseUpload, thumbnailUrl, type PlanSource } from "./api";
-import { FloorPlan3D, type ViewMode } from "./components/FloorPlan3D";
-import { formatSqft } from "./components/FloorPlan3D/theme";
-import { RentSplit } from "./components/RentSplit";
-import { UploadBox } from "./components/UploadBox";
-import type { ParsedPlan } from "./types";
+import { Link } from "react-router";
+import { PRODUCT } from "../brand";
+import { loadPlan, loadPlanList, parseUpload, thumbnailUrl, type PlanSource } from "../api";
+import { FloorPlan3D, type ViewMode } from "../components/FloorPlan3D";
+import { formatSqft } from "../components/FloorPlan3D/theme";
+import { RentSplit } from "../components/RentSplit";
+import { UploadBox } from "../components/UploadBox";
+import type { ParsedPlan } from "../types";
 
-const params = new URLSearchParams(window.location.search);
 const DEFAULT_PLAN = "jvue_3bed";
 
 function Fact({ label, value }: { label: string; value: React.ReactNode }) {
@@ -18,7 +19,9 @@ function Fact({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-export default function App() {
+/** Parser lab: every parsed plan, uploads, the 3D viewer and the rent split side by side. */
+export default function DevParser() {
+  const [params] = useState(() => new URLSearchParams(window.location.search));
   const [source, setSource] = useState<PlanSource | null>(null);
   const [selected, setSelected] = useState(params.get("plan") ?? "");
   const [current, setCurrent] = useState<{ plan: ParsedPlan; imageUrl: string } | null>(null);
@@ -87,17 +90,17 @@ export default function App() {
     <div className="min-h-full">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="grid h-9 w-9 place-items-center rounded-xl bg-teal-600 text-white shadow-sm">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden>
                 <path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5Z" strokeLinejoin="round" />
               </svg>
             </div>
             <div>
-              <div className="text-xs font-medium text-teal-700">Roombae × LeaseHub</div>
+              <div className="text-xs font-medium text-teal-700">{PRODUCT} parser lab</div>
               <h1 className="text-base font-semibold leading-tight text-slate-900 sm:text-lg">Floor plan to 3D</h1>
             </div>
-          </div>
+          </Link>
           {offline && (
             <span
               className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800 ring-1 ring-amber-200"

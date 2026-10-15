@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Socially\nPFR:pri=Matching social energy|Location match|Honest communication style\nVRD:STRONG|r=Profiles compatible on location, non‑smoking, budget overlap, and priorities|open=none",
+  "created": "2026-10-15T08:32:32+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

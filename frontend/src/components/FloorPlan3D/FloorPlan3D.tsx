@@ -29,6 +29,10 @@ export interface FloorPlan3DProps {
   onRoomSelect?: (room: Room | null) => void;
   /** localStorage key for the furniture layout; defaults to the plan name. */
   layoutKey?: string;
+  /** Furniture shown until the user saves their own layout under `layoutKey`. */
+  defaultLayout?: FurnitureItem[];
+  /** Show the clicked room's details panel (embeds that show room facts themselves turn it off). */
+  roomPanel?: boolean;
 }
 
 /** 3D model of a parsed floor plan: 1 scene unit = 1 ft, top view matches the 2D image. */
@@ -44,6 +48,8 @@ export function FloorPlan3D({
   selectedRoomId,
   onRoomSelect,
   layoutKey,
+  defaultLayout,
+  roomPanel = true,
 }: FloorPlan3DProps) {
   const model = useMemo(() => buildModel(plan), [plan]);
   const checker = useMemo(() => new FitChecker(model), [model]);
@@ -57,7 +63,7 @@ export function FloorPlan3D({
   const [ownRoom, setOwnRoom] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [items, setItems] = useLayout(layoutKey ?? plan.plan_name ?? plan.source_image);
+  const [items, setItems] = useLayout(layoutKey ?? plan.plan_name ?? plan.source_image, defaultLayout);
   const [itemId, setItemId] = useState<string | null>(null);
   const [autoMessage, setAutoMessage] = useState<string | null>(null);
   const [folded, setFolded] = useState(false); // phones: room sheet folded to its title row
@@ -241,6 +247,7 @@ export function FloorPlan3D({
           angleOffset={angleOffset}
           spin={spin}
           panelFolded={folded}
+          panelOpen={Boolean(room) && roomPanel}
         />
       </Canvas>
       <LabelLayer model={model} selectedId={roomId} onSelect={selectFromScene} els={labelEls} passThrough={editing} />
@@ -273,7 +280,7 @@ export function FloorPlan3D({
           No scale in this plan; assumed {FALLBACK_PPF} px/ft
         </div>
       )}
-      {room && (
+      {room && roomPanel && (
         <RoomPanel room={room} plan={plan} onClose={() => selectFromScene(null)} onSelect={selectFromScene} compact={editing} folded={folded} onFold={setFolded}>
           {editing && (
             <FurniturePanel

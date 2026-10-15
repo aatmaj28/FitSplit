@@ -1,0 +1,6 @@
+{
+  "value": "PFR:sleep=23:00‑07:00,cleanliness=4,guest_limit=2 per week,wfh=Yes (quiet study space needed 3‑5 pm),daily_routine=Morning coffee, gym 6‑8 am, study 9‑12 pm, dinner 7‑9 pm  \nFLX:guest_limit=2 per week|if guests are low‑noise and stay ≤4 hours  \n\nCNF:sleep:ALIGN(detail=both night‑owls, overlap 23:00‑07:00)  \nCNF:cleanliness:ALIGN(detail=both rate 4 – moderate/tidy)  \nCNF:guest_limit:ALIGN(detail=max 2 wk, low‑noise)  \nCNF:wfh:ALIGN(detail=quiet hours needed 3‑5 pm)  \n\nVRD:STRONG|r=All core routines align; please confirm your exact sleep window, cleanliness rating, guest habits, and any WFH schedule so we can finalize|open=none",
+  "created": "2026-10-15T08:37:16+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

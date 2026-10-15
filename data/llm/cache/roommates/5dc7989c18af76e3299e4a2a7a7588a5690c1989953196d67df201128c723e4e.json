@@ -1,0 +1,6 @@
+{
+  "value": "CNF:budget:INCOMPATIBLE (Your maximum $1400 is below my fixed rent share of $1,488)  \nVRD:INCOMPATIBLE|r=Budget mismatch|open=none",
+  "created": "2026-10-15T08:40:15+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

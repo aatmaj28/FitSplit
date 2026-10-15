@@ -7,6 +7,8 @@ import pytest
 
 from app.llm import text, usage
 
+CHAIN = [("groq", "m1"), ("gemini", "g1"), ("claude", "c1")]
+
 
 @pytest.fixture()
 def ledger(tmp_path, monkeypatch):
@@ -64,7 +66,7 @@ def test_429_backs_off_then_succeeds(ledger, monkeypatch):
         return '{"ok": true}', {"input_tokens": 1, "output_tokens": 1}
 
     monkeypatch.setitem(text.CALLS, "groq", groq)
-    res = text.complete("s", "u", sleep=waits.append)
+    res = text.complete("s", "u", sleep=waits.append, chain=CHAIN)
     assert res.provider == "groq" and res.value == {"ok": True} and waits == [2.0]
 
 
@@ -72,7 +74,7 @@ def test_long_retry_after_moves_to_next_provider(ledger, monkeypatch):
     monkeypatch.setitem(text.CALLS, "groq", lambda *a, **k: (_ for _ in ()).throw(RateLimit(3600)))
     monkeypatch.setitem(text.CALLS, "gemini", lambda *a, **k: ('{"who": "gemini"}', {}))
     waits = []
-    res = text.complete("s", "u", sleep=waits.append)
+    res = text.complete("s", "u", sleep=waits.append, chain=CHAIN)
     assert res.provider == "gemini" and waits == []
 
 
@@ -90,8 +92,8 @@ def test_invalid_output_retries_once_then_falls_back(ledger, monkeypatch):
 
     monkeypatch.setitem(text.CALLS, "groq", groq)
     monkeypatch.setitem(text.CALLS, "gemini", lambda *a, **k: ('{"x": 1}', {}))
-    res = text.complete("s", "u", parse=need_key)
-    assert res.provider == "gemini" and len(seen) == 2 and "not valid" in seen[1]
+    res = text.complete("s", "u", parse=need_key, chain=CHAIN)
+    assert res.provider == "gemini" and len(seen) == 2 and "not valid" in seen[1][-1]["content"]
 
 
 def test_claude_cap_is_respected_by_text_chain(ledger, monkeypatch):
@@ -100,7 +102,7 @@ def test_claude_cap_is_respected_by_text_chain(ledger, monkeypatch):
         monkeypatch.setitem(text.CALLS, name, lambda *a, **k: (_ for _ in ()).throw(RuntimeError("down")))
     monkeypatch.setitem(text.CALLS, "claude", lambda *a, **k: pytest.fail("Claude must not be called over the cap"))
     with pytest.raises(text.TextError) as e:
-        text.complete("s", "u")
+        text.complete("s", "u", chain=CHAIN)
     assert any(a["status"] == "cap" for a in e.value.attempts)
 
 
@@ -114,6 +116,11 @@ def test_daily_quota_cools_provider_down(ledger, monkeypatch):
 
     monkeypatch.setitem(text.CALLS, "groq", groq)
     monkeypatch.setitem(text.CALLS, "gemini", lambda *a, **k: ('{"ok": 1}', {}))
-    assert text.complete("s", "u", sleep=lambda s: pytest.fail("no backoff for a daily quota")).provider == "gemini"
-    assert text.complete("s", "u").provider == "gemini"
+    assert text.complete("s", "u", sleep=lambda s: pytest.fail("no backoff for a daily quota"), chain=CHAIN).provider == "gemini"
+    assert text.complete("s", "u", chain=CHAIN).provider == "gemini"
     assert len(groq_calls) == 1  # skipped while cooling down
+
+
+def test_default_chain_is_free_first():
+    assert [p for p, _ in text.TEXT_CHAIN] == ["groq", "groq", "groq", "gemini", "claude"]
+    assert text.TEXT_CHAIN[0][1] == "openai/gpt-oss-120b" and text.TEXT_CHAIN[-1][1] == "claude-sonnet-5-5"

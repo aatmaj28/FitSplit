@@ -1,0 +1,6 @@
+{
+  "value": "CNF:nzl:aligned(✓) | temp:aligned(✓)  \n\nVRD:STRONG|r=All negotiation points resolved, ready to move forward|open=none",
+  "created": "2026-10-15T08:31:20+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

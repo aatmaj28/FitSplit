@@ -1,0 +1,419 @@
+{
+  "find": {
+    "pairs": [
+      {
+        "a": "priya",
+        "b": "ananya",
+        "id": "n_56f4b6105f43",
+        "status": "strong"
+      },
+      {
+        "a": "priya",
+        "b": "meera",
+        "id": "n_466ebbcf80d6",
+        "status": "strong"
+      },
+      {
+        "a": "ananya",
+        "b": "meera",
+        "id": "n_eda906397488",
+        "status": "strong"
+      },
+      {
+        "a": "priya",
+        "b": "jake",
+        "id": "n_fdf33270c5a0",
+        "status": "incompatible"
+      }
+    ],
+    "groups": [
+      {
+        "members": [
+          "ananya",
+          "meera",
+          "priya"
+        ],
+        "score": 876,
+        "pairs": [
+          {
+            "id": "n_eda906397488",
+            "a": "ananya",
+            "b": "meera",
+            "status": "strong"
+          },
+          {
+            "id": "n_56f4b6105f43",
+            "a": "priya",
+            "b": "ananya",
+            "status": "strong"
+          },
+          {
+            "id": "n_466ebbcf80d6",
+            "a": "priya",
+            "b": "meera",
+            "status": "strong"
+          }
+        ],
+        "budget_min": 3400,
+        "budget_max": 4500,
+        "beds": 3
+      }
+    ]
+  },
+  "fill": [
+    {
+      "id": "fill_rohan",
+      "candidate": "rohan",
+      "members": [
+        {
+          "id": "arjun",
+          "room_id": "r4"
+        },
+        {
+          "id": "sofia",
+          "room_id": "r6"
+        }
+      ],
+      "room": {
+        "plan": "jvue_3bed",
+        "unit_name": "JVUE 3 bed",
+        "rent_total": 4200,
+        "beds": 3,
+        "room_id": "r5",
+        "room_label": "Bedroom 2 (DREAM)",
+        "area_sqft": 196.1,
+        "share": 1360,
+        "private_bath": false,
+        "furniture": {
+          "items": [
+            "Queen bed",
+            "Desk",
+            "Bookshelf"
+          ],
+          "all_fit": true,
+          "free_sqft": 152,
+          "note": ""
+        },
+        "members": [
+          {
+            "profile_id": "arjun",
+            "name": "Arjun Reddy",
+            "room_label": "Bedroom 1 (DREAM)",
+            "share": 1352
+          },
+          {
+            "profile_id": "sofia",
+            "name": "Sofia Alvarez",
+            "room_label": "Bedroom 3 (DREAM)",
+            "share": 1488
+          }
+        ]
+      },
+      "negotiations": [
+        {
+          "member": {
+            "id": "arjun",
+            "name": "Arjun Reddy"
+          },
+          "id": "n_569b09f3878a",
+          "status": "complete",
+          "verdict": "conditional"
+        },
+        {
+          "member": {
+            "id": "sofia",
+            "name": "Sofia Alvarez"
+          },
+          "id": "n_2f46fbd23610",
+          "status": "complete",
+          "verdict": "incompatible"
+        }
+      ],
+      "group": {
+        "match": false,
+        "status": "no_match",
+        "rule": "all",
+        "approvals": 1,
+        "members": 2,
+        "summary": "1 of 2 roommates agreed; not a match (Sofia Alvarez said no)"
+      },
+      "layout": [
+        {
+          "id": "g9i9owri",
+          "kind": "queen_bed",
+          "name": "Queen bed",
+          "w": 60,
+          "d": 80,
+          "h": 24,
+          "color": "#9db7f5",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 31.991255961844196,
+          "z": 12.763506540596325
+        },
+        {
+          "id": "l8i8u24j",
+          "kind": "desk",
+          "name": "Desk",
+          "w": 48,
+          "d": 24,
+          "h": 30,
+          "color": "#f3c987",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 31.491255961844196,
+          "z": 17.18017320726299
+        },
+        {
+          "id": "9r9rl84m",
+          "kind": "bookshelf",
+          "name": "Bookshelf",
+          "w": 36,
+          "d": 12,
+          "h": 72,
+          "color": "#a9d18e",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 35.991255961844196,
+          "z": 9.93017320726299
+        }
+      ]
+    },
+    {
+      "id": "fill_jake",
+      "candidate": "jake",
+      "members": [
+        {
+          "id": "arjun",
+          "room_id": "r4"
+        },
+        {
+          "id": "sofia",
+          "room_id": "r6"
+        }
+      ],
+      "room": {
+        "plan": "jvue_3bed",
+        "unit_name": "JVUE 3 bed",
+        "rent_total": 4200,
+        "beds": 3,
+        "room_id": "r5",
+        "room_label": "Bedroom 2 (DREAM)",
+        "area_sqft": 196.1,
+        "share": 1360,
+        "private_bath": false,
+        "furniture": {
+          "items": [
+            "Full bed",
+            "Desk",
+            "Keyboard stand"
+          ],
+          "all_fit": true,
+          "free_sqft": 153.4,
+          "note": ""
+        },
+        "members": [
+          {
+            "profile_id": "arjun",
+            "name": "Arjun Reddy",
+            "room_label": "Bedroom 1 (DREAM)",
+            "share": 1352
+          },
+          {
+            "profile_id": "sofia",
+            "name": "Sofia Alvarez",
+            "room_label": "Bedroom 3 (DREAM)",
+            "share": 1488
+          }
+        ]
+      },
+      "negotiations": [
+        {
+          "member": {
+            "id": "arjun",
+            "name": "Arjun Reddy"
+          },
+          "id": "n_6b935761a781",
+          "status": "complete",
+          "verdict": "conditional"
+        },
+        {
+          "member": {
+            "id": "sofia",
+            "name": "Sofia Alvarez"
+          },
+          "id": "n_86e815208f2b",
+          "status": "complete",
+          "verdict": "incompatible"
+        }
+      ],
+      "group": {
+        "match": false,
+        "status": "no_match",
+        "rule": "all",
+        "approvals": 1,
+        "members": 2,
+        "summary": "1 of 2 roommates agreed; not a match (Sofia Alvarez said no)"
+      },
+      "layout": [
+        {
+          "id": "yqcuplf5",
+          "kind": "full_bed",
+          "name": "Full bed",
+          "w": 54,
+          "d": 75,
+          "h": 24,
+          "color": "#9db7f5",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 31.741255961844196,
+          "z": 12.55517320726299
+        },
+        {
+          "id": "zyqkexpw",
+          "kind": "desk",
+          "name": "Desk",
+          "w": 48,
+          "d": 24,
+          "h": 30,
+          "color": "#f3c987",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 35.991255961844196,
+          "z": 10.43017320726299
+        },
+        {
+          "id": "573fbg8k",
+          "kind": "custom",
+          "name": "Keyboard stand",
+          "w": 54,
+          "d": 18,
+          "h": 30,
+          "color": "#9fc9c4",
+          "rot": 90,
+          "roomId": "r5",
+          "x": 39.991255961844196,
+          "z": 12.93017320726299
+        }
+      ]
+    },
+    {
+      "id": "fill_kavya",
+      "candidate": "kavya",
+      "members": [
+        {
+          "id": "arjun",
+          "room_id": "r4"
+        },
+        {
+          "id": "sofia",
+          "room_id": "r6"
+        }
+      ],
+      "room": {
+        "plan": "jvue_3bed",
+        "unit_name": "JVUE 3 bed",
+        "rent_total": 4200,
+        "beds": 3,
+        "room_id": "r5",
+        "room_label": "Bedroom 2 (DREAM)",
+        "area_sqft": 196.1,
+        "share": 1360,
+        "private_bath": false,
+        "furniture": {
+          "items": [
+            "Twin bed",
+            "Desk",
+            "Bookshelf"
+          ],
+          "all_fit": true,
+          "free_sqft": 165,
+          "note": ""
+        },
+        "members": [
+          {
+            "profile_id": "arjun",
+            "name": "Arjun Reddy",
+            "room_label": "Bedroom 1 (DREAM)",
+            "share": 1352
+          },
+          {
+            "profile_id": "sofia",
+            "name": "Sofia Alvarez",
+            "room_label": "Bedroom 3 (DREAM)",
+            "share": 1488
+          }
+        ]
+      },
+      "negotiations": [
+        {
+          "member": {
+            "id": "arjun",
+            "name": "Arjun Reddy"
+          },
+          "id": "n_c2eb5734e137",
+          "status": "complete",
+          "verdict": "incompatible"
+        },
+        {
+          "member": {
+            "id": "sofia",
+            "name": "Sofia Alvarez"
+          },
+          "id": "n_f3cf92b46a88",
+          "status": "complete",
+          "verdict": "incompatible"
+        }
+      ],
+      "group": {
+        "match": false,
+        "status": "no_match",
+        "rule": "all",
+        "approvals": 0,
+        "members": 2,
+        "summary": "0 of 2 roommates agreed; not a match (Arjun Reddy, Sofia Alvarez said no)"
+      },
+      "layout": [
+        {
+          "id": "e7k9bbgo",
+          "kind": "twin_bed",
+          "name": "Twin bed",
+          "w": 39,
+          "d": 75,
+          "h": 24,
+          "color": "#9db7f5",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 31.116255961844196,
+          "z": 12.55517320726299
+        },
+        {
+          "id": "lglybcxr",
+          "kind": "desk",
+          "name": "Desk",
+          "w": 48,
+          "d": 24,
+          "h": 30,
+          "color": "#f3c987",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 34.741255961844196,
+          "z": 10.43017320726299
+        },
+        {
+          "id": "tlsuy6c7",
+          "kind": "bookshelf",
+          "name": "Bookshelf",
+          "w": 36,
+          "d": 12,
+          "h": 72,
+          "color": "#a9d18e",
+          "rot": 0,
+          "roomId": "r5",
+          "x": 34.241255961844196,
+          "z": 11.93017320726299
+        }
+      ]
+    }
+  ]
+}

@@ -23,6 +23,7 @@
     "polygon-clipping": "^0.15.7",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-router": "^7.18.4",
     "three": "^0.186.1"
   },
   "devDependencies": {

@@ -1,0 +1,6 @@
+{
+  "value": "PFR:temp=70°F (comfortable 68‑72°F); happy to keep thermostat at 70°F and adjust ±1°F with a day's notice.  \n\nFLX:nzl=If I need a brief 5‑minute quiet break for a call during study hours, I’ll use headphones and keep volume low; please let me know beforehand.  \n\nVRD:STRONG|r=Temperature and brief‑call noise compromise agreed|open=none",
+  "created": "2026-10-15T08:31:07+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

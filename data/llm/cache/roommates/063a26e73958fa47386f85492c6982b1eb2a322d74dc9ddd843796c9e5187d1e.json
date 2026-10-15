@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10 pm–6 am, cln=4/5, gwk=Occasional friends, 24‑h notice, no overnight stays, wfh=No, nlz=Quiet during study hours  \nCNF:smk=Non‑smoking household only, party=No parties ever  \nFLX:cln=I can adjust to a 3‑point cleanliness level if we agree on a rotating chore chart.  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Awaiting your sleep schedule, cleanliness standard, guest policy, and work routine to confirm alignment|open=financial, social, lifestyle",
+  "created": "2026-10-15T08:51:35+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

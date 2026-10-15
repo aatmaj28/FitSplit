@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 88,
+      "lifestyle": 95,
+      "personality": 90,
+      "logistics": 93
+    },
+    "highlights": [
+      "Both require a non‑smoking household and have identical sleep windows (10 pm–6 am)",
+      "Both agree on a 4/5 cleanliness level with a rotating chore chart",
+      "Budget ranges overlap (Ananya $1000‑1400, Meera $1300‑1650) and both prefer private rooms in the same Boston neighborhoods"
+    ],
+    "concerns": [
+      "Both are night‑owl by nature but have negotiated flexible exam‑week sleep shifts, which could cause occasional friction",
+      "Guest policy allows up to 2 guests with 24‑hour notice; a third guest is a conditional exception that may need future clarification",
+      "Both drink socially vs. never; occasional social drinking could affect quiet hours"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Allow a one‑time third guest with 24‑hour notice and departure by 10 pm",
+      "Permit exam‑week sleep shift to 11 pm–7 am provided noise stays below conversational level"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "The two roommates match on all core non‑negotiables—non‑smoking, sleep schedule, cleanliness, and budget—making them a strong fit. Minor flexible points (guest limits and occasional later sleep) are already negotiated, so they can move forward confidently."
+  },
+  "created": "2026-10-15T08:35:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

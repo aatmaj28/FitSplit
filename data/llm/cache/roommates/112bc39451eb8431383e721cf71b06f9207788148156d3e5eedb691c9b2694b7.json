@@ -1,0 +1,29 @@
+{
+  "value": {
+    "scores": {
+      "overall": 20,
+      "finances": 30,
+      "lifestyle": 15,
+      "personality": 25,
+      "logistics": 10
+    },
+    "highlights": [
+      "Both are students in the same Boston area with similar budget ranges (1100-1500)",
+      "Priya values a non‑smoking household and quiet work time",
+      "Jake drinks regularly and is a smoker, indicating higher social activity"
+    ],
+    "concerns": [
+      "Smoking conflict: Priya requires a non‑smoking home, Jake smokes",
+      "Guest frequency mismatch: Priya prefers occasional guests, Jake expects weekly gatherings",
+      "Sleep schedule clash: Priya is neutral, Jake is a night owl"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Priya’s non‑smoking household requirement directly conflicts with Jake’s smoking habit, which is a non‑negotiable condition for her.",
+    "middle_ground": [],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The core non‑smoking requirement cannot be reconciled with Jake’s smoking habit, making the match unsuitable. Even if other preferences were aligned, this dealbreaker outweighs potential compatibility."
+  },
+  "created": "2026-10-15T08:36:08+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

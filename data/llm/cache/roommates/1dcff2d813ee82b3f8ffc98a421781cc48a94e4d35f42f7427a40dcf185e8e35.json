@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=1–3 months|bd=$1100-$1400|rm=Private room|gnd=Man|smk=Non-smoking|drink=Socially|pet=I love pets but don’t have any|pri=Budget compatibility,Quiet/work time|nn=No smoking indoors,Budget hard cap (cannot exceed $1400)  \nPFR:budget=$1352,cleanliness=4,quiet_hours=22:00-07:00,guest_limit=2 per week  \nVRD:STRONG|r=All primary criteria align; rent fits within your budget and non‑smoking, quiet‑time preferences are met|open=none",
+  "created": "2026-10-15T08:36:25+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

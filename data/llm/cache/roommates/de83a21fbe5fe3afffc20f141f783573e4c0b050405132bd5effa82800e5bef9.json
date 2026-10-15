@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards|nn=No smoking indoors  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but no current pets|slp=Night owl|cln=4|gwk=1|usp=Equal split|groc=Shared|dep=200|wfh=Yes|nzl=Low|cf=Direct|pri=Honest communication style, Matching social energy, Similar cleanliness standards  \nVRD:STRONG|r=Looking forward to chatting about how we can fit together.",
+  "created": "2026-10-15T08:49:24+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 20,
+      "finances": 0,
+      "lifestyle": 30,
+      "personality": 40,
+      "logistics": 20
+    },
+    "highlights": [
+      "Both are students in the same Boston/Fenway area",
+      "Both prefer regular social interaction and weekly guests",
+      "Both want to split rent and basics equally"
+    ],
+    "concerns": [
+      "Jake's budget cap is $1500 max, Sofia's room is $1488 which exceeds his limit when fees are considered",
+      "Jake smokes while Sofia requires a non‑smoking household",
+      "Different cleanliness expectations (Jake rates 2, Sofia rates 4)"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Budget incompatibility: Jake cannot exceed $1500 total rent, but Sofia's listed rent $1488 plus utilities likely surpasses his hard cap",
+    "middle_ground": [
+      "Jake could consider a slightly higher rent ceiling if utilities are low",
+      "Sofia could offer a discount or find a cheaper room within Jake's range"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The primary dealbreaker is the budget mismatch, compounded by smoking preferences and differing cleanliness standards. Even with potential compromises, the financial conflict is likely insurmountable."
+  },
+  "created": "2026-10-15T08:41:00+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

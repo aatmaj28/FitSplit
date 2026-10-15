@@ -1,0 +1,6 @@
+{
+  "value": "VRD:CONDITIONAL|r=Awaiting your confirmation on sleep schedule, cleanliness standard, guest policy, and work‑from‑home preference|open=financial, social, lifestyle",
+  "created": "2026-10-15T08:53:07+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

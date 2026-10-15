@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 90,
+      "personality": 88,
+      "logistics": 93
+    },
+    "highlights": [
+      "Both have identical rent budget ($1100‑$1450) and split utilities 50/50, confirming financial compatibility",
+      "Sleep schedules align (11 pm–7 am) with quiet study windows and low guest frequency",
+      "Temperature preference converged on 70°F with ±1°F flexibility and agreed brief‑call noise protocol"
+    ],
+    "concerns": [
+      "Both prefer low guest frequency; if one’s social circle expands, it could strain the ‘low’ guest rule",
+      "Both rate cleanliness at 4/5; occasional differences in tidiness standards could arise",
+      "Both are night‑owls socially but need quiet after 10 pm for study, requiring strict adherence"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "If guest frequency needs to increase, agree on advance notice of 24‑48 hours and limit to one overnight stay per week",
+      "Maintain a shared cleaning calendar to ensure dishes are done same night, preventing cleanliness disputes"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Meera show strong alignment across finances, lifestyle, and logistical preferences, with clear agreements on rent, utilities, sleep, noise, and temperature. Minor potential friction points (guest frequency and cleanliness expectations) can be managed with simple compromises, making them a solid roommate match."
+  },
+  "created": "2026-10-15T08:32:18+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

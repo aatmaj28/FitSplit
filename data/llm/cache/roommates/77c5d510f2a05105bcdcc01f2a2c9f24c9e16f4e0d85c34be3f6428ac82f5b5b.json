@@ -1,0 +1,6 @@
+{
+  "value": "VRD:CONDITIONAL|open=guest_policy, chore_schedule|r=We’re a strong match on sleep, cleanliness, WFH, and budget. The only unresolved topics are the exact guest policy and chore schedule. Once we iron those out, we can proceed.",
+  "created": "2026-10-15T08:48:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

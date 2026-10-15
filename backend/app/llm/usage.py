@@ -13,6 +13,7 @@ import fcntl
 import functools
 import json
 import os
+import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -58,6 +59,14 @@ def purpose(name: str) -> Iterator[None]:
         yield
     finally:
         _purpose.reset(token)
+
+
+_SECRETS = re.compile(r"(org_[A-Za-z0-9]{6,}|gsk_[A-Za-z0-9]{6,}|sk-ant-[A-Za-z0-9_-]{6,}|AIza[0-9A-Za-z_-]{10,})")
+
+
+def redact(text: str) -> str:
+    """Provider errors can echo account identifiers (Groq puts the org id in 429s); never log them."""
+    return _SECRETS.sub(lambda m: m.group(1)[:4] + "…", text)
 
 
 @contextlib.contextmanager
@@ -112,7 +121,7 @@ def _finish(provider: str, model: str, ok: bool, latency_s: float, usage: dict |
                 "purpose": _purpose.get(), "status": "ok" if ok else "error", "latency_s": round(latency_s, 2),
                 "input_tokens": (usage or {}).get("input_tokens"), "output_tokens": (usage or {}).get("output_tokens")}
         if error:
-            line["error"] = error[:160]
+            line["error"] = redact(error)[:160]
         with open(CALLS_PATH, "a") as fh:
             fh.write(json.dumps(line) + "\n")
 

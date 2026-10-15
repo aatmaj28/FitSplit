@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nVRD:CONDITIONAL|r=Need to confirm sleep & guest preferences align|open=guest policy, sleep schedule",
+  "created": "2026-10-15T08:32:40+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

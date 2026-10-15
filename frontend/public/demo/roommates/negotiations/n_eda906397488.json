@@ -1,0 +1,396 @@
+{
+  "id": "n_eda906397488",
+  "engine": "rm1",
+  "mode": "find",
+  "a": {
+    "id": "ananya",
+    "name": "Ananya Iyer"
+  },
+  "b": {
+    "id": "meera",
+    "name": "Meera Patel"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches initial criteria|open=none",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Socially\nPFR:pri=Matching social energy|Location match|Honest communication style\nVRD:STRONG|r=Profiles compatible on location, non‑smoking, budget overlap, and priorities|open=none",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nVRD:CONDITIONAL|r=Need to confirm sleep & guest preferences align|open=guest policy, sleep schedule",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nCNF:slp:status=aligned? (Do you also prefer a 10 pm–6 am sleep window?) \nCNF:cln:status=aligned? (Do you aim for a 4/5 cleanliness level?) \nCNF:gwk:status=aligned? (Is 0‑1 guests per week comfortable for you?) \nVRD:CONDITIONAL|r=Awaiting confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=10 pm–6 am (quiet evenings, early mornings for classes)|cln=4 (clean kitchen & bathroom, tidy common areas)|wfh=Rare (mostly on campus, occasional remote work evenings)|nzl=Low (prefer calm environment, music low after 9 pm)\nFLX:slp=Flexible to 11 pm–7 am if needed, provided quiet hours are respected|condition=No loud activities after designated sleep time\nCNV:gwk=I usually have 0‑1 guests weekly; open to 2 with prior notice and adherence to quiet hours\n<<MOD:ROUTINES>>",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=10 pm–6 am (quiet evenings, early mornings for classes)|cln=4 (clean kitchen & bathroom, tidy common areas)|wfh=Rare (mostly on campus, occasional remote work evenings)|nzl=Low (prefer calm environment, music low after 9 pm)\nFLX:slp=Flexible to 11 pm–7 am if needed, provided quiet hours are respected|condition=No loud activities after designated sleep time\nCNF:gwk:status=aligned? (I usually have 0‑1 guests weekly; are you comfortable with up to 2 guests with prior notice?) \nCNF:wfh:status=aligned? (Do you also work remotely only occasionally, mainly on campus?) \nVRD:CONDITIONAL|r=Need confirmation on guest frequency and remote‑work patterns|open=guest policy, WFH schedule)",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=10 pm–6 am (I wind down by 10 pm, need quiet for study) | cln=4 (I keep my space tidy and follow a rotating chore chart) | wfh=Occasional evenings only (usually on campus, remote work 1‑2 times /week) | gwk=0‑1 guests weekly (I’m fine with up to 2 guests if they’re announced in advance)  \nFLX:gwk=Can allow 2 guests/week with at least 24 hour notice and strict quiet hours after 9 pm | condition=No parties, noise kept low  \nCNF:slp:status=aligned? (Do you also need a quiet environment from 10 pm–6 am?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level acceptable for you?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Awaiting your confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=10 pm–6 am (quiet study time, I also need the space silent after 10 pm) | cln=4 (rotating chore chart, kitchen and bathroom wiped down daily) | wfh=Occasional evenings only (1‑2 times /week, usually after 7 pm) | gwk=0‑1 guests weekly (flexible to 2 with 24‑hour notice, no loud gatherings)  \nFLX:slp=Can shift to 11 pm–7 am on rare exam weeks if you’re okay with maintaining strict quiet after 11 pm | condition=No music or conversations louder than conversational level after sleep time  \nFLX:gwk=If you ever need a third guest for a short visit, I’m open to it provided it’s a one‑time event and the guest leaves by 10 pm | condition=Advance notice and adherence to quiet hours  \nCNF:slp:status=aligned? (Do you also require quiet from 10 pm–6 am for study?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level with a shared chore chart acceptable?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Waiting for your confirmation on sleep schedule, cleanliness standards, and guest policy|open=guest policy, sleep schedule, cleanliness)",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can extend to 11 pm–7 am during exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest departs by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:slp:status=aligned (I also need a silent environment from 10 pm–6 am for study)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, usually evenings)  \n\nVRD:CONDITIONAL|r=All core preferences align; awaiting your final acceptance of the proposed flexible guest and exam‑week sleep adjustments|open=guest policy, exam‑week sleep shift, chore schedule",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:smk=Non‑smoking household only (my non‑negotiable) | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can extend to 11 pm–7 am during exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest departs by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned? (Do you also require a non‑smoking household?)  \nCNF:slp:status=aligned (I also need a silent environment from 10 pm–6 am for study)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, usually evenings)  \n\nVRD:CONDITIONAL|r=All core preferences align pending confirmation on the non‑smoking rule|open=smoking policy, guest policy, exam‑week sleep shift, chore schedule",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "PFR:smk=Non‑smoking household only (my non‑negotiable) | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can shift to 11 pm–7 am on exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest leaves by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned? (Do you also require a completely smoke‑free home?)  \nCNF:slp:status=aligned (I need silence from 10 pm–6 am for study as well)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, mainly evenings)  \n\nVRD:CONDITIONAL|r=All core preferences line up; just need your confirmation on the non‑smoking rule and the flexible guest/exam‑week sleep proposals|open=smoking policy, guest policy, exam‑week sleep shift, chore schedule",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "VRD:STRONG|r=All core preferences align, non‑smoking rule confirmed, and flexible guest/exam‑week sleep adjustments are acceptable. Thank you for the clear communication!",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T08:45:03+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Ananya Iyer",
+        "speaker_id": "a",
+        "message": "VRD:STRONG|r=All core preferences align, non‑smoking rule confirmed, and flexible guest/exam‑week sleep adjustments are acceptable. Thank you for the clear communication!",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T08:45:06+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 92,
+          "finances": 95,
+          "lifestyle": 93,
+          "personality": 90,
+          "logistics": 92
+        },
+        "highlights": [
+          "Non‑smoking household confirmed",
+          "Aligned sleep schedules (10 pm–6 am with flexible exam‑week shift)",
+          "Consistent 4/5 cleanliness level with shared chore chart"
+        ],
+        "concerns": [],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [],
+        "recommendation": "strong",
+        "recommendation_summary": "Both roommates have matched on all key criteria—budget, location, non‑smoking rule, sleep window, cleanliness, and guest policy—after a thorough back‑and‑forth. Their communication is clear and they have agreed on flexible arrangements for exam weeks and occasional guests. This makes a strong, conflict‑free match."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1000-1400|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Never\nPFR:pri=Similar cleanliness standards|Compatible sleep schedule|Honest communication style\nVRD:STRONG|r=Profile matches initial criteria|open=none",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1300-1650|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|pet=No pets|drink=Socially\nPFR:pri=Matching social energy|Location match|Honest communication style\nVRD:STRONG|r=Profiles compatible on location, non‑smoking, budget overlap, and priorities|open=none",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nVRD:CONDITIONAL|r=Need to confirm sleep & guest preferences align|open=guest policy, sleep schedule",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nCNF:slp:status=aligned? (Do you also prefer a 10 pm–6 am sleep window?) \nCNF:cln:status=aligned? (Do you aim for a 4/5 cleanliness level?) \nCNF:gwk:status=aligned? (Is 0‑1 guests per week comfortable for you?) \nVRD:CONDITIONAL|r=Awaiting confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=10 pm–6 am (quiet evenings, early mornings for classes)|cln=4 (clean kitchen & bathroom, tidy common areas)|wfh=Rare (mostly on campus, occasional remote work evenings)|nzl=Low (prefer calm environment, music low after 9 pm)\nFLX:slp=Flexible to 11 pm–7 am if needed, provided quiet hours are respected|condition=No loud activities after designated sleep time\nCNV:gwk=I usually have 0‑1 guests weekly; open to 2 with prior notice and adherence to quiet hours\n<<MOD:ROUTINES>>",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=10 pm–6 am (quiet evenings, early mornings for classes)|cln=4 (clean kitchen & bathroom, tidy common areas)|wfh=Rare (mostly on campus, occasional remote work evenings)|nzl=Low (prefer calm environment, music low after 9 pm)\nFLX:slp=Flexible to 11 pm–7 am if needed, provided quiet hours are respected|condition=No loud activities after designated sleep time\nCNF:gwk:status=aligned? (I usually have 0‑1 guests weekly; are you comfortable with up to 2 guests with prior notice?) \nCNF:wfh:status=aligned? (Do you also work remotely only occasionally, mainly on campus?) \nVRD:CONDITIONAL|r=Need confirmation on guest frequency and remote‑work patterns|open=guest policy, WFH schedule)",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=10 pm–6 am (I wind down by 10 pm, need quiet for study) | cln=4 (I keep my space tidy and follow a rotating chore chart) | wfh=Occasional evenings only (usually on campus, remote work 1‑2 times /week) | gwk=0‑1 guests weekly (I’m fine with up to 2 guests if they’re announced in advance)  \nFLX:gwk=Can allow 2 guests/week with at least 24 hour notice and strict quiet hours after 9 pm | condition=No parties, noise kept low  \nCNF:slp:status=aligned? (Do you also need a quiet environment from 10 pm–6 am?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level acceptable for you?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Awaiting your confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=10 pm–6 am (quiet study time, I also need the space silent after 10 pm) | cln=4 (rotating chore chart, kitchen and bathroom wiped down daily) | wfh=Occasional evenings only (1‑2 times /week, usually after 7 pm) | gwk=0‑1 guests weekly (flexible to 2 with 24‑hour notice, no loud gatherings)  \nFLX:slp=Can shift to 11 pm–7 am on rare exam weeks if you’re okay with maintaining strict quiet after 11 pm | condition=No music or conversations louder than conversational level after sleep time  \nFLX:gwk=If you ever need a third guest for a short visit, I’m open to it provided it’s a one‑time event and the guest leaves by 10 pm | condition=Advance notice and adherence to quiet hours  \nCNF:slp:status=aligned? (Do you also require quiet from 10 pm–6 am for study?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level with a shared chore chart acceptable?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Waiting for your confirmation on sleep schedule, cleanliness standards, and guest policy|open=guest policy, sleep schedule, cleanliness)",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can extend to 11 pm–7 am during exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest departs by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:slp:status=aligned (I also need a silent environment from 10 pm–6 am for study)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, usually evenings)  \n\nVRD:CONDITIONAL|r=All core preferences align; awaiting your final acceptance of the proposed flexible guest and exam‑week sleep adjustments|open=guest policy, exam‑week sleep shift, chore schedule",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:smk=Non‑smoking household only (my non‑negotiable) | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can extend to 11 pm–7 am during exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest departs by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned? (Do you also require a non‑smoking household?)  \nCNF:slp:status=aligned (I also need a silent environment from 10 pm–6 am for study)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, usually evenings)  \n\nVRD:CONDITIONAL|r=All core preferences align pending confirmation on the non‑smoking rule|open=smoking policy, guest policy, exam‑week sleep shift, chore schedule",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "PFR:smk=Non‑smoking household only (my non‑negotiable) | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can shift to 11 pm–7 am on exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest leaves by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned? (Do you also require a completely smoke‑free home?)  \nCNF:slp:status=aligned (I need silence from 10 pm–6 am for study as well)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, mainly evenings)  \n\nVRD:CONDITIONAL|r=All core preferences line up; just need your confirmation on the non‑smoking rule and the flexible guest/exam‑week sleep proposals|open=smoking policy, guest policy, exam‑week sleep shift, chore schedule",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "VRD:STRONG|r=All core preferences align, non‑smoking rule confirmed, and flexible guest/exam‑week sleep adjustments are acceptable. Thank you for the clear communication!",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T08:45:03+00:00"
+    },
+    {
+      "speaker": "Ananya Iyer",
+      "speaker_id": "a",
+      "message": "VRD:STRONG|r=All core preferences align, non‑smoking rule confirmed, and flexible guest/exam‑week sleep adjustments are acceptable. Thank you for the clear communication!",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T08:45:06+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 93,
+      "personality": 90,
+      "logistics": 92
+    },
+    "highlights": [
+      "Non‑smoking household confirmed",
+      "Aligned sleep schedules (10 pm–6 am with flexible exam‑week shift)",
+      "Consistent 4/5 cleanliness level with shared chore chart"
+    ],
+    "concerns": [],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "Both roommates have matched on all key criteria—budget, location, non‑smoking rule, sleep window, cleanliness, and guest policy—after a thorough back‑and‑forth. Their communication is clear and they have agreed on flexible arrangements for exam weeks and occasional guests. This makes a strong, conflict‑free match."
+  },
+  "providers": {
+    "cache": 11,
+    "groq": 3
+  },
+  "created": "2026-10-15T08:45:03+00:00"
+}

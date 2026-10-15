@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Never|pet=No pets|nn=No smoking indoors;No pets|pri=Similar cleanliness standards;Compatible sleep schedule;Honest communication style\nPFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, open to cooking together a few times a week|clean_sched=Rotating chore chart (weekly) with bathroom split 15‑30 min each|bath_time=Under 15 min\nFLX:clean_sched=Flexible to a bi‑weekly chore rotation if you prefer fewer schedule checks|condition=Both parties confirm completion via a shared checklist\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00, and give a heads‑up 12 hrs in advance\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables respected; compromises offered on chore frequency and guest notifications|open=Please confirm if the bi‑weekly chore option works for you and share any other routine preferences.",
+  "created": "2026-10-15T08:27:30+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

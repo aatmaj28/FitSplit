@@ -1,0 +1,31 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 90,
+      "personality": 88,
+      "logistics": 93
+    },
+    "highlights": [
+      "Both are non‑smokers and require a non‑smoking household",
+      "Both have identical budget caps and split costs equally",
+      "Both prioritize cleanliness (rating 4) and quiet work time"
+    ],
+    "concerns": [
+      "Sofia’s message indicates a perceived conflict over smoking rules, though both profiles state the same requirement",
+      "Both are night owls, which could affect shared living space if one prefers earlier sleep times"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on a clear quiet hours schedule to accommodate night owl habits",
+      "Set a shared cleaning rota to maintain cleanliness standards"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "The profiles align on key criteria—budget, smoking, cleanliness, and work‑time quietness—making a strong match likely. Minor adjustments around sleep schedules can be easily negotiated."
+  },
+  "created": "2026-10-15T08:50:03+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

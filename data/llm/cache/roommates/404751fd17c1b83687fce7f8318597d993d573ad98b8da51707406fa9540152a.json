@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early to mid‑night; wake 7‑8 am|cln=Daily tidying, expect 4/5 cleanliness|gwk=0 overnight guests; occasional friends on weekends|wfh=Occasional study or work from home on weekdays|nzl=Low noise, especially during 10 pm‑6 am  \nCNF:slp:compatible|cln:compatible|gwk:compatible|wfh:compatible|nzl:compatible  \nFLX:gwk=Allow up to 2 guests per month if scheduled a week in advance|cln=Agree on a weekly 15‑minute quick‑tidy and a deeper clean every other week  \nVRD:CONDITIONAL|r=We’re in sync on sleep, cleanliness, WFH, and noise. We just need to lock in the guest policy and cleaning schedule. open=guest policy, cleaning routine",
+  "created": "2026-10-15T08:57:00+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

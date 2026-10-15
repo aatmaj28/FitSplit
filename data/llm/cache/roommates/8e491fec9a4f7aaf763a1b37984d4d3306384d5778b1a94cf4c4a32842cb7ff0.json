@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 90,
+      "personality": 93,
+      "logistics": 94
+    },
+    "highlights": [
+      "Identical rent range and split‑equally budget",
+      "Matching sleep windows (22:00‑07:00) and quiet evenings",
+      "Both prefer non‑smoking, no pets in the home"
+    ],
+    "concerns": [
+      "Priya mentions loving pets while Ananya prefers no pets – resolved by agreeing no pets in the house",
+      "Slight difference in preferred chore rotation (weekly vs bi‑weekly) – both accepted flexible schedule",
+      "Ananya drinks never vs Priya drinks socially – low‑impact social difference"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on a bi‑weekly chore rotation with a shared checklist (flexible to weekly if needed)",
+      "Limit guest visits to close friends, no overnight stays after 22:00 with 12‑hour notice"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Priya and Ananya align on budget, sleep schedule, cleanliness, and non‑negotiables. Minor differences around pets, chore frequency, and drinking habits have been mutually accommodated, making this a strong roommate match."
+  },
+  "created": "2026-10-15T08:29:36+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

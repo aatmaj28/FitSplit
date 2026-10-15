@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10 pm–6 am (quiet study time, I also need the space silent after 10 pm) | cln=4 (rotating chore chart, kitchen and bathroom wiped down daily) | wfh=Occasional evenings only (1‑2 times /week, usually after 7 pm) | gwk=0‑1 guests weekly (flexible to 2 with 24‑hour notice, no loud gatherings)  \nFLX:slp=Can shift to 11 pm–7 am on rare exam weeks if you’re okay with maintaining strict quiet after 11 pm | condition=No music or conversations louder than conversational level after sleep time  \nFLX:gwk=If you ever need a third guest for a short visit, I’m open to it provided it’s a one‑time event and the guest leaves by 10 pm | condition=Advance notice and adherence to quiet hours  \nCNF:slp:status=aligned? (Do you also require quiet from 10 pm–6 am for study?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level with a shared chore chart acceptable?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Waiting for your confirmation on sleep schedule, cleanliness standards, and guest policy|open=guest policy, sleep schedule, cleanliness)",
+  "created": "2026-10-15T08:33:40+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

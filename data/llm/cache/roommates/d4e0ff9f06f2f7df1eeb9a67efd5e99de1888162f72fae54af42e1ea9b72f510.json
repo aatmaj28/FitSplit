@@ -1,0 +1,31 @@
+{
+  "value": {
+    "scores": {
+      "overall": 20,
+      "finances": 80,
+      "lifestyle": 30,
+      "personality": 40,
+      "logistics": 70
+    },
+    "highlights": [
+      "Both are students in Boston/Fenway with similar budget ranges (1150-1500)",
+      "Both value a private room and have similar sleep schedules (10pm-6am)",
+      "Both are open to rotating chore charts to manage cleanliness"
+    ],
+    "concerns": [
+      "Jake smokes indoors while Arjun requires a non‑smoking household only",
+      "Arjun prohibits parties and any overnight guests, whereas Jake lists regular guests and a social, lively noise level",
+      "Both have conflicting expectations around guests and noise during study hours"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Smoking policy conflict – Jake smokes, Arjun requires a non‑smoking household only, which is a hard non‑negotiable rule.",
+    "middle_ground": [
+      "None feasible due to smoking policy conflict"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The smoking policy mismatch is a hard deal‑breaker. Despite similar budgets and schedules, the conflict over indoor smoking and parties makes a shared living arrangement untenable."
+  },
+  "created": "2026-10-15T08:53:49+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

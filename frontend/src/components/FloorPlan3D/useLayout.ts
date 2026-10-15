@@ -3,10 +3,11 @@ import type { FurnitureItem } from "./furniture";
 
 const PREFIX = "fp3d.layout.v1:";
 
-function load(key: string): FurnitureItem[] {
+function load(key: string, initial: FurnitureItem[] = []): FurnitureItem[] {
   try {
     const raw = localStorage.getItem(PREFIX + key);
-    const data = raw ? JSON.parse(raw) : [];
+    if (raw === null) return initial;
+    const data = JSON.parse(raw);
     if (!Array.isArray(data)) return [];
     return data.filter(
       (i): i is FurnitureItem =>
@@ -14,7 +15,7 @@ function load(key: string): FurnitureItem[] {
         [i.w, i.d, i.h, i.x, i.z, i.rot].every((v) => typeof v === "number" && Number.isFinite(v)),
     );
   } catch {
-    return []; // storage blocked (private mode, previews) or corrupt: start empty
+    return initial; // storage blocked (private mode, previews) or corrupt: start over
   }
 }
 
@@ -27,12 +28,13 @@ function save(key: string, items: FurnitureItem[]): void {
   }
 }
 
-/** Furniture layout for one plan, persisted in localStorage under the plan's key. */
-export function useLayout(key: string) {
-  const [state, setState] = useState(() => ({ key, items: load(key) }));
+/** Furniture layout for one plan, persisted in localStorage under the plan's key; `initial` is used
+ *  until something is saved under that key. */
+export function useLayout(key: string, initial?: FurnitureItem[]) {
+  const [state, setState] = useState(() => ({ key, items: load(key, initial) }));
   let current = state;
   if (state.key !== key) {
-    current = { key, items: load(key) }; // plan changed: switch layouts during render
+    current = { key, items: load(key, initial) }; // plan changed: switch layouts during render
     setState(current);
   }
   useEffect(() => save(current.key, current.items), [current]);

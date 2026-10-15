@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=22:30-07:30|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low\nCNF:gwk:status(Aligned) (I prefer no regular guests; occasional close‑friend visits okay)\nFLX:gwk=1|condition=Only close friends, no overnight stays after 22:00\n<<MOD:ROUTINES>>\nVRD:STRONG|r=Sleep windows and cleanliness match; guest policy compatible with minor flexibility|open=none",
+  "created": "2026-10-15T08:27:02+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

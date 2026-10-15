@@ -1,0 +1,328 @@
+{
+  "id": "n_86e815208f2b",
+  "engine": "rm1",
+  "mode": "fill",
+  "a": {
+    "id": "jake",
+    "name": "Jake Thompson"
+  },
+  "b": {
+    "id": "sofia",
+    "name": "Sofia Alvarez"
+  },
+  "room": {
+    "plan": "jvue_3bed",
+    "unit_name": "JVUE 3 bed",
+    "rent_total": 4200,
+    "beds": 3,
+    "room_id": "r5",
+    "room_label": "Bedroom 2 (DREAM)",
+    "area_sqft": 196.1,
+    "share": 1360,
+    "private_bath": false,
+    "furniture": {
+      "items": [
+        "Full bed",
+        "Desk",
+        "Keyboard stand"
+      ],
+      "all_fit": true,
+      "free_sqft": 153.4,
+      "note": ""
+    },
+    "members": [
+      {
+        "profile_id": "arjun",
+        "name": "Arjun Reddy",
+        "room_label": "Bedroom 1 (DREAM)",
+        "share": 1352
+      },
+      {
+        "profile_id": "sofia",
+        "name": "Sofia Alvarez",
+        "room_label": "Bedroom 3 (DREAM)",
+        "share": 1488
+      }
+    ]
+  },
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Jake Thompson",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nPFR:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:53:49+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but don't have any|wfh=No|nlz=Quiet|cf=Honest communication style|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but don't have any|wfh=No|nlz=Quiet|cf=Honest communication style|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:53:59+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Jake Thompson",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nPFR:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:54:04+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Honest communication|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nCNF:smk=Non-smoking household only|r=My house is strictly no smoking indoors.  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Awaiting your sleep schedule, cleaning habits, and guest preferences to confirm fit.|open=financial, routines, social, lifestyle",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:54:17+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Jake Thompson",
+        "speaker_id": "a",
+        "message": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Direct|pri=Matching social energy;Similar guest/party preferences;Location match  \nCNF:smk=Yes|r=I smoke, so a non-smoking household would be a conflict|  \nFLX:smk=Open to designated outdoor smoking area|condition=If it’s a shared space, I’ll keep it outside and away from windows.  \nVRD:CONDITIONAL|r=Need your sleep schedule, cleaning habits, guest policy, and noise tolerance to confirm fit|open=financial, routines, social, lifestyle",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:54:31+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Sofia Alvarez",
+        "speaker_id": "b",
+        "message": "CNF:smk=No smoking indoors|r=My household is strictly non-smoking indoors, which conflicts with your smoking habit.  \nVRD:INCOMPATIBLE|r=Smoking indoors is a non-negotiable for me. No further negotiation possible.",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:54:48+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "analyzing",
+      "seq": 9
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "incompatible",
+        "reason": "Smoking indoors is a non-negotiable for me. No further negotiation possible",
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 20,
+          "finances": 70,
+          "lifestyle": 15,
+          "personality": 40,
+          "logistics": 60
+        },
+        "highlights": [
+          "Both are students in Boston/Fenway with similar budget ranges",
+          "Both enjoy pets and have similar guest frequency",
+          "Both prefer private rooms and have similar communication styles"
+        ],
+        "concerns": [
+          "Smoking conflict: Jake smokes while Sofia requires a non‑smoking household",
+          "Different sleep schedules: Jake is a night owl vs Sofia’s early riser",
+          "Cleaning standards differ: Jake rates 2/5, Sofia rates 5/5"
+        ],
+        "dealbreaker_detected": true,
+        "dealbreaker_detail": "Smoking indoors is a non‑negotiable for Sofia, while Jake smokes regularly. This conflict cannot be reconciled within the given constraints.",
+        "middle_ground": [
+          "Designated outdoor smoking area with strict no‑smoke rule inside",
+          "Agree on a shared cleaning schedule to balance differing standards"
+        ],
+        "recommendation": "incompatible",
+        "recommendation_summary": "The smoking conflict is a hard, non‑negotiable dealbreaker that overrides other compatible factors. Despite some shared preferences, the roommates cannot coexist under the stated conditions."
+      },
+      "checks": [
+        {
+          "id": "budget",
+          "ok": true,
+          "hard": false,
+          "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+        },
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        },
+        {
+          "id": "furniture",
+          "ok": true,
+          "hard": false,
+          "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+        }
+      ],
+      "seq": 10
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Jake Thompson",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nPFR:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:53:49+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but don't have any|wfh=No|nlz=Quiet|cf=Honest communication style|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nPFR:loc=Boston/Fenway|mv=1–3 months|bd=1400-1800|rm=Private room|gnd=Woman|smk=Non-smoking household only|drink=Socially|pet=Love pets but don't have any|wfh=No|nlz=Quiet|cf=Honest communication style|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:53:59+00:00"
+    },
+    {
+      "speaker": "Jake Thompson",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nPFR:loc=Boston/Fenway, mv=1–3 months, bd=1150-1500, rm=Private room, gnd=Man, smk=Yes, drink=Regularly, pet=Love pets but none, wfh=No, nlz=noise_level, cf=Direct, pri=Matching social energy;Similar guest/party preferences;Location match  \nVRD:CONDITIONAL|r=Awaiting further details to confirm compatibility|open=financial, routines, social, lifestyle",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:54:04+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Honest communication|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nCNF:smk=Non-smoking household only|r=My house is strictly no smoking indoors.  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Awaiting your sleep schedule, cleaning habits, and guest preferences to confirm fit.|open=financial, routines, social, lifestyle",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:54:17+00:00"
+    },
+    {
+      "speaker": "Jake Thompson",
+      "speaker_id": "a",
+      "message": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Direct|pri=Matching social energy;Similar guest/party preferences;Location match  \nCNF:smk=Yes|r=I smoke, so a non-smoking household would be a conflict|  \nFLX:smk=Open to designated outdoor smoking area|condition=If it’s a shared space, I’ll keep it outside and away from windows.  \nVRD:CONDITIONAL|r=Need your sleep schedule, cleaning habits, guest policy, and noise tolerance to confirm fit|open=financial, routines, social, lifestyle",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:54:31+00:00"
+    },
+    {
+      "speaker": "Sofia Alvarez",
+      "speaker_id": "b",
+      "message": "CNF:smk=No smoking indoors|r=My household is strictly non-smoking indoors, which conflicts with your smoking habit.  \nVRD:INCOMPATIBLE|r=Smoking indoors is a non-negotiable for me. No further negotiation possible.",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:54:48+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "budget",
+      "ok": true,
+      "hard": false,
+      "detail": "$1,360/mo is within Jake Thompson's $1,500 max"
+    },
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    },
+    {
+      "id": "furniture",
+      "ok": true,
+      "hard": false,
+      "detail": "Full bed, Desk, Keyboard stand fits in Bedroom 2 (DREAM)"
+    }
+  ],
+  "result": {
+    "status": "incompatible",
+    "reason": "Smoking indoors is a non-negotiable for me. No further negotiation possible",
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 20,
+      "finances": 70,
+      "lifestyle": 15,
+      "personality": 40,
+      "logistics": 60
+    },
+    "highlights": [
+      "Both are students in Boston/Fenway with similar budget ranges",
+      "Both enjoy pets and have similar guest frequency",
+      "Both prefer private rooms and have similar communication styles"
+    ],
+    "concerns": [
+      "Smoking conflict: Jake smokes while Sofia requires a non‑smoking household",
+      "Different sleep schedules: Jake is a night owl vs Sofia’s early riser",
+      "Cleaning standards differ: Jake rates 2/5, Sofia rates 5/5"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Smoking indoors is a non‑negotiable for Sofia, while Jake smokes regularly. This conflict cannot be reconciled within the given constraints.",
+    "middle_ground": [
+      "Designated outdoor smoking area with strict no‑smoke rule inside",
+      "Agree on a shared cleaning schedule to balance differing standards"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The smoking conflict is a hard, non‑negotiable dealbreaker that overrides other compatible factors. Despite some shared preferences, the roommates cannot coexist under the stated conditions."
+  },
+  "providers": {
+    "cache": 1,
+    "groq": 6
+  },
+  "created": "2026-10-15T08:50:07+00:00"
+}

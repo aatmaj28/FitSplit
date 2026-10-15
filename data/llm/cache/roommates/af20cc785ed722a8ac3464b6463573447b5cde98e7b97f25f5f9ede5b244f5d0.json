@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Night owl|cln=4|gwk=1|wfh=Yes|nzl=Low|cf=Direct|pri=Budget compatibility, Cleanliness, Quiet work time  \n\nCNF:slp:status(align)  \nCNF:cln:status(align)  \nCNF:wfh:status(align)  \nCNF:gwk:status(friction)  \n\nFLX:gwk:offer(1 per week|condition=quiet after 10pm)  \n\nVRD:CONDITIONAL|r=We match on sleep, cleanliness, WFH, but need to agree on guests. open=guest_policy, noise_level.",
+  "created": "2026-10-15T08:46:47+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

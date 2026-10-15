@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=I sleep 10 pm–6 am, avoid late‑night noise, and keep my room tidy (cleanliness 4/5). gwk=Guests: I’m fine with occasional friends but expect 24‑h notice; no overnight stays. wfh=I don’t work from home, so I’m free during weekdays. nlz=Quiet during study hours.  \nCNF:smk=Non‑smoking household only|party=No parties ever  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Awaiting your sleep schedule, cleanliness level, guest policy, and work routine to confirm alignment|open=financial, social, lifestyle",
+  "created": "2026-10-15T08:50:45+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

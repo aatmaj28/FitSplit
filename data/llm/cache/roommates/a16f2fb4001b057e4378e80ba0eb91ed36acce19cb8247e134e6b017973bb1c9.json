@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=I’m a night owl, sleep 10 pm–6 am, and keep my space clean (cln=4/5). gwk=I host friends rarely; I give 24‑hour notice and no overnight stays. wfh=I don’t work from home, so my weekdays are free. nlz=I need quiet during study hours.  \nCNF:smk=Non‑smoking household only|party=No parties ever  \nFLX:cln=I can adjust to a 3‑point cleanliness level if we agree on a rotating chore chart.  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Waiting for your sleep schedule, cleanliness standard, guest policy, and work routine to see if we sync|open=financial, social, lifestyle",
+  "created": "2026-10-15T08:51:17+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

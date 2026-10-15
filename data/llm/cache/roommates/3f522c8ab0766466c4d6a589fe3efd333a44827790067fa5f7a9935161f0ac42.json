@@ -1,0 +1,6 @@
+{
+  "value": "PFR:smk=Non‑smoking household only | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=Can shift to 11 pm–7 am during exam weeks if noise stays below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If a third guest is needed for a one‑night visit, they may stay provided they leave by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned (both require a completely smoke‑free home)  \nCNF:slp:status=aligned (both need silence from 10 pm–6 am)  \nCNF:cln:status=aligned (both are comfortable with a 4/5 cleanliness level and shared chore chart)  \nCNF:wfh:status=aligned (both work remotely only occasionally, mainly evenings)  \n\nVRD:STRONG MATCH|r=All preferences and non‑negotiables align perfectly; ready to move forward|open=none",
+  "created": "2026-10-15T08:35:23+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

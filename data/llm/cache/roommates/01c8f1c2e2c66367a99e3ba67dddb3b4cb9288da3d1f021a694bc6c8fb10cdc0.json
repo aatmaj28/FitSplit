@@ -1,0 +1,6 @@
+{
+  "value": "CNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \nPFR:Anything else you’d like to share about noise tolerance during study hours or preferred temperature settings in the apartment?  \n\nVRD:STRONG|r=All routine preferences align, open to final details|open=noise/temperature preferences",
+  "created": "2026-10-15T08:30:31+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

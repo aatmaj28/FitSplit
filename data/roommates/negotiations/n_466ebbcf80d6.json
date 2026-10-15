@@ -1,0 +1,412 @@
+{
+  "id": "n_466ebbcf80d6",
+  "engine": "rm1",
+  "mode": "find",
+  "a": {
+    "id": "priya",
+    "name": "Priya Sharma"
+  },
+  "b": {
+    "id": "meera",
+    "name": "Meera Patel"
+  },
+  "room": null,
+  "status": "complete",
+  "events": [
+    {
+      "type": "checks",
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 0
+    },
+    {
+      "type": "phase_start",
+      "phase": "introduction",
+      "label": "Phase 1 — Introduction",
+      "seq": 1
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+        "turn": 1,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 2
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=Non-smoking household only|pri=Matching social energy;Location match;Honest communication style  \nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low  \n<<MOD:FINANCIAL>>  \n\nVRD:STRONG|r=All criteria compatible|open=financial details (utilities, groceries)",
+        "turn": 2,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 3
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "<<MOD:FINANCIAL>>\n\nPFR:bd=1100-1450|dep=500|usp=Utilities split 50/50|groc=Each covers own groceries|bd_total=1200 (average rent + utilities)  \nVRD:STRONG|r=Financial expectations align|open=none",
+        "turn": 3,
+        "phase": "introduction",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 4
+    },
+    {
+      "type": "phase_start",
+      "phase": "exploration",
+      "label": "Phase 2 — Lifestyle Exploration",
+      "seq": 5
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:slp=Flexible, usually sleeps 11 pm–7 am|cln=4 (tidy, likes dishes done promptly)|gwk=0 (rarely have guests, prefer quiet evenings)|wfh=Occasionally, work from home 1–2 days a week, need a quiet space|rtn=Cook simple meals at home, clean up right after, enjoy short evening walks in the neighborhood  \n\nPFR:slp=Your preferred sleep hours?|cln=How strict are you on cleanliness (1‑5)?|gwk=Do you often have friends over or host gatherings?|wfh=Do you work from home regularly and need a dedicated workspace?|rtn=Any particular daily routines you’d like to share?  \n\nVRD:STRONG|r=Preferences exchanged, looking for alignment|open=none",
+        "turn": 4,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 6
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:slp=11 pm–7 am, need quiet after 10 pm for study;cln=4 (tidy, dishes done same night);gwk=0 (rarely host, occasional over‑night guest with prior notice);wfh=1–2 days /week, need a desk and minimal background noise;rtn=Cook simple meals, clean kitchen immediately, enjoy evening walks on the Charles River  \n\nCNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \n\nVRD:STRONG|r=All routine preferences match|open=none",
+        "turn": 5,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 7
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "CNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \nPFR:Anything else you’d like to share about noise tolerance during study hours or preferred temperature settings in the apartment?  \n\nVRD:STRONG|r=All routine preferences align, open to final details|open=noise/temperature preferences",
+        "turn": 6,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 8
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); prefer moderate temperature 68‑72°F, using AC/heater responsibly; open to adjusting if needed with mutual notice.  \n\nCNF:nzl:aligned(✓) | temp:open(need your preference)  \n\nVRD:STRONG|r=Noise and temperature preferences discussed, awaiting your input|open=temperature preference details",
+        "turn": 7,
+        "phase": "exploration",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 9
+    },
+    {
+      "type": "phase_start",
+      "phase": "negotiation",
+      "label": "Phase 3 — Negotiation",
+      "seq": 10
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); moderate temperature 68‑72°F; I can keep windows closed and use the AC minimally if you prefer it a bit cooler, just give me a heads‑up.  \n\nFLX:nzl=If you ever need a brief break in quiet time for a call, I’m fine with a short 10‑minute window with headphones on.  \n\nPFR:What temperature range feels most comfortable for you? Are you okay with keeping the thermostat around 70°F and adjusting up or down a degree or two with a day’s notice?  \n\nVRD:STRONG|r=Noise and temperature preferences largely aligned, awaiting your temperature preference|open=temperature range confirmation",
+        "turn": 8,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 11
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:temp=70°F (comfortable 68‑72°F); happy to keep thermostat at 70°F and adjust ±1°F with a day's notice.  \n\nFLX:nzl=If I need a brief 5‑minute quiet break for a call during study hours, I’ll use headphones and keep volume low; please let me know beforehand.  \n\nVRD:STRONG|r=Temperature and brief‑call noise compromise agreed|open=none",
+        "turn": 9,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 12
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "CNF:nzl:aligned(✓) | temp:aligned(✓)  \n\nVRD:STRONG|r=All negotiation points resolved, ready to move forward|open=none",
+        "turn": 10,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 13
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:All core preferences—quiet study windows, temperature 70°F (±1°F with notice), brief‑call noise windows, non‑smoking household, tidy shared spaces, minimal guests—are aligned and mutually accepted.  \n\nFLX:If any unexpected schedule change arises (e.g., a late‑night study session), I’ll give you a heads‑up and use headphones to keep noise down.  \n\nVRD:STRONG|r=All negotiation points resolved, ready to move forward|open=none",
+        "turn": 11,
+        "phase": "negotiation",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 14
+    },
+    {
+      "type": "phase_start",
+      "phase": "conclusion",
+      "label": "Phase 4 — Conclusion",
+      "seq": 15
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Meera Patel",
+        "speaker_id": "b",
+        "message": "CNF:all:aligned(✓)  \n\nVRD:STRONG|r=All core preferences and compromises aligned, ready to move forward|open=none",
+        "turn": 12,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 16
+    },
+    {
+      "type": "agent_message",
+      "data": {
+        "speaker": "Priya Sharma",
+        "speaker_id": "a",
+        "message": "PFR:All preferences and compromises are aligned—non‑smoking, quiet study windows, temperature 70 °F (±1 °F with notice), brief‑call noise windows, tidy shared spaces, minimal guests, and budget within range.  \n\nVRD:STRONG MATCH|r=All core preferences and compromises aligned, ready to move forward|open=none",
+        "turn": 13,
+        "phase": "conclusion",
+        "timestamp": "2026-10-15T08:44:59+00:00"
+      },
+      "seq": 17
+    },
+    {
+      "type": "analyzing",
+      "seq": 18
+    },
+    {
+      "type": "complete",
+      "result": {
+        "status": "strong",
+        "reason": null,
+        "unresolved_topics": [],
+        "source": "vrd"
+      },
+      "analysis": {
+        "scores": {
+          "overall": 92,
+          "finances": 95,
+          "lifestyle": 88,
+          "personality": 85,
+          "logistics": 90
+        },
+        "highlights": [
+          "Both roommates share identical rent range and split expenses equally",
+          "Sleep schedules and quiet study windows are fully aligned",
+          "Both are non‑smokers and agree on cleanliness standards and temperature preferences"
+        ],
+        "concerns": [
+          "Meera’s occasional weekly guests could conflict with Priya’s preference for minimal guests, though they have agreed on limits",
+          "Priya’s strict 10 pm quiet rule may clash with Meera’s occasional late‑night study sessions, but a brief‑call compromise was reached",
+          "Both have similar social energy but Meera’s social schedule is slightly more active, requiring clear communication about noise"
+        ],
+        "dealbreaker_detected": false,
+        "dealbreaker_detail": "",
+        "middle_ground": [
+          "Agree to a 10‑minute quiet break window for calls with prior notice",
+          "Set a weekly check‑in to review guest visits and adjust if needed",
+          "Use a shared calendar for study hours to avoid late‑night conflicts"
+        ],
+        "recommendation": "conditional",
+        "recommendation_summary": "The roommates have strong alignment on finances, lifestyle, and logistics, but a few minor lifestyle differences remain. With clear communication and agreed compromises, they can coexist successfully, though ongoing monitoring of guest visits and study schedules is advised."
+      },
+      "checks": [
+        {
+          "id": "gender",
+          "ok": true,
+          "hard": false,
+          "detail": "No same-gender conflict"
+        }
+      ],
+      "seq": 19
+    }
+  ],
+  "messages": [
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=No smoking indoors;Non-smoking household only|pri=Similar cleanliness standards;Respectful of quiet/work time;Budget compatibility\nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low\nVRD:STRONG|r=All initial criteria align|open=none",
+      "turn": 1,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "HI:loc=Boston/Fenway|mv=1–3 months|bd=1100-1450|rm=Private room|gnd=Woman|occ=Student|smk=Non-smoking|drink=Socially|pet=I love pets but don't have any|nn=Non-smoking household only|pri=Matching social energy;Location match;Honest communication style  \nPFR:cln=4|gwk=0|usp=Split equally|dep=500|wfh=Occasionally|nzl=Low  \n<<MOD:FINANCIAL>>  \n\nVRD:STRONG|r=All criteria compatible|open=financial details (utilities, groceries)",
+      "turn": 2,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "<<MOD:FINANCIAL>>\n\nPFR:bd=1100-1450|dep=500|usp=Utilities split 50/50|groc=Each covers own groceries|bd_total=1200 (average rent + utilities)  \nVRD:STRONG|r=Financial expectations align|open=none",
+      "turn": 3,
+      "phase": "introduction",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:slp=Flexible, usually sleeps 11 pm–7 am|cln=4 (tidy, likes dishes done promptly)|gwk=0 (rarely have guests, prefer quiet evenings)|wfh=Occasionally, work from home 1–2 days a week, need a quiet space|rtn=Cook simple meals at home, clean up right after, enjoy short evening walks in the neighborhood  \n\nPFR:slp=Your preferred sleep hours?|cln=How strict are you on cleanliness (1‑5)?|gwk=Do you often have friends over or host gatherings?|wfh=Do you work from home regularly and need a dedicated workspace?|rtn=Any particular daily routines you’d like to share?  \n\nVRD:STRONG|r=Preferences exchanged, looking for alignment|open=none",
+      "turn": 4,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:slp=11 pm–7 am, need quiet after 10 pm for study;cln=4 (tidy, dishes done same night);gwk=0 (rarely host, occasional over‑night guest with prior notice);wfh=1–2 days /week, need a desk and minimal background noise;rtn=Cook simple meals, clean kitchen immediately, enjoy evening walks on the Charles River  \n\nCNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \n\nVRD:STRONG|r=All routine preferences match|open=none",
+      "turn": 5,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "CNF:slp:aligned(✓) | cln:aligned(✓) | gwk:aligned(✓) | wfh:aligned(✓) | rtn:aligned(✓)  \nPFR:Anything else you’d like to share about noise tolerance during study hours or preferred temperature settings in the apartment?  \n\nVRD:STRONG|r=All routine preferences align, open to final details|open=noise/temperature preferences",
+      "turn": 6,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); prefer moderate temperature 68‑72°F, using AC/heater responsibly; open to adjusting if needed with mutual notice.  \n\nCNF:nzl:aligned(✓) | temp:open(need your preference)  \n\nVRD:STRONG|r=Noise and temperature preferences discussed, awaiting your input|open=temperature preference details",
+      "turn": 7,
+      "phase": "exploration",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); moderate temperature 68‑72°F; I can keep windows closed and use the AC minimally if you prefer it a bit cooler, just give me a heads‑up.  \n\nFLX:nzl=If you ever need a brief break in quiet time for a call, I’m fine with a short 10‑minute window with headphones on.  \n\nPFR:What temperature range feels most comfortable for you? Are you okay with keeping the thermostat around 70°F and adjusting up or down a degree or two with a day’s notice?  \n\nVRD:STRONG|r=Noise and temperature preferences largely aligned, awaiting your temperature preference|open=temperature range confirmation",
+      "turn": 8,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:temp=70°F (comfortable 68‑72°F); happy to keep thermostat at 70°F and adjust ±1°F with a day's notice.  \n\nFLX:nzl=If I need a brief 5‑minute quiet break for a call during study hours, I’ll use headphones and keep volume low; please let me know beforehand.  \n\nVRD:STRONG|r=Temperature and brief‑call noise compromise agreed|open=none",
+      "turn": 9,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "CNF:nzl:aligned(✓) | temp:aligned(✓)  \n\nVRD:STRONG|r=All negotiation points resolved, ready to move forward|open=none",
+      "turn": 10,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:All core preferences—quiet study windows, temperature 70°F (±1°F with notice), brief‑call noise windows, non‑smoking household, tidy shared spaces, minimal guests—are aligned and mutually accepted.  \n\nFLX:If any unexpected schedule change arises (e.g., a late‑night study session), I’ll give you a heads‑up and use headphones to keep noise down.  \n\nVRD:STRONG|r=All negotiation points resolved, ready to move forward|open=none",
+      "turn": 11,
+      "phase": "negotiation",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Meera Patel",
+      "speaker_id": "b",
+      "message": "CNF:all:aligned(✓)  \n\nVRD:STRONG|r=All core preferences and compromises aligned, ready to move forward|open=none",
+      "turn": 12,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    },
+    {
+      "speaker": "Priya Sharma",
+      "speaker_id": "a",
+      "message": "PFR:All preferences and compromises are aligned—non‑smoking, quiet study windows, temperature 70 °F (±1 °F with notice), brief‑call noise windows, tidy shared spaces, minimal guests, and budget within range.  \n\nVRD:STRONG MATCH|r=All core preferences and compromises aligned, ready to move forward|open=none",
+      "turn": 13,
+      "phase": "conclusion",
+      "timestamp": "2026-10-15T08:44:59+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "gender",
+      "ok": true,
+      "hard": false,
+      "detail": "No same-gender conflict"
+    }
+  ],
+  "result": {
+    "status": "strong",
+    "reason": null,
+    "unresolved_topics": [],
+    "source": "vrd"
+  },
+  "analysis": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 88,
+      "personality": 85,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both roommates share identical rent range and split expenses equally",
+      "Sleep schedules and quiet study windows are fully aligned",
+      "Both are non‑smokers and agree on cleanliness standards and temperature preferences"
+    ],
+    "concerns": [
+      "Meera’s occasional weekly guests could conflict with Priya’s preference for minimal guests, though they have agreed on limits",
+      "Priya’s strict 10 pm quiet rule may clash with Meera’s occasional late‑night study sessions, but a brief‑call compromise was reached",
+      "Both have similar social energy but Meera’s social schedule is slightly more active, requiring clear communication about noise"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree to a 10‑minute quiet break window for calls with prior notice",
+      "Set a weekly check‑in to review guest visits and adjust if needed",
+      "Use a shared calendar for study hours to avoid late‑night conflicts"
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "The roommates have strong alignment on finances, lifestyle, and logistics, but a few minor lifestyle differences remain. With clear communication and agreed compromises, they can coexist successfully, though ongoing monitoring of guest visits and study schedules is advised."
+  },
+  "providers": {
+    "cache": 12,
+    "groq": 2
+  },
+  "created": "2026-10-15T08:44:59+00:00"
+}

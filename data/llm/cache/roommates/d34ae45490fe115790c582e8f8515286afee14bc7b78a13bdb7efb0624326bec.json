@@ -1,0 +1,6 @@
+{
+  "value": "VRD:CONDITIONAL|r=Unresolved topics: sleep schedule, cleanliness standard, guest policy, work‑from‑home preference|open=none",
+  "created": "2026-10-15T08:53:26+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

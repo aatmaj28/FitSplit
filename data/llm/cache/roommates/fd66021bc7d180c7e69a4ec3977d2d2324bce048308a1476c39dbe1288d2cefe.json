@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=22:00-07:00|cln=4|gwk=0|wfh=Occasionally (2‑3 days /week, evenings quiet)|nzl=Low|cook=Daily – I cook most meals, happy to share cooking duties 2‑3 times week|clean_sched=Bi‑weekly chore rotation (alternating weeks) with shared checklist|bath_time=15‑30 min\nFLX:wfh=Flexible to add a few evenings (up to 2 days /week) if you need quiet work time, provided I’m not cooking at that moment\nFLX:gwk=1|condition=Close‑friend visits only, no overnight stays after 22:00, heads‑up 12 hrs prior\nCNF:none:status(Aligned)\n<<MOD:DEALBREAKERS>>\nVRD:STRONG|r=All non‑negotiables upheld; compromises on chore frequency, guest notice, and occasional WFH evenings accepted|open=none",
+  "created": "2026-10-15T08:27:47+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

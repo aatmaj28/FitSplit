@@ -1,0 +1,6 @@
+{
+  "value": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); prefer moderate temperature 68‑72°F, using AC/heater responsibly; open to adjusting if needed with mutual notice.  \n\nCNF:nzl:aligned(✓) | temp:open(need your preference)  \n\nVRD:STRONG|r=Noise and temperature preferences discussed, awaiting your input|open=temperature preference details",
+  "created": "2026-10-15T08:30:44+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

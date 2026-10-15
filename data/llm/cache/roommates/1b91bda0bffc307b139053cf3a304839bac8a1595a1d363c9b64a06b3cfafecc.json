@@ -1,0 +1,33 @@
+{
+  "value": {
+    "scores": {
+      "overall": 95,
+      "finances": 100,
+      "lifestyle": 90,
+      "personality": 95,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both have identical rent expectations ($1100-$1400) and confirmed rent $1,352 fits budget caps",
+      "Sleep windows align (23:00‑07:00) with mutually offered flexibility to 22:30‑08:00 for early‑class needs",
+      "Both rate cleanliness 4 and agreed on a rotating chore chart with optional nightly tidy"
+    ],
+    "concerns": [
+      "Rohan originally listed as early bird but quickly shifted to night‑owl schedule to match Arjun, requiring flexibility",
+      "Guest policy allows 2 guests/week up to 4 hrs; Arjun proposes a conditional increase to 3 guests/week with strict noise limits",
+      "Noise thresholds during WFH hours (40‑50 dB) need monitoring to avoid conflicts"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Allow occasional guest increase to 3 per week if stays ≤2 hrs and volume <50 dB",
+      "Maintain a nightly 10‑minute tidy on weeks when either roommate is out late to keep cleanliness at level 4",
+      "Provide a quiet pre‑23:00 study hour (22:30‑23:00) for early‑class needs without affecting overall sleep schedule"
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Rohan and Arjun have near‑perfect financial and lifestyle alignment, with clear, mutually‑accepted compromises on sleep, cleanliness, guests, and noise. No hard conflicts remain, making them a strong roommate match."
+  },
+  "created": "2026-10-15T08:40:06+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

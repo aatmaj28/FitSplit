@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10 pm–6 am, cln=4/5, gwk=Occasional friends, 24‑h notice, no overnight stays, wfh=No, nlz=Quiet during study hours  \nCNF:smk=Non‑smoking household only, party=No parties ever  \nFLX:cln=I’ll drop to a 3/5 level if we set a rotating chore chart covering all common areas.  \nFLX:gwk=I can allow a friend over on a weekday if you give me 48‑h notice and they stay ≤4 h.  \nFLX:wfh=I’ll work from home one weekday morning (e.g., Tuesday 9 am–12 pm) if you need a quieter space that day.  \nVRD:CONDITIONAL|r=Awaiting your confirmation on sleep schedule, cleanliness standard, guest policy, and work‑from‑home preference|open=financial, social, lifestyle",
+  "created": "2026-10-15T08:52:45+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

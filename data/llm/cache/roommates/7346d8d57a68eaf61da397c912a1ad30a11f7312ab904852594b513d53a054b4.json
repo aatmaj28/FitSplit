@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=10 pm–6 am (I wind down by 10 pm, need quiet for study) | cln=4 (I keep my space tidy and follow a rotating chore chart) | wfh=Occasional evenings only (usually on campus, remote work 1‑2 times /week) | gwk=0‑1 guests weekly (I’m fine with up to 2 guests if they’re announced in advance)  \nFLX:gwk=Can allow 2 guests/week with at least 24 hour notice and strict quiet hours after 9 pm | condition=No parties, noise kept low  \nCNF:slp:status=aligned? (Do you also need a quiet environment from 10 pm–6 am?)  \nCNF:cln:status=aligned? (Is a 4/5 cleanliness level acceptable for you?)  \nCNF:wfh:status=aligned? (Do you work remotely only occasionally, mainly evenings?)  \nVRD:CONDITIONAL|r=Awaiting your confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+  "created": "2026-10-15T08:33:24+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

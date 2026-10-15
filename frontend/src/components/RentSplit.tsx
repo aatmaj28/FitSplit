@@ -11,7 +11,7 @@ export interface RentSplitProps {
   /** Hide the "AI checked" badge (it needs the backend or bundled demo results). */
   aiCheck?: boolean;
   /** Called whenever the shares change (e.g. to fill a group application). */
-  onSplit?: (split: SplitResult) => void;
+  onSplit?: (split: SplitResult, opts: { method: SplitMethod; includeClosets: boolean }) => void;
   className?: string;
 }
 
@@ -76,14 +76,16 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck =
   const total = split.rows.reduce((s, r) => s + r.share, 0);
   const n = split.rows.length;
   const check = useRentCheck(key, split, { method, includeClosets: closets });
-  useEffect(() => onSplit?.(split), [split]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    onSplit?.(split, { method, includeClosets: closets });
+  }, [split]); // eslint-disable-line react-hooks/exhaustive-deps
   const apply = (sug: Suggestion) => {
     if (sug.action === "set_private_bath" && sug.room_id) setBathOverride((b) => ({ ...b, [sug.room_id!]: sug.value }));
     if (sug.action === "include_closets") setClosets(sug.value);
   };
 
   return (
-    <section className={`flex flex-col gap-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200 ${className}`} aria-label="Rent split">
+    <section id="rent-split" className={`flex scroll-mt-20 flex-col gap-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200 ${className}`} aria-label="Rent split">
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div>
           <div className="flex flex-wrap items-center gap-2">

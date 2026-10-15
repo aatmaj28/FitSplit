@@ -1,0 +1,6 @@
+{
+  "value": "HI:loc=Boston/Fenway|Back Bay,mv=1–3 months,bd=$1150-$1500,rm=Private room,gnd=Man,smk=Yes,drink=Regularly,pet=Love pets but none,occ=Student,pri=Matching social energy;Similar guest/party preferences;Location match,nn=Budget hard cap (cannot exceed max)  \nPFR:loc=Boston/Fenway|Back Bay,mv=1–3 months,bd=$1150-$1500,rm=Private room,pri=Matching social energy;Similar guest/party preferences  \nVRD:STRONG|r=Intro completed|open=none",
+  "created": "2026-10-15T08:40:31+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "fitsplit",
+  "private": true,
+  "description": "FitSplit: floor plan to 3D, furniture fit, fair rent split, roommate finder (hackathon demo)",
+  "scripts": {
+    "dev:all": "node scripts/dev-all.mjs",
+    "test": "cd backend && .venv/bin/python -m pytest -q && cd ../frontend && npm run check"
+  }
+}

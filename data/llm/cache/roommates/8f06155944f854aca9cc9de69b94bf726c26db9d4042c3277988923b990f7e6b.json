@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early to moderate (10 pm–6 am)|cln=4|gwk=0‑1|usp=Even split|groc=Shared basics\nFLX:gwk=Up to 2 guests/week if advanced notice|condition=Quiet hours maintained\nCNF:slp:status=aligned? (Do you also prefer a 10 pm–6 am sleep window?) \nCNF:cln:status=aligned? (Do you aim for a 4/5 cleanliness level?) \nCNF:gwk:status=aligned? (Is 0‑1 guests per week comfortable for you?) \nVRD:CONDITIONAL|r=Awaiting confirmation on sleep, cleanliness, and guest policies|open=guest policy, sleep schedule, cleanliness)",
+  "created": "2026-10-15T08:32:46+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

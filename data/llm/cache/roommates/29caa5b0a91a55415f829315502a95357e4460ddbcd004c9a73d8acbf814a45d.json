@@ -1,0 +1,25 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 93,
+      "personality": 90,
+      "logistics": 92
+    },
+    "highlights": [
+      "Non‑smoking household confirmed",
+      "Aligned sleep schedules (10 pm–6 am with flexible exam‑week shift)",
+      "Consistent 4/5 cleanliness level with shared chore chart"
+    ],
+    "concerns": [],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [],
+    "recommendation": "strong",
+    "recommendation_summary": "Both roommates have matched on all key criteria—budget, location, non‑smoking rule, sleep window, cleanliness, and guest policy—after a thorough back‑and‑forth. Their communication is clear and they have agreed on flexible arrangements for exam weeks and occasional guests. This makes a strong, conflict‑free match."
+  },
+  "created": "2026-10-15T08:45:30+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

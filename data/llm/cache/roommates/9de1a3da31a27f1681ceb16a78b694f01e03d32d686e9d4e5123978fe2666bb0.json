@@ -1,0 +1,31 @@
+{
+  "value": {
+    "scores": {
+      "overall": 85,
+      "finances": 90,
+      "lifestyle": 80,
+      "personality": 75,
+      "logistics": 80
+    },
+    "highlights": [
+      "Aligned sleep schedules (night owl), shared cleanliness standards, both non‑smokers, compatible budgets, both work remotely and value quiet"
+    ],
+    "concerns": [
+      "Guest policy and noise level need agreement, chore schedule not yet finalized",
+      "Potential friction over weekly guests and noise after 10pm",
+      "Need clear chore rotation to maintain shared spaces"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree on one guest per week staying no later than 10pm with no noise after 10pm",
+      "Allow occasional 20‑minute conversation in common area with noise <50 dB",
+      "Rotate shared‑space chores weekly, each cleaned within 2 days of use"
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "Rohan and Arjun are a strong match on key factors like sleep, cleanliness, budget, and remote work. The only unresolved issues are guest policy, noise limits, and chore scheduling, which can be negotiated. With clear agreements on these points, they can coexist comfortably."
+  },
+  "created": "2026-10-15T08:49:11+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

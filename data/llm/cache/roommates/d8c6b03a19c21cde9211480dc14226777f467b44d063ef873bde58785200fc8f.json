@@ -1,0 +1,6 @@
+{
+  "value": "CNF:smk:conflict(you require non‑smoking, user wants smoking)  \nVRD:INCOMPATIBLE|r=Non‑smoking indoor policy is non‑negotiable|open=none",
+  "created": "2026-10-15T08:40:35+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

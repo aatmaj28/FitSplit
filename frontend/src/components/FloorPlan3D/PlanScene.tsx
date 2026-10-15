@@ -61,6 +61,8 @@ interface SceneProps {
   spin?: { seq: number; deg: number };
   /** phones: the room sheet is folded to its title row */
   panelFolded?: boolean;
+  /** the room panel covers part of the canvas (default: whenever a room is selected) */
+  panelOpen?: boolean;
 }
 
 export interface FurnitureProps {
@@ -75,7 +77,7 @@ export interface FurnitureProps {
 }
 
 export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight, selectedId, onSelect, onReady, labelEls, furniture,
-  focusId = null, angle = "corner", angleOffset = 0, spin, panelFolded = false }: SceneProps) {
+  focusId = null, angle = "corner", angleOffset = 0, spin, panelFolded = false, panelOpen }: SceneProps) {
   const { cx, cz, sx, sz } = model.bounds;
   const roomType = useMemo(() => new Map(model.rooms.map((r) => [r.room.id, r.room.type])), [model]);
   const fit = useRef<FitState>({ zoom: 1, distance: 50 }); // last fit, the panel offset's baseline
@@ -103,7 +105,7 @@ export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight,
       <CameraRig model={model} view={view} resetKey={resetKey} wallHeight={wallHeight} onReady={onReady} fit={fit} focusId={focusId}
         angle={angle} angleOffset={angleOffset} sizeKey={sizeKey} />
       <Spin spin={spin} view={view} />
-      <PanelOffset open={selectedId != null} view={view} resetKey={resetKey} fit={fit} focusId={focusId} sizeKey={sizeKey} angle={angle}
+      <PanelOffset open={panelOpen ?? selectedId != null} view={view} resetKey={resetKey} fit={fit} focusId={focusId} sizeKey={sizeKey} angle={angle}
         angleOffset={angleOffset} folded={panelFolded} />
       {/* plan center at the origin: the shadow light and the camera target both default to it */}
       <group position={[-cx, 0, -cz]}>

@@ -1,0 +1,6 @@
+{
+  "value": "PFR:smk=Non‑smoking household only (my non‑negotiable) | slp=10 pm–6 am (quiet study window, lights off by 10 pm) | cln=4 (rotating chore chart, kitchen & bathroom wiped daily) | wfh=1‑2 times /week, evenings after 7 pm only | gwk=0‑1 guests weekly (flexible to 2 with 24‑hr notice, no loud gatherings)  \nFLX:slp=I can shift to 11 pm–7 am on exam weeks if we keep noise below conversational level after 11 pm | condition=No music or group chats louder than normal conversation during that hour  \nFLX:gwk=If you need a third guest for a one‑night visit, I’m okay with it provided the guest leaves by 10 pm and we have 24‑hr notice | condition=Quiet hours respected, no parties  \n\nCNF:smk:status=aligned? (Do you also require a completely smoke‑free home?)  \nCNF:slp:status=aligned (I need silence from 10 pm–6 am for study as well)  \nCNF:cln:status=aligned (A 4/5 cleanliness level with a shared chore chart works for me)  \nCNF:wfh:status=aligned (I work remotely only occasionally, mainly evenings)  \n\nVRD:CONDITIONAL|r=All core preferences line up; just need your confirmation on the non‑smoking rule and the flexible guest/exam‑week sleep proposals|open=smoking policy, guest policy, exam‑week sleep shift, chore schedule",
+  "created": "2026-10-15T08:34:42+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

@@ -1,0 +1,6 @@
+{
+  "value": "CNF:smk=No smoking indoors|r=My household is strictly non-smoking indoors, which conflicts with your smoking habit.  \nVRD:INCOMPATIBLE|r=Smoking indoors is a non-negotiable for me. No further negotiation possible.",
+  "created": "2026-10-15T08:54:48+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

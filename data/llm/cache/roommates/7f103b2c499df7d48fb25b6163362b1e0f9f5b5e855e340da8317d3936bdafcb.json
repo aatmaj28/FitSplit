@@ -1,0 +1,33 @@
+{
+  "value": {
+    "scores": {
+      "overall": 92,
+      "finances": 95,
+      "lifestyle": 88,
+      "personality": 85,
+      "logistics": 90
+    },
+    "highlights": [
+      "Both roommates share identical rent range and split expenses equally",
+      "Sleep schedules and quiet study windows are fully aligned",
+      "Both are non‑smokers and agree on cleanliness standards and temperature preferences"
+    ],
+    "concerns": [
+      "Meera’s occasional weekly guests could conflict with Priya’s preference for minimal guests, though they have agreed on limits",
+      "Priya’s strict 10 pm quiet rule may clash with Meera’s occasional late‑night study sessions, but a brief‑call compromise was reached",
+      "Both have similar social energy but Meera’s social schedule is slightly more active, requiring clear communication about noise"
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Agree to a 10‑minute quiet break window for calls with prior notice",
+      "Set a weekly check‑in to review guest visits and adjust if needed",
+      "Use a shared calendar for study hours to avoid late‑night conflicts"
+    ],
+    "recommendation": "conditional",
+    "recommendation_summary": "The roommates have strong alignment on finances, lifestyle, and logistics, but a few minor lifestyle differences remain. With clear communication and agreed compromises, they can coexist successfully, though ongoing monitoring of guest visits and study schedules is advised."
+  },
+  "created": "2026-10-15T08:45:00+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}

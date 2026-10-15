@@ -1,0 +1,6 @@
+{
+  "value": "<<MOD:FINANCIAL>>\n\nPFR:bd=1100-1450|dep=500|usp=Utilities split 50/50|groc=Each covers own groceries|bd_total=1200 (average rent + utilities)  \nVRD:STRONG|r=Financial expectations align|open=none",
+  "created": "2026-10-15T08:29:54+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

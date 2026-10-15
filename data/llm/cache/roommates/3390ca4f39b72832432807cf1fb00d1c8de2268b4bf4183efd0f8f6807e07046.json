@@ -1,0 +1,6 @@
+{
+  "value": "PFR:sleep=23:00‑07:00 (agree to your 22:30‑08:00 flex if you ever need an early‑class quiet hour)  \nFLX:sleep=22:30‑08:00|if you need that pre‑23:00 study window  \n\nPFR:cleanliness=4 (rotating chore chart, dishes same day)  \nFLX:cleanliness=3‑5|I’ll add a 10‑min nightly tidy on weeks when I’m out late  \n\nPFR:guest_limit=2 wk, max 4 hrs, low‑noise  \nFLX:guest_limit=3 wk|only if guests stay ≤2 hrs and keep volume <50 dB  \n\nPFR:wfh=Yes, quiet 3‑5 pm daily  \nFLX:wfh=Yes|if common‑area noise stays <40 dB during that window  \n\nCNF:sleep:ALIGN(detail=overlap confirmed)  \nCNF:cleanliness:ALIGN(detail=both 4, nightly tidy added)  \nCNF:guest_limit:ALIGN(detail=2 wk baseline, 3 wk possible with conditions)  \nCNF:wfh:ALIGN(detail=quiet window respected)  \n\nVRD:STRONG|r=All compromises accepted; ready to finalize roommate agreement|open=none",
+  "created": "2026-10-15T08:38:55+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

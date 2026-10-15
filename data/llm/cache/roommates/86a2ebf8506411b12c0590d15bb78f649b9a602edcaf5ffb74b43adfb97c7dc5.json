@@ -1,0 +1,6 @@
+{
+  "value": "PFR:nzl=Low during study hours (quiet 9 am–12 pm, 2 pm–5 pm); moderate temperature 68‑72°F; I can keep windows closed and use the AC minimally if you prefer it a bit cooler, just give me a heads‑up.  \n\nFLX:nzl=If you ever need a brief break in quiet time for a call, I’m fine with a short 10‑minute window with headphones on.  \n\nPFR:What temperature range feels most comfortable for you? Are you okay with keeping the thermostat around 70°F and adjusting up or down a degree or two with a day’s notice?  \n\nVRD:STRONG|r=Noise and temperature preferences largely aligned, awaiting your temperature preference|open=temperature range confirmation",
+  "created": "2026-10-15T08:30:52+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

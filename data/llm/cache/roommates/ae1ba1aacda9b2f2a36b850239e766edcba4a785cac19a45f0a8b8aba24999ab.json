@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 15,
+      "finances": 80,
+      "lifestyle": 20,
+      "personality": 30,
+      "logistics": 10
+    },
+    "highlights": [
+      "Both are students in the same Boston neighborhood with similar rent budgets",
+      "Both love pets but currently have none",
+      "Both prefer split equally for rent and basics"
+    ],
+    "concerns": [
+      "Jake smokes indoors while Arjun requires a non‑smoking household",
+      "Arjun wants no parties and very quiet, Jake regularly hosts guests weekly",
+      "Arjun prefers minimal guests, Jake expects regular weekly guests"
+    ],
+    "dealbreaker_detected": true,
+    "dealbreaker_detail": "Arjun's non‑smoking indoor policy directly conflicts with Jake's smoking habit, which Arjun marked as non‑negotiable",
+    "middle_ground": [
+      "Jake could agree to smoke only outside the apartment",
+      "Arjun could allow limited smoking in a designated area if ventilation is ensured"
+    ],
+    "recommendation": "incompatible",
+    "recommendation_summary": "The core conflict over indoor smoking is a hard non‑negotiable for Arjun, making the match incompatible despite aligned budgets and location."
+  },
+  "created": "2026-10-15T08:40:44+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

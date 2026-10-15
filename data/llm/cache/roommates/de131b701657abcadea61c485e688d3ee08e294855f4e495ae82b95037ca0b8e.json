@@ -1,0 +1,6 @@
+{
+  "value": "PFR:sleep=23:00‑07:00,cleanliness=4,guest_limit=2 per week,wfh=Yes (remote classes 3‑5 pm),daily_routine=Morning coffee, gym 6‑8 am, study 9‑12 pm, dinner 7‑9 pm  \nFLX:guest_limit=2 per week|if guests are low‑noise and stay ≤4 hours  \nCNF:budget:OK(detail=rent $1,352 / mo ≤ $1,400)  \nVRD:STRONG|r=Shared sleep window, cleanliness level, guest policy and WFH needs align; please share your exact sleep times, cleanliness rating (1‑5), guest frequency, and any WFH schedule so we can confirm full compatibility|open=none",
+  "created": "2026-10-15T08:37:01+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

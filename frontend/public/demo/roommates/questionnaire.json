@@ -1,0 +1,512 @@
+{
+  "sections": {
+    "living": "🏠 Living Preferences",
+    "financial": "💰 Financial & Utilities",
+    "routines": "🌅 Daily Routines",
+    "social": "🎉 Guests & Social Life",
+    "lifestyle": "💼 Work & Lifestyle",
+    "personality": "🤝 Personality & Communication",
+    "dealbreakers": "🚨 Dealbreakers & Priorities"
+  },
+  "questions": {
+    "living": {
+      "city": {
+        "question": "What city are you looking to live in?",
+        "type": "select",
+        "options": [
+          "Boston",
+          "Cambridge",
+          "Somerville",
+          "Brookline",
+          "Allston",
+          "Brighton",
+          "Medford",
+          "Watertown",
+          "Newton",
+          "Quincy",
+          "New York",
+          "Brooklyn",
+          "Queens",
+          "Manhattan",
+          "Bronx",
+          "San Francisco",
+          "Oakland",
+          "Berkeley",
+          "San Jose",
+          "Palo Alto",
+          "Los Angeles",
+          "Chicago",
+          "Seattle",
+          "Austin",
+          "Denver",
+          "Portland",
+          "Philadelphia",
+          "Washington DC",
+          "Miami",
+          "Atlanta",
+          "Other"
+        ],
+        "required": true
+      },
+      "neighborhood": {
+        "question": "Neighborhood or specific area (optional)",
+        "type": "text",
+        "placeholder": "e.g., South Boston, Back Bay, Downtown"
+      },
+      "occupation": {
+        "question": "What is your occupation?",
+        "type": "select",
+        "options": [
+          "Student",
+          "Working Professional",
+          "Freelancer / Self-employed",
+          "Between jobs",
+          "Other"
+        ],
+        "required": true
+      },
+      "gender": {
+        "question": "What is your gender?",
+        "type": "select",
+        "options": [
+          "Man",
+          "Woman",
+          "Non-binary",
+          "Prefer not to say"
+        ],
+        "required": true,
+        "help": "Used to match 'same gender only' preferences accurately."
+      },
+      "move_in_date": {
+        "question": "When are you looking to move in?",
+        "type": "select",
+        "options": [
+          "ASAP",
+          "Within 1 month",
+          "1–3 months",
+          "3–6 months",
+          "Flexible"
+        ]
+      },
+      "lease_type": {
+        "question": "What kind of lease do you prefer?",
+        "type": "select",
+        "options": [
+          "Month-to-month",
+          "6-month lease",
+          "1-year lease",
+          "No preference"
+        ]
+      },
+      "budget_min": {
+        "question": "Minimum monthly budget ($)",
+        "type": "number",
+        "min": 300,
+        "max": 5000,
+        "default": 800,
+        "required": true
+      },
+      "budget_max": {
+        "question": "Maximum monthly budget ($)",
+        "type": "number",
+        "min": 300,
+        "max": 5000,
+        "default": 1500,
+        "required": true
+      },
+      "budget_flexibility": {
+        "question": "How flexible is your budget?",
+        "type": "select",
+        "options": [
+          "Hard limit — cannot go over",
+          "Can flex up to ~$100",
+          "Can flex up to ~$200",
+          "Fairly flexible if the fit is right"
+        ],
+        "priority_field": true,
+        "required": true
+      },
+      "room_type": {
+        "question": "Room preference",
+        "type": "select",
+        "options": [
+          "Private room",
+          "Shared room",
+          "Either is fine"
+        ],
+        "required": true
+      },
+      "bathroom_preference": {
+        "question": "Bathroom preference",
+        "type": "select",
+        "options": [
+          "Private bathroom",
+          "Shared with 1 person",
+          "Shared with 2+ people",
+          "No preference"
+        ]
+      },
+      "roommate_gender": {
+        "question": "Roommate gender preference",
+        "type": "select",
+        "options": [
+          "Same gender only",
+          "Any gender",
+          "No preference"
+        ],
+        "required": true
+      },
+      "pets": {
+        "question": "Pet situation",
+        "type": "select",
+        "options": [
+          "I have pets",
+          "I love pets but don't have any",
+          "No pets please",
+          "Allergic to pets"
+        ],
+        "required": true
+      },
+      "smoking": {
+        "question": "Smoking preference",
+        "type": "select",
+        "options": [
+          "I smoke",
+          "Okay with smokers",
+          "Non-smoking household only"
+        ],
+        "required": true
+      },
+      "drinking": {
+        "question": "Drinking habits",
+        "type": "select",
+        "options": [
+          "Never",
+          "Socially",
+          "Regularly"
+        ],
+        "required": true
+      }
+    },
+    "financial": {
+      "utilities_split": {
+        "question": "How do you prefer to split utilities (electricity, internet, etc.)?",
+        "type": "select",
+        "options": [
+          "Split equally",
+          "Split by usage/room size",
+          "Included in rent",
+          "Discuss case by case"
+        ]
+      },
+      "groceries_split": {
+        "question": "How do you feel about shared groceries?",
+        "type": "select",
+        "options": [
+          "Completely separate groceries",
+          "Split basics (condiments, cleaning)",
+          "Fully shared groceries",
+          "Open to discussing"
+        ]
+      },
+      "security_deposit": {
+        "question": "Can you cover a security deposit upfront?",
+        "type": "select",
+        "options": [
+          "Yes, up to 1 month's rent",
+          "Yes, up to 2 months' rent",
+          "Need to split the deposit",
+          "Not sure yet"
+        ]
+      },
+      "payment_style": {
+        "question": "How do you prefer to handle shared payments?",
+        "type": "select",
+        "options": [
+          "One person pays, others Venmo/Zelle",
+          "Each person pays their share directly",
+          "Shared app (Splitwise, etc.)",
+          "No preference"
+        ]
+      }
+    },
+    "routines": {
+      "sleep_schedule": {
+        "question": "What's your typical sleep schedule?",
+        "type": "select",
+        "options": [
+          "Early bird (sleep before 10pm)",
+          "Night owl (sleep after midnight)",
+          "Somewhere in between",
+          "Varies a lot"
+        ],
+        "required": true
+      },
+      "wake_time": {
+        "question": "What time do you usually wake up?",
+        "type": "select",
+        "options": [
+          "Before 6am",
+          "6am–8am",
+          "8am–10am",
+          "After 10am",
+          "Varies"
+        ]
+      },
+      "cooking_habits": {
+        "question": "How often do you cook at home?",
+        "type": "select",
+        "options": [
+          "Daily — I cook most meals",
+          "A few times a week",
+          "Rarely, mostly takeout/delivery",
+          "Meal prep on weekends only"
+        ]
+      },
+      "kitchen_sharing": {
+        "question": "How do you feel about sharing kitchen time/space?",
+        "type": "select",
+        "options": [
+          "Happy to share and cook together sometimes",
+          "Prefer separate times in the kitchen",
+          "No strong preference",
+          "I barely use the kitchen"
+        ]
+      },
+      "bathroom_time": {
+        "question": "How long do you typically spend in the bathroom in the morning?",
+        "type": "select",
+        "options": [
+          "Under 15 minutes",
+          "15–30 minutes",
+          "30–45 minutes",
+          "Over 45 minutes"
+        ]
+      },
+      "common_space_usage": {
+        "question": "How do you use common spaces (living room, etc.)?",
+        "type": "select",
+        "options": [
+          "I spend a lot of time in common areas",
+          "I mostly stay in my room",
+          "Balanced use",
+          "Depends on day"
+        ]
+      },
+      "cleanliness": {
+        "question": "How would you rate your cleanliness standard? (1 = Relaxed, 5 = Spotless)",
+        "type": "slider",
+        "min": 1,
+        "max": 5,
+        "default": 3,
+        "required": true
+      },
+      "cleaning_schedule": {
+        "question": "How do you prefer to handle shared cleaning?",
+        "type": "select",
+        "options": [
+          "Rotating chore chart",
+          "Clean as you go / whoever notices",
+          "Hire a cleaner and split cost",
+          "Discuss and decide together"
+        ]
+      }
+    },
+    "social": {
+      "noise_level": {
+        "question": "What's your noise and social preference at home?",
+        "type": "select",
+        "options": [
+          "Very quiet, minimal guests",
+          "Occasional friends over (weekends)",
+          "Social and lively, guests often",
+          "Balance of both — depends on the week"
+        ],
+        "required": true
+      },
+      "overnight_guests": {
+        "question": "How often might you have overnight guests?",
+        "type": "select",
+        "options": [
+          "Never / very rarely",
+          "Occasionally (once a month or less)",
+          "Regularly (weekly)",
+          "Partner stays over frequently"
+        ],
+        "required": true
+      },
+      "guest_notice": {
+        "question": "When having guests over, would you give advance notice?",
+        "type": "select",
+        "options": [
+          "Always give notice",
+          "Usually, for anything more than 1–2 people",
+          "No strong opinion",
+          "Prefer spontaneous — it's a shared home"
+        ]
+      },
+      "parties": {
+        "question": "Are you okay with occasional parties or gatherings at home?",
+        "type": "select",
+        "options": [
+          "Yes, I'd love that",
+          "Small gatherings only (< 10 people)",
+          "Rarely, and with advance notice",
+          "No parties please"
+        ]
+      },
+      "introvert_extrovert": {
+        "question": "How would you describe yourself socially?",
+        "type": "slider",
+        "min": 1,
+        "max": 5,
+        "default": 3,
+        "labels": [
+          "Very Introverted",
+          "Very Extroverted"
+        ]
+      }
+    },
+    "lifestyle": {
+      "work_from_home": {
+        "question": "Do you work or study from home?",
+        "type": "select",
+        "options": [
+          "Yes, full-time remote",
+          "Hybrid (a few days a week)",
+          "No, I go to office/school daily",
+          "Varies by week"
+        ]
+      },
+      "quiet_hours_needed": {
+        "question": "Do you need quiet hours for work/study calls?",
+        "type": "select",
+        "options": [
+          "Yes, I'm on calls frequently during the day",
+          "Occasionally — a few times a week",
+          "Rarely, headphones handle it",
+          "No, not an issue"
+        ]
+      },
+      "schedule_predictability": {
+        "question": "How predictable is your daily schedule?",
+        "type": "select",
+        "options": [
+          "Very consistent — same routine daily",
+          "Mostly consistent with some variation",
+          "Quite unpredictable / shift work",
+          "Changes by season / project"
+        ]
+      },
+      "temperature_preference": {
+        "question": "What's your thermostat preference at home?",
+        "type": "select",
+        "options": [
+          "Cool (below 68°F / 20°C)",
+          "Moderate (68–72°F / 20–22°C)",
+          "Warm (above 72°F / 22°C)",
+          "No strong preference"
+        ]
+      },
+      "hobbies": {
+        "question": "What are your main hobbies or interests?",
+        "type": "text",
+        "placeholder": "e.g., gaming, cooking, hiking, music, yoga..."
+      },
+      "lifestyle_notes": {
+        "question": "Anything else about your lifestyle a potential roommate should know?",
+        "type": "text",
+        "placeholder": "e.g., I practice guitar, I keep odd hours during finals, I fast in the mornings..."
+      }
+    },
+    "personality": {
+      "conflict_style": {
+        "question": "How do you prefer to handle conflicts?",
+        "type": "select",
+        "options": [
+          "Direct conversation immediately",
+          "Cool off first, then discuss",
+          "Write it out (text/note)",
+          "Prefer to avoid if possible"
+        ]
+      },
+      "communication_style": {
+        "question": "How do you prefer to communicate with your roommate day-to-day?",
+        "type": "select",
+        "options": [
+          "Group chat / text for everything",
+          "Talk in person when needed",
+          "Keep it minimal — respect each other's space",
+          "A mix depending on the situation"
+        ]
+      },
+      "roommate_relationship": {
+        "question": "What kind of relationship do you want with your roommate?",
+        "type": "select",
+        "options": [
+          "Close friends — hang out regularly",
+          "Friendly but independent",
+          "Cordial — mutual respect, mostly separate lives",
+          "No preference"
+        ]
+      }
+    },
+    "dealbreakers": {
+      "non_negotiables": {
+        "question": "Select your absolute NON-NEGOTIABLES (things you will not compromise on):",
+        "type": "multiselect",
+        "options": [
+          "No smoking indoors",
+          "No pets",
+          "No overnight guests",
+          "Strict quiet hours (e.g., no noise after 10pm)",
+          "Must keep kitchen very clean",
+          "No parties ever",
+          "Same gender roommate only",
+          "Budget hard cap (cannot exceed max)",
+          "Must be okay with my pet(s)",
+          "Non-smoking household only"
+        ],
+        "required": true,
+        "help": "Select at least 1. These will never be compromised in matching."
+      },
+      "top_priorities": {
+        "question": "What are your TOP 3 priorities in a roommate?",
+        "type": "multiselect",
+        "options": [
+          "Compatible sleep schedule",
+          "Similar cleanliness standards",
+          "Respectful of quiet/work time",
+          "Budget compatibility",
+          "Pet-friendly",
+          "Matching social energy",
+          "Location match",
+          "Honest communication style",
+          "Similar guest/party preferences"
+        ],
+        "max_select": 3,
+        "required": true,
+        "help": "Choose up to 3. These guide what your clone fights for in negotiation."
+      },
+      "flexible_on": {
+        "question": "What are you MOST flexible on? (things you're willing to negotiate)",
+        "type": "multiselect",
+        "options": [
+          "Budget (within reason)",
+          "Move-in date",
+          "Lease length",
+          "Chore split style",
+          "Grocery arrangement",
+          "Guest frequency",
+          "Noise levels",
+          "Temperature preference"
+        ]
+      },
+      "custom_dealbreaker": {
+        "question": "Any other dealbreakers not listed above?",
+        "type": "text",
+        "placeholder": "e.g., Must be okay with incense, no loud phone calls in common areas after 9pm..."
+      }
+    }
+  }
+}

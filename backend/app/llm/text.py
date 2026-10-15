@@ -1,5 +1,6 @@
-"""Text-only JSON completions with the overnight budget rules:
-Groq "openai/gpt-oss-120b" (free) -> Gemini -> Claude "claude-sonnet-5-5" (paid, capped).
+"""Text-only completions with the overnight budget rules:
+Groq "openai/gpt-oss-120b" (free) -> Groq "openai/gpt-oss-20b" -> Groq "qwen/qwen3.8-27b" (free, each with
+its own daily quota) -> Gemini -> Claude "claude-sonnet-5-5" (paid, capped).
 
 A 429 is retried with backoff on the same provider (honouring Retry-After); a long Retry-After
 (daily quota gone), any other error, or output that `parse` rejects twice moves on to the next
@@ -20,12 +21,16 @@ from . import usage
 
 T = TypeVar("T")
 
-TEXT_ORDER = ["groq", "gemini", "claude"]
-TEXT_MODELS = {
-    "groq": os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-120b"),
-    "gemini": os.getenv("GEMINI_TEXT_MODEL", "gemini-flash-latest"),
-    "claude": os.getenv("CLAUDE_TEXT_MODEL", "claude-sonnet-5-5"),
-}
+# (provider, model) in order; each Groq model has its own free quota
+TEXT_CHAIN: list[tuple[str, str]] = [
+    ("groq", os.getenv("GROQ_TEXT_MODEL", "openai/gpt-oss-120b")),
+    ("groq", os.getenv("GROQ_TEXT_MODEL_2", "openai/gpt-oss-20b")),
+    ("groq", os.getenv("GROQ_TEXT_MODEL_3", "qwen/qwen3.8-27b")),
+    ("gemini", os.getenv("GEMINI_TEXT_MODEL", "gemini-flash-latest")),
+    ("claude", os.getenv("CLAUDE_TEXT_MODEL", "claude-sonnet-5-5")),
+]
+GROQ_QWEN_MAX_TOKENS = 1000  # this account's output-tokens-per-minute limit for qwen (see semantics/providers.py)
+Messages = list[dict]  # [{"role": "user" | "assistant", "content": str}]
 KEYS = {"groq": "GROQ_API_KEY", "gemini": "GEMINI_API_KEY", "claude": "ANTHROPIC_API_KEY"}
 TIMEOUT_S = float(os.getenv("TEXT_TIMEOUT_S", "60"))
 MAX_RATE_RETRIES = 3
@@ -49,7 +54,7 @@ class TextResult:
 
 # ----------------------------------------------------------------------------- providers
 
-def _groq(system: str, user: str, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
+def _groq(system: str, messages: Messages, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
     from groq import Groq
 
     client = Groq(api_key=os.environ[KEYS["groq"]], timeout=TIMEOUT_S, max_retries=0)
@@ -58,9 +63,12 @@ def _groq(system: str, user: str, *, model: str, max_tokens: int, temperature: f
         kwargs["response_format"] = {"type": "json_object"}
     if "gpt-oss" in model:
         kwargs["reasoning_effort"] = "low"
+    elif "qwen" in model:
+        kwargs.update(reasoning_format="hidden", reasoning_effort="none")
+        max_tokens = min(max_tokens, GROQ_QWEN_MAX_TOKENS)
     resp = client.chat.completions.create(
         model=model,
-        messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+        messages=[{"role": "system", "content": system}, *messages],
         temperature=temperature,
         max_completion_tokens=max_tokens,
         **kwargs,
@@ -72,7 +80,7 @@ def _groq(system: str, user: str, *, model: str, max_tokens: int, temperature: f
     return choice.message.content or "", u
 
 
-def _gemini(system: str, user: str, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
+def _gemini(system: str, messages: Messages, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
     from google import genai
     from google.genai import types
 
@@ -88,7 +96,8 @@ def _gemini(system: str, user: str, *, model: str, max_tokens: int, temperature:
     )
     if json_mode:
         config.response_mime_type = "application/json"
-    resp = client.models.generate_content(model=model, contents=user, config=config)
+    contents = [types.Content(role="model" if m["role"] == "assistant" else "user", parts=[types.Part(text=m["content"])]) for m in messages]
+    resp = client.models.generate_content(model=model, contents=contents, config=config)
     if not resp.text:
         raise RuntimeError("Gemini returned no text")
     um = resp.usage_metadata
@@ -96,16 +105,16 @@ def _gemini(system: str, user: str, *, model: str, max_tokens: int, temperature:
     return resp.text, u
 
 
-def _claude(system: str, user: str, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
+def _claude(system: str, messages: Messages, *, model: str, max_tokens: int, temperature: float, json_mode: bool) -> tuple[str, dict]:
     import anthropic
 
     client = anthropic.Anthropic(api_key=os.environ[KEYS["claude"]], timeout=TIMEOUT_S, max_retries=0)
     msg = client.messages.create(
         model=model,
         system=system + ("\nReply with only the JSON object, no markdown." if json_mode else ""),
-        max_tokens=max_tokens,
-        temperature=temperature,
-        messages=[{"role": "user", "content": user}],
+        max_tokens=max_tokens,  # this SDK version takes no sampling parameters
+        # the API wants the first message from the user (a history window can start mid-conversation)
+        messages=messages if messages[0]["role"] == "user" else [{"role": "user", "content": "(earlier conversation omitted)"}, *messages],
     )
     if msg.stop_reason == "max_tokens":
         raise RuntimeError(f"output truncated at {max_tokens} tokens")
@@ -148,25 +157,27 @@ def extract_json(text: str) -> object:
         raise
 
 
-def complete(system: str, user: str, *, parse: Callable[[object], T] = lambda v: v, json_mode: bool = True,
-             max_tokens: int = 1200, temperature: float = 0.7, order: Optional[list[str]] = None,
+def complete(system: str, user: "str | Messages", *, parse: Callable[[object], T] = lambda v: v, json_mode: bool = True,
+             max_tokens: int = 1200, temperature: float = 0.7, chain: Optional[list[tuple[str, str]]] = None,
              sleep: Callable[[float], None] = time.sleep) -> TextResult:
-    """Run the chain; `parse` gets the decoded JSON (or the raw text when json_mode is False)
-    and may raise ValueError / ValidationError to reject it (one retry per provider)."""
+    """Run the chain on one user message or a message history; `parse` gets the decoded JSON (or
+    the raw text when json_mode is False) and may raise ValueError / ValidationError to reject it
+    (one retry per model)."""
     attempts: list[dict] = []
-    for name in order or TEXT_ORDER:
+    base: Messages = [{"role": "user", "content": user}] if isinstance(user, str) else list(user)
+    for name, model in chain or TEXT_CHAIN:
         if not os.getenv(KEYS[name]):
             attempts.append({"provider": name, "status": "skipped", "error": f"{KEYS[name]} not set"})
             continue
-        if usage.cooling(name):
-            attempts.append({"provider": name, "status": "skipped", "error": "quota exhausted earlier, cooling down"})
+        slot = f"{name}:{model}"  # quotas are per model
+        if usage.cooling(slot):
+            attempts.append({"provider": name, "model": model, "status": "skipped", "error": "quota exhausted earlier, cooling down"})
             continue
-        model = TEXT_MODELS[name]
-        prompt_user, invalid, rate_retries = user, 0, 0
+        messages, invalid, rate_retries = base, 0, 0
         while True:
             try:
                 with usage.track(name, model) as meta:
-                    text, u = CALLS[name](system, prompt_user, model=model, max_tokens=max_tokens,
+                    text, u = CALLS[name](system, messages, model=model, max_tokens=max_tokens,
                                           temperature=temperature, json_mode=json_mode)
                     meta.update(u)
             except usage.CapReached as e:
@@ -174,7 +185,7 @@ def complete(system: str, user: str, *, parse: Callable[[object], T] = lambda v:
                 break
             except Exception as e:  # noqa: BLE001
                 if usage.quota_exhausted(e):
-                    usage.cool_down(name)
+                    usage.cool_down(slot)
                 elif _rate_limited(e) and rate_retries < MAX_RATE_RETRIES:
                     wait = _retry_after(e)
                     if wait is None or wait <= MAX_WAIT_S:
@@ -193,7 +204,8 @@ def complete(system: str, user: str, *, parse: Callable[[object], T] = lambda v:
                 attempts.append({"provider": name, "model": model, "status": "invalid_output", "error": " ".join(str(e).split())[:200]})
                 if invalid >= 2:
                     break
-                prompt_user = user + f"\n\nYour previous answer was not valid ({' '.join(str(e).split())[:200]}). Reply again, following the format exactly."
+                fix = f"Your previous answer was not valid ({' '.join(str(e).split())[:200]}). Reply again, following the format exactly."
+                messages = [*base[:-1], {**base[-1], "content": base[-1]["content"] + "\n\n" + fix}]
                 continue
             attempts.append({"provider": name, "model": model, "status": "ok"})
             return TextResult(value, text, name, model, attempts)

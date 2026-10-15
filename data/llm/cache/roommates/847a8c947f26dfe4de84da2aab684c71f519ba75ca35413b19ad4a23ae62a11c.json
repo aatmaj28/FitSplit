@@ -1,0 +1,6 @@
+{
+  "value": "CNF:smk:conflict(Jake is a smoker, but you require a non‑smoking household)\nVRD:INCOMPATIBLE|r=Non‑smoking household requirement conflicts with Jake’s smoking|open=none",
+  "created": "2026-10-15T08:36:01+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

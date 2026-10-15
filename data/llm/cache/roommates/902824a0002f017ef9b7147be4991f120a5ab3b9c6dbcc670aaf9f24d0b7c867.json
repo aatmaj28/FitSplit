@@ -1,0 +1,6 @@
+{
+  "value": "PFR:slp=Early riser, 10pm bedtime|cln=5 (very tidy)|gwk=1 guest per week|wfh=No|nzl=Quiet|cf=Honest communication|pri=Honest communication style;Matching social energy;Similar cleanliness standards  \nCNF:smk=Non-smoking household only|r=My house is strictly no smoking indoors.  \n<<MOD:ROUTINES>>  \nVRD:CONDITIONAL|r=Awaiting your sleep schedule, cleaning habits, and guest preferences to confirm fit.|open=financial, routines, social, lifestyle",
+  "created": "2026-10-15T08:54:17+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b"
+}
