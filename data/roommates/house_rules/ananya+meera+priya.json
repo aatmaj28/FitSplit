@@ -1,0 +1,45 @@
+{
+  "key": "ananya+meera+priya",
+  "members": [
+    "priya",
+    "ananya",
+    "meera"
+  ],
+  "negotiations": [
+    "n_1288eb7f7263",
+    "n_4a9f06839f47",
+    "n_df6915b8e045"
+  ],
+  "rules": [
+    {
+      "topic": "quiet hours",
+      "text": "Please keep the home quiet before 8am so our early risers can sleep."
+    },
+    {
+      "topic": "guests",
+      "text": "Up to two weekend gatherings a month, under 10 people, with notice by Thursday."
+    },
+    {
+      "topic": "chores",
+      "text": "We follow a rotating chore chart and clean up right after ourselves in shared spaces."
+    },
+    {
+      "topic": "kitchen",
+      "text": "The shared kitchen is clear by 7am, and we're happy to share vegetarian staples."
+    },
+    {
+      "topic": "costs",
+      "text": "Utilities and basic groceries are split equally and tracked on Splitwise; deposit is up to one month's rent."
+    },
+    {
+      "topic": "other",
+      "text": "The thermostat stays between 68 and 72°F, and the whole home is non-smoking."
+    }
+  ],
+  "open": [
+    "late-night quiet hours (10pm vs 11:30pm) and friends in rooms",
+    "lease length",
+    "move-in date"
+  ],
+  "provider": "claude"
+}

@@ -1,0 +1,37 @@
+{
+  "value": {
+    "rules": [
+      {
+        "topic": "quiet hours",
+        "text": "Shared spaces go quiet at 9:30pm, and any calls are taken in our own rooms at low volume."
+      },
+      {
+        "topic": "guests",
+        "text": "No parties; text everyone the day before guests come, and keep weekend gatherings to 4 people or fewer, gone by 9pm."
+      },
+      {
+        "topic": "chores",
+        "text": "We follow a weekly rotating chore chart with fixed tasks, bathroom included, and hold a 10-minute check-in on Sundays before 8pm."
+      },
+      {
+        "topic": "kitchen",
+        "text": "It's a strict vegetarian kitchen, wiped down after every meal, with morning cooking kept quiet and finished by 7am."
+      },
+      {
+        "topic": "costs",
+        "text": "We split utilities and basic groceries equally on Splitwise, and the deposit is up to one month's rent."
+      },
+      {
+        "topic": "other",
+        "text": "We keep the thermostat between 68 and 72°F."
+      }
+    ],
+    "open": [
+      "Call end time (9:30pm vs 10pm), pending Kavya's confirmation",
+      "How often gatherings happen (once a month or less?)"
+    ]
+  },
+  "created": "2026-10-15T19:27:34+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

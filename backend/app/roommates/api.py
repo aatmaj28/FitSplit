@@ -92,6 +92,28 @@ def get(nid: str) -> dict:
     return _summary(rec)
 
 
+class HouseRulesBody(BaseModel):
+    members: list[str] = Field(min_length=2, max_length=6)
+    negotiations: list[str] = Field(min_length=1, max_length=15)
+
+
+@router.post("/house-rules")
+def house_rules(body: HouseRulesBody) -> dict:
+    """The house rules a group's clones agreed on (one cached text call per group)."""
+    from .house_rules import house_rules as build, stored
+
+    key = "+".join(sorted(body.members))
+    hit = stored(key)
+    if hit and sorted(hit["negotiations"]) == sorted(body.negotiations):
+        return hit
+    try:
+        return build(body.members, body.negotiations)
+    except service.NotFound as e:
+        raise HTTPException(409, str(e)) from e
+    except TextError as e:
+        raise HTTPException(503, "no text model available for the house rules right now") from e
+
+
 @router.post("/negotiations/{nid}/narrate")
 def narrate(nid: str) -> dict:
     """Plain-English lines for a stored conversation's messages (one cached text call)."""

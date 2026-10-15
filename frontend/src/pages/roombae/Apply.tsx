@@ -11,7 +11,9 @@ import { assignRooms } from "../../roommates/fit";
 import { useNegotiationRecords, useProfiles, useScenarios } from "../../roommates/hooks";
 import { Avatar, VerdictBadge } from "../../roommates/NegotiationView";
 import { EmptyState, ErrorState, PageLoading } from "../ui";
+import { Confetti } from "./Confetti";
 import { R } from "./RoombaeLayout";
+import { downloadSummary } from "./summaryPdf";
 import { ME } from "./RoommateFinder";
 
 type Split = { split: SplitResult; opts: { method: SplitMethod; includeClosets: boolean } };
@@ -95,14 +97,20 @@ export default function Apply() {
   };
 
   if (sent) {
+    const names = sent.members.map((m) => m.name.split(" ")[0]);
+    const together = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : names[0];
     return (
-      <div className="mx-auto max-w-xl space-y-4 py-6 text-center" data-applied={sent.id}>
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-2xl text-emerald-700">✓</div>
-        <h1 className="text-2xl font-bold text-slate-900">Application sent</h1>
-        <p className="text-slate-600">{sent.members.map((m) => m.name.split(" ")[0]).join(", ")} applied for {l.title} as a group. The agent sees every roommate's exact share, the AI rent check and your compatibility on LeaseHub.</p>
-        <div className="flex justify-center gap-2">
-          <Link to={`/leasehub/applications/${sent.id}`} className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">See it as the agent (LeaseHub) →</Link>
-          <Link to={`/roombae/listings/${l.id}`} className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300">Back to the listing</Link>
+      <div className="mx-auto max-w-xl space-y-5 py-10 text-center" data-applied={sent.id}>
+        <Confetti />
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-emerald-100 text-3xl text-emerald-700 shadow-sm">✓</div>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Application sent! 🎉</h1>
+          <p className="mt-2 text-lg font-medium text-slate-800">Congratulations {together}!</p>
+          <p className="mt-1 text-slate-600">The listing agent for {l.title} has your application and will reach out to you soon.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          <button type="button" onClick={() => downloadSummary(sent, l)} className={`rounded-full px-5 py-2.5 text-sm font-semibold ${R.primary}`}>Download summary</button>
+          <Link to={`/roombae/listings/${l.id}`} className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50">Back to the listing</Link>
         </div>
       </div>
     );
@@ -157,7 +165,8 @@ export default function Apply() {
           </button>
           <p className="text-[11px] text-slate-400">Goes to the listing agent on LeaseHub</p>
         </section>
-        <RentSplit key={l.id} plan={data.plan} onSplit={(split, opts) => setS({ split, opts })} className="self-start" />
+        <RentSplit key={l.id} plan={data.plan} onSplit={(split, opts) => setS({ split, opts })} className="self-start"
+          defaultNames={Object.fromEntries(people.filter((p) => rooms[p.id]).map((p) => [rooms[p.id], p.name.split(" ")[0]]))} />
       </div>
     </div>
   );

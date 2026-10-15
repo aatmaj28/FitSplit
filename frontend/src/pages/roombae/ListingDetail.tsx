@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
 import { FloorPlan3D } from "../../components/FloorPlan3D";
 import { RentSplit } from "../../components/RentSplit";
 import { baths, listing, money } from "../../data/listings";
 import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
+import type { SplitRow } from "../../rentSplit";
+import { assignRooms } from "../../roommates/fit";
+import { useProfiles } from "../../roommates/hooks";
 import { EmptyState, ErrorState, PageLoading } from "../ui";
 import { R } from "./RoombaeLayout";
 
@@ -14,6 +17,15 @@ export default function ListingDetail() {
   const { data, error } = usePlan(l?.id);
   const { group } = useDemo();
   const [roomId, setRoomId] = useState<string | null>(null);
+  const { profiles } = useProfiles();
+  const [rows, setRows] = useState<SplitRow[] | null>(null);
+  // the saved group's names in the rent split, each in the room the budget assignment gives them
+  const defaultNames = useMemo(() => {
+    if (!l || !rows || !group || group.members.length !== l.beds || (group.listingId && group.listingId !== l.id)) return undefined;
+    const people = group.members.map((id) => profiles.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p);
+    const fit = people.length === rows.length ? assignRooms(people, rows) : null;
+    return fit ? Object.fromEntries(fit.assignment.map((a) => [a.row.room.id, a.person.name.split(" ")[0]])) : undefined;
+  }, [l, rows, group, profiles]);
   if (!l) return <EmptyState title="Listing not found" action={<Link to="/roombae/listings" className={`rounded-full px-4 py-1.5 text-sm font-medium ${R.primary}`}>All listings</Link>} />;
   const ours = group?.listingId === l.id;
   return (
@@ -50,7 +62,7 @@ export default function ListingDetail() {
             </div>
             <p className="text-xs text-slate-500">Click a room for its size. <span className="font-medium text-slate-700">Edit layout</span> to try your furniture: green fits, red doesn't.</p>
           </div>
-          <RentSplit key={l.id} plan={data.plan} selectedRoomId={roomId} onSelectRoom={setRoomId} className="self-start" />
+          <RentSplit key={l.id} plan={data.plan} selectedRoomId={roomId} onSelectRoom={setRoomId} onSplit={(sp) => setRows(sp.rows)} defaultNames={defaultNames} className="self-start" />
         </div>
       )}
     </div>

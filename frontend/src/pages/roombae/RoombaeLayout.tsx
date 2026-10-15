@@ -16,7 +16,7 @@ const nav = ({ isActive }: { isActive: boolean }) =>
 
 export default function RoombaeLayout() {
   const { pathname } = useLocation();
-  const finding = /^\/roombae\/(discover|matches|roommates)/.test(pathname);
+  const finding = /^\/roombae\/(discover|matches|roommates|group-chat)/.test(pathname);
   return (
     <div className="flex min-h-full flex-col bg-[#fbf8f5]">
       <PortalBar current="roombae" />

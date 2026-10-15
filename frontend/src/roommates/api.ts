@@ -233,3 +233,25 @@ export function groupVerdict(results: { member: string; status: Verdict }[], rul
     summary: (ok.length === results.length ? "Everyone agreed" : `${ok.length} of ${results.length} roommates agreed`) + (match ? "" : `; not a match (${no.join(", ")} said no)`),
   };
 }
+
+export interface HouseRules {
+  key: string;
+  members: string[];
+  negotiations: string[];
+  rules: { topic: "quiet hours" | "guests" | "chores" | "kitchen" | "costs" | "other"; text: string }[];
+  open: string[];
+}
+
+/** The house rules a group's clones agreed on: bundled for the demo group, else made once by the backend. */
+export async function loadHouseRules(members: string[], negotiations: string[]): Promise<HouseRules> {
+  const key = [...members].sort().join("+");
+  try {
+    return await fetchJson<HouseRules>(`${RM}/house_rules/${key}.json`); // ids are [a-z]+, so the key needs no escaping
+  } catch {
+    return fetchJson<HouseRules>(`${API}/api/roommates/house-rules`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ members, negotiations }),
+    }, 60000);
+  }
+}

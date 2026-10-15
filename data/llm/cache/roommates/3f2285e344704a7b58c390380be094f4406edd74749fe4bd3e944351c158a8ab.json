@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Your Sunday check-in and bathroom/trash split work for me, so we have no conflicts on non-negotiables, sleep, cleanliness, or money, and I'm calling this a strong match.\n\nCNF:[nn:none(no smoking indoors and no pets match on both sides),slp:aligned(both asleep before 10pm, up early),bd:compatible(overlap 1000-1250, rent at or under your cap)]\nVRD:STRONG|r=Non-negotiables match, sleep and quiet lifestyles align, chore list with weekly check-in closes the 4 vs 5 cleanliness gap, budgets overlap|open=none",
+  "created": "2026-10-15T17:24:19+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

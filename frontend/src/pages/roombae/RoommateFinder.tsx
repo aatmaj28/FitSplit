@@ -118,6 +118,11 @@ export default function RoommateFinder() {
     demo.setGroup(people.map((p) => p.id), listingId);
     navigate(`/roombae/listings/${listingId}`);
   };
+  /** Open a listing; a matched group goes with it (names in the rent split, applicants on Apply). */
+  const open = (listingId: string) => {
+    if (groupOk) demo.setGroup(people.map((p) => p.id), listingId);
+    navigate(`/roombae/listings/${listingId}`);
+  };
   const talkLive = async (a: Profile, b: Profile) => {
     setLiveError(null);
     try {
@@ -211,7 +216,9 @@ export default function RoommateFinder() {
                 <p className="text-xs text-slate-500">Fair split of the real floor plan, each room matched to whoever can afford it.</p>
                 <div className="mt-2 grid gap-3 sm:grid-cols-2">
                   {(preferred && fits ? [preferred, ...fits.filter((f) => f !== preferred)] : fits ?? []).map(({ l, result }) => (
-                    <div key={l.id} className={`rounded-2xl p-3.5 ring-1 ${result?.fits ? "ring-emerald-200" : "ring-slate-200"}`} data-fit={l.id}>
+                    <div key={l.id} role="link" tabIndex={0} aria-label={`Open ${l.title}`} data-fit={l.id}
+                      onClick={() => open(l.id)} onKeyDown={(e) => { if (e.key === "Enter") open(l.id); }}
+                      className={`cursor-pointer rounded-2xl p-3.5 ring-1 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e8553e] ${result?.fits ? "ring-emerald-200 hover:ring-emerald-300" : "ring-slate-200 hover:ring-slate-300"}`}>
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <div className="font-semibold text-slate-900">{l.title}</div>
@@ -223,11 +230,13 @@ export default function RoommateFinder() {
                       </div>
                       {result && <div className="mt-2"><Rooms assignment={result.assignment} /></div>}
                       {result?.fits && (
-                        <button type="button" onClick={() => save(l.id)} disabled={!groupOk} title={groupOk ? undefined : "Every pair has to match first"}
+                        <button type="button" onClick={(e) => { e.stopPropagation(); save(l.id); }} disabled={!groupOk} title={groupOk ? undefined : "Every pair has to match first"}
                           className={`mt-3 w-full rounded-full px-3 py-1.5 text-sm font-semibold disabled:opacity-40 ${R.primary}`}>
                           Save group & see it in 3D
                         </button>
                       )}
+                      <Link to={`/roombae/listings/${l.id}`} onClick={(e) => { e.stopPropagation(); if (groupOk) demo.setGroup(people.map((p) => p.id), l.id); }}
+                        className="mt-2 inline-block text-sm font-semibold text-[#d4452f] hover:underline">View listing →</Link>
                     </div>
                   ))}
                   {fits === null && <p className="text-sm text-slate-400">Checking listings…</p>}

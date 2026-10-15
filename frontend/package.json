@@ -23,6 +23,7 @@
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "framer-motion": "13.4.6",
+    "jspdf": "4.2.1",
     "polygon-clipping": "^0.15.7",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

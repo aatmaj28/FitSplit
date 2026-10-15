@@ -18,6 +18,9 @@ const exportOnly = process.argv.includes("--export-only");
 // right on Ananya, Jake and Meera; Ananya + Meera completes the group), then the rest of Priya's
 // Discover deck (every card she can swipe right on has a bundled conversation)
 const FIND = [["priya", "ananya"], ["priya", "jake"], ["priya", "meera"], ["ananya", "meera"], ["priya", "kavya"], ["priya", "rohan"]];
+// groups are ranked over the guided demo's students only (any stored pair among them counts, e.g. a
+// live Kavya + Ananya chat would otherwise make Priya + Ananya + Kavya the "best" group)
+const GROUP_POOL = ["priya", "ananya", "meera", "jake"];
 // apartment first: Arjun (Bedroom 1) and Sofia (Bedroom 3) have the JVUE 3 bed and need someone for Bedroom 2
 const FILL = { plan: "jvue_3bed", unit: "JVUE 3 bed", open: "r5", members: [["arjun", "r4"], ["sofia", "r6"]], candidates: ["rohan", "jake", "kavya"] };
 
@@ -78,7 +81,7 @@ for (const [a, b] of FIND) {
   if (!exportOnly || rec.status === "complete") rec = await finishOrKeep(rec, `${byId[a].name} + ${byId[b].name}`, oldId);
   scenarios.find.pairs.push({ a, b, id: rec.id, status: rec.result?.status ?? null });
 }
-scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: [...new Set(FIND.flat())], size: 3 });
+scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: GROUP_POOL, size: 3 });
 
 console.log("Fill a room:");
 const plan = JSON.parse(readFileSync(join(ROOT, "public", "demo", `${FILL.plan}.json`), "utf8"));
@@ -127,7 +130,7 @@ for (const f of existsSync(join(DATA, "negotiations")) ? readdirSync(join(DATA, 
     console.log(`  removed stale ${rec.mode} negotiation ${rec.a.name} + ${rec.b.name} (${rec.id})`);
   }
 }
-if (seeded.size) scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: [...new Set(FIND.flat())], size: 3 });
+if (seeded.size) scenarios.find.groups = await api("/api/roommates/groups", { profile_ids: GROUP_POOL, size: 3 });
 
 // every bundled conversation gets plain-English lines (rm2 clones write their own SAY lines; a
 // conversation kept from engine rm1 gets them from one cached narration call)
@@ -153,6 +156,19 @@ for (const id of ids) {
 writeFileSync(join(OUT, "profiles.json"), JSON.stringify(profiles, null, 2));
 writeFileSync(join(OUT, "questionnaire.json"), JSON.stringify(await api("/api/roommates/questionnaire"), null, 2));
 writeFileSync(join(OUT, "scenarios.json"), JSON.stringify(scenarios, null, 2));
+// the house rules of the best group (one cached text call per group; stored ones come back as they are)
+mkdirSync(join(OUT, "house_rules"), { recursive: true });
+// (only pairs listed in FIND count: bundling a live Kavya + Ananya chat once made a different group the "best" one)
+for (const g of scenarios.find.groups.slice(0, 1)) {
+  const members = ["priya", ...g.members.filter((m) => m !== "priya")];
+  try {
+    const rules = await api("/api/roommates/house-rules", { members, negotiations: g.pairs.map((p) => p.id) });
+    writeFileSync(join(OUT, "house_rules", `${rules.key}.json`), JSON.stringify(rules, null, 2));
+    console.log(`house rules for ${rules.key}: ${rules.rules.length} rules, ${rules.open.length} open (${rules.provider})`);
+  } catch (e) {
+    console.log(`house rules failed: ${String(e.message).slice(0, 120)}`);
+  }
+}
 const usage = await api("/api/llm/usage");
 if (kept.length) console.log(`\nkept from the previous bundle (not regenerated): ${kept.map(([l, id]) => `${l} (${id})`).join(", ")}`);
 console.log(`\nbundled ${ids.length} negotiations in public/demo/roommates. API calls so far:`,

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Equal utilities, splitting only basic groceries, Splitwise, and a deposit up to one month's rent all work for me, and your early, quiet 15-30 minute showers are fine.\n\nPFR:[usp:split equally,groc:split basics only (condiments, cleaning supplies; own food separate),pay:Splitwise,dep:up to 1 month's rent]\nCNF:[bath_time:minor gap(your 15-30 min vs my under 15, fine since you shower before my 6am wake-up),bd:compatible(your 900-1250 cap sits inside my range)]\nFLX:[chore split style:open to a fixed-task split instead of rotating|if tasks are fair and written down in Splitwise notes or a shared list]\n\n<<MOD:FINANCIAL>>",
+  "created": "2026-10-15T17:23:41+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

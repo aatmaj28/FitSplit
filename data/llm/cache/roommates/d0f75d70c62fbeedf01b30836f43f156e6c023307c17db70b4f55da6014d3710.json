@@ -1,0 +1,6 @@
+{
+  "value": "SAY: A strict vegetarian kitchen suits me since I'm vegetarian and cook daily; I'm happy to meet your 5/5 cleanliness, keep 68-72°F, and shower under 15 minutes.\n\nCNF:[cln:minor gap(4 vs 5, fine, I'll match your standard in shared spaces),slp:aligned(your pre-6am wake is fine, I'm up 6-8am and out for early lab hours),temp:aligned(68-72°F)]\nPFR:[cook:daily, vegetarian,kitchen:happy to share and cook together sometimes,bath_time:under 15 minutes]",
+  "created": "2026-10-15T17:23:22+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

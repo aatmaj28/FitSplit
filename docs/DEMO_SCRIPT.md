@@ -53,7 +53,9 @@ counting closets. The AI never changes a number; you choose whether to apply its
 
 **2:20 Step 5: apply as a group.** (Shift + →)
 Say: "One click: every roommate's name and exact share, already matched to their budgets." Click
-**Submit group application**.
+**Submit group application**: "Application sent! 🎉 Congratulations Priya, Ananya and Meera!", with a
+little confetti. Optional: **Download summary** gives a one-page PDF (listing, rooms, shares, total =
+rent).
 
 **2:35 Step 6: LeaseHub, the agent receives it.** (Shift + →)
 Say: "The agent gets one application: who's in which room, shares that add up to the rent, the AI

@@ -19,7 +19,7 @@ const check = (ok, msg) => {
 
 async function flow(offline) {
   const tag = offline ? "offline" : "online";
-  const page = await browser.newPage({ viewport: { width: 1440, height: 960 }, deviceScaleFactor: shots && !offline ? 2 : 1 });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 960 }, deviceScaleFactor: shots && !offline ? 2 : 1, acceptDownloads: true });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   if (offline) await page.route("**/api/**", (r) => r.abort());
@@ -135,6 +135,12 @@ async function flow(offline) {
   await shot("demo_step5_apply.png");
   await page.getByRole("button", { name: /Submit group application/ }).click();
   await page.locator("[data-applied]").waitFor();
+  check(await page.getByText("Application sent! 🎉").isVisible() && await page.getByText("Congratulations Priya, Ananya and Meera!").isVisible(), `${tag}: "Application sent!" congratulates the group by name`);
+  const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 15000 }), page.getByRole("button", { name: "Download summary" }).click()]);
+  check(dl.suggestedFilename() === "group-application-jvue_3bed.pdf", `${tag}: Download summary saves a PDF (${dl.suggestedFilename()})`);
+  check(!(await page.getByText("See it as the agent").count()), `${tag}: no agent link on the renter's page`);
+  await page.waitForTimeout(1200);
+  await shot("demo_step5_sent.png");
 
   // 6. agent receives it
   await next();

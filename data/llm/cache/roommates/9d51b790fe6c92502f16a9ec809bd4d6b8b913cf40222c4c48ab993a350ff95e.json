@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm asleep before 10pm, up 6-8am, cleanliness 4/5 with rotating chores, rarely host guests, and am out daily; what are your guests, noise, WFH habits?\n\nPFR:[slp:asleep before 10pm,wake:6am-8am,cln:4,clean_sched:rotating chore chart,gwk:never/very rarely with advance notice,nzl:very quiet,wfh:No, office/school daily]\nFLX:[chore split style:open to alternatives to a rotating chart|if split is fair and consistent]\n\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T17:22:54+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

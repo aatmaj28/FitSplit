@@ -1,0 +1,32 @@
+{
+  "value": {
+    "scores": {
+      "overall": 91,
+      "finances": 90,
+      "lifestyle": 94,
+      "personality": 86,
+      "logistics": 89
+    },
+    "highlights": [
+      "Both are non-smoking, no-pets and never-drink students with identical early-bird schedules (asleep before 10pm), so their daily rhythms line up. Kavya's pet allergy and Ananya's no-pets rule point the same way.",
+      "Budgets overlap at $1000-1250, which sits inside Kavya's hard $900-1250 cap and Ananya's $1000-1400 range. They agree on equal utility splits, sharing only basic groceries, Splitwise, and a deposit of up to one month's rent.",
+      "They closed the 5 vs 4 cleanliness gap with a concrete plan: a fixed-task list (Ananya takes kitchen wipe-down and stovetop, Kavya takes weekly bathroom, they alternate trash and recycling) and a Sunday check-in before 8pm. Both are also vegetarian and cook daily, so the strict vegetarian kitchen is no issue."
+    ],
+    "concerns": [
+      "Cleanliness is 5/5 for Kavya and 4/5 for Ananya. Ananya promised to hold shared spaces to a 5 standard, but that may be hard to sustain without the weekly check-ins.",
+      "Kavya wakes before 6am and showers for 15-30 minutes, while Ananya prefers under 15 minutes and wakes at 6-8am. Early noise could disturb Ananya's sleep if the layout or walls are thin.",
+      "The conversation never covered a specific unit, the exact rent, or whether it is in Fenway rather than Cambridgeport. Kavya's hard cap of $1250 means any listing above that fails. Ananya also never stated a temperature preference, only agreeing to Kavya's 68-72F."
+    ],
+    "dealbreaker_detected": false,
+    "dealbreaker_detail": "",
+    "middle_ground": [
+      "Keep the written fixed-task list and the Sunday check-in before 8pm, and adjust tasks if either person's standard slips. Agree on a shared definition of 'clean' for the kitchen and bathroom, such as a wipe-down after every meal.",
+      "Set quiet-hour rules for the early morning: showering and kitchen use quietly before 6am, and a rough shower-time guideline. Only look at Fenway units with rent at or under $1250 so Kavya's hard cap holds."
+    ],
+    "recommendation": "strong",
+    "recommendation_summary": "Kavya and Ananya match on every listed non-negotiable (no pets, non-smoking, budget cap) and on sleep, guests, noise, cooking style and money handling. The 5 vs 4 cleanliness difference and the early-morning shower noise are minor and already have workable plans. A Fenway unit at or under $1250 should make this a very strong pairing."
+  },
+  "created": "2026-10-15T17:24:34+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

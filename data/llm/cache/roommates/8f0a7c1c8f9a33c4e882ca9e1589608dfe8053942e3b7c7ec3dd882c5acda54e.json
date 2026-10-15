@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I wake before 6am, rate cleanliness 5/5, cook daily in a strict vegetarian kitchen, and allow no parties and very rare guests; is that kitchen fine for you?\n\nPFR:[slp:asleep before 10pm,wake:before 6am,cln:5,clean_sched:rotating chore chart,cook:daily (strict vegetarian kitchen),gwk:never/very rarely (notice always),parties:none,nzl:very quiet,wfh:No (office/school daily),temp:68-72F]\nCNF:[cln:minor gap(5 vs 4, under 2 points),slp:mostly aligned(I wake slightly earlier than your 6-8am)]\nFLX:[clean_sched:chore chart style is flexible|if the split stays fair and consistent]\n\n<<MOD:SOCIAL>>",
+  "created": "2026-10-15T17:23:12+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

@@ -14,6 +14,7 @@ const ListingDetail = lazy(() => import("./pages/roombae/ListingDetail"));
 const RoommateFinder = lazy(() => import("./pages/roombae/RoommateFinder"));
 const Discover = lazy(() => import("./pages/roombae/Discover"));
 const Matches = lazy(() => import("./pages/roombae/Matches"));
+const GroupChat = lazy(() => import("./pages/roombae/GroupChat"));
 const FillRoom = lazy(() => import("./pages/roombae/FillRoom"));
 const Apply = lazy(() => import("./pages/roombae/Apply"));
 const LeaseHubLayout = lazy(() => import("./pages/leasehub/LeaseHubLayout"));
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "discover", element: <Discover /> },
       { path: "matches", element: <Matches /> },
       { path: "roommates", element: <RoommateFinder /> },
+      { path: "group-chat", element: <GroupChat /> },
       { path: "fill-room", element: <FillRoom /> },
       { path: "apply/:id", element: <Apply /> },
     ],

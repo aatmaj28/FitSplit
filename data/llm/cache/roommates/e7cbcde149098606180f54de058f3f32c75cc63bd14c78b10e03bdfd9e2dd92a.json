@@ -1,0 +1,6 @@
+{
+  "value": "SAY: Our budgets overlap at $1000-1250, and Fenway works for me. Since we both prioritize cleanliness and sleep, what cleanliness level (1-5) and bed and wake times do you keep?\n\nCNF:[bd:compatible(overlap 1000-1250, my cap stays 1250),loc:compatible(Fenway matches my preference)]\nPFR:[pri:Compare cleanliness 1-5 and sleep schedule next]\n\n<<MOD:ROUTINES>>",
+  "created": "2026-10-15T17:22:47+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

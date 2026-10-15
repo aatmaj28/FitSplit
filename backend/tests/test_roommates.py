@@ -398,3 +398,28 @@ def test_a_conditional_verdict_also_lists_code_verified_open_points(store, monke
     monkeypatch.setattr(service, "RUNNER", runner)
     rec = service.start("priya", "meera")
     assert rec["result"]["status"] == "conditional" and rec["result"]["unresolved_topics"] == ["lease length", "guest policy"]
+
+
+def test_house_rules_merge_pairs_and_drop_invented_numbers(store, monkeypatch):
+    from app.roommates import engine as eng
+    from app.roommates import house_rules as hr
+
+    recs = [service.start("priya", "ananya"), service.start("priya", "meera"), service.start("ananya", "meera")]
+    for r in recs:
+        r["messages"][0]["say"] = "Quiet after 11:30 pm, and we split utilities on Splitwise."
+        service._save(r)
+    seen = []
+
+    def fake(kind, system, messages, **kw):
+        seen.append(messages[0]["content"])
+        return kw["parse"]({"rules": [{"topic": "quiet hours", "text": "Shared spaces go quiet after 11:30 pm."},
+                                      {"topic": "costs", "text": "Utilities are split on Splitwise."},
+                                      {"topic": "guests", "text": "At most 47 guests, home by 58 pm."}],  # 47 and 58 appear nowhere
+                            "open": ["lease length"]}), "fake"
+
+    monkeypatch.setattr(hr, "_cached_call", fake)
+    out = hr.house_rules(["priya", "ananya", "meera"], [r["id"] for r in recs])
+    assert [r["topic"] for r in out["rules"]] == ["quiet hours", "costs"] and out["open"] == ["lease length"]
+    assert out["key"] == "ananya+meera+priya" and hr.stored("ananya+meera+priya")["rules"] == out["rules"]
+    assert "## Priya + Ananya" in seen[0] and "Open topics:" in seen[0]
+    assert eng  # engine import stays used

@@ -1,0 +1,6 @@
+{
+  "value": "SAY: I'm fine with a fixed-task chore list if the kitchen gets wiped down after every meal, and I suggest a weekly check-in to close our 5 vs 4 cleanliness gap.\n\nFLX:[clean_sched:fixed-task split instead of rotating chart|tasks written in a shared list, kitchen wiped after each meal, weekly 10-minute check-in]\nCNF:[bd:compatible(our overlap works as long as the final rent stays within my cap),cln:minor gap(5 vs 4, manageable with the shared list)]",
+  "created": "2026-10-15T17:24:02+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

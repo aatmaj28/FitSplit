@@ -12,6 +12,8 @@ export interface RentSplitProps {
   aiCheck?: boolean;
   /** Called whenever the shares change (e.g. to fill a group application). */
   onSplit?: (split: SplitResult, opts: { method: SplitMethod; includeClosets: boolean }) => void;
+  /** Names shown until someone types their own (room id -> name), e.g. the saved group's rooms. */
+  defaultNames?: Record<string, string>;
   className?: string;
 }
 
@@ -59,7 +61,7 @@ function explain(s: SplitResult, method: SplitMethod, closets: boolean): string 
 }
 
 /** Fair rent split by bedroom size, with a private bath counted toward its bedroom. */
-export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck = true, onSplit, className = "" }: RentSplitProps) {
+export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck = true, onSplit, defaultNames, className = "" }: RentSplitProps) {
   const key = plan.plan_name ?? plan.source_image;
   const [method, setMethod] = useState<SplitMethod>("fair");
   const [closets, setClosets] = useState(false);
@@ -210,7 +212,7 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck =
                   </span>
                 </div>
                 <input
-                  value={names[r.room.id] ?? ""}
+                  value={names[r.room.id] ?? defaultNames?.[r.room.id] ?? ""}
                   onChange={(e) => setName(r.room.id, e.target.value)}
                   onClick={(e) => e.stopPropagation()}
                   onKeyDown={(e) => e.stopPropagation()}
