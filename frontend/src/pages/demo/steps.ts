@@ -39,7 +39,7 @@ export const STEPS: Step[] = [
   },
   {
     n: 6, side: "LeaseHub", title: "Agent receives it",
-    hint: "Every roommate's share, the AI rent check and the clones' compatibility verdict, in one application.",
+    hint: "Every roommate's room and exact share, next to the listing and its 3D floor plan, in one application. Approve the group.",
     path: () => {
       const app = getDemo().applications.find((a) => a.listingId === DEMO_LISTING && !a.sample);
       return app ? `/leasehub/applications/${app.id}` : "/leasehub";
