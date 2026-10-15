@@ -47,6 +47,32 @@ for (const name of ["jvue_3bed", "longwood_2bed"]) {
   }
 }
 
+// --- AI rent check: the browser builds the same cache key as backend/app/rentcheck.py (tests/test_rentcheck.py)
+{
+  const RC = await server.ssrLoadModule("/src/rentCheck.ts");
+  const req = {
+    plan: "jvue_3bed", method: "fair", include_closets: false, rent: 4200,
+    rows: [
+      { room_id: "r4", name: "DREAM", bedroom_area: 193.06, private_bath: false, private_bath_area: 0, share: 1352, vs_even: -48 },
+      { room_id: "r5", name: "DREAM", bedroom_area: 196.08, private_bath: false, private_bath_area: 0, share: 1360, vs_even: -40 },
+      { room_id: "r6", name: "DREAM", bedroom_area: 205.0, private_bath: true, private_bath_area: 36.9, share: 1488, vs_even: 88 },
+    ],
+  };
+  check(RC.rentCheckKeyString(req) === "rc1|jvue_3bed|fair|0|4200|r4:1931:0:0:1352;r5:1961:0:0:1360;r6:2050:1:369:1488", "rent check key string matches the backend");
+  check(RC.rentCheckKey(req) === "8643cdf0dc9a881d", `rent check key hash matches the backend (${RC.rentCheckKey(req)})`);
+
+  // private-bath overrides (what "Apply suggestion" changes): shares move, totals stay exact
+  const p = plan("jvue_3bed");
+  const base = computeSplit(p, { method: "fair", includeClosets: false, rent: 4200 });
+  const off = computeSplit(p, { method: "fair", includeClosets: false, rent: 4200, bathOverride: { r6: false } });
+  const suite = (s) => s.rows.find((r) => r.room.id === "r6");
+  check(suite(base).hasPrivateBath && !suite(off).hasPrivateBath && suite(off).share < suite(base).share && sum(off.rows.map((r) => r.share)) === 4200,
+    `override: private bath off for r6 -> $${suite(base).share} becomes $${suite(off).share}, total still $4,200`);
+  const k1 = RC.rentCheckKey(RC.rentCheckRequest("jvue_3bed", base, { method: "fair", includeClosets: false }));
+  const k2 = RC.rentCheckKey(RC.rentCheckRequest("jvue_3bed", off, { method: "fair", includeClosets: false }));
+  check(k1 !== k2, "different inputs give different rent check keys");
+}
+
 // --- furniture: queen bed + desk + dresser in a JVUE bedroom fit; shoved into a wall they don't
 {
   const p = plan("jvue_3bed");

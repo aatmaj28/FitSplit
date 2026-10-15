@@ -1,0 +1,47 @@
+{
+  "key": "52a22da14eefc188",
+  "plan": "longwood_1bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly one room labeled Bedroom."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The only bath opens onto the foyer, not through the bedroom, so 'no private bath' is correct."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "The 165 sq ft area matches the printed 15' x 11' dimensions and the drawn size relative to the living room."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "With only one bedroom there is nothing to compare; the balcony opens off the shared living room, not the bedroom."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "This is a one-bedroom apartment, so the single bedroom covers the whole rent of $2,700/month, which is the same as an even split. There's no other bedroom to compare against, so no adjustment is needed.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:13:13+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 2700,
+    "bedrooms": [
+      {
+        "room_id": "r8",
+        "name": "Bedroom",
+        "area": 165,
+        "private_bath": false,
+        "share": 2700
+      }
+    ]
+  }
+}

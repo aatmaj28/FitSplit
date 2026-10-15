@@ -16,6 +16,8 @@ from typing import Callable, Optional
 
 from PIL import Image
 
+from ..llm.usage import tracked
+
 
 @dataclass
 class ProviderReply:
@@ -174,10 +176,11 @@ def call_groq(image: bytes, mime: str, prompt: str, *, model: str, api_key: str,
 
 ProviderFn = Callable[..., ProviderReply]
 
+# every request is counted in data/llm/usage.json; Claude stops at its call cap (app/llm/usage.py)
 PROVIDERS: dict[str, ProviderFn] = {
-    "gemini": call_gemini,
-    "claude": call_claude,
-    "groq": call_groq,
+    "gemini": tracked("gemini", call_gemini),
+    "claude": tracked("claude", call_claude),
+    "groq": tracked("groq", call_groq),
 }
 
 

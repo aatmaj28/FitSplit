@@ -26,5 +26,61 @@
     "semantics_provider": "claude",
     "json": "longwood_2bed.json",
     "image": "longwood_2bed.png"
+  },
+  {
+    "name": "jvue_1bed",
+    "source_image": "jvue_1bed.png",
+    "unit": {
+      "total_sqft": 771,
+      "beds": 1,
+      "baths": 1,
+      "rent": 2650
+    },
+    "rooms": 9,
+    "semantics_provider": "claude",
+    "json": "jvue_1bed.json",
+    "image": "jvue_1bed.png"
+  },
+  {
+    "name": "longwood_1bed",
+    "source_image": "longwood_1bed.png",
+    "unit": {
+      "total_sqft": 775,
+      "beds": 1,
+      "baths": 1,
+      "rent": 2700
+    },
+    "rooms": 10,
+    "semantics_provider": "gemini",
+    "json": "longwood_1bed.json",
+    "image": "longwood_1bed.png"
+  },
+  {
+    "name": "missionmain_3bed",
+    "source_image": "missionmain_3bed.png",
+    "unit": {
+      "total_sqft": 1427,
+      "beds": 3,
+      "baths": 2,
+      "rent": 4500
+    },
+    "rooms": 17,
+    "semantics_provider": "claude",
+    "json": "missionmain_3bed.json",
+    "image": "missionmain_3bed.png"
+  },
+  {
+    "name": "serenity_1bed",
+    "source_image": "serenity_1bed.png",
+    "unit": {
+      "total_sqft": 713,
+      "beds": 1,
+      "baths": 1,
+      "rent": 4000
+    },
+    "rooms": 7,
+    "semantics_provider": "groq",
+    "json": "serenity_1bed.json",
+    "image": "serenity_1bed.png"
   }
 ]

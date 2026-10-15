@@ -1,5 +1,5 @@
 // Copy parsed plans + original images into public/demo/ for the offline fallback.
-//   node scripts/sync-demo.mjs [plan ...]      (default: jvue_3bed longwood_2bed)
+//   node scripts/sync-demo.mjs [plan ...]      (default: the six listed units)
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -7,7 +7,8 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const parsed = join(root, "..", "data", "parsed");
 const out = join(root, "public", "demo");
-const names = process.argv.slice(2).length ? process.argv.slice(2) : ["jvue_3bed", "longwood_2bed"];
+const DEFAULT = ["jvue_3bed", "longwood_2bed", "jvue_1bed", "longwood_1bed", "missionmain_3bed", "serenity_1bed"];
+const names = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT;
 
 mkdirSync(out, { recursive: true });
 const index = [];

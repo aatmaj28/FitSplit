@@ -1,0 +1,63 @@
+{
+  "key": "8840c05c4220853d",
+  "plan": "longwood_2bed",
+  "verdict": "warn",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly two bedrooms: the Master Bedroom and the Second Bedroom."
+    },
+    {
+      "id": "private_bath",
+      "status": "warn",
+      "reason": "The only Bath opens onto the shared hallway near the living room, not through the Second Bedroom, so it is not private to Bedroom 2."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "182 sq ft matches 13' x 14' and 142 sq ft matches 13'6\" x 10'6\", and the drawn sizes look consistent."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "Both bedrooms have exterior windows and their own closets, and the balcony is reached from the living room, so neither room has a clear extra the area misses."
+    }
+  ],
+  "suggestions": [
+    {
+      "action": "set_private_bath",
+      "room_id": "r11",
+      "value": false,
+      "reason": "The single bathroom is reached from the common hallway, so it is shared space.",
+      "label": "Turn private bath off for Bedroom 2"
+    }
+  ],
+  "explanation": "Right now the Master Bedroom pays $1,714/month, $11 less than an even split of $1,725, and the Second Bedroom pays $1,736/month, $11 more. That's because the Second Bedroom was given the 48 sq ft bathroom as private space, even though it's smaller than the Master. The plan shows the bathroom opens onto the shared hallway, so it should count as shared space. Fixing that flag will change the split, so please re-run the calculation.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:12:35+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 3450,
+    "bedrooms": [
+      {
+        "room_id": "r9",
+        "name": "Master Bedroom",
+        "area": 182,
+        "private_bath": false,
+        "share": 1714
+      },
+      {
+        "room_id": "r11",
+        "name": "Second Bedroom",
+        "area": 142,
+        "private_bath": true,
+        "share": 1736
+      }
+    ]
+  },
+  "cached": false
+}

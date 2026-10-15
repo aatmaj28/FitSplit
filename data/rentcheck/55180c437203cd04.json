@@ -1,0 +1,61 @@
+{
+  "key": "55180c437203cd04",
+  "plan": "missionmain_3bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly three bedrooms: the Master Bedroom at the top left and two Bedrooms on the right side."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "Both bathrooms open onto the central hallway, so neither is private to any bedroom."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "No dimensions are printed, but the drawn sizes match the entered areas: the master is clearly largest and the two right-side bedrooms are nearly equal."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "Every bedroom has a window and a reach-in closet, with no balcony, walk-in closet or other notable feature that the areas miss."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "The Master Bedroom is noticeably larger than the other two, so its occupant pays $1,600/month, which is $100 more than an even split of $1,500. The two smaller bedrooms are almost the same size: Bedroom 2 pays $1,447 ($53 less) and Bedroom 3 pays $1,453 ($47 less). Everyone shares the two hallway bathrooms, kitchen, dining and living room equally.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:13:37+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 4500,
+    "bedrooms": [
+      {
+        "room_id": "r1",
+        "name": "MASTER BEDROOM",
+        "area": 176,
+        "private_bath": false,
+        "share": 1600
+      },
+      {
+        "room_id": "r11",
+        "name": "BEDROOM",
+        "area": 128,
+        "private_bath": false,
+        "share": 1447
+      },
+      {
+        "room_id": "r13",
+        "name": "BEDROOM",
+        "area": 130,
+        "private_bath": false,
+        "share": 1453
+      }
+    ]
+  }
+}

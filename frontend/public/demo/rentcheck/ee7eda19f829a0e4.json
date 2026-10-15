@@ -1,0 +1,62 @@
+{
+  "key": "ee7eda19f829a0e4",
+  "plan": "jvue_3bed",
+  "verdict": "warn",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly three DREAM bedrooms side by side across the top."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The right-hand REFRESH bath opens off a door-enclosed vestibule that serves only Bedroom 3, and Bedrooms 1 and 2 share the hall bath, so all three flags look right."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "All three areas are within 15% of their printed dimensions once the attached closets are included."
+    },
+    {
+      "id": "extras",
+      "status": "warn",
+      "reason": "Bedroom 3 has its own door onto the right-hand BREATHE balcony, which its area does not capture."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "Bedroom 3 pays $1,530/month, which is $130 more than an even split of $1,400, because it is the largest room and has its own private bathroom. Bedroom 1 pays $1,317 ($83 less) and Bedroom 2 pays $1,353 ($47 less) because they have smaller rooms and share the hall bath. Bedroom 3 also has private access to a balcony that the split does not account for, so you may want to talk about that perk.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:08:32+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": true,
+    "rent": 4200,
+    "bedrooms": [
+      {
+        "room_id": "r4",
+        "name": "DREAM",
+        "area": 195,
+        "private_bath": false,
+        "share": 1317
+      },
+      {
+        "room_id": "r5",
+        "name": "DREAM",
+        "area": 208,
+        "private_bath": false,
+        "share": 1353
+      },
+      {
+        "room_id": "r6",
+        "name": "DREAM",
+        "area": 234,
+        "private_bath": true,
+        "share": 1530
+      }
+    ]
+  },
+  "cached": false
+}

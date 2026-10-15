@@ -1,0 +1,55 @@
+{
+  "key": "27fe7a104f918885",
+  "plan": "longwood_2bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly two bedrooms, the Master Bedroom and the Second Bedroom."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The only bath opens off the shared hall area near the living room, so neither bedroom has a private bath."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "Both areas match their printed dimensions, and the drawn rooms look proportionally consistent with them."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "Both bedrooms have exterior windows and comparable full-length closets, so there is no clear unaccounted advantage beyond the Master's small extra 'C' closet."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "The Master Bedroom is the larger room, so its occupant pays $1,939/month, which is $214 more than the even split of $1,725. The Second Bedroom is smaller, so its occupant pays $1,511/month, which is $214 less. Both rooms share the one bath and have similar closets and windows, so splitting by room size alone looks fair here.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:11:31+00:00",
+  "inputs": {
+    "method": "size",
+    "include_closets": false,
+    "rent": 3450,
+    "bedrooms": [
+      {
+        "room_id": "r9",
+        "name": "Master Bedroom",
+        "area": 182,
+        "private_bath": false,
+        "share": 1939
+      },
+      {
+        "room_id": "r11",
+        "name": "Second Bedroom",
+        "area": 142,
+        "private_bath": false,
+        "share": 1511
+      }
+    ]
+  },
+  "cached": false
+}

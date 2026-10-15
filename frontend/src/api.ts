@@ -1,7 +1,7 @@
 import type { ParsedPlan, PlanSummary } from "./types";
 
-const API = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
-const DEMO = `${import.meta.env.BASE_URL}demo`;
+export const API = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
+export const DEMO = `${import.meta.env.BASE_URL}demo`;
 
 export class ApiError extends Error {
   constructor(
@@ -12,7 +12,7 @@ export class ApiError extends Error {
   }
 }
 
-async function fetchJson<T>(url: string, init: RequestInit = {}, timeoutMs = 4000): Promise<T> {
+export async function fetchJson<T>(url: string, init: RequestInit = {}, timeoutMs = 4000): Promise<T> {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), timeoutMs);
   try {

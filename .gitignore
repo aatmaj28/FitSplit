@@ -37,3 +37,6 @@ external/
 node_modules/
 dist/
 *.tsbuildinfo
+
+# runtime lock file of the LLM call counter
+data/llm/.usage.lock

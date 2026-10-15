@@ -1,0 +1,54 @@
+{
+  "key": "13993c109b71ed65",
+  "plan": "longwood_2bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly two bedrooms, Master Bedroom and Second Bedroom."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The only Bath opens off the shared hall area, so neither bedroom has a private bath."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "182 and 142 sq ft match the printed 13' x 14' and 13'6\" x 10'6\" dimensions, and the drawn sizes look consistent."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "Both bedrooms have exterior windows and their own closet, and the balcony belongs to the living room, so neither room has a clear extra perk."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "The Master Bedroom roommate pays $1,787/month, which is $62 more than an even split of $1,725, because that room is larger at 182 sq ft. The Second Bedroom roommate pays $1,663/month, $62 less than an even split, since that room is 142 sq ft. You share the bath, kitchen, living room and balcony, so that part of the rent is split equally.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:11:05+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 3450,
+    "bedrooms": [
+      {
+        "room_id": "r9",
+        "name": "Master Bedroom",
+        "area": 182,
+        "private_bath": false,
+        "share": 1787
+      },
+      {
+        "room_id": "r11",
+        "name": "Second Bedroom",
+        "area": 142,
+        "private_bath": false,
+        "share": 1663
+      }
+    ]
+  }
+}

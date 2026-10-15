@@ -1,0 +1,19 @@
+{
+  "since": "2026-10-15T08:06:06+00:00",
+  "providers": {
+    "gemini": {
+      "calls": 46,
+      "ok": 0,
+      "errors": 46,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "claude": {
+      "calls": 16,
+      "ok": 16,
+      "errors": 0,
+      "input_tokens": 53278,
+      "output_tokens": 17751
+    }
+  }
+}

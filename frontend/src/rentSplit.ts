@@ -7,12 +7,15 @@ export interface SplitOptions {
   method: SplitMethod;
   includeClosets: boolean;
   rent: number;
+  /** per-bedroom private-bath override (room id -> has one); default: the parsed `has_private_bath` */
+  bathOverride?: Record<string, boolean>;
 }
 
 export interface SplitRow {
   room: Room;
   bedroomArea: number; // sq ft used for the bedroom itself
-  privateBath: Room | null;
+  hasPrivateBath: boolean; // the input (parsed flag or the user's override)
+  privateBath: Room | null; // the bathroom found for it on the plan
   privateBathArea: number; // counted only by the fair split
   weight: number; // area this room is charged for
   exact: number; // dollars before rounding
@@ -60,9 +63,10 @@ export function polygonGap(a: Pt[], b: Pt[]): number {
   return best;
 }
 
-/** The bathroom a bedroom with has_private_bath opens into: the nearest bathroom within 10 ft. */
-export function findPrivateBath(plan: ParsedPlan, bedroom: Room): Room | null {
-  if (!bedroom.has_private_bath || !bedroom.polygon) return null;
+/** The bathroom a bedroom with a private bath opens into: the nearest bathroom within 10 ft.
+ *  `has` overrides the parsed `has_private_bath` flag. */
+export function findPrivateBath(plan: ParsedPlan, bedroom: Room, has = Boolean(bedroom.has_private_bath)): Room | null {
+  if (!has || !bedroom.polygon) return null;
   const ppf = plan.scale.pixels_per_foot || 30;
   let best: { room: Room; gap: number } | null = null;
   for (const r of plan.rooms) {
@@ -77,18 +81,19 @@ export function bedrooms(plan: ParsedPlan): Room[] {
   return plan.rooms.filter((r) => r.type === "bedroom" && (r.area_sqft_final ?? r.area_sqft) != null);
 }
 
-export function computeSplit(plan: ParsedPlan, { method, includeClosets, rent }: SplitOptions): SplitResult {
+export function computeSplit(plan: ParsedPlan, { method, includeClosets, rent, bathOverride = {} }: SplitOptions): SplitResult {
   const notes: string[] = [];
   const beds = bedrooms(plan);
   const n = beds.length;
   const area = (r: Room) => (includeClosets ? (r.area_with_closets_sqft ?? r.area_sqft_final) : r.area_sqft_final) ?? r.area_sqft ?? 0;
 
   const rows: SplitRow[] = beds.map((room) => {
-    const bath = method === "fair" ? findPrivateBath(plan, room) : null;
-    if (method === "fair" && room.has_private_bath && !bath) notes.push(`${room.name}: private bath not located on the plan, not counted`);
+    const has = bathOverride[room.id] ?? Boolean(room.has_private_bath);
+    const bath = method === "fair" ? findPrivateBath(plan, room, has) : null;
+    if (method === "fair" && has && !bath) notes.push(`${room.name}: private bath not located on the plan, not counted`);
     const bathArea = bath ? (bath.area_sqft_final ?? bath.area_sqft ?? 0) : 0;
     const bedroomArea = area(room);
-    return { room, bedroomArea, privateBath: bath, privateBathArea: bathArea, weight: bedroomArea + bathArea, exact: 0, share: 0, vsEven: 0 };
+    return { room, bedroomArea, hasPrivateBath: has, privateBath: bath, privateBathArea: bathArea, weight: bedroomArea + bathArea, exact: 0, share: 0, vsEven: 0 };
   });
   const privateSqft = rows.reduce((s, r) => s + r.weight, 0);
 

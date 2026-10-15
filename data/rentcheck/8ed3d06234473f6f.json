@@ -1,0 +1,47 @@
+{
+  "key": "8ed3d06234473f6f",
+  "plan": "jvue_1bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly one bedroom, labeled DREAM."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The REFRESH bathroom opens off the shared hallway rather than only through DREAM, so 'no' is correct."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "200 sq ft is consistent with the printed 17'5\" x 11'6\" and the room's drawn size."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "DREAM has a window and the reach-in STYLE closet, and the balcony is reached from GATHER, but with only one bedroom there is nothing to compare."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "This is a one-bedroom plan, so the single DREAM bedroom carries the whole rent of $2,650/month, which is the same as an even split. The bathroom and balcony are reached from shared space rather than through the bedroom, so no adjustments are needed.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:12:54+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 2650,
+    "bedrooms": [
+      {
+        "room_id": "r3",
+        "name": "DREAM",
+        "area": 200,
+        "private_bath": false,
+        "share": 2650
+      }
+    ]
+  }
+}

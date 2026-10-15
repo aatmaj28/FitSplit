@@ -1,0 +1,47 @@
+{
+  "key": "ca6ac0746c00c989",
+  "plan": "serenity_1bed",
+  "verdict": "ok",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly one bedroom, labeled 'Bedroom'."
+    },
+    {
+      "id": "private_bath",
+      "status": "pass",
+      "reason": "The bath's door opens onto the shared living area, not through the bedroom, so 'no' is correct."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "125 sq ft matches the printed 11'3\" x 11'1\" dimensions and the drawn room size."
+    },
+    {
+      "id": "extras",
+      "status": "pass",
+      "reason": "The bedroom has exterior windows and a standard reach-in closet; nothing unusual is missing from its area."
+    }
+  ],
+  "suggestions": [],
+  "explanation": "This is a one-bedroom apartment, so there is only one bedroom to assign. Whoever has it pays the full $4,000/month, which is the same as an even split because there are no other bedrooms to share the rent with. If more people will live here, the split method would need to account for someone sleeping in the shared space.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:06:16+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 4000,
+    "bedrooms": [
+      {
+        "room_id": "r1",
+        "name": "Bedroom",
+        "area": 125,
+        "private_bath": false,
+        "share": 4000
+      }
+    ]
+  }
+}

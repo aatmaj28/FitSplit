@@ -1,0 +1,69 @@
+{
+  "key": "bc8511b29ade27a7",
+  "plan": "jvue_3bed",
+  "verdict": "warn",
+  "checks": [
+    {
+      "id": "bedroom_count",
+      "status": "pass",
+      "reason": "The plan shows exactly three DREAM bedrooms."
+    },
+    {
+      "id": "private_bath",
+      "status": "warn",
+      "reason": "The right REFRESH bath sits in a private vestibule behind its own door, next to Bedroom 3's entrance, so it looks like Bedroom 3's en-suite rather than a shared bath."
+    },
+    {
+      "id": "areas",
+      "status": "pass",
+      "reason": "All three areas match their printed dimensions, and their drawn sizes look consistent."
+    },
+    {
+      "id": "extras",
+      "status": "warn",
+      "reason": "Bedroom 3 appears to have its own door to the right BREATHE balcony and two extra C closets in its vestibule, which its area does not reflect."
+    }
+  ],
+  "suggestions": [
+    {
+      "action": "set_private_bath",
+      "room_id": "r6",
+      "value": true,
+      "reason": "The right REFRESH bath seems reachable only through Bedroom 3's private vestibule.",
+      "label": "Turn private bath on for Bedroom 3"
+    }
+  ],
+  "explanation": "With the current inputs, Bedroom 1 pays $1,386/month ($14 less than an even split) and Bedroom 2 pays $1,395/month ($5 less), because their rooms are slightly smaller. Bedroom 3 pays $1,419/month ($19 more) for the largest room. However, the plan suggests Bedroom 3 also has its own bathroom, a private balcony and extra closets, so you may want to mark its bath as private and rerun the split.",
+  "explanation_source": "ai",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "checked_at": "2026-10-15T08:10:12+00:00",
+  "inputs": {
+    "method": "fair",
+    "include_closets": false,
+    "rent": 4200,
+    "bedrooms": [
+      {
+        "room_id": "r4",
+        "name": "DREAM",
+        "area": 193,
+        "private_bath": false,
+        "share": 1386
+      },
+      {
+        "room_id": "r5",
+        "name": "DREAM",
+        "area": 196,
+        "private_bath": false,
+        "share": 1395
+      },
+      {
+        "room_id": "r6",
+        "name": "DREAM",
+        "area": 205,
+        "private_bath": false,
+        "share": 1419
+      }
+    ]
+  }
+}

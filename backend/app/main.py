@@ -5,6 +5,8 @@
     GET  /api/plans                  cached plans (name, unit info, thumbnail url)
     GET  /api/plans/{name}           parsed JSON
     GET  /api/plans/{name}/image     original image (?max_side=320 for a thumbnail)
+    POST /api/rent-check             AI check of a rent split's inputs (?cache_only=1: never call a model)
+    GET  /api/llm/usage              API calls per provider tonight + the Claude cap
 
     uvicorn app.main:app --reload --port 8000      (from /backend)
 """
@@ -21,8 +23,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from PIL import Image
 
-from . import cache
+from . import cache, rentcheck
 from .config import FLOORPLANS_DIR, PARSED_DIR, PROVIDER_ORDER, PROVIDER_TIMEOUT_S, provider_settings
+from .llm import usage as llm_usage
+from .llm.vision import VisionError
 from .pipeline import PIPELINE_VERSION, parse_floorplan
 from .semantics import SemanticsError
 
@@ -137,3 +141,25 @@ def get_plan_image(name: str, max_side: Optional[int] = Query(None, ge=32, le=40
             im.thumbnail((max_side, max_side))
             im.save(thumb, "PNG", optimize=True)
     return FileResponse(thumb, media_type="image/png")
+
+
+@app.post("/api/rent-check")
+def rent_check(req: rentcheck.RentCheckRequest,
+               cache_only: bool = Query(False, description="answer from the cache only; 404 if this input was never checked")
+               ) -> dict:
+    try:
+        result, hit = rentcheck.check(req, cache_only=cache_only)
+    except rentcheck.NotCached as e:
+        raise HTTPException(404, f"no cached check for input key {e}") from e
+    except rentcheck.PlanNotFound as e:
+        raise HTTPException(404, f"no parsed plan named {str(e)!r}") from e
+    except ValueError as e:
+        raise HTTPException(422, str(e)) from e
+    except VisionError as e:
+        raise HTTPException(503, {"error": "AI check unavailable right now", "attempts": e.attempts}) from e
+    return {**result.model_dump(), "cached": hit}
+
+
+@app.get("/api/llm/usage")
+def llm_usage_totals() -> dict:
+    return llm_usage.totals()

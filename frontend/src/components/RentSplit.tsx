@@ -1,12 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { computeSplit, type SplitMethod, type SplitResult } from "../rentSplit";
 import type { ParsedPlan } from "../types";
+import { RentCheckBadge, RentCheckDetails, useRentCheck, type Suggestion } from "./RentCheck";
 
 export interface RentSplitProps {
   plan: ParsedPlan;
   /** Highlight a bedroom (shared with <FloorPlan3D selectedRoomId>). */
   selectedRoomId?: string | null;
   onSelectRoom?: (id: string | null) => void;
+  /** Hide the "AI checked" badge (it needs the backend or bundled demo results). */
+  aiCheck?: boolean;
+  /** Called whenever the shares change (e.g. to fill a group application). */
+  onSplit?: (split: SplitResult) => void;
   className?: string;
 }
 
@@ -54,23 +59,39 @@ function explain(s: SplitResult, method: SplitMethod, closets: boolean): string 
 }
 
 /** Fair rent split by bedroom size, with a private bath counted toward its bedroom. */
-export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, className = "" }: RentSplitProps) {
+export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck = true, onSplit, className = "" }: RentSplitProps) {
   const key = plan.plan_name ?? plan.source_image;
   const [method, setMethod] = useState<SplitMethod>("fair");
   const [closets, setClosets] = useState(false);
   const [rent, setRent] = useState<number>(plan.unit.rent ?? 0);
+  const [bathOverride, setBathOverride] = useState<Record<string, boolean>>({});
   const [names, setName] = useRoommateNames(key);
-  useEffect(() => setRent(plan.unit.rent ?? 0), [plan]);
+  const [checkOpen, setCheckOpen] = useState(false);
+  useEffect(() => {
+    setRent(plan.unit.rent ?? 0);
+    setBathOverride({});
+  }, [plan]);
 
-  const split = useMemo(() => computeSplit(plan, { method, includeClosets: closets, rent }), [plan, method, closets, rent]);
+  const split = useMemo(() => computeSplit(plan, { method, includeClosets: closets, rent, bathOverride }), [plan, method, closets, rent, bathOverride]);
   const total = split.rows.reduce((s, r) => s + r.share, 0);
   const n = split.rows.length;
+  const check = useRentCheck(key, split, { method, includeClosets: closets });
+  useEffect(() => onSplit?.(split), [split]); // eslint-disable-line react-hooks/exhaustive-deps
+  const apply = (sug: Suggestion) => {
+    if (sug.action === "set_private_bath" && sug.room_id) setBathOverride((b) => ({ ...b, [sug.room_id!]: sug.value }));
+    if (sug.action === "include_closets") setClosets(sug.value);
+  };
 
   return (
     <section className={`flex flex-col gap-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200 ${className}`} aria-label="Rent split">
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="text-base font-semibold text-slate-900">Rent split</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-base font-semibold text-slate-900">Rent split</h2>
+            {aiCheck && rent > 0 && n > 0 && (
+              <RentCheckBadge state={check.state} open={checkOpen} onToggle={() => setCheckOpen((o) => !o)} onRun={() => { setCheckOpen(true); check.run(); }} />
+            )}
+          </div>
           <p className="text-xs text-slate-500">
             {n} bedroom{n === 1 ? "" : "s"}
             {plan.unit.total_sqft ? ` · ${sqft(plan.unit.total_sqft)}` : ""}
@@ -119,6 +140,8 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, className
         </label>
       </div>
 
+      {aiCheck && checkOpen && check.state.status === "found" && <RentCheckDetails result={check.state.result} onApply={apply} />}
+
       {!rent ? (
         <p className="rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-800">Enter the monthly rent to see the split.</p>
       ) : n === 0 ? (
@@ -155,11 +178,21 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, className
                   {sqft(r.bedroomArea)}
                 </div>
                 <div className="mt-1.5 flex min-h-5 flex-wrap gap-1">
-                  {r.room.has_private_bath && (
-                    <span className="rounded-full bg-teal-100 px-2 py-0.5 text-[11px] font-medium text-teal-800">
-                      Private bath{r.privateBath && method === "fair" ? ` +${Math.round(r.privateBathArea)} sq ft` : ""}
-                    </span>
-                  )}
+                  <button
+                    type="button"
+                    aria-pressed={r.hasPrivateBath}
+                    title={r.hasPrivateBath ? "Has its own bathroom (click if it doesn't)" : "Click if this bedroom has its own bathroom"}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setBathOverride((b) => ({ ...b, [r.room.id]: !r.hasPrivateBath }));
+                    }}
+                    onKeyDown={(e) => e.stopPropagation()}
+                    className={`rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors ${
+                      r.hasPrivateBath ? "bg-teal-100 text-teal-800 hover:bg-teal-200" : "text-slate-400 ring-1 ring-slate-200 hover:text-slate-600"
+                    }`}
+                  >
+                    {r.hasPrivateBath ? `Private bath${r.privateBath && method === "fair" ? ` +${Math.round(r.privateBathArea)} sq ft` : ""}` : "No private bath"}
+                  </button>
                 </div>
                 <div className="mt-1 flex flex-wrap items-end justify-between gap-x-2 gap-y-1">
                   <div className="text-2xl font-semibold tabular-nums text-slate-900">
