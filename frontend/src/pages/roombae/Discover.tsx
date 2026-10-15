@@ -6,10 +6,10 @@ import { demo, useDemo } from "../../data/store";
 import { parseAcp } from "../../roommates/acp";
 import { startNegotiation, type NegotiationEvent, type NegotiationMessage, type Profile, type Scenarios } from "../../roommates/api";
 import { discoverDeck, ME, noClickReason, pairId, topScores, type HiddenReason, type SwipeDir } from "../../roommates/deck";
-import { useNegotiationEvents, useProfiles, useScenarios } from "../../roommates/hooks";
+import { useNegotiationEvents, useProfiles, useQuestionnaire, useScenarios } from "../../roommates/hooks";
 import { Avatar, VerdictBadge } from "../../roommates/NegotiationView";
 import { avatarUrl, cardFacts, firstName, funTags, tint, topPriorities } from "../../roommates/people";
-import { ProfileFacts } from "../../roommates/Questionnaire";
+import { ProfileFacts, QuestionnaireForm } from "../../roommates/Questionnaire";
 import { ReplayDialog } from "../../roommates/ReplayDialog";
 import { ErrorState, PageLoading } from "../ui";
 import { FindTabs } from "./FindTabs";
@@ -291,6 +291,8 @@ export default function Discover() {
   const card = useRef<CardHandle>(null);
   const [after, setAfter] = useState<{ other: Profile; negId: string | null; failed: boolean } | null>(null);
   const [replay, setReplay] = useState<{ id: string; other: Profile } | null>(null);
+  const [showQ, setShowQ] = useState(false);
+  const schema = useQuestionnaire();
 
   const onSwiped = async (p: Profile, dir: SwipeDir) => {
     const bundled = pairId(sc.data, ME, p.id);
@@ -394,6 +396,13 @@ export default function Discover() {
             </div>
             <p className="mt-2 text-xs text-slate-600">Your clone negotiates with what you told it:</p>
             <div className="mt-1.5"><ProfileFacts p={me} /></div>
+            <button type="button" aria-expanded={showQ} aria-controls="my-questionnaire" className="mt-3 text-xs font-medium text-violet-700 hover:text-violet-900"
+              onClick={() => {
+                setShowQ((v) => !v);
+                if (!showQ) setTimeout(() => document.getElementById("my-questionnaire")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+              }}>
+              {showQ ? "Hide questionnaire" : "View questionnaire (7 sections)"}
+            </button>
           </div>
           <div className="rounded-2xl bg-white p-4 text-xs text-slate-600 shadow-sm ring-1 ring-slate-200" data-deck-filters>
             <div className="text-sm font-semibold text-slate-800">{deck.length} {deck.length === 1 ? "student" : "students"} left to see</div>
@@ -412,6 +421,17 @@ export default function Discover() {
           </div>
         </aside>
       </div>
+
+      {showQ && schema.data && (
+        <section id="my-questionnaire" className="scroll-mt-24 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200" aria-label="Your questionnaire">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <h2 className="text-sm font-semibold text-slate-800">What your clone knows about you</h2>
+            <button type="button" onClick={() => setShowQ(false)} className="text-xs text-slate-500 hover:text-slate-800">Hide</button>
+          </div>
+          <p className="mb-3 text-xs text-slate-500">Tanvi's 7-section questionnaire. Read-only in the demo: the bundled conversations were negotiated with these answers.</p>
+          <fieldset disabled><QuestionnaireForm schema={schema.data} value={me.questionnaire} onChange={() => {}} /></fieldset>
+        </section>
+      )}
 
       {after && (
         <AfterLike me={me} other={after.other} negId={after.negId} failed={after.failed}
