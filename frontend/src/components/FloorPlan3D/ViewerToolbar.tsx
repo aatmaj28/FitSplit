@@ -21,10 +21,25 @@ function RotateIcon({ flip }: { flip?: boolean }) {
   );
 }
 
-export function ViewerToolbar({ preset, onPreset, onRotate, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount }: {
+/** Snaps the camera back to the viewer's default fit (its starting view, angle and zoom). */
+export function ResetViewButton({ onClick, className = "" }: { onClick: () => void; className?: string }) {
+  return (
+    <button type="button" onClick={onClick} aria-label="Reset view" title="Reset view: back to the default fit"
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 sm:text-sm ${className}`}>
+      <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M3 8V3h5M17 12v5h-5M3.5 3.5 8 8M16.5 16.5 12 12" />
+      </svg>
+      <span className="sm:hidden">Reset</span>
+      <span className="hidden sm:inline">Reset view</span>
+    </button>
+  );
+}
+
+export function ViewerToolbar({ preset, onPreset, onRotate, onResetView, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount }: {
   preset: "top" | Angle;
   onPreset: (p: "top" | Angle) => void;
   onRotate: (deg: number) => void;
+  onResetView: () => void;
   show2D: boolean;
   onShow2D: (v: boolean) => void;
   canShow2D: boolean;
@@ -63,6 +78,8 @@ export function ViewerToolbar({ preset, onPreset, onRotate, show2D, onShow2D, ca
           className="rounded-full p-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900">
           <RotateIcon flip />
         </button>
+        <span className="mx-0.5 h-4 w-px bg-slate-200" aria-hidden />
+        <ResetViewButton onClick={onResetView} />
       </div>
       <button
         type="button"

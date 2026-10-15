@@ -8,7 +8,7 @@ import { LabelLayer } from "./LabelLayer";
 import { PlanScene, type Angle, type ViewMode } from "./PlanScene";
 import { RoomPanel } from "./RoomPanel";
 import { useLayout } from "./useLayout";
-import { Legend, ViewerToolbar } from "./ViewerToolbar";
+import { Legend, ResetViewButton, ViewerToolbar } from "./ViewerToolbar";
 
 export interface FloorPlan3DProps {
   /** Parsed plan JSON from the backend (`POST /api/parse` or `GET /api/plans/{name}`). */
@@ -197,6 +197,13 @@ export function FloorPlan3D({
     setAngleOffset(0);
     setView("3d");
   };
+  /** Reset view: the starting view and angle, re-fitted (also after orbiting, zooming or panning by hand). */
+  const resetView = () => {
+    setView(initialView);
+    setAngle("corner");
+    setAngleOffset(0);
+    setResetKey((k) => k + 1);
+  };
   /** Rotate 45°: turns the 3D camera; from the top view it switches to the 3D corner view turned by 45°. */
   const rotateView = (deg: number) => {
     if (view === "top") {
@@ -258,6 +265,7 @@ export function FloorPlan3D({
             preset={view === "top" ? "top" : angle}
             onPreset={pickPreset}
             onRotate={rotateView}
+            onResetView={resetView}
             show2D={show2D}
             onShow2D={setShow2D}
             canShow2D={Boolean(imageUrl)}
@@ -274,6 +282,11 @@ export function FloorPlan3D({
           />
           <Legend model={model} editing={editing} />
         </>
+      )}
+      {!showControls && (
+        <div className="absolute left-2 top-2 z-30 rounded-full bg-white/90 p-0.5 shadow-sm ring-1 ring-slate-200 backdrop-blur sm:left-3 sm:top-3">
+          <ResetViewButton onClick={resetView} />
+        </div>
       )}
       {model.scaleMissing && (
         <div className="absolute bottom-3 right-3 z-30 rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-800 ring-1 ring-amber-200">
