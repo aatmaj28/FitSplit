@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router";
+import { useCatalog, type CatalogListing } from "../../data/catalog";
 import { baths, LISTINGS, money, type Listing } from "../../data/listings";
 import { getPlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { computeSplit } from "../../rentSplit";
+import { MediaImg } from "../../media/PhotoViewer";
 import { EmptyState } from "../ui";
 import { R } from "./RoombaeLayout";
 
@@ -27,12 +29,19 @@ export function useRoomPrices(): Record<string, { min: number; max: number }> {
   return prices;
 }
 
-export function ListingCard({ l, price, badge }: { l: Listing; price?: { min: number; max: number }; badge?: React.ReactNode }) {
+export function ListingCard({ l, price, badge }: { l: Listing | CatalogListing; price?: { min: number; max: number }; badge?: React.ReactNode }) {
+  const c = l as Partial<CatalogListing>;
+  const photo = c.fromMedia && c.media?.cover ? c.media : null;
+  const has = [c.fromMedia ? null : "3D view", c.media ? "Photos" : null].filter(Boolean).join(" · ");
   return (
     <Link to={`/roombae/listings/${l.id}`} className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md" data-listing={l.id}>
       <div className="relative aspect-[4/3] overflow-hidden bg-white">
-        <img src={l.image} alt={`${l.title} floor plan`} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-3" />
-        <span className="absolute left-2 top-2 rounded-full bg-slate-900/80 px-2 py-0.5 text-[11px] font-semibold text-white">3D view</span>
+        {photo ? (
+          <MediaImg jobId={photo.jobId} file={photo.cover!} alt={`${l.title} photo`} className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <img src={l.image} alt={`${l.title} floor plan`} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-3" />
+        )}
+        <span className="absolute left-2 top-2 rounded-full bg-slate-900/80 px-2 py-0.5 text-[11px] font-semibold text-white">{has}</span>
         {badge && <span className="absolute right-2 top-2">{badge}</span>}
       </div>
       <div className="flex flex-1 flex-col gap-1 border-t border-slate-100 p-3.5">
@@ -43,7 +52,7 @@ export function ListingCard({ l, price, badge }: { l: Listing; price?: { min: nu
         <div className="text-xs text-slate-500">
           {l.location} · {l.beds} bed · {baths(l.baths)} · {l.sqft.toLocaleString()} sq ft
         </div>
-        {l.beds > 1 && (
+        {l.beds > 1 && c.fromMedia !== true && (
           <div className="text-xs text-slate-600">
             {price ? <>Rooms {money(price.min)} to {money(price.max)}/mo <span className="text-slate-400">(fair split)</span></> : <span className="text-slate-400">Working out room prices…</span>}
           </div>
@@ -58,6 +67,7 @@ const BUDGETS = [0, 1300, 1400, 1500, 1800, 2700, 4000];
 export default function Listings() {
   const [params, setParams] = useSearchParams();
   const { group, listings: published } = useDemo();
+  const catalog = useCatalog();
   const prices = useRoomPrices();
   const q = params.get("q") ?? "";
   const beds = params.get("beds") ?? "any";
@@ -69,15 +79,14 @@ export default function Listings() {
     else p.set(k, v);
     setParams(p, { replace: true });
   };
-  const live = new Set(published.filter((p) => p.status === "published").map((p) => p.id));
   const shown = useMemo(
     () =>
-      LISTINGS.filter((l) => live.has(l.id))
+      catalog
         .filter((l) => !q || l.title.toLowerCase().includes(q.toLowerCase()))
         .filter((l) => beds === "any" || l.beds === Number(beds))
         .filter((l) => !budget || (prices[l.id]?.min ?? l.rent / l.beds) <= budget)
         .filter((l) => !fitsGroup || !group || l.beds === group.members.length),
-    [q, beds, budget, fitsGroup, group, prices, published], // eslint-disable-line react-hooks/exhaustive-deps
+    [q, beds, budget, fitsGroup, group, prices, published], // eslint-disable-line react-hooks/exhaustive-deps -- catalog derives from published
   );
   const chip = (active: boolean) => `rounded-full px-3 py-1 text-sm font-medium ring-1 transition-colors ${active ? `${R.soft} ring-[#e8553e]/40` : "bg-white text-slate-600 ring-slate-200 hover:text-slate-900"}`;
   return (

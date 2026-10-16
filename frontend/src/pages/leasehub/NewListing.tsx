@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { parseUpload } from "../../api";
 import { FloorPlan3D } from "../../components/FloorPlan3D";
 import { formatSqft } from "../../components/FloorPlan3D/theme";
@@ -10,6 +10,7 @@ import { demo, SYNDICATION, useDemo } from "../../data/store";
 import type { ParsedPlan } from "../../types";
 import { ErrorState } from "../ui";
 import { L } from "./LeaseHubLayout";
+import NewListingMedia from "./NewListingMedia";
 
 type Parsed = { plan: ParsedPlan; imageUrl: string; seconds: number; cached: boolean };
 const TYPE_ORDER = ["bedroom", "living", "kitchen", "dining", "bathroom", "closet", "balcony", "foyer", "other"];
@@ -56,7 +57,29 @@ function ParseProgress({ started }: { started: number }) {
   );
 }
 
+type Source = "plan" | "video";
+
+/** "Floor plan" | "Video or photos" (kept in the URL, so the guided demo can link to either). */
+function SourceSwitch({ value, onChange }: { value: Source; onChange: (s: Source) => void }) {
+  const opt = (s: Source, label: string, hint: string) => (
+    <button type="button" role="tab" aria-selected={value === s} onClick={() => onChange(s)} data-source={s}
+      className={`flex-1 rounded-lg px-3 py-2 text-left transition-colors sm:flex-none sm:px-4 ${value === s ? "bg-white text-slate-900 shadow-sm ring-1 ring-slate-200" : "text-slate-500 hover:text-slate-800"}`}>
+      <span className="block text-sm font-semibold">{label}</span>
+      <span className="block text-[11px] text-slate-400">{hint}</span>
+    </button>
+  );
+  return (
+    <div role="tablist" aria-label="Start from" className="inline-flex w-full gap-1 rounded-xl bg-slate-100 p-1 sm:w-auto">
+      {opt("plan", "Floor plan", "3D view and room sizes")}
+      {opt("video", "Video or photos", "Amenities, description, walkthrough")}
+    </div>
+  );
+}
+
 export default function NewListing() {
+  const [params, setParams] = useSearchParams();
+  const source: Source = params.get("source") === "video" ? "video" : "plan";
+  const setSource = (s: Source) => setParams(s === "video" ? { source: "video" } : {}, { replace: true });
   const offline = useOffline();
   const { listings } = useDemo();
   const [parsed, setParsed] = useState<Parsed | null>(null);
@@ -122,12 +145,21 @@ export default function NewListing() {
 
   return (
     <div className="space-y-5">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">New listing</h1>
-        <p className="text-sm text-slate-500">Upload the floor plan once. You get a 3D view and every room's size, and renters get the same when the listing goes out.</p>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">New listing</h1>
+          <p className="text-sm text-slate-500">
+            {source === "plan"
+              ? "Upload the floor plan once. You get a 3D view and every room's size, and renters get the same when the listing goes out."
+              : "Upload a walkthrough video or your photos. We tag every amenity with the photo that shows it and write the description."}
+          </p>
+        </div>
+        {!parsed && <SourceSwitch value={source} onChange={setSource} />}
       </div>
 
-      {!parsed && (
+      {source === "video" && !parsed && <NewListingMedia offline={offline} />}
+
+      {source === "plan" && !parsed && (
         <div className="grid gap-4 lg:grid-cols-2">
           <section className="space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <h2 className="font-semibold text-slate-900">1. Floor plan</h2>

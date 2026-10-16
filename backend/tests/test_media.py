@@ -72,11 +72,14 @@ def test_photos_heic_and_exif_rotation(tmp_path):
 
 
 def fake_tagger(answer_for):
-    """A vision call that answers per "Photo N" label."""
+    """A vision call that answers per "Photo N" label (and puts every photo in one room when asked
+    to group contact sheets)."""
     calls = []
 
     def call(images, prompt, **kw):
         calls.append([lbl for lbl, _ in images])
+        if images[0][0].startswith("Contact sheet"):
+            return ProviderReply(json.dumps({"rooms": [{"id": "a", "type": "living", "frames": list(range(1, 51))}], "connections": []}), "fake", 0.01)
         frames_ = [answer_for(int(lbl.split()[1])) for lbl, _ in images]
         return ProviderReply(json.dumps({"frames": frames_}), "fake", 0.01)
 
@@ -160,10 +163,12 @@ def test_media_job_endpoint(tmp_path, monkeypatch, keys, client):
     assert r.status_code == 200, r.text
     job = r.json()
     assert job["status"] == "complete" and job["id"].startswith("mj_") and len(job["frames"]) == 5
-    assert [s["status"] for s in job["steps"]][:2] == ["done", "done"]
+    assert [s["status"] for s in job["steps"]] == ["done", "done", "done", "skipped", "skipped", "done"]
+    assert [r["name"] for r in job["rooms"]] == ["Living room"] and job["walkthrough"]["rooms"][0]["photos"][0] == "frames/f001.jpg"
     assert {a["id"] for a in job["amenities"]} >= {"dishwasher", "bathtub"} and job["description"]["short"]
     assert job["insight"]["new_filter_matches"] >= 1
     assert client.get(f"/api/media/jobs/{job['id']}").json()["status"] == "complete"
+    assert [(j["id"], j["frames"], j["cover"]) for j in client.get("/api/media/jobs").json()] == [(job["id"], 5, "frames/f001.jpg")]
     assert client.get(f"/api/media/jobs/{job['id']}/files/frames/f001.jpg").status_code == 200
     assert client.get(f"/api/media/jobs/{job['id']}/files/../job.json").status_code == 404
     # same upload again: the stored job comes straight back
@@ -171,3 +176,105 @@ def test_media_job_endpoint(tmp_path, monkeypatch, keys, client):
     # one video or several photos; known file types only
     assert client.post("/api/media/jobs", files=[("files", ("a.mp4", b"x", "video/mp4")), ("files", ("b.jpg", jpg(9), "image/jpeg"))]).status_code == 422
     assert client.post("/api/media/jobs", files=[("files", ("notes.txt", b"hi", "text/plain"))]).status_code == 415
+
+
+# ----------------------------------------------------------------------------- rooms + walkthrough
+
+from app.media import walkthrough as wt  # noqa: E402
+
+
+def tag(n: int, room: str) -> dict:
+    return tagging.FrameTag.model_validate({"frame": n, "room_type": room}).model_dump()
+
+
+def test_walk_order_grouping_merges_blips_and_numbers_rooms():
+    seq = ["living", "living", "kitchen", "living", "hallway", "bedroom", "bedroom", "bathroom", "hallway", "bedroom"]
+    tags = [tag(i + 1, r) for i, r in enumerate(seq)]
+    g = wt.finalize(wt.heuristic(tags), tags)
+    assert [(r["name"], r["frames"]) for r in g["rooms"]][:2] == [("Living room", [1, 2, 3, 4]), ("Hallway 1", [5])]
+    assert [r["name"] for r in g["rooms"]] == ["Living room", "Hallway 1", "Bedroom 1", "Bathroom", "Hallway 2", "Bedroom 2"]
+    assert g["entrance"] == "r1" and len(g["connections"]) == 5
+
+
+def test_model_grouping_is_cleaned_up_and_connected():
+    tags = [tag(i, r) for i, r in enumerate(["living", "living", "kitchen", "kitchen", "living", "bedroom", "bedroom"], 1)]
+    raw = wt.GroupOut.model_validate({
+        "rooms": [{"id": "a", "type": "living room", "frames": [1, 2, 5, 99]}, {"id": "b", "type": "kitchen", "frames": [3, 4, 2]},
+                  {"id": "c", "type": "bedroom", "frames": [6], "entrance": False}],
+        "connections": [{"a": "a", "b": "b", "via_frames": [2, 3], "kind": "opening"}, {"a": "b", "b": "zzz"}],
+    })
+    g = wt.finalize(raw, tags)
+    assert [(r["id"], r["type"], r["frames"]) for r in g["rooms"]] == [("r1", "living", [1, 2, 5]), ("r2", "kitchen", [3, 4]), ("r3", "bedroom", [6, 7])]
+    pairs = {(c["a"], c["b"]): c["source"] for c in g["connections"]}
+    assert pairs == {("r1", "r2"): "model", ("r1", "r3"): "walk order"}  # 5 -> 6 walks from the living room into the bedroom
+
+
+def test_group_rooms_uses_one_call_on_contact_sheets(tmp_path, monkeypatch, keys):
+    calls = []
+
+    def fake(images, prompt, **kw):
+        calls.append([lbl for lbl, _ in images])
+        return ProviderReply(json.dumps({"rooms": [{"id": "x", "type": "kitchen", "frames": list(range(1, 15))},
+                                                   {"id": "y", "type": "bathroom", "frames": list(range(15, 31))}],
+                                         "connections": [{"a": "x", "b": "y", "via_frames": [14, 15]}]}), "fake", 0.01)
+
+    monkeypatch.setitem(vision_multi.CALLS, "claude", fake)
+    (tmp_path / "frames").mkdir()
+    for i in range(1, 31):
+        Image.fromarray(scene(i)[:, :, ::-1]).save(tmp_path / f"frames/f{i:03d}.jpg")
+    job = {"frames": [{"id": i, "file": f"frames/f{i:03d}.jpg"} for i in range(1, 31)], "tags": [tag(i, "kitchen") for i in range(1, 31)]}
+    detail = wt.group_rooms(job, tmp_path, lambda p, d: None)
+    assert calls == [["Contact sheet 1: photos 1-24", "Contact sheet 2: photos 25-30"]]
+    assert [r["name"] for r in job["rooms"]] == ["Kitchen", "Bathroom"] and "2 rooms" in detail and job["rooms_source"] == "claude"
+
+
+def wide_scene(w: int = 3200, h: int = 900) -> np.ndarray:
+    rng = np.random.default_rng(0)
+    img = np.full((h, w, 3), 200, np.uint8)
+    for _ in range(900):
+        cv2.circle(img, (int(rng.integers(0, w)), int(rng.integers(0, h))), int(rng.integers(6, 40)), tuple(int(c) for c in rng.integers(0, 255, 3)), -1)
+    return img
+
+
+def test_walkthrough_stitches_a_pan_and_falls_back_to_photos(tmp_path):
+    big = wide_scene()
+    (tmp_path / "frames").mkdir()
+    frames = []
+    for i, x in enumerate(range(0, 3200 - 1066, 420), 1):  # room 1: a pan across one wall (stitches)
+        cv2.imwrite(str(tmp_path / f"frames/f{i:03d}.jpg"), cv2.resize(big[50:850, x:x + 1066], (800, 600)))
+        frames.append(i)
+    for j in range(2):  # room 2: two unrelated photos (doesn't stitch)
+        i = len(frames) + 1
+        cv2.imwrite(str(tmp_path / f"frames/f{i:03d}.jpg"), cv2.resize(scene(40 + j), (800, 600)))
+        frames.append(i)
+    job = {"frames": [{"id": i, "file": f"frames/f{i:03d}.jpg"} for i in frames],
+           "rooms": [{"id": "r1", "name": "Living room", "type": "living", "frames": frames[:6]}, {"id": "r2", "name": "Bedroom", "type": "bedroom", "frames": frames[6:]}],
+           "connections": [{"a": "r1", "b": "r2", "via": [6, 7], "kind": "door"}], "entrance": "r1"}
+    detail = wt.build_walkthrough(job, tmp_path, lambda p, d: None)
+    living, bed = job["walkthrough"]["rooms"]
+    assert living["pano"] == "pano/r1.jpg" and (tmp_path / "pano/r1.jpg").is_file() and living["pano_size"][0] > 1.5 * 800
+    assert bed["pano"] is None and bed["photos"] == ["frames/f007.jpg", "frames/f008.jpg"]
+    # the door to the bedroom is where the walker left the living room: its last frame, at the right end
+    assert living["hotspots"][0]["to"] == "r2" and living["hotspots"][0]["frame"] == 6 and living["hotspots"][0]["x"] > 0.7
+    assert bed["hotspots"][0] == {"to": "r1", "name": "Living room", "frame": 7, "x": None, "photo": 0}
+    assert detail.startswith("1 of 2 rooms stitched")
+    assert json.loads((tmp_path / "walk/walkthrough.json").read_text())["entrance"] == "r1"
+
+
+def test_finished_job_resumes_new_steps_without_retagging(tmp_path, monkeypatch):
+    monkeypatch.setattr(jobs, "MEDIA_DIR", tmp_path)
+    ran = []
+    monkeypatch.setitem(jobs.BUILTIN, "extract", lambda job, d, p: ran.append("extract"))
+    monkeypatch.setitem(jobs.BUILTIN, "tag", lambda job, d, p: ran.append("tag"))
+    monkeypatch.setitem(jobs.BUILTIN, "rooms", lambda job, d, p: ran.append("rooms") or "2 rooms")
+    monkeypatch.delitem(jobs.BUILTIN, "walkthrough")
+    f = tmp_path / "in.jpg"
+    f.write_bytes(b"photo")
+    job = jobs.create([f], background=False)
+    assert ran == ["extract", "tag", "rooms"] and job["steps"][5]["status"] == "skipped" and not jobs.upgradable(jobs.load(job["id"]))
+    monkeypatch.setitem(jobs.BUILTIN, "walkthrough", lambda job, d, p: ran.append("walkthrough") or "stitched")
+    g = tmp_path / "again.jpg"
+    g.write_bytes(b"photo")
+    again = jobs.create([g], background=False)  # same content: resume, not a new job
+    assert again["id"] == job["id"] and ran[3:] == ["walkthrough"] and again["steps"][5]["detail"] == "stitched"
+    assert again["status"] == "complete" and [s["status"] for s in again["steps"]][:3] == ["done"] * 3

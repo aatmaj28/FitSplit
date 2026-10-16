@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { listing, money } from "../../data/listings";
 import { useDemo, type AgentListing } from "../../data/store";
+import { MediaImg } from "../../media/PhotoViewer";
 import { VerdictBadge } from "../../roommates/NegotiationView";
 import { EmptyState, Stat } from "../ui";
 import { L } from "./LeaseHubLayout";
@@ -101,12 +102,14 @@ export default function Dashboard() {
                 <li key={a.id}>
                   <Link to={`/leasehub/listings/${a.id}`} className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50" data-agent-listing={a.id}>
                     <div className="h-14 w-16 shrink-0 overflow-hidden rounded-lg bg-white ring-1 ring-slate-200">
-                      {info.image && <img src={info.image} alt="" className="h-full w-full object-contain p-1" />}
+                      {info.image ? <img src={info.image} alt="" className="h-full w-full object-contain p-1" />
+                        : a.media?.cover ? <MediaImg jobId={a.media.jobId} file={a.media.cover} className="h-full w-full object-cover" /> : null}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="truncate font-medium text-slate-900">{info.title}</div>
-                      <div className="text-xs text-slate-500">{money(info.rent)}/mo · {info.beds} bd / {info.baths} ba · {info.sqft.toLocaleString()} sq ft</div>
+                      <div className="text-xs text-slate-500">{money(info.rent)}/mo · {info.beds} bd / {info.baths} ba{info.sqft ? ` · ${info.sqft.toLocaleString()} sq ft` : ""}</div>
                       <div className="mt-1 flex flex-wrap gap-1">
+                        {a.media && <span className="rounded bg-blue-50 px-1.5 py-px text-[10px] font-medium text-blue-700">{a.media.amenities.length} amenities tagged</span>}
                         {a.syndicated.map((s) => <span key={s} className="rounded bg-slate-100 px-1.5 py-px text-[10px] text-slate-600">{s} ✓</span>)}
                       </div>
                     </div>

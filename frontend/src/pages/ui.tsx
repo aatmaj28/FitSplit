@@ -64,3 +64,18 @@ export const btn = {
   base: "inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50",
   ghost: "bg-white text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50",
 };
+
+/** Small pill tabs above a listing's main view (3D / Walkthrough / Photos); hidden with one tab. */
+export function ViewTabs<T extends string>({ value, onChange, tabs }: { value: T; onChange: (v: T) => void; tabs: { id: T; label: string }[] }) {
+  if (tabs.length < 2) return null;
+  return (
+    <div role="tablist" aria-label="View" className="inline-flex gap-1 rounded-full bg-slate-100 p-1">
+      {tabs.map((t) => (
+        <button key={t.id} type="button" role="tab" aria-selected={value === t.id} onClick={() => onChange(t.id)} data-view-tab={t.id}
+          className={`rounded-full px-3.5 py-1 text-sm font-medium transition-colors ${value === t.id ? "bg-white text-slate-900 shadow-sm ring-1 ring-slate-200" : "text-slate-500 hover:text-slate-800"}`}>
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}

@@ -6,6 +6,8 @@ GET /api/media/jobs/{id} reports the current step and progress.
 data/media_jobs/<id>/job.json     status, steps and results
 data/media_jobs/<id>/input/       the original upload (gitignored)
 data/media_jobs/<id>/frames/      the kept frames (1024 px)
+data/media_jobs/<id>/pano/        per-room panoramas
+data/media_jobs/<id>/walk/        walkthrough.json (rooms, panoramas, hotspots)
 """
 from __future__ import annotations
 
@@ -21,7 +23,7 @@ from typing import Callable, Optional
 from ..config import DATA_DIR
 from . import describe as describe_mod
 from . import frames as frames_mod
-from . import tagging
+from . import tagging, walkthrough
 
 MEDIA_DIR = DATA_DIR / "media_jobs"
 PIPELINE_VERSION = "media-1"
@@ -91,7 +93,7 @@ def create(uploads: list[Path], *, listing_id: Optional[str] = None, existing: O
     if old and old["status"] in ("queued", "running", "complete"):
         for p in uploads:
             p.unlink(missing_ok=True)
-        return old
+        return resume(old, background=background) if old["status"] == "complete" and upgradable(old) else old
     d = job_dir(jid)
     (d / "input").mkdir(parents=True, exist_ok=True)
     inputs = []
@@ -104,6 +106,7 @@ def create(uploads: list[Path], *, listing_id: Optional[str] = None, existing: O
         "steps": [{"id": s, "label": label, "status": "pending", "detail": ""} for s, label in STEPS],
         "listing_id": listing_id, "existing_amenities": existing or [], "inputs": inputs,
         "frames": [], "tags": [], "amenities": [], "rooms_seen": {}, "description": None, "insight": None,
+        "rooms": [], "connections": [], "entrance": None, "walkthrough": None,
         "error": None, "created": _now(), "finished": None,
     }
     with _lock:
@@ -117,6 +120,28 @@ def create(uploads: list[Path], *, listing_id: Optional[str] = None, existing: O
     return job
 
 
+def upgradable(job: dict) -> bool:
+    """A finished job with steps that were skipped (not built yet then) but exist now."""
+    return any(s["status"] == "skipped" and (s["id"] in BUILTIN or s["id"] in EXTRA_STEPS) for s in job["steps"])
+
+
+def resume(job: dict, *, background: Optional[bool] = None) -> dict:
+    """Run the steps a job hasn't done (keeps frames, tags and everything else that is done)."""
+    with _lock:
+        if job["id"] in RUNNING:
+            return RUNNING[job["id"]]
+        job = {**job, "status": "queued", "error": None, "finished": None}
+        job["steps"] = [s if s["status"] == "done" else {**s, "status": "pending", "detail": ""} for s in job["steps"]]
+        RUNNING[job["id"]] = job
+    _save(job)
+    run = lambda: _run(job)  # noqa: E731
+    if BACKGROUND if background is None else background:
+        threading.Thread(target=run, name=f"media-{job['id']}", daemon=True).start()
+    else:
+        run()
+    return job
+
+
 def _run(job: dict) -> None:
     d = job_dir(job["id"])
     with _one_at_a_time:
@@ -124,6 +149,8 @@ def _run(job: dict) -> None:
         try:
             for i, (sid, _) in enumerate(STEPS):
                 step = job["steps"][i]
+                if step["status"] == "done":  # resumed job: keep what is done
+                    continue
                 job["step"], step["status"] = sid, "running"
                 done_before = sum(WEIGHTS[s] for s, _ in STEPS[:i])
 
@@ -183,7 +210,24 @@ def _listing(listing_id: Optional[str]) -> Optional[dict]:
     return {"title": m.get("title") or listing_id.replace("_", " "), "beds": m.get("beds"), "baths": m.get("baths")} if isinstance(m, dict) else None
 
 
-BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag}
+BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthrough.group_rooms, "walkthrough": walkthrough.build_walkthrough}
+
+
+def list_jobs() -> list[dict]:
+    """Finished jobs, newest first: what the upload page offers to reopen."""
+    out = []
+    for f in MEDIA_DIR.glob("mj_*/job.json"):
+        try:
+            job = json.loads(f.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        if job.get("status") != "complete":
+            continue
+        names = [i["name"] for i in job.get("inputs", [])]
+        out.append({"id": job["id"], "title": job.get("title") or (names[0] if len(names) == 1 else f"{len(names)} photos"),
+                    "inputs": ", ".join(names[:3]) + ("…" if len(names) > 3 else ""), "frames": len(job.get("frames", [])),
+                    "cover": (job.get("frames") or [{}])[0].get("file"), "created": job.get("created")})
+    return sorted(out, key=lambda j: j["created"] or "", reverse=True)
 
 
 def summary(job: dict) -> dict:

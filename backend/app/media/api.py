@@ -2,7 +2,9 @@
 
     POST /api/media/jobs                 multipart: files (one video OR several photos), listing_id?,
                                          existing_amenities? (comma-separated ids) -> the job
+    GET  /api/media/jobs                 finished jobs, newest first
     GET  /api/media/jobs/{id}            status, current step, progress, results when done
+    POST /api/media/jobs/{id}/resume     run the steps a finished job hasn't done yet
     GET  /api/media/jobs/{id}/files/...  frames/, pano/, plan/ files of a job
 """
 from __future__ import annotations
@@ -55,12 +57,28 @@ async def create_job(files: list[UploadFile] = File(...), listing_id: Optional[s
         incoming.rmdir()
 
 
+@router.get("/jobs")
+def list_jobs() -> list[dict]:
+    return jobs.list_jobs()
+
+
 @router.get("/jobs/{jid}")
 def get_job(jid: str) -> dict:
     job = jobs.load(jid) if re.fullmatch(r"mj_[0-9a-f]{12}", jid) else None
     if job is None:
         raise HTTPException(404, f"no media job {jid!r}")
     return jobs.summary(job)
+
+
+@router.post("/jobs/{jid}/resume")
+def resume_job(jid: str) -> dict:
+    """Run the steps a finished job hasn't done yet (no re-upload, no re-tagging)."""
+    job = jobs.load(jid) if re.fullmatch(r"mj_[0-9a-f]{12}", jid) else None
+    if job is None:
+        raise HTTPException(404, f"no media job {jid!r}")
+    if job["status"] in ("queued", "running"):
+        return job
+    return jobs.summary(jobs.resume(job))
 
 
 @router.get("/jobs/{jid}/files/{path:path}")

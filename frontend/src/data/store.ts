@@ -30,13 +30,23 @@ export interface Application {
   sample?: boolean;
 }
 
+/** What a listing video / photos added: the media job, the amenities the agent kept, the description. */
+export interface ListingMedia {
+  jobId: string;
+  amenities: string[]; // ids the agent kept
+  confirmed: string[]; // ids the agent ticked
+  description: { full: string; short: string } | null;
+  cover: string | null; // "frames/f007.jpg"
+}
+
 export interface AgentListing {
-  id: string; // plan name; listings created from an upload use the parsed plan's name
+  id: string; // plan name; listings created from an upload use the parsed plan's name, from a video "media_<job>"
   status: "published" | "draft";
   publishedAt: string;
   syndicated: string[];
   views3d: number; // sample numbers, labelled as such in the UI
-  custom?: { title: string; rent: number; beds: number; baths: number; sqft: number; imageUrl?: string };
+  custom?: { title: string; rent: number; beds: number; baths: number; sqft: number; imageUrl?: string; location?: string };
+  media?: ListingMedia;
 }
 
 export interface Showing {
