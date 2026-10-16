@@ -28,6 +28,9 @@ def no_network_llm(monkeypatch, tmp_path):
 
     for name in list(text.CALLS):
         monkeypatch.setitem(text.CALLS, name, refuse_text(name))
+    from app.media import vision_multi
+    for name in list(vision_multi.CALLS):
+        monkeypatch.setitem(vision_multi.CALLS, name, refuse_text(f"{name} (media)"))
     # never count, log or cache anything in the real data/llm while testing
     monkeypatch.setattr(usage, "LLM_DIR", tmp_path / "llm")
     monkeypatch.setattr(usage, "USAGE_PATH", tmp_path / "llm" / "usage.json")

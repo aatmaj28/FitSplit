@@ -9,3 +9,5 @@ python-dotenv==1.2.4
 google-genai==2.31.0
 anthropic==1.14.0
 groq==1.7.0
+imageio-ffmpeg==0.6.0
+pillow-heif==1.8.0

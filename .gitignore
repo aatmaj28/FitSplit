@@ -40,3 +40,8 @@ dist/
 
 # runtime lock file of the LLM call counter
 data/llm/.usage.lock
+
+# listing media: the raw uploads and test videos stay local (large); frames and results are kept
+data/media/
+data/media_jobs/*/input/
+data/media_jobs/_incoming/
