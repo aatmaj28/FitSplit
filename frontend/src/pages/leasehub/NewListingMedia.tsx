@@ -7,7 +7,8 @@ import { AmenityChips, PhotoStrip } from "../../media/Amenities";
 import { useMediaJob } from "../../media/hooks";
 import { MediaImg } from "../../media/PhotoViewer";
 import { filterPhrase, mentioned, ROOM_LABEL } from "../../media/vocab";
-import { ErrorState, Spinner } from "../ui";
+import { walkOf, Walkthrough } from "../../media/Walkthrough";
+import { ErrorState, Spinner, ViewTabs } from "../ui";
 import { L } from "./LeaseHubLayout";
 
 const mb = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(bytes > 100 * 1024 * 1024 ? 0 : 1)} MB`;
@@ -181,6 +182,7 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   const [form, setForm] = useState({ title: "", location: "Boston, MA", rent: 0, beds: 1, baths: 1, sqft: 0 });
   const [publishing, setPublishing] = useState(false);
   const [published, setPublished] = useState(0);
+  const [tab, setTab] = useState<"amenities" | "walk">("amenities");
 
   useEffect(() => {
     listMediaJobs().then((r) => setRecent(r.jobs)).catch(() => {});
@@ -315,18 +317,29 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   // ---- results
   const ready = publishing && published >= SYNDICATION.length;
   const rooms = Object.entries(job.rooms_seen).filter(([t]) => t !== "other").sort((a, b) => b[1] - a[1]);
+  const walk = walkOf(job);
+  const nRooms = (job as MediaJob & { rooms?: unknown[] }).rooms?.length ?? 0;
   return (
     <div className="space-y-4" data-media-results={job.id}>
       <div className="flex flex-wrap items-center gap-2 text-sm">
         <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800 ring-1 ring-emerald-200">
-          {job.frames.length} photos tagged · {job.amenities.length} amenities found
+          {job.frames.length} photos tagged · {job.amenities.length} amenities found{nRooms ? ` · ${nRooms} rooms` : ""}
         </span>
         <span className="text-xs text-slate-500">from {job.inputs.length === 1 ? job.inputs[0].name : job.inputs.length ? `${job.inputs[0].name} and ${job.inputs.length - 1} more` : "a walkthrough video"}</span>
         <button type="button" onClick={reset} className="ml-auto text-xs font-medium text-slate-500 hover:text-slate-800">Use another video</button>
       </div>
       <MissingCallout job={job} kept={kept} existing={existing} />
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        <div className="space-y-4">
+        <div className="space-y-3">
+          <ViewTabs value={tab} onChange={setTab} tabs={[{ id: "amenities" as const, label: "Amenities" }, ...(walk ? [{ id: "walk" as const, label: `Walkthrough · ${walk.rooms.length} rooms` }] : [])]} />
+          {tab === "walk" && walk ? (
+            <div className="space-y-2">
+              <div className="h-[60vh] min-h-[380px]"><Walkthrough job={job} walk={walk} /></div>
+              <p className="text-xs text-slate-500">
+                {walk.rooms.filter((r) => r.pano).length} of {walk.rooms.length} rooms stitched into panoramas; the others show their photos. Rooms and doors come from the walk order and one AI check of the photos.
+              </p>
+            </div>
+          ) : (<>
           <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="font-semibold text-slate-900">Amenities found in the photos</h2>
@@ -346,6 +359,7 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
             </div>
             <PhotoStrip job={job} max={23} />
           </section>
+          </>)}
         </div>
         <section className="space-y-4 self-start rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
           <div>

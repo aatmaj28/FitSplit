@@ -6,11 +6,12 @@ import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { useMediaJob } from "../../media/hooks";
 import { ListingAmenities, PhotoGallery } from "../../media/ListingMedia";
+import { walkOf, Walkthrough } from "../../media/Walkthrough";
 import { EmptyState, ErrorState, PageLoading, Stat, ViewTabs } from "../ui";
 import { listingInfo } from "./Dashboard";
 import { L } from "./LeaseHubLayout";
 
-type View = "3d" | "photos";
+type View = "3d" | "walk" | "photos";
 
 export default function AgentListing() {
   const { id } = useParams();
@@ -26,7 +27,12 @@ export default function AgentListing() {
   const apps = applications.filter((x) => x.listingId === id);
   const rooms = data ? data.plan.rooms.filter((r) => r.type !== "closet").sort((x, y) => (y.area_sqft_final ?? 0) - (x.area_sqft_final ?? 0)) : [];
   const media = a.media && job?.status === "complete" ? job : null;
-  const tabs: { id: View; label: string }[] = [...(hasPlan ? [{ id: "3d" as const, label: "3D" }] : []), ...(a.media ? [{ id: "photos" as const, label: "Photos" }] : [])];
+  const walk = a.media ? walkOf(job) : null;
+  const tabs: { id: View; label: string }[] = [
+    ...(hasPlan ? [{ id: "3d" as const, label: "3D" }] : []),
+    ...(walk || (a.media && !job) ? [{ id: "walk" as const, label: "Walkthrough" }] : []),
+    ...(a.media ? [{ id: "photos" as const, label: "Photos" }] : []),
+  ];
   const asked = params.get("view") as View | null;
   const view: View = tabs.some((t) => t.id === asked) ? asked! : tabs[0]?.id ?? "3d";
   const setView = (v: View) => setParams(v === tabs[0]?.id ? {} : { view: v }, { replace: true });
@@ -53,7 +59,9 @@ export default function AgentListing() {
           <Stat label="Rooms measured" value={rooms.length} hint="from the floor plan" />
         )}
       </div>
-      {view === "photos" ? (
+      {view === "walk" ? (
+        media && walk ? <div className="h-[60vh] min-h-[400px]"><Walkthrough job={media} walk={walk} /></div> : <PageLoading label="Loading the walkthrough…" />
+      ) : view === "photos" ? (
         media ? <div className="h-[60vh] min-h-[400px]"><PhotoGallery job={media} /></div> : <PageLoading label="Loading the photos…" />
       ) : error ? (
         <ErrorState title="Couldn't load the floor plan">{error}</ErrorState>

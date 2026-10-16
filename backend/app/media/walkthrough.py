@@ -307,6 +307,26 @@ def locate(frame: np.ndarray, pano: np.ndarray) -> Optional[float]:
     return float(x) if -0.1 <= x <= 1.1 else None
 
 
+def spread(xs: list[float], gap: float = 0.12, lo: float = 0.04, hi: float = 0.96) -> list[float]:
+    """Push hotspots apart so two doors never sit on top of each other (keeps their order; only
+    the crowded ones move)."""
+    if not xs:
+        return xs
+    idx = sorted(range(len(xs)), key=lambda i: xs[i])
+    out = [min(hi, max(lo, xs[i])) for i in idx]
+    for i in range(1, len(out)):  # push right
+        out[i] = max(out[i], out[i - 1] + gap)
+    out[-1] = min(out[-1], hi)
+    for i in range(len(out) - 2, -1, -1):  # then back from the right edge
+        out[i] = min(out[i], out[i + 1] - gap)
+    if out[0] < lo:  # too many to fit with the full gap: share the width evenly
+        out = [lo + k * (hi - lo) / max(1, len(out) - 1) for k in range(len(out))]
+    res = [0.0] * len(xs)
+    for k, i in enumerate(idx):
+        res[i] = round(out[k], 3)
+    return res
+
+
 def _exit_frames(room: dict, other: dict, order: list[int]) -> tuple[int, int]:
     """(frame of `room`, frame of `other`) closest together in walk order: where you cross over."""
     pos = {f: i for i, f in enumerate(order)}
@@ -356,6 +376,10 @@ def build_walkthrough(job: dict, d: Path, progress: Callable[[float, str], None]
                     x = (e["pano_frames"].index(mine) + 0.5) / len(e["pano_frames"])
             e["hotspots"].append({"to": there, "name": other["name"], "frame": mine, "x": None if x is None else round(min(0.97, max(0.03, x)), 3),
                                   "photo": e["frames"].index(mine)})
+    for e, _ in out_rooms:
+        placed = [h for h in e["hotspots"] if h["x"] is not None]
+        for h, x in zip(placed, spread([h["x"] for h in placed])):
+            h["x"] = x
     job["walkthrough"] = {"rooms": [e for e, _ in out_rooms], "entrance": job.get("entrance"), "connections": job.get("connections", [])}
     (d / "walk").mkdir(exist_ok=True)
     (d / "walk" / "walkthrough.json").write_text(json.dumps(job["walkthrough"], indent=1))

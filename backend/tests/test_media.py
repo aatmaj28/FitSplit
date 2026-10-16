@@ -278,3 +278,10 @@ def test_finished_job_resumes_new_steps_without_retagging(tmp_path, monkeypatch)
     again = jobs.create([g], background=False)  # same content: resume, not a new job
     assert again["id"] == job["id"] and ran[3:] == ["walkthrough"] and again["steps"][5]["detail"] == "stitched"
     assert again["status"] == "complete" and [s["status"] for s in again["steps"]][:3] == ["done"] * 3
+
+
+def test_hotspots_never_overlap():
+    assert wt.spread([0.74, 0.74]) == [0.74, 0.86]
+    assert wt.spread([0.95, 0.9, 0.5]) == [0.96, 0.84, 0.5]
+    xs = wt.spread([0.5] * 9)
+    assert sorted(xs) == xs and all(b - a > 0.1 for a, b in zip(xs, xs[1:])) and xs[-1] <= 0.96

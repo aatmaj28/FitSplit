@@ -8,13 +8,14 @@ import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { useMediaJob } from "../../media/hooks";
 import { ListingAmenities, PhotoGallery } from "../../media/ListingMedia";
+import { walkOf, Walkthrough } from "../../media/Walkthrough";
 import type { SplitRow } from "../../rentSplit";
 import { assignRooms } from "../../roommates/fit";
 import { useProfiles } from "../../roommates/hooks";
 import { EmptyState, ErrorState, PageLoading, ViewTabs } from "../ui";
 import { R } from "./RoombaeLayout";
 
-type View = "3d" | "photos";
+type View = "3d" | "walk" | "photos";
 
 export default function ListingDetail() {
   const { id } = useParams();
@@ -35,7 +36,12 @@ export default function ListingDetail() {
   }, [l, rows, group, profiles]);
   if (!l) return <EmptyState title="Listing not found" action={<Link to="/roombae/listings" className={`rounded-full px-4 py-1.5 text-sm font-medium ${R.primary}`}>All listings</Link>} />;
   const ours = group?.listingId === l.id;
-  const tabs: { id: View; label: string }[] = [...(l.hasPlan ? [{ id: "3d" as const, label: "3D" }] : []), ...(l.media ? [{ id: "photos" as const, label: "Photos" }] : [])];
+  const walk = l.media ? walkOf(job) : null;
+  const tabs: { id: View; label: string }[] = [
+    ...(l.hasPlan ? [{ id: "3d" as const, label: "3D" }] : []),
+    ...(walk || (l.media && !job) ? [{ id: "walk" as const, label: "Walkthrough" }] : []),
+    ...(l.media ? [{ id: "photos" as const, label: "Photos" }] : []),
+  ];
   const asked = params.get("view") as View | null;
   const view: View = tabs.some((t) => t.id === asked) ? asked! : tabs[0]?.id ?? "3d";
   const setView = (v: View) => setParams(v === tabs[0]?.id ? {} : { view: v }, { replace: true });
@@ -65,7 +71,13 @@ export default function ListingDetail() {
           )}
         </div>
       </div>
-      {view === "photos" ? (
+      {view === "walk" ? (
+        media && walk ? (
+          <div className="h-[62vh] min-h-[420px] sm:h-[68vh]"><Walkthrough job={media} walk={walk} /></div>
+        ) : (
+          <PageLoading label="Loading the walkthrough…" />
+        )
+      ) : view === "photos" ? (
         media ? (
           <div className="h-[62vh] min-h-[420px] sm:h-[68vh]"><PhotoGallery job={media} /></div>
         ) : (

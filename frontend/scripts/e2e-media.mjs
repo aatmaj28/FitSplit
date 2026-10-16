@@ -55,6 +55,43 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   await page.keyboard.press("Escape");
   check((await page.locator("[data-photo-viewer]").count()) === 0, `${tag} Esc closes the viewer`);
 
+  // walkthrough (when the job has one): drag, hotspot to the next room, ↓ back, minimap
+  if (job.walkthrough?.rooms?.length) {
+    const walk = job.walkthrough;
+    await page.locator('[data-view-tab="walk"]').click();
+    const viewer = page.locator("[data-walkthrough]");
+    await viewer.waitFor();
+    const entrance = walk.rooms.find((r) => r.id === walk.entrance) ?? walk.rooms[0];
+    check((await page.locator("[data-room-label]").textContent()) === entrance.name, `${tag} the walkthrough starts in ${entrance.name}`);
+    check((await page.locator("[data-minimap]").count()) === 1, `${tag} minimap shows where you are`);
+    if (entrance.pano) {
+      const before = await page.locator("[data-pano-x]").getAttribute("data-pano-x");
+      const box = await page.locator("[data-pano]").boundingBox();
+      await page.mouse.move(box.x + box.width * 0.7, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(box.x + box.width * 0.2, box.y + box.height / 2, { steps: 6 });
+      await page.mouse.up();
+      check((await page.locator("[data-pano-x]").getAttribute("data-pano-x")) !== before, `${tag} dragging looks around the panorama`);
+    }
+    const next = entrance.hotspots[0];
+    if (next) {
+      // the door may be off screen after the drag (phone): a click event still reaches it
+      await viewer.locator(`[data-hotspot="${next.to}"]`).first().dispatchEvent("click");
+      await page.waitForTimeout(600);
+      check((await page.locator("[data-room-label]").textContent()) === next.name, `${tag} the hotspot walks to ${next.name}`);
+      await viewer.focus();
+      await page.keyboard.press("ArrowDown");
+      await page.waitForTimeout(600);
+      check((await page.locator("[data-room-label]").textContent()) === entrance.name, `${tag} ↓ goes back to ${entrance.name}`);
+      await page.keyboard.press("ArrowUp");
+      await page.waitForTimeout(600);
+      const names = entrance.hotspots.map((h) => h.name);
+      const now = await page.locator("[data-room-label]").textContent();
+      check(names.includes(now), `${tag} ↑ goes through the door in view (${now})`);
+    }
+    await page.locator('[data-view-tab="amenities"]').click();
+  }
+
   // remove + undo, confirm
   await chip.getByRole("button", { name: `Remove ${a.label}` }).click();
   check((await page.locator(`[data-amenity="${a.id}"]`).count()) === 0, `${tag} ✕ removes ${a.label}`);
@@ -75,8 +112,13 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   await page.locator("[data-media-published]").waitFor({ timeout: 6000 });
   check(true, `${tag} publish syndicates the listing`);
   await page.getByRole("link", { name: "See it on Roombae" }).click();
+  if (job.walkthrough?.rooms?.length) {
+    await page.locator("[data-walkthrough]").waitFor({ timeout: 10000 });
+    check(true, `${tag} Roombae opens the new listing on its walkthrough`);
+    await page.locator('[data-view-tab="photos"]').click();
+  }
   await page.locator("[data-photo-gallery]").waitFor({ timeout: 10000 });
-  check(true, `${tag} Roombae opens the new listing on its photos`);
+  check(true, `${tag} Roombae shows the listing's photos`);
   await page.locator("[data-listing-media]").waitFor();
   const shown = await page.locator("[data-listing-media] [data-amenity]").count();
   check(shown === job.amenities.length - 1, `${tag} Roombae shows the kept amenities (${shown}, one removed)`);
