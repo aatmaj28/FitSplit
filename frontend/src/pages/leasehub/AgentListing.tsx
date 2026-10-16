@@ -5,6 +5,7 @@ import { listing, money } from "../../data/listings";
 import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { estimatedPlan, layoutRects } from "../../media/api";
+import { EngineBuilding, EngineCredit, LayoutEngineSwitch, useLayoutEngine } from "../../media/EngineSwitch";
 import { useMediaJob } from "../../media/hooks";
 import { ListingAmenities, PhotoGallery } from "../../media/ListingMedia";
 import { RoomPhotos } from "../../media/RoomPhotos";
@@ -24,23 +25,31 @@ export default function AgentListing() {
   // listings made from a video have no parsed floor plan (unless the video was added to one)
   const hasPlan = Boolean(a && (listing(a.id) || !a.media));
   const { data, error } = usePlan(a && hasPlan ? id : undefined);
-  const { job } = useMediaJob(a?.media?.jobId);
+  const { job, kick } = useMediaJob(a?.media?.jobId);
+  const [engine, setEngine] = useLayoutEngine(job);
   if (!a) return <EmptyState title="Listing not found" action={<Link to="/leasehub" className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${L.primary}`}>Dashboard</Link>} />;
   const info = listingInfo(a);
   const apps = applications.filter((x) => x.listingId === id);
   const media = a.media && job?.status === "complete" ? job : null;
-  const est = !hasPlan && media ? estimatedPlan(media, info.rent) : null;
+  const fromVideo = !hasPlan && Boolean(media);
+  const est = fromVideo ? estimatedPlan(media, info.rent, engine) : null; // the engine on show (null while it's being built)
+  const anyEst = fromVideo ? (est ?? estimatedPlan(media, info.rent)) : null;
   const plan3d = hasPlan ? data : est;
   const rooms = plan3d ? plan3d.plan.rooms.filter((r) => r.type !== "closet").sort((x, y) => (y.area_sqft_final ?? 0) - (x.area_sqft_final ?? 0)) : [];
   const walk = a.media ? walkOf(job) : null;
   const look = plan3d && media ? listingLook(plan3d.plan, media) : null;
   const walkTab = walk || (a.media && !job) ? [{ id: "walk" as const, label: "Walkthrough" }] : [];
-  const tab3d = hasPlan || est ? [{ id: "3d" as const, label: "3D" }] : [];
+  const tab3d = hasPlan || anyEst ? [{ id: "3d" as const, label: "3D" }] : [];
   const photoTab = a.media ? [{ id: "photos" as const, label: "Photos" }] : [];
   const tabs: { id: View; label: string }[] = hasPlan ? [...tab3d, ...walkTab, ...photoTab] : [...walkTab, ...tab3d, ...photoTab];
   const asked = params.get("view") as View | null;
   const view: View = tabs.some((t) => t.id === asked) ? asked! : tabs[0]?.id ?? "3d";
-  const setView = (v: View) => setParams(v === tabs[0]?.id ? {} : { view: v }, { replace: true });
+  const setView = (v: View) => {
+    const p = new URLSearchParams(params); // keeps ?engine=
+    if (v === tabs[0]?.id) p.delete("view");
+    else p.set("view", v);
+    setParams(p, { replace: true });
+  };
   return (
     <div className="space-y-4">
       <div className="text-sm"><Link to="/leasehub" className="text-slate-500 hover:text-slate-800">← Dashboard</Link></div>
@@ -49,7 +58,7 @@ export default function AgentListing() {
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">{info.title}</h1>
           <p className="text-sm text-slate-500">
             {a.custom?.location || "Boston, MA"} · {money(info.rent)}/mo · {info.beds} bd / {info.baths} ba
-            {info.sqft ? ` · ${info.sqft.toLocaleString()} sq ft` : est?.plan.unit.total_sqft ? ` · ≈ ${est.plan.unit.total_sqft.toLocaleString()} sq ft (${estimateLabel(est.plan).toLowerCase()})` : ""} · published {a.publishedAt}
+            {info.sqft ? ` · ${info.sqft.toLocaleString()} sq ft` : anyEst?.plan.unit.total_sqft ? ` · ≈ ${anyEst.plan.unit.total_sqft.toLocaleString()} sq ft (${estimateLabel(anyEst.plan).toLowerCase()})` : ""} · published {a.publishedAt}
           </p>
           <div className="mt-1.5 flex flex-wrap gap-1">{a.syndicated.map((s) => <span key={s} className="rounded bg-emerald-50 px-1.5 py-0.5 text-[11px] font-medium text-emerald-800">{s} ✓</span>)}</div>
         </div>
@@ -68,24 +77,31 @@ export default function AgentListing() {
         )}
       </div>
       {view === "walk" ? (
-        media && walk ? <div className="h-[60vh] min-h-[400px]"><Walkthrough job={media} walk={walk} rects={layoutRects(media)} /></div> : <PageLoading label="Loading the walkthrough…" />
+        media && walk ? <div className="h-[60vh] min-h-[400px]"><Walkthrough job={media} walk={walk} rects={layoutRects(media, engine)} /></div> : <PageLoading label="Loading the walkthrough…" />
       ) : view === "photos" ? (
         media ? <div className="h-[60vh] min-h-[400px]"><PhotoGallery job={media} /></div> : <PageLoading label="Loading the photos…" />
       ) : error && hasPlan ? (
         <ErrorState title="Couldn't load the floor plan">{error}</ErrorState>
+      ) : fromVideo && media && !est ? (
+        <div className="space-y-2">
+          <LayoutEngineSwitch job={media} engine={engine} onChange={setEngine} onAsked={kick} />
+          <EngineBuilding job={media} engine={engine} />
+        </div>
       ) : !plan3d ? (
         <PageLoading label="Loading the 3D view…" />
       ) : (
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+          {fromVideo && media && <LayoutEngineSwitch job={media} engine={engine} onChange={setEngine} onAsked={kick} className="xl:col-span-2" />}
           <div className="relative h-[60vh] min-h-[400px]">
-            <FloorPlan3D plan={plan3d.plan} imageUrl={plan3d.imageUrl} initialLivedIn roomStyle={look?.styles}
+            <FloorPlan3D key={fromVideo ? engine : "plan"} plan={plan3d.plan} imageUrl={plan3d.imageUrl} initialLivedIn roomStyle={look?.styles}
               roomExtra={media && look ? (room) => <RoomPhotos job={media} frames={look.frames[room.id]} name={room.name} /> : undefined} />
           </div>
           <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
             <h2 className="font-semibold text-slate-900">Room sizes, as renters see them</h2>
             <p className="text-xs text-slate-500">
-              {est ? `${estimateLabel(est.plan)}: measured against doors, appliances and beds in the photos. Room positions are schematic.` : "Printed dimensions where the plan has them, measured from the drawing otherwise."}
+              {est ? `${estimateLabel(est.plan)}. ${est.plan.estimate?.method ?? ""}.` : "Printed dimensions where the plan has them, measured from the drawing otherwise."}
             </p>
+            {est && <EngineCredit plan={est.plan} className="mt-1" />}
             <table className="mt-2 w-full text-sm">
               <thead><tr className="text-left text-[11px] uppercase tracking-wide text-slate-400"><th className="py-1 font-medium">Room</th><th className="py-1 text-right font-medium">Dims</th><th className="py-1 text-right font-medium">Area</th></tr></thead>
               <tbody className="divide-y divide-slate-100">

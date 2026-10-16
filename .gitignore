@@ -45,3 +45,4 @@ data/llm/.usage.lock
 # results are bundled in frontend/public/demo/media/, and its model answers are in data/llm/cache/media/.
 data/media/
 data/media_jobs/
+backend/third_party/

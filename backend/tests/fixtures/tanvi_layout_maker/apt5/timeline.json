@@ -1,0 +1,20 @@
+{
+  "video": "videos/apt5.mp4",
+  "source": "Claude reading runs/apt5/sheets (1 tile/s); 272x480 HLS stream",
+  "segments": [
+    {"t": [0, 0],   "room": "entry",   "label": "entry", "objects": ["keycard-lock unit door", "bifold coat closet"]},
+    {"t": [1, 2],   "room": "living",  "label": "view from entry to living", "objects": ["window", "wall heater"]},
+    {"t": [3, 5],   "room": "kitchen", "label": "kitchen open to living", "objects": ["white cabinets", "black counters", "sink under window", "fridge", "range"]},
+    {"t": [6, 12],  "room": "living",  "label": "living room", "objects": ["windows on two walls", "wall heaters", "balcony door up a step"]},
+    {"t": [13, 19], "room": "hall",    "label": "entry door then hall", "objects": ["unit door", "doors", "closet with rod"]},
+    {"t": [20, 25], "room": "bath1",   "label": "bathroom 1", "objects": ["black vanity", "toilet", "mirror"]},
+    {"t": [26, 26], "room": "linen",   "label": "linen closet", "objects": ["shelves"]},
+    {"t": [27, 33], "room": "bed1",    "label": "bedroom 1", "objects": ["window", "wall heater", "closet"]},
+    {"t": [34, 37], "room": "hall",    "label": "hall", "objects": []},
+    {"t": [38, 42], "room": "bed2",    "label": "bedroom 2", "objects": ["window", "wall heater"]},
+    {"t": [43, 51], "room": "bath2",   "label": "bathroom 2 (door across hall from bedroom 2)", "objects": ["toilet", "vanity"]},
+    {"t": [52, 57], "room": "bed3",    "label": "bedroom 3 (largest)", "objects": ["window", "wall heater", "closet"]},
+    {"t": [58, 64], "room": "hall",    "label": "hall back toward living", "objects": ["bath 2 door"]},
+    {"t": [65, 65], "room": "bed3",    "label": "bedroom glimpse", "objects": ["window"]}
+  ]
+}

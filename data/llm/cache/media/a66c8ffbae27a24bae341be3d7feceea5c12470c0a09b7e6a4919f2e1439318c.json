@@ -1,0 +1,6 @@
+{
+  "value": "```json\n{\"width_ft\": 11.5, \"length_ft\": 14.5, \"confidence\": \"low\", \"plus_minus_pct\": 25, \"references\": [\"bay window sashes (~30-32 in each)\", \"baseboard heater runs\", \"ceiling height\"], \"reasoning\": \"There is no door or furniture in view, so the scale comes from the bay window: its three ~3 ft trimmed windows plus the short wall returns suggest a width of about 11-12 ft. The view from the doorway shows a depth of about 12.5 ft to the bay, plus roughly 2 ft of bay projection.\", \"ceiling_ft\": 9.0}\n```",
+  "created": "2026-10-16T16:03:58+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

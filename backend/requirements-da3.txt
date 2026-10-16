@@ -1,0 +1,17 @@
+# OPTIONAL: Depth Anything 3 room measurement from Tanvi's layout maker (app/media/layout_tanvi/measure_da3.py).
+# Not needed for anything else. After installing these, clone Depth Anything 3 into backend/third_party/:
+#   git clone https://github.com/ByteDance-Seed/Depth-Anything-3 third_party/Depth-Anything-3
+#   .venv/bin/pip install --no-deps --ignore-requires-python -e third_party/Depth-Anything-3
+# then set DA3_MEASURE=1 in backend/.env. Models download from Hugging Face on first use (~1.5 GB).
+torch
+torchvision
+huggingface_hub
+safetensors
+einops
+omegaconf
+moviepy==1.0.3
+trimesh
+imageio
+plyfile
+addict
+evo

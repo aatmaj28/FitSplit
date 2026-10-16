@@ -1,0 +1,643 @@
+{
+  "units": "m",
+  "source": "manual reading of videos/apartment1.mp4 (Claude, frame-by-frame); dimensions estimated from door/window sizes",
+  "rooms": [
+    {
+      "id": "stairs_front",
+      "type": "stairs",
+      "label": "Front stairs",
+      "rect": [
+        0,
+        0,
+        2.6,
+        4.5
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        5,
+        11
+      ],
+      "features": [
+        "unit door #2 at street level",
+        "wood stairs with handrail"
+      ]
+    },
+    {
+      "id": "living",
+      "type": "living_room",
+      "label": "Living room",
+      "rect": [
+        2.6,
+        -0.7,
+        5.0,
+        4.5
+      ],
+      "confidence": 0.85,
+      "evidence_s": [
+        16,
+        24,
+        119,
+        121
+      ],
+      "features": [
+        "3-window bay facing street",
+        "ceiling fan",
+        "thermostat",
+        "bay projects ~0.7 m toward street with angled sides"
+      ],
+      "polygon": [
+        [
+          2.6,
+          0
+        ],
+        [
+          3.6,
+          0
+        ],
+        [
+          4.1,
+          -0.7
+        ],
+        [
+          6.1,
+          -0.7
+        ],
+        [
+          6.6,
+          0
+        ],
+        [
+          7.6,
+          0
+        ],
+        [
+          7.6,
+          3.8
+        ],
+        [
+          2.6,
+          3.8
+        ]
+      ]
+    },
+    {
+      "id": "hall",
+      "type": "hallway",
+      "label": "Hall",
+      "rect": [
+        2.6,
+        3.8,
+        1.1,
+        5.1
+      ],
+      "confidence": 0.7,
+      "evidence_s": [
+        12,
+        15,
+        25,
+        27,
+        50,
+        53,
+        113,
+        118
+      ]
+    },
+    {
+      "id": "bed1",
+      "type": "bedroom",
+      "label": "Bedroom 1 (small)",
+      "rect": [
+        0,
+        4.5,
+        2.6,
+        3.2
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        28,
+        33,
+        123,
+        126
+      ],
+      "features": [
+        "1 window",
+        "ceiling light"
+      ]
+    },
+    {
+      "id": "closets",
+      "type": "closet",
+      "label": "Closets",
+      "rect": [
+        0,
+        7.7,
+        2.6,
+        1.2
+      ],
+      "confidence": 0.4,
+      "evidence_s": [
+        34,
+        38
+      ]
+    },
+    {
+      "id": "bed2",
+      "type": "bedroom",
+      "label": "Bedroom 2",
+      "rect": [
+        3.7,
+        3.8,
+        3.9,
+        3.9
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        41,
+        49,
+        127,
+        129
+      ],
+      "features": [
+        "2 windows",
+        "walk-in closet"
+      ]
+    },
+    {
+      "id": "bed2_closet",
+      "type": "closet",
+      "label": "Walk-in closet",
+      "rect": [
+        3.7,
+        7.7,
+        3.9,
+        1.2
+      ],
+      "confidence": 0.4,
+      "evidence_s": [
+        46,
+        47
+      ]
+    },
+    {
+      "id": "kitchen",
+      "type": "kitchen",
+      "label": "Kitchen",
+      "rect": [
+        2.6,
+        8.9,
+        5.0,
+        3.6
+      ],
+      "confidence": 0.85,
+      "evidence_s": [
+        53,
+        64,
+        109,
+        112,
+        131,
+        132,
+        139
+      ],
+      "features": [
+        "gas range",
+        "sink",
+        "fridge",
+        "dishwasher",
+        "dark wood cabinets",
+        "tile floor"
+      ]
+    },
+    {
+      "id": "bed3",
+      "type": "bedroom",
+      "label": "Bedroom 3",
+      "rect": [
+        0,
+        8.9,
+        2.6,
+        3.6
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        70,
+        77,
+        135,
+        136
+      ],
+      "features": [
+        "2 windows",
+        "closet"
+      ]
+    },
+    {
+      "id": "stairs_back",
+      "type": "stairs",
+      "label": "Back stairs",
+      "rect": [
+        2.6,
+        12.5,
+        3.0,
+        2.2
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        68,
+        69,
+        84,
+        89,
+        102,
+        108
+      ]
+    },
+    {
+      "id": "bath",
+      "type": "bathroom",
+      "label": "Bathroom",
+      "rect": [
+        5.6,
+        12.5,
+        2.0,
+        2.2
+      ],
+      "confidence": 0.8,
+      "evidence_s": [
+        81,
+        83,
+        137,
+        138
+      ],
+      "features": [
+        "toilet",
+        "vanity",
+        "tub/shower",
+        "hex tile floor"
+      ]
+    },
+    {
+      "id": "porch",
+      "type": "porch",
+      "label": "Back porch (covered)",
+      "rect": [
+        0,
+        14.7,
+        7.6,
+        2.2
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        90,
+        101
+      ]
+    }
+  ],
+  "openings": [
+    {
+      "type": "opening",
+      "wall": [
+        [
+          2.6,
+          3.9
+        ],
+        [
+          2.6,
+          4.4
+        ]
+      ],
+      "rooms": [
+        "stairs_front",
+        "hall"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          2.7,
+          3.8
+        ],
+        [
+          3.6,
+          3.8
+        ]
+      ],
+      "rooms": [
+        "living",
+        "hall"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          2.6,
+          5.6
+        ],
+        [
+          2.6,
+          6.4
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed1"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          2.6,
+          7.9
+        ],
+        [
+          2.6,
+          8.7
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "closets"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          3.7,
+          4.4
+        ],
+        [
+          3.7,
+          5.2
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed2"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          5.0,
+          7.7
+        ],
+        [
+          5.8,
+          7.7
+        ]
+      ],
+      "rooms": [
+        "bed2",
+        "bed2_closet"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          2.7,
+          8.9
+        ],
+        [
+          3.6,
+          8.9
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "kitchen"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          2.6,
+          11.4
+        ],
+        [
+          2.6,
+          12.2
+        ]
+      ],
+      "rooms": [
+        "kitchen",
+        "bed3"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          3.2,
+          12.5
+        ],
+        [
+          4.0,
+          12.5
+        ]
+      ],
+      "rooms": [
+        "kitchen",
+        "stairs_back"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          6.0,
+          12.5
+        ],
+        [
+          6.7,
+          12.5
+        ]
+      ],
+      "rooms": [
+        "kitchen",
+        "bath"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          3.8,
+          14.7
+        ],
+        [
+          4.6,
+          14.7
+        ]
+      ],
+      "rooms": [
+        "stairs_back",
+        "porch"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0,
+          5.6
+        ],
+        [
+          0,
+          6.5
+        ]
+      ],
+      "rooms": [
+        "bed1"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          7.6,
+          4.4
+        ],
+        [
+          7.6,
+          5.2
+        ]
+      ],
+      "rooms": [
+        "bed2"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          7.6,
+          6.2
+        ],
+        [
+          7.6,
+          7.0
+        ]
+      ],
+      "rooms": [
+        "bed2"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          7.6,
+          9.8
+        ],
+        [
+          7.6,
+          10.7
+        ]
+      ],
+      "rooms": [
+        "kitchen"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0,
+          9.4
+        ],
+        [
+          0,
+          10.2
+        ]
+      ],
+      "rooms": [
+        "bed3"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0,
+          11.0
+        ],
+        [
+          0,
+          11.8
+        ]
+      ],
+      "rooms": [
+        "bed3"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          7.6,
+          13.2
+        ],
+        [
+          7.6,
+          13.8
+        ]
+      ],
+      "rooms": [
+        "bath"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          3.7,
+          -0.15
+        ],
+        [
+          4.0,
+          -0.55
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          4.5,
+          -0.7
+        ],
+        [
+          5.7,
+          -0.7
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          6.2,
+          -0.55
+        ],
+        [
+          6.5,
+          -0.15
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    }
+  ],
+  "notes": "Layout follows the typical Boston triple-decker plan (living room at street, hall down one side, kitchen/bath/porch at rear). Which side the hall runs on, and exact room sizes, cannot be confirmed from this video."
+}

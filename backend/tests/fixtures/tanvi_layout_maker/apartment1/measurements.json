@@ -1,0 +1,153 @@
+{
+  "outside_front": {
+    "frames": 16,
+    "scale": 1.4609,
+    "height_m": 1.21,
+    "points": 400000,
+    "conf_median": 1.023,
+    "ok": false
+  },
+  "stairs_front": {
+    "frames": 40,
+    "scale": 1.1294,
+    "height_m": 1.97,
+    "points": 400000,
+    "conf_median": 1.041,
+    "dims_m": [
+      0.7,
+      1.68
+    ],
+    "outline_fraction": 0.62,
+    "ok": false
+  },
+  "hall": {
+    "frames": 40,
+    "scale": 3.1894,
+    "height_m": 2.68,
+    "points": 400000,
+    "conf_median": 1.559,
+    "dims_m": [
+      1.12,
+      5.3
+    ],
+    "outline_fraction": 0.55,
+    "ok": false
+  },
+  "living": {
+    "frames": 39,
+    "scale": 1.6601,
+    "height_m": 2.58,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      2.76,
+      3.56
+    ],
+    "outline_fraction": 0.54,
+    "ok": false
+  },
+  "bed1": {
+    "frames": 30,
+    "scale": 1.5999,
+    "height_m": 2.67,
+    "points": 400000,
+    "conf_median": 1.72,
+    "dims_m": [
+      1.96,
+      3.46
+    ],
+    "outline_fraction": 0.9,
+    "ok": true
+  },
+  "closets": {
+    "frames": 40,
+    "scale": 1.3252,
+    "height_m": 2.64,
+    "points": 400000,
+    "conf_median": 1.099,
+    "dims_m": [
+      3.16,
+      1.9
+    ],
+    "outline_fraction": 0.45,
+    "ok": false
+  },
+  "bed2": {
+    "frames": 36,
+    "scale": 2.2005,
+    "height_m": 2.69,
+    "points": 400000,
+    "conf_median": 1.65,
+    "dims_m": [
+      3.0,
+      3.52
+    ],
+    "outline_fraction": 0.67,
+    "ok": true
+  },
+  "kitchen": {
+    "frames": 40,
+    "scale": 2.107,
+    "height_m": 2.63,
+    "points": 400000,
+    "conf_median": 2.197,
+    "dims_m": [
+      5.86,
+      2.6
+    ],
+    "outline_fraction": 0.3,
+    "ok": false
+  },
+  "stairs_back": {
+    "frames": 40,
+    "scale": 2.5055,
+    "height_m": 2.12,
+    "points": 400000,
+    "conf_median": 1.195,
+    "dims_m": [
+      3.68,
+      3.02
+    ],
+    "outline_fraction": 0.09,
+    "ok": false
+  },
+  "bed3": {
+    "frames": 33,
+    "scale": 1.6645,
+    "height_m": 2.64,
+    "points": 400000,
+    "conf_median": 1.596,
+    "dims_m": [
+      2.5,
+      3.06
+    ],
+    "outline_fraction": 0.92,
+    "ok": true
+  },
+  "bath": {
+    "frames": 32,
+    "scale": 1.7765,
+    "height_m": 2.33,
+    "points": 400000,
+    "conf_median": 1.311,
+    "dims_m": [
+      2.4,
+      1.56
+    ],
+    "outline_fraction": 0.4,
+    "ok": false
+  },
+  "porch": {
+    "frames": 36,
+    "scale": 3.3745,
+    "height_m": 2.9,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      2.34,
+      2.58
+    ],
+    "outline_fraction": 0.5,
+    "ok": false
+  }
+}

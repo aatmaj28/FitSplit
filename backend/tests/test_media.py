@@ -81,6 +81,16 @@ def test_photos_heic_and_exif_rotation(tmp_path):
     assert stats == {"sampled": 2, "kept": 2, "videos": 0, "photos": 2} and [f.source for f in kept] == ["a.heic", "b.jpg"]
 
 
+TANVI_ANSWER = {
+    "timeline": {"segments": [{"t": [1, 3], "room": "living", "label": "living room"}, {"t": [4, 5], "room": "bed1", "label": "bedroom"}]},
+    "layout": {"units": "m", "notes": "test", "rooms": [
+        {"id": "living", "type": "living_room", "label": "Living room", "rect": [0, 0, 4, 4], "confidence": 0.8, "evidence_s": [1, 2]},
+        {"id": "bed1", "type": "bedroom", "label": "Bedroom", "rect": [4, 0, 3, 4], "confidence": 0.7, "evidence_s": [4]}],
+        "openings": [{"type": "door", "wall": [[4, 1], [4, 1.8]], "rooms": ["living", "bed1"]},
+                     {"type": "window", "wall": [[0, 1], [0, 2]], "rooms": ["living"]}]},
+}
+
+
 def fake_tagger(answer_for):
     """A vision call that answers per "Photo N" label (and puts every photo in one room when asked
     to group contact sheets)."""
@@ -90,6 +100,8 @@ def fake_tagger(answer_for):
         calls.append([lbl for lbl, _ in images])
         if images[0][0].startswith("Contact sheet"):
             return ProviderReply(json.dumps({"rooms": [{"id": "a", "type": "living", "frames": list(range(1, 51))}], "connections": []}), "fake", 0.01)
+        if "contact sheets of a handheld walkthrough" in prompt:  # Tanvi's layout maker, Workflow A
+            return ProviderReply(json.dumps(TANVI_ANSWER), "fake", 0.01)
         if "floor size in feet" in prompt:
             return ProviderReply(json.dumps({"width_ft": 12, "length_ft": 15, "confidence": "medium", "plus_minus_pct": 18, "references": ["door"], "reasoning": "Two doors fit."}), "fake", 0.01)
         frames_ = [answer_for(int(lbl.split()[1])) for lbl, _ in images]
@@ -181,8 +193,18 @@ def test_media_job_endpoint(tmp_path, monkeypatch, keys, client):
     job = r.json()
     assert job["status"] == "complete" and job["id"].startswith("mj_") and len(job["frames"]) == 5
     assert [s["status"] for s in job["steps"]] == ["done"] * 6
-    assert job["plan"]["layout_source"] == "estimated_from_photos" and job["plan"]["rooms"][0]["area_sqft_final"] == 180
+    # the default engine (combined): Tanvi's layout with FitSplit's size for the enclosed bedroom fused in
+    assert job["layout_engine"] == "combined" and job["plan"]["layout_engine"] == "combined" and set(job["plans"]) == {"combined"}
+    assert [r["name"] for r in job["plan"]["rooms"]] == ["Living room", "Bedroom"] and job["plan"]["credit"].endswith("Tanvi Deshpande and Aatmaj Salunke")
+    assert job["plan"]["rooms"][1]["dims_confidence"]["source"] == "fitsplit"
     assert client.get(f"/api/media/jobs/{job['id']}/files/plan/plan.png").status_code == 200
+    assert client.get(f"/api/media/jobs/{job['id']}/files/plan/combined.png").status_code == 200
+    # the engine switch: build the other two on request
+    for engine in ("tanvi", "fitsplit"):
+        built = client.post(f"/api/media/jobs/{job['id']}/engines/{engine}").json()
+        assert built["engine_status"][engine] == "done" and built["plans"][engine]["layout_engine"] == engine
+    assert set(client.get(f"/api/media/jobs/{job['id']}").json()["plans"]) == {"combined", "tanvi", "fitsplit"}
+    assert client.post(f"/api/media/jobs/{job['id']}/engines/nope").status_code == 422
     assert [r["name"] for r in job["rooms"]] == ["Living room"] and job["walkthrough"]["rooms"][0]["photos"][0] == "frames/f001.jpg"
     assert {a["id"] for a in job["amenities"]} >= {"dishwasher", "bathtub"} and job["description"]["short"]
     assert job["insight"]["new_filter_matches"] >= 1
@@ -286,6 +308,8 @@ def test_finished_job_resumes_new_steps_without_retagging(tmp_path, monkeypatch)
     monkeypatch.setitem(jobs.BUILTIN, "extract", lambda job, d, p: ran.append("extract"))
     monkeypatch.setitem(jobs.BUILTIN, "tag", lambda job, d, p: ran.append("tag"))
     monkeypatch.setitem(jobs.BUILTIN, "rooms", lambda job, d, p: ran.append("rooms") or "2 rooms")
+    monkeypatch.setitem(jobs.BUILTIN, "sizes", lambda job, d, p: None)
+    monkeypatch.setitem(jobs.BUILTIN, "layout", lambda job, d, p: None)
     monkeypatch.delitem(jobs.BUILTIN, "walkthrough")
     f = tmp_path / "in.jpg"
     f.write_bytes(b"photo")

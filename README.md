@@ -38,9 +38,11 @@ matched group with an agreed split, so the agent receives one complete applicati
     numbers), and editable.
   - **Walkthrough:** frames grouped into rooms; each room is a stitched panorama (or its photos)
     with arrows to the next room, a minimap, keyboard and touch.
-  - **Estimated floor plan:** each room sized against doors, appliances and fixtures in its photos,
-    then laid out by how the rooms connect. It feeds the same 3D view, furniture fit and rent split,
-    and every size is labelled "Estimated from photos ±N%".
+  - **Estimated floor plan:** three layout engines, switchable on the listing (see
+    [Layout engines](#layout-engines)). The default combines **Tanvi's layout maker**, which reads
+    the whole video at once, with FitSplit's room-by-room sizes from doors, appliances and fixtures.
+    It feeds the same 3D view, furniture fit and rent split, and every size is labelled "Estimated
+    from photos ±N%".
 - **Lived-in 3D.** Walls painted and floors in real materials (from the listing's photos when it has
   them), and a **Furnished** view that places furniture in every room with the fit check. Click a
   room to see its photos.
@@ -90,7 +92,8 @@ student profiles ──► AI clones negotiate (4 phases, shared memory) ──�
 
 phone video / photos ─► frames (2 fps, blur + duplicate filter) ─► tags (10 photos per vision call) ─► amenities, description
                                                                  ─► rooms (1 call on contact sheets) ─► panoramas, walkthrough
-                                                                 ─► sizes (1 call per room) ─► layout ─► plan JSON (estimated)
+video ─► Tanvi's contact sheets (1 tile / s) ─► whole-apartment layout (1 call) ─┐
+            FitSplit sizes for the enclosed rooms (1 call each) ─────────────────┴─► her fuse step ─► plan JSON (estimated)
 ```
 
 - **Floor plan parser** (`backend/app/geometry`, `pipeline.py`). OpenCV finds walls and door and
@@ -127,6 +130,54 @@ phone video / photos ─► frames (2 fps, blur + duplicate filter) ─► tags 
   - plain-English lines for every message;
   - the group's house rules.
 
+## Layout engines
+
+A floor plan from a video comes from one of three engines. Each listing has a **Layout engine**
+switch (Combined, Tanvi's, FitSplit) on the results screen and the listing pages, and the plan shows
+who built it.
+
+| Engine | What it does | By |
+|---|---|---|
+| **Combined** (default) | Tanvi's whole-apartment layout (rooms, outlines, every door and window), with FitSplit's sizes for the enclosed rooms (bedrooms, baths, halls) fused in by her least-squares step | Tanvi Deshpande and Aatmaj Salunke |
+| **Tanvi's** | [Tanvi's layout maker](https://github.com/Tanvi-15/Layout-maker) (video2floorplan), Workflow A: one model call reads time-stamped contact sheets of the whole video (one tile per second) and writes her timeline + layout.json. Sizes come from doors and windows | Tanvi Deshpande |
+| **FitSplit** | Frames grouped into rooms, each room sized against reference objects in 3-4 of its photos, rooms placed by how they connect | Aatmaj Salunke |
+
+**How they compare.** On the demo video, each engine is scored against Tanvi's hand-checked plan of
+the same apartment: her `apartment1`, whose three bedrooms she measured with Depth Anything 3. The
+score is 0 to 100: bedrooms 15, rooms 20, room types 10, connections 20, size error on the
+measured bedrooms 20, total area 15. To reproduce it, run
+`backend/.venv/bin/python backend/scripts/compare_layouts.py` (no model calls).
+
+| engine | score | rooms (ref 12) | bedrooms (ref 3) | connections P / R | measured bedrooms, area error | total sq ft (ref 1020) |
+|---|---|---|---|---|---|---|
+| fitsplit | **64.6** | 9 (7 matched) | 2 | 1.0 / 0.36 | bed1 +1%, bed3 +16% | 648 (-36%) |
+| tanvi | **79.6** | 12 (11 matched) | 3 | 0.78 / 0.64 | bed1 +29%, bed2 -7%, bed3 +52% | 1054 (+3%) |
+| combined | **84.6** | 12 (11 matched) | 3 | 0.78 / 0.64 | bed1 +7%, bed2 -15%, bed3 +15% | 926 (-9%) |
+
+- Tanvi's reading of the whole video finds every room. FitSplit missed the second bedroom because
+  its frame selection skipped those seconds (since fixed).
+- FitSplit's per-room sizes are closer on the measured bedrooms.
+- The combined engine takes both, so it's the default.
+
+![Layout engines side by side](docs/screenshots/layout_engines_compare.png)
+
+- **Choose the default** with `LAYOUT_ENGINE=combined|tanvi|fitsplit` in `backend/.env`. A new job
+  builds only that engine. The switch builds another on request
+  (`POST /api/media/jobs/{id}/engines/{engine}`) and keeps it.
+- **Model calls** for the demo video: Tanvi's step is 1 call, FitSplit's sizes 1 per enclosed room
+  (6), and everything is cached by image hash.
+- **Depth Anything 3 (optional, off by default).** Her Workflow C measures rooms in metres from the
+  video, and the combined engine then fuses those measurements in with weight 10. It needs torch and
+  about 1.5 GB of models, so it isn't in the default install. To turn it on:
+  1. `backend/.venv/bin/pip install -r backend/requirements-da3.txt`
+  2. clone [Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) into
+     `backend/third_party/` and run
+     `pip install --no-deps --ignore-requires-python -e backend/third_party/Depth-Anything-3`
+  3. set `DA3_MEASURE=1`
+- **The port.** Her code is ported into `backend/app/media/layout_tanvi/`, and every file credits
+  her. Her repo has **no license file yet**; we're confirming with her. Plain-language notes on her
+  method are in [`docs/notes/tanvi_layout_maker.md`](docs/notes/tanvi_layout_maker.md).
+
 ## Tech stack
 
 | Layer | Tools |
@@ -142,7 +193,8 @@ phone video / photos ─► frames (2 fps, blur + duplicate filter) ─► tags 
 backend/
   app/              FastAPI app: parser (geometry/, semantics/, pipeline.py), rent check,
                     roommates/ (engine, memory, checks, house rules), media/ (video and photos:
-                    frames, tagging, description, rooms, walkthrough, layout), llm/ (chain, usage cap, cache)
+                    frames, tagging, description, rooms, walkthrough, layout engines; layout_tanvi/
+                    is Tanvi's layout maker), llm/ (chain, usage cap, cache)
   scripts/          parse_all.py, seed_roommates.py
   tests/            pytest suite (never calls a real model)
 frontend/
@@ -237,8 +289,11 @@ restart `npm run dev:all`.
 
 Settings, in `backend/.env` or the shell:
 
-- **`CLAUDE_CALL_CAP`** (default `192`): a hard cap on the total number of Claude calls, counted in
+- **`CLAUDE_CALL_CAP`** (default `170`): a hard cap on the total number of Claude calls, counted in
   `data/llm/usage.json`. Once it's reached, Claude is skipped and the next provider is used.
+- **`LAYOUT_ENGINE`** (default `combined`): the layout engine new video jobs use: `combined`,
+  `tanvi` or `fitsplit` (see [Layout engines](#layout-engines)). **`DA3_MEASURE=1`** turns on the
+  optional Depth Anything 3 measurement.
 - **`VISION_CHAIN_ORDER`** (default `claude,gemini,groq`): the order of the vision providers for
   floor plan parsing, the AI rent check and listing video / photos. Use `gemini,claude,groq` to try
   Gemini's free tier first.
@@ -276,7 +331,7 @@ starting data at any time.
 ```bash
 npm test                                   # from the root: backend pytest + frontend offline checks
 
-cd backend && .venv/bin/python -m pytest -q   # backend: API, parser extras, rent check, LLM chain, roommates, media pipeline
+cd backend && .venv/bin/python -m pytest -q   # backend: API, parser extras, rent check, LLM chain, roommates, media pipeline, layout engines
 cd frontend && npm run check && npm run build # offline logic checks + type check + production build
 ```
 
@@ -346,7 +401,19 @@ More detail: [`docs/DECISIONS.md`](docs/DECISIONS.md) (every design decision),
 [`docs/OVERNIGHT_REPORT.md`](docs/OVERNIGHT_REPORT.md) and
 [`docs/notes/roommate_engine_analysis.md`](docs/notes/roommate_engine_analysis.md).
 
+## Contributors
+
+- **Tanvi Deshpande** ([@Tanvi-15](https://github.com/Tanvi-15)): the roommate engine
+  ([AI Roommate Finder](https://github.com/Tanvi-15/AI-Roommate-Finder): questionnaire, clone
+  protocol, negotiation, Setup Match / My Matches) and the
+  [layout maker](https://github.com/Tanvi-15/Layout-maker) behind the Tanvi's and Combined layout
+  engines.
+- **Aatmaj Salunke** ([@aatmaj28](https://github.com/aatmaj28)): FitSplit itself: the floor plan
+  parser, 3D view and furniture fit, rent split and AI check, both portals, the video / photo
+  pipeline (tagging, walkthrough, FitSplit layout engine) and the guided demo.
+
 ---
 
 **Built by Tanvi Deshpande and Aatmaj Salunke.** The roommate engine builds on Tanvi's
-[AI Roommate Finder](https://github.com/Tanvi-15/AI-Roommate-Finder).
+[AI Roommate Finder](https://github.com/Tanvi-15/AI-Roommate-Finder), and the default layout engine
+on her [layout maker](https://github.com/Tanvi-15/Layout-maker).

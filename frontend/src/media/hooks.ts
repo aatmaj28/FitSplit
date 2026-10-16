@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMediaJob, type MediaJob } from "./api";
 
-/** A media job, polled every second while it runs. */
+const busy = (j: MediaJob) => j.status === "queued" || j.status === "running" || Object.values(j.engine_status ?? {}).includes("running");
+
+/** A media job, polled every second while it runs (or while another layout engine is being built).
+ *  `kick` re-reads it now, e.g. after asking for another engine. */
 export function useMediaJob(id: string | null | undefined) {
   const [job, setJob] = useState<MediaJob | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [kicks, setKicks] = useState(0);
+  const shown = useRef<string | null | undefined>(undefined);
   useEffect(() => {
-    setJob(null);
-    setError(null);
+    if (shown.current !== id) {  // a different job: start empty; a kick keeps showing the current one
+      shown.current = id;
+      setJob(null);
+      setError(null);
+    }
     if (!id) return;
     let alive = true;
     let timer: number | undefined;
@@ -17,7 +25,7 @@ export function useMediaJob(id: string | null | undefined) {
         if (!alive) return;
         setJob(j);
         setError(null);
-        if (j.status === "queued" || j.status === "running") timer = window.setTimeout(tick, 1000);
+        if (busy(j)) timer = window.setTimeout(tick, 1000);
       } catch (e) {
         if (!alive) return;
         setError(String((e as Error).message ?? e));
@@ -29,8 +37,8 @@ export function useMediaJob(id: string | null | undefined) {
       alive = false;
       clearTimeout(timer);
     };
-  }, [id]);
-  return { job, error };
+  }, [id, kicks]);
+  return { job, error, kick: () => setKicks((k) => k + 1) };
 }
 
 /** Amenities the agent kept, in the job's order. */

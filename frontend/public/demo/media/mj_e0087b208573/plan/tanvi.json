@@ -1,0 +1,2239 @@
+{
+ "plan_name": "media_e0087b208573",
+ "source_image": "plan/tanvi.png",
+ "image_size": {
+  "w": 540,
+  "h": 1235
+ },
+ "semantics_provider": "photos",
+ "semantics_model": null,
+ "scale": {
+  "pixels_per_foot": 20.0,
+  "method": "estimated_from_photos",
+  "notes": "Tanvi's layout maker: the whole apartment read from the video's contact sheets; sizes from doors and windows"
+ },
+ "walls": [
+  {
+   "id": "w1",
+   "polygon": [
+    [
+     350.0,
+     960.0
+    ],
+    [
+     350.0,
+     1071.0
+    ],
+    [
+     349.0,
+     1072.0
+    ],
+    [
+     269.0,
+     1072.0
+    ],
+    [
+     268.0,
+     1071.0
+    ],
+    [
+     268.0,
+     973.0
+    ],
+    [
+     258.0,
+     973.0
+    ],
+    [
+     258.0,
+     1071.0
+    ],
+    [
+     257.0,
+     1072.0
+    ],
+    [
+     46.0,
+     1072.0
+    ],
+    [
+     45.0,
+     1071.0
+    ],
+    [
+     45.0,
+     999.0
+    ],
+    [
+     35.0,
+     999.0
+    ],
+    [
+     35.0,
+     1077.0
+    ],
+    [
+     36.0,
+     1078.0
+    ],
+    [
+     36.0,
+     1080.0
+    ],
+    [
+     37.0,
+     1081.0
+    ],
+    [
+     39.0,
+     1081.0
+    ],
+    [
+     40.0,
+     1082.0
+    ],
+    [
+     380.0,
+     1082.0
+    ],
+    [
+     380.0,
+     1072.0
+    ],
+    [
+     361.0,
+     1072.0
+    ],
+    [
+     360.0,
+     1071.0
+    ],
+    [
+     360.0,
+     960.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w2",
+   "polygon": [
+    [
+     35.0,
+     763.0
+    ],
+    [
+     35.0,
+     945.0
+    ],
+    [
+     45.0,
+     945.0
+    ],
+    [
+     45.0,
+     873.0
+    ],
+    [
+     46.0,
+     872.0
+    ],
+    [
+     257.0,
+     872.0
+    ],
+    [
+     258.0,
+     873.0
+    ],
+    [
+     258.0,
+     918.0
+    ],
+    [
+     268.0,
+     918.0
+    ],
+    [
+     268.0,
+     876.0
+    ],
+    [
+     263.0,
+     876.0
+    ],
+    [
+     262.0,
+     875.0
+    ],
+    [
+     262.0,
+     862.0
+    ],
+    [
+     46.0,
+     862.0
+    ],
+    [
+     45.0,
+     861.0
+    ],
+    [
+     45.0,
+     763.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w3",
+   "polygon": [
+    [
+     297.0,
+     422.0
+    ],
+    [
+     297.0,
+     635.0
+    ],
+    [
+     302.0,
+     635.0
+    ],
+    [
+     303.0,
+     636.0
+    ],
+    [
+     303.0,
+     652.0
+    ],
+    [
+     302.0,
+     653.0
+    ],
+    [
+     297.0,
+     653.0
+    ],
+    [
+     297.0,
+     708.0
+    ],
+    [
+     307.0,
+     708.0
+    ],
+    [
+     307.0,
+     676.0
+    ],
+    [
+     308.0,
+     675.0
+    ],
+    [
+     428.0,
+     675.0
+    ],
+    [
+     429.0,
+     676.0
+    ],
+    [
+     429.0,
+     821.0
+    ],
+    [
+     428.0,
+     822.0
+    ],
+    [
+     308.0,
+     822.0
+    ],
+    [
+     307.0,
+     821.0
+    ],
+    [
+     307.0,
+     763.0
+    ],
+    [
+     297.0,
+     763.0
+    ],
+    [
+     297.0,
+     858.0
+    ],
+    [
+     302.0,
+     858.0
+    ],
+    [
+     303.0,
+     859.0
+    ],
+    [
+     303.0,
+     872.0
+    ],
+    [
+     349.0,
+     872.0
+    ],
+    [
+     350.0,
+     873.0
+    ],
+    [
+     350.0,
+     905.0
+    ],
+    [
+     360.0,
+     905.0
+    ],
+    [
+     360.0,
+     873.0
+    ],
+    [
+     361.0,
+     872.0
+    ],
+    [
+     493.0,
+     872.0
+    ],
+    [
+     494.0,
+     873.0
+    ],
+    [
+     494.0,
+     1071.0
+    ],
+    [
+     493.0,
+     1072.0
+    ],
+    [
+     435.0,
+     1072.0
+    ],
+    [
+     435.0,
+     1082.0
+    ],
+    [
+     499.0,
+     1082.0
+    ],
+    [
+     500.0,
+     1081.0
+    ],
+    [
+     502.0,
+     1081.0
+    ],
+    [
+     503.0,
+     1080.0
+    ],
+    [
+     503.0,
+     1078.0
+    ],
+    [
+     504.0,
+     1077.0
+    ],
+    [
+     504.0,
+     867.0
+    ],
+    [
+     503.0,
+     866.0
+    ],
+    [
+     503.0,
+     864.0
+    ],
+    [
+     502.0,
+     863.0
+    ],
+    [
+     500.0,
+     863.0
+    ],
+    [
+     499.0,
+     862.0
+    ],
+    [
+     308.0,
+     862.0
+    ],
+    [
+     307.0,
+     861.0
+    ],
+    [
+     307.0,
+     833.0
+    ],
+    [
+     308.0,
+     832.0
+    ],
+    [
+     434.0,
+     832.0
+    ],
+    [
+     435.0,
+     831.0
+    ],
+    [
+     437.0,
+     831.0
+    ],
+    [
+     438.0,
+     830.0
+    ],
+    [
+     438.0,
+     828.0
+    ],
+    [
+     439.0,
+     827.0
+    ],
+    [
+     439.0,
+     670.0
+    ],
+    [
+     438.0,
+     669.0
+    ],
+    [
+     438.0,
+     667.0
+    ],
+    [
+     437.0,
+     666.0
+    ],
+    [
+     435.0,
+     666.0
+    ],
+    [
+     434.0,
+     665.0
+    ],
+    [
+     308.0,
+     665.0
+    ],
+    [
+     307.0,
+     664.0
+    ],
+    [
+     307.0,
+     571.0
+    ],
+    [
+     308.0,
+     570.0
+    ],
+    [
+     499.0,
+     570.0
+    ],
+    [
+     500.0,
+     569.0
+    ],
+    [
+     502.0,
+     569.0
+    ],
+    [
+     503.0,
+     568.0
+    ],
+    [
+     503.0,
+     566.0
+    ],
+    [
+     504.0,
+     565.0
+    ],
+    [
+     504.0,
+     513.0
+    ],
+    [
+     494.0,
+     513.0
+    ],
+    [
+     494.0,
+     559.0
+    ],
+    [
+     493.0,
+     560.0
+    ],
+    [
+     308.0,
+     560.0
+    ],
+    [
+     307.0,
+     559.0
+    ],
+    [
+     307.0,
+     422.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w4",
+   "polygon": [
+    [
+     219.0,
+     422.0
+    ],
+    [
+     219.0,
+     533.0
+    ],
+    [
+     218.0,
+     534.0
+    ],
+    [
+     46.0,
+     534.0
+    ],
+    [
+     45.0,
+     533.0
+    ],
+    [
+     45.0,
+     448.0
+    ],
+    [
+     35.0,
+     448.0
+    ],
+    [
+     35.0,
+     708.0
+    ],
+    [
+     45.0,
+     708.0
+    ],
+    [
+     45.0,
+     650.0
+    ],
+    [
+     46.0,
+     649.0
+    ],
+    [
+     223.0,
+     649.0
+    ],
+    [
+     223.0,
+     636.0
+    ],
+    [
+     224.0,
+     635.0
+    ],
+    [
+     229.0,
+     635.0
+    ],
+    [
+     229.0,
+     618.0
+    ],
+    [
+     219.0,
+     618.0
+    ],
+    [
+     219.0,
+     638.0
+    ],
+    [
+     218.0,
+     639.0
+    ],
+    [
+     46.0,
+     639.0
+    ],
+    [
+     45.0,
+     638.0
+    ],
+    [
+     45.0,
+     545.0
+    ],
+    [
+     46.0,
+     544.0
+    ],
+    [
+     218.0,
+     544.0
+    ],
+    [
+     219.0,
+     545.0
+    ],
+    [
+     219.0,
+     564.0
+    ],
+    [
+     229.0,
+     564.0
+    ],
+    [
+     229.0,
+     422.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w5",
+   "polygon": [
+    [
+     494.0,
+     408.0
+    ],
+    [
+     494.0,
+     459.0
+    ],
+    [
+     504.0,
+     459.0
+    ],
+    [
+     504.0,
+     408.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w6",
+   "polygon": [
+    [
+     75.0,
+     36.0
+    ],
+    [
+     36.0,
+     75.0
+    ],
+    [
+     36.0,
+     78.0
+    ],
+    [
+     35.0,
+     79.0
+    ],
+    [
+     35.0,
+     393.0
+    ],
+    [
+     45.0,
+     393.0
+    ],
+    [
+     45.0,
+     322.0
+    ],
+    [
+     46.0,
+     321.0
+    ],
+    [
+     218.0,
+     321.0
+    ],
+    [
+     219.0,
+     322.0
+    ],
+    [
+     219.0,
+     367.0
+    ],
+    [
+     229.0,
+     367.0
+    ],
+    [
+     229.0,
+     311.0
+    ],
+    [
+     46.0,
+     311.0
+    ],
+    [
+     45.0,
+     310.0
+    ],
+    [
+     45.0,
+     82.0
+    ],
+    [
+     78.0,
+     49.0
+    ],
+    [
+     78.0,
+     36.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w7",
+   "polygon": [
+    [
+     342.0,
+     35.0
+    ],
+    [
+     341.0,
+     36.0
+    ],
+    [
+     339.0,
+     36.0
+    ],
+    [
+     338.0,
+     37.0
+    ],
+    [
+     338.0,
+     39.0
+    ],
+    [
+     337.0,
+     40.0
+    ],
+    [
+     337.0,
+     65.0
+    ],
+    [
+     336.0,
+     66.0
+    ],
+    [
+     307.0,
+     37.0
+    ],
+    [
+     306.0,
+     37.0
+    ],
+    [
+     305.0,
+     36.0
+    ],
+    [
+     303.0,
+     36.0
+    ],
+    [
+     303.0,
+     48.0
+    ],
+    [
+     337.0,
+     82.0
+    ],
+    [
+     337.0,
+     236.0
+    ],
+    [
+     347.0,
+     236.0
+    ],
+    [
+     347.0,
+     46.0
+    ],
+    [
+     348.0,
+     45.0
+    ],
+    [
+     441.0,
+     45.0
+    ],
+    [
+     442.0,
+     46.0
+    ],
+    [
+     442.0,
+     310.0
+    ],
+    [
+     441.0,
+     311.0
+    ],
+    [
+     348.0,
+     311.0
+    ],
+    [
+     347.0,
+     310.0
+    ],
+    [
+     347.0,
+     303.0
+    ],
+    [
+     337.0,
+     303.0
+    ],
+    [
+     337.0,
+     310.0
+    ],
+    [
+     336.0,
+     311.0
+    ],
+    [
+     284.0,
+     311.0
+    ],
+    [
+     284.0,
+     321.0
+    ],
+    [
+     296.0,
+     321.0
+    ],
+    [
+     297.0,
+     322.0
+    ],
+    [
+     297.0,
+     367.0
+    ],
+    [
+     307.0,
+     367.0
+    ],
+    [
+     307.0,
+     322.0
+    ],
+    [
+     308.0,
+     321.0
+    ],
+    [
+     493.0,
+     321.0
+    ],
+    [
+     494.0,
+     322.0
+    ],
+    [
+     494.0,
+     354.0
+    ],
+    [
+     504.0,
+     354.0
+    ],
+    [
+     504.0,
+     316.0
+    ],
+    [
+     503.0,
+     315.0
+    ],
+    [
+     503.0,
+     313.0
+    ],
+    [
+     502.0,
+     312.0
+    ],
+    [
+     500.0,
+     312.0
+    ],
+    [
+     499.0,
+     311.0
+    ],
+    [
+     453.0,
+     311.0
+    ],
+    [
+     452.0,
+     310.0
+    ],
+    [
+     452.0,
+     40.0
+    ],
+    [
+     451.0,
+     39.0
+    ],
+    [
+     451.0,
+     37.0
+    ],
+    [
+     450.0,
+     36.0
+    ],
+    [
+     448.0,
+     36.0
+    ],
+    [
+     447.0,
+     35.0
+    ]
+   ],
+   "holes": []
+  }
+ ],
+ "rooms": [
+  {
+   "id": "living",
+   "name": "Front room with bay",
+   "type": "living",
+   "media_type": "living",
+   "tanvi_type": "living_room",
+   "label_point": [
+    190.96934908677747,
+    180.4281670530595
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 14' \u00d7 15'",
+   "area_sqft": 204.1,
+   "area_sqft_final": 204.1,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     45.0,
+     84.0
+    ],
+    [
+     45.0,
+     311.0
+    ],
+    [
+     337.0,
+     311.0
+    ],
+    [
+     337.0,
+     84.0
+    ],
+    [
+     297.0,
+     45.0
+    ],
+    [
+     84.0,
+     45.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "references": [
+     "3-window bay at front",
+     "ceiling fan",
+     "baseboard heat"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 16s, 19s, 21s, 118s, 120s."
+   },
+   "frames": [
+    3,
+    41,
+    42
+   ],
+   "evidence_s": [
+    16.0,
+    19.0,
+    21.0,
+    118.0,
+    120.0
+   ],
+   "features": [
+    "3-window bay at front",
+    "ceiling fan",
+    "baseboard heat"
+   ]
+  },
+  {
+   "id": "stairs_front",
+   "name": "Front entry and stair",
+   "type": "other",
+   "media_type": "hallway",
+   "tanvi_type": "stairs",
+   "label_point": [
+    394.3307189941406,
+    177.7952728271484
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 5' \u00d7 14'",
+   "area_sqft": 72.3,
+   "area_sqft_final": 72.3,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     346.83728,
+     45.0
+    ],
+    [
+     441.82415999999995,
+     45.0
+    ],
+    [
+     441.82415999999995,
+     310.59056000000004
+    ],
+    [
+     346.83728,
+     310.59056000000004
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 3s, 5s, 7s, 9s."
+   },
+   "frames": [
+    2
+   ],
+   "evidence_s": [
+    3.0,
+    5.0,
+    7.0,
+    9.0
+   ],
+   "features": []
+  },
+  {
+   "id": "hall",
+   "name": "Central hall",
+   "type": "other",
+   "media_type": "hallway",
+   "tanvi_type": "hallway",
+   "label_point": [
+    263.0971145629882,
+    479.63255310058594
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 4' \u00d7 16.5'",
+   "area_sqft": 64.6,
+   "area_sqft_final": 64.6,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     228.72704,
+     320.59056000000004
+    ],
+    [
+     297.4672,
+     320.59056000000004
+    ],
+    [
+     297.4672,
+     638.67456
+    ],
+    [
+     228.72704,
+     638.67456
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 12s, 13s, 26s, 40s, 114s, 116s."
+   },
+   "frames": [],
+   "evidence_s": [
+    12.0,
+    13.0,
+    26.0,
+    40.0,
+    114.0,
+    116.0
+   ],
+   "features": []
+  },
+  {
+   "id": "bed1",
+   "name": "Bedroom 1 (small)",
+   "type": "bedroom",
+   "media_type": "bedroom",
+   "tanvi_type": "bedroom",
+   "label_point": [
+    131.86351776123047,
+    427.1391143798828
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 9' \u00d7 11'",
+   "area_sqft": 102.5,
+   "area_sqft_final": 102.5,
+   "area_source": "estimated",
+   "has_private_bath": false,
+   "polygon": [
+    [
+     45.0,
+     320.59056000000004
+    ],
+    [
+     218.72704,
+     320.59056000000004
+    ],
+    [
+     218.72704,
+     533.68768
+    ],
+    [
+     45.0,
+     533.68768
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "references": [
+     "single window",
+     "ceiling light"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 28s, 30s, 123s, 124s."
+   },
+   "frames": [
+    4,
+    5,
+    6,
+    43,
+    44,
+    45
+   ],
+   "evidence_s": [
+    28.0,
+    30.0,
+    123.0,
+    124.0
+   ],
+   "features": [
+    "single window",
+    "ceiling light"
+   ]
+  },
+  {
+   "id": "closet1",
+   "name": "Hall closets",
+   "type": "closet",
+   "media_type": "closet",
+   "tanvi_type": "closet",
+   "label_point": [
+    131.86351776123047,
+    591.1811218261719
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 5' \u00d7 9'",
+   "area_sqft": 48.2,
+   "area_sqft_final": 48.2,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     45.0,
+     543.68768
+    ],
+    [
+     218.72704,
+     543.68768
+    ],
+    [
+     218.72704,
+     638.67456
+    ],
+    [
+     45.0,
+     638.67456
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 34s, 35s, 36s."
+   },
+   "frames": [
+    7,
+    8
+   ],
+   "evidence_s": [
+    34.0,
+    35.0,
+    36.0
+   ],
+   "features": []
+  },
+  {
+   "id": "bed2",
+   "name": "Bedroom 2",
+   "type": "bedroom",
+   "media_type": "bedroom",
+   "tanvi_type": "bedroom",
+   "label_point": [
+    400.89239501953125,
+    440.262466430664
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 10' \u00d7 12.5'",
+   "area_sqft": 122.7,
+   "area_sqft_final": 122.7,
+   "area_source": "estimated",
+   "has_private_bath": false,
+   "polygon": [
+    [
+     307.4672,
+     320.59056000000004
+    ],
+    [
+     494.31759999999997,
+     320.59056000000004
+    ],
+    [
+     494.31759999999997,
+     559.9344
+    ],
+    [
+     307.4672,
+     559.9344
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "references": [
+     "2 windows",
+     "closet"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 42s, 44s, 46s, 128s."
+   },
+   "frames": [
+    9
+   ],
+   "evidence_s": [
+    42.0,
+    44.0,
+    46.0,
+    128.0
+   ],
+   "features": [
+    "2 windows",
+    "closet"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": "Kitchen",
+   "type": "kitchen",
+   "media_type": "kitchen",
+   "tanvi_type": "kitchen",
+   "label_point": [
+    171.23359680175778,
+    755.2231140136719
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 11' \u00d7 13'",
+   "area_sqft": 146.4,
+   "area_sqft_final": 146.4,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     45.0,
+     648.67456
+    ],
+    [
+     297.4672,
+     648.67456
+    ],
+    [
+     297.4672,
+     861.77168
+    ],
+    [
+     45.0,
+     861.77168
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "references": [
+     "gas range",
+     "fridge",
+     "dishwasher",
+     "sink",
+     "window",
+     "tile floor"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 53s, 55s, 58s, 63s, 109s, 131s."
+   },
+   "frames": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    46,
+    47
+   ],
+   "evidence_s": [
+    53.0,
+    55.0,
+    58.0,
+    63.0,
+    109.0,
+    131.0
+   ],
+   "features": [
+    "gas range",
+    "fridge",
+    "dishwasher",
+    "sink",
+    "window",
+    "tile floor"
+   ]
+  },
+  {
+   "id": "bath",
+   "name": "Bathroom",
+   "type": "bathroom",
+   "media_type": "bathroom",
+   "tanvi_type": "bathroom",
+   "label_point": [
+    368.08399963378895,
+    748.6614379882814
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 6.5' \u00d7 8'",
+   "area_sqft": 51.7,
+   "area_sqft_final": 51.7,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     307.4672,
+     674.9212799999999
+    ],
+    [
+     428.7008,
+     674.9212799999999
+    ],
+    [
+     428.7008,
+     822.4016
+    ],
+    [
+     307.4672,
+     822.4016
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [
+     "tub/shower",
+     "toilet",
+     "vanity"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 80s, 82s."
+   },
+   "frames": [
+    24
+   ],
+   "evidence_s": [
+    80.0,
+    82.0
+   ],
+   "features": [
+    "tub/shower",
+    "toilet",
+    "vanity"
+   ]
+  },
+  {
+   "id": "bed3",
+   "name": "Bedroom 3 (rear)",
+   "type": "bedroom",
+   "media_type": "bedroom",
+   "tanvi_type": "bedroom",
+   "label_point": [
+    151.54855346679688,
+    971.758575439453
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 10.5' \u00d7 11'",
+   "area_sqft": 117.1,
+   "area_sqft_final": 117.1,
+   "area_source": "estimated",
+   "has_private_bath": false,
+   "polygon": [
+    [
+     45.0,
+     871.77168
+    ],
+    [
+     258.09711999999996,
+     871.77168
+    ],
+    [
+     258.09711999999996,
+     1071.74544
+    ],
+    [
+     45.0,
+     1071.74544
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [
+     "window",
+     "closet"
+    ],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 69s, 72s, 73s, 76s, 135s."
+   },
+   "frames": [
+    23,
+    48,
+    49,
+    50
+   ],
+   "evidence_s": [
+    69.0,
+    72.0,
+    73.0,
+    76.0,
+    135.0
+   ],
+   "features": [
+    "window",
+    "closet"
+   ]
+  },
+  {
+   "id": "rear_hall",
+   "name": "Rear passage",
+   "type": "other",
+   "media_type": "hallway",
+   "tanvi_type": "hallway",
+   "label_point": [
+    309.02886962890625,
+    971.7585754394531
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 4.5' \u00d7 10.5'",
+   "area_sqft": 48.2,
+   "area_sqft_final": 48.2,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     268.09711999999996,
+     871.77168
+    ],
+    [
+     349.96063999999996,
+     871.77168
+    ],
+    [
+     349.96063999999996,
+     1071.74544
+    ],
+    [
+     268.09711999999996,
+     1071.74544
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 65s, 66s, 67s."
+   },
+   "frames": [
+    22
+   ],
+   "evidence_s": [
+    65.0,
+    66.0,
+    67.0
+   ],
+   "features": []
+  },
+  {
+   "id": "rear_stairs",
+   "name": "Rear stair hall / back door",
+   "type": "other",
+   "media_type": "hallway",
+   "tanvi_type": "stairs",
+   "label_point": [
+    427.1391143798827,
+    971.7585754394531
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 7' \u00d7 10.5'",
+   "area_sqft": 75.8,
+   "area_sqft_final": 75.8,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     359.96063999999996,
+     871.77168
+    ],
+    [
+     494.31759999999997,
+     871.77168
+    ],
+    [
+     494.31759999999997,
+     1071.74544
+    ],
+    [
+     359.96063999999996,
+     1071.74544
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 68s, 86s, 87s, 102s, 103s."
+   },
+   "frames": [
+    25,
+    26,
+    27,
+    38,
+    39,
+    40
+   ],
+   "evidence_s": [
+    68.0,
+    86.0,
+    87.0,
+    102.0,
+    103.0
+   ],
+   "features": []
+  },
+  {
+   "id": "outside",
+   "name": "Rear deck",
+   "type": "balcony",
+   "media_type": "balcony",
+   "tanvi_type": "balcony",
+   "label_point": [
+    381.2073516845703,
+    1135.800598144531
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 6' \u00d7 12'",
+   "area_sqft": 69.8,
+   "area_sqft_final": 69.8,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     268.09711999999996,
+     1081.74544
+    ],
+    [
+     494.31759999999997,
+     1081.74544
+    ],
+    [
+     494.31759999999997,
+     1189.8556800000001
+    ],
+    [
+     268.09711999999996,
+     1189.8556800000001
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 40,
+    "references": [],
+    "source": "tanvi",
+    "frames": [],
+    "reasoning": "Tanvi's layout maker: estimated from doors and windows in the video. Seen at 90s, 91s, 93s, 97s."
+   },
+   "frames": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ],
+   "evidence_s": [
+    90.0,
+    91.0,
+    93.0,
+    97.0
+   ],
+   "features": []
+  }
+ ],
+ "footprint": [
+  [
+   [
+    79.0,
+    40.0
+   ],
+   [
+    40.0,
+    79.0
+   ],
+   [
+    40.0,
+    1077.0
+   ],
+   [
+    262.0,
+    1077.0
+   ],
+   [
+    263.0,
+    1078.0
+   ],
+   [
+    263.0,
+    1195.0
+   ],
+   [
+    499.0,
+    1195.0
+   ],
+   [
+    499.0,
+    867.0
+   ],
+   [
+    303.0,
+    867.0
+   ],
+   [
+    302.0,
+    866.0
+   ],
+   [
+    302.0,
+    828.0
+   ],
+   [
+    303.0,
+    827.0
+   ],
+   [
+    434.0,
+    827.0
+   ],
+   [
+    434.0,
+    670.0
+   ],
+   [
+    303.0,
+    670.0
+   ],
+   [
+    302.0,
+    669.0
+   ],
+   [
+    302.0,
+    566.0
+   ],
+   [
+    303.0,
+    565.0
+   ],
+   [
+    499.0,
+    565.0
+   ],
+   [
+    499.0,
+    316.0
+   ],
+   [
+    448.0,
+    316.0
+   ],
+   [
+    447.0,
+    315.0
+   ],
+   [
+    447.0,
+    40.0
+   ],
+   [
+    342.0,
+    40.0
+   ],
+   [
+    342.0,
+    77.0
+   ],
+   [
+    341.0,
+    78.0
+   ],
+   [
+    322.0,
+    59.0
+   ],
+   [
+    321.0,
+    59.0
+   ],
+   [
+    302.0,
+    40.0
+   ]
+  ]
+ ],
+ "openings": [
+  {
+   "id": "o1",
+   "kind": "window",
+   "axis": "h",
+   "width_ft": 11.15,
+   "polygon": [
+    [
+     79.37008,
+     32.0
+    ],
+    [
+     302.4672,
+     32.0
+    ],
+    [
+     302.4672,
+     48.0
+    ],
+    [
+     79.37008,
+     48.0
+    ]
+   ]
+  },
+  {
+   "id": "o2",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     230.28872,
+     307.59056000000004
+    ],
+    [
+     282.78216,
+     307.59056000000004
+    ],
+    [
+     282.78216,
+     323.59056000000004
+    ],
+    [
+     230.28872,
+     323.59056000000004
+    ]
+   ]
+  },
+  {
+   "id": "o3",
+   "kind": "opening",
+   "axis": "v",
+   "width_ft": 3.28,
+   "polygon": [
+    [
+     333.83728,
+     236.8504
+    ],
+    [
+     349.83728,
+     236.8504
+    ],
+    [
+     349.83728,
+     302.4672
+    ],
+    [
+     333.83728,
+     302.4672
+    ]
+   ]
+  },
+  {
+   "id": "o4",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     215.72704,
+     368.084
+    ],
+    [
+     231.72704,
+     368.084
+    ],
+    [
+     231.72704,
+     420.57744
+    ],
+    [
+     215.72704,
+     420.57744
+    ]
+   ]
+  },
+  {
+   "id": "o5",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     32.0,
+     394.33072000000004
+    ],
+    [
+     48.0,
+     394.33072000000004
+    ],
+    [
+     48.0,
+     446.82416
+    ],
+    [
+     32.0,
+     446.82416
+    ]
+   ]
+  },
+  {
+   "id": "o6",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     215.72704,
+     564.9344
+    ],
+    [
+     231.72704,
+     564.9344
+    ],
+    [
+     231.72704,
+     617.4278400000001
+    ],
+    [
+     215.72704,
+     617.4278400000001
+    ]
+   ]
+  },
+  {
+   "id": "o7",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     294.4672,
+     368.084
+    ],
+    [
+     310.4672,
+     368.084
+    ],
+    [
+     310.4672,
+     420.57744
+    ],
+    [
+     294.4672,
+     420.57744
+    ]
+   ]
+  },
+  {
+   "id": "o8",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     491.31759999999997,
+     354.96063999999996
+    ],
+    [
+     507.31759999999997,
+     354.96063999999996
+    ],
+    [
+     507.31759999999997,
+     407.45408
+    ],
+    [
+     491.31759999999997,
+     407.45408
+    ]
+   ]
+  },
+  {
+   "id": "o9",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     491.31759999999997,
+     459.94752000000005
+    ],
+    [
+     507.31759999999997,
+     459.94752000000005
+    ],
+    [
+     507.31759999999997,
+     512.44096
+    ],
+    [
+     491.31759999999997,
+     512.44096
+    ]
+   ]
+  },
+  {
+   "id": "o10",
+   "kind": "opening",
+   "axis": "h",
+   "width_ft": 3.94,
+   "polygon": [
+    [
+     223.72704,
+     635.67456
+    ],
+    [
+     302.4672,
+     635.67456
+    ],
+    [
+     302.4672,
+     651.67456
+    ],
+    [
+     223.72704,
+     651.67456
+    ]
+   ]
+  },
+  {
+   "id": "o11",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     32.0,
+     709.2913599999999
+    ],
+    [
+     48.0,
+     709.2913599999999
+    ],
+    [
+     48.0,
+     761.7847999999999
+    ],
+    [
+     32.0,
+     761.7847999999999
+    ]
+   ]
+  },
+  {
+   "id": "o12",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     294.4672,
+     709.2913599999999
+    ],
+    [
+     310.4672,
+     709.2913599999999
+    ],
+    [
+     310.4672,
+     761.7847999999999
+    ],
+    [
+     294.4672,
+     761.7847999999999
+    ]
+   ]
+  },
+  {
+   "id": "o13",
+   "kind": "opening",
+   "axis": "h",
+   "width_ft": 1.97,
+   "polygon": [
+    [
+     263.09711999999996,
+     858.77168
+    ],
+    [
+     302.4672,
+     858.77168
+    ],
+    [
+     302.4672,
+     874.77168
+    ],
+    [
+     263.09711999999996,
+     874.77168
+    ]
+   ]
+  },
+  {
+   "id": "o14",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     255.09711999999996,
+     919.26512
+    ],
+    [
+     271.09711999999996,
+     919.26512
+    ],
+    [
+     271.09711999999996,
+     971.75856
+    ],
+    [
+     255.09711999999996,
+     971.75856
+    ]
+   ]
+  },
+  {
+   "id": "o15",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     32.0,
+     945.5118400000001
+    ],
+    [
+     48.0,
+     945.5118400000001
+    ],
+    [
+     48.0,
+     998.00528
+    ],
+    [
+     32.0,
+     998.00528
+    ]
+   ]
+  },
+  {
+   "id": "o16",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     346.96063999999996,
+     906.14176
+    ],
+    [
+     362.96063999999996,
+     906.14176
+    ],
+    [
+     362.96063999999996,
+     958.6351999999999
+    ],
+    [
+     346.96063999999996,
+     958.6351999999999
+    ]
+   ]
+  },
+  {
+   "id": "o17",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.62,
+   "polygon": [
+    [
+     381.20736,
+     1068.74544
+    ],
+    [
+     433.7008,
+     1068.74544
+    ],
+    [
+     433.7008,
+     1084.74544
+    ],
+    [
+     381.20736,
+     1084.74544
+    ]
+   ]
+  }
+ ],
+ "window_lines": [],
+ "unit": {
+  "total_sqft": 1054,
+  "beds": 3,
+  "baths": 1,
+  "rent": null
+ },
+ "warnings": [
+  "Estimated from photos: room sizes \u00b135% on average",
+  "Room positions come from reading the whole video, not a survey"
+ ],
+ "layout_source": "estimated_from_photos",
+ "layout_engine": "tanvi",
+ "credit": "Layout engine by Tanvi Deshpande",
+ "estimate": {
+  "plus_minus_pct": 35,
+  "rooms_sized": 0,
+  "rooms": 12,
+  "method": "Tanvi's layout maker: the whole apartment read from the video's contact sheets; sizes from doors and windows"
+ },
+ "notes": "Vacant second-floor unit reached by a front staircase. Room set is confident: bay-window front room, three bedrooms, kitchen, bath and rear stair/deck. Left/right placement, hall length, closet positions and the exact link between kitchen, rear passage, bath and rear stair are inferred from walk order and not confirmed. Sizes are rough."
+}

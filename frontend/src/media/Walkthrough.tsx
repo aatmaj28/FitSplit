@@ -9,8 +9,9 @@ export interface WalkRoom {
   pano: string | null; pano_size: [number, number] | null; pano_frames: number[]; hotspots: WalkHotspot[];
 }
 export interface Walk { rooms: WalkRoom[]; entrance: string | null; connections: { a: string; b: string; kind: string }[] }
-/** Room rectangles for the minimap (feet), from the estimated layout when there is one. */
-export type MiniRect = { id: string; x: number; y: number; w: number; h: number };
+/** Room rectangles for the minimap (feet), from the estimated layout when there is one, with the
+ *  walkthrough rooms each one holds (an engine's rooms needn't match the walkthrough's one to one). */
+export type MiniRect = { id: string; x: number; y: number; w: number; h: number; walkIds: string[] };
 
 export function walkOf(job: MediaJob | null): Walk | null {
   const w = (job as (MediaJob & { walkthrough?: Walk | null }) | null)?.walkthrough;
@@ -114,15 +115,16 @@ function Minimap({ walk, here, rects, onGo }: { walk: Walk; here: string; rects?
   if (rects?.length) {
     const minX = Math.min(...rects.map((r) => r.x)), minY = Math.min(...rects.map((r) => r.y));
     const maxX = Math.max(...rects.map((r) => r.x + r.w)), maxY = Math.max(...rects.map((r) => r.y + r.h));
-    const cur = rects.find((r) => r.id === here);
+    const cur = rects.find((r) => r.walkIds.includes(here));
     return (
       <svg viewBox={`${minX - 1} ${minY - 1} ${maxX - minX + 2} ${maxY - minY + 2}`} className="h-28 w-36 rounded-xl bg-slate-900/70 p-1.5 backdrop-blur sm:h-32 sm:w-44" data-minimap aria-label="Map of the rooms">
         {rects.map((r) => {
-          const name = walk.rooms.find((x) => x.id === r.id)?.name ?? "";
+          const names = r.walkIds.map((id) => walk.rooms.find((x) => x.id === id)?.name).filter(Boolean).join(", ");
+          const on = r.walkIds.includes(here);
           return (
-            <g key={r.id} onClick={() => onGo(r.id)} className="cursor-pointer">
-              <title>{name}</title>
-              <rect x={r.x} y={r.y} width={r.w} height={r.h} rx={0.4} fill={r.id === here ? "#38bdf8" : "#e2e8f0"} fillOpacity={r.id === here ? 0.9 : 0.25} stroke="#f8fafc" strokeWidth={0.25} />
+            <g key={r.id} onClick={() => r.walkIds[0] && onGo(r.walkIds[0])} className={r.walkIds.length ? "cursor-pointer" : ""}>
+              <title>{names}</title>
+              <rect x={r.x} y={r.y} width={r.w} height={r.h} rx={0.4} fill={on ? "#38bdf8" : "#e2e8f0"} fillOpacity={on ? 0.9 : r.walkIds.length ? 0.25 : 0.12} stroke="#f8fafc" strokeWidth={0.25} />
             </g>
           );
         })}

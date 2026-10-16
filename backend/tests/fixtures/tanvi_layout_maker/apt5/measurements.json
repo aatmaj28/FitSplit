@@ -1,0 +1,122 @@
+{
+  "entry": {
+    "frames": 8,
+    "scale": 2.3505,
+    "height_m": 2.32,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      1.66,
+      2.0
+    ],
+    "outline_fraction": 1.0,
+    "ok": false
+  },
+  "living": {
+    "frames": 27,
+    "scale": 6.3584,
+    "height_m": 2.44,
+    "points": 400000,
+    "conf_median": 2.931,
+    "dims_m": [
+      6.3,
+      5.44
+    ],
+    "outline_fraction": 0.79,
+    "ok": true
+  },
+  "kitchen": {
+    "frames": 24,
+    "scale": 3.2557,
+    "height_m": 2.42,
+    "points": 400000,
+    "conf_median": 2.072,
+    "dims_m": [
+      1.4,
+      1.56
+    ],
+    "outline_fraction": 0.85,
+    "ok": true
+  },
+  "hall": {
+    "frames": 40,
+    "scale": 4.1144,
+    "height_m": 2.25,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      2.42,
+      5.36
+    ],
+    "outline_fraction": 0.26,
+    "ok": false
+  },
+  "bath1": {
+    "frames": 40,
+    "scale": 1.6924,
+    "height_m": 1.6,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      1.26,
+      1.38
+    ],
+    "outline_fraction": 0.66,
+    "ok": false
+  },
+  "linen": {
+    "frames": 8,
+    "scale": 0.9074,
+    "height_m": 0.92,
+    "points": 400000,
+    "conf_median": 1.446,
+    "ok": false
+  },
+  "bed1": {
+    "frames": 40,
+    "scale": 2.3339,
+    "height_m": 2.41,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      4.9,
+      3.82
+    ],
+    "outline_fraction": 0.62,
+    "ok": true
+  },
+  "bed2": {
+    "frames": 40,
+    "scale": 3.4386,
+    "height_m": 2.21,
+    "points": 400000,
+    "conf_median": 1.563,
+    "dims_m": [
+      4.06,
+      3.36
+    ],
+    "outline_fraction": 0.32,
+    "ok": false
+  },
+  "bath2": {
+    "frames": 27,
+    "scale": 2.7258,
+    "height_m": 2.4,
+    "points": 400000,
+    "conf_median": 1.0,
+    "dims_m": [
+      3.14,
+      3.36
+    ],
+    "outline_fraction": 0.23,
+    "ok": false
+  },
+  "bed3": {
+    "frames": 40,
+    "scale": 1.1151,
+    "height_m": 2.36,
+    "points": 400000,
+    "conf_median": 1.0,
+    "ok": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "units": "m",
+  "source": "manual reading of videos/apt2.MOV (Claude); dimensions estimated from doors, windows, furniture (queen bed ~1.5x2.0 m)",
+  "rooms": [
+    {"id": "living", "type": "living_room", "label": "Living room", "rect": [0, 0, 4.4, 4.5], "confidence": 0.8, "evidence_s": [29, 35, 42], "features": ["window bank at front", "ceiling fan", "radiator"]},
+    {"id": "office", "type": "office", "label": "Office / Bedroom 2", "rect": [4.4, 0, 3.0, 3.4], "confidence": 0.75, "evidence_s": [36, 41], "features": ["French doors", "bookshelves", "closet", "window AC"]},
+    {"id": "dining", "type": "dining_room", "label": "Dining", "rect": [0, 4.5, 3.2, 3.3], "confidence": 0.6, "evidence_s": [7, 26, 28], "features": ["dining table", "track lights"]},
+    {"id": "hall", "type": "hallway", "label": "Hall", "rect": [3.2, 4.5, 1.2, 5.0], "confidence": 0.5, "evidence_s": [8, 9, 14, 17]},
+    {"id": "bed1", "type": "bedroom", "label": "Bedroom 1", "rect": [4.4, 3.4, 3.0, 3.6], "confidence": 0.75, "evidence_s": [18, 25], "features": ["queen bed", "dresser", "window AC", "closet"]},
+    {"id": "bath", "type": "bathroom", "label": "Bathroom", "rect": [4.4, 7.0, 1.8, 2.5], "confidence": 0.75, "evidence_s": [10, 13], "features": ["tub", "vanity", "toilet"]},
+    {"id": "kitchen", "type": "kitchen", "label": "Kitchen (galley)", "rect": [0, 7.8, 3.2, 3.4], "confidence": 0.8, "evidence_s": [0, 6], "features": ["gas range", "microwave", "fridge", "dishwasher", "subway tile"]}
+  ],
+  "openings": [
+    {"type": "opening", "wall": [[0.3, 4.5], [2.9, 4.5]], "rooms": ["living", "dining"]},
+    {"type": "door", "wall": [[4.4, 1.0], [4.4, 2.4]], "rooms": ["living", "office"]},
+    {"type": "opening", "wall": [[3.2, 5.0], [3.2, 6.0]], "rooms": ["dining", "hall"]},
+    {"type": "opening", "wall": [[3.4, 4.5], [4.2, 4.5]], "rooms": ["living", "hall"]},
+    {"type": "door", "wall": [[4.4, 5.6], [4.4, 6.4]], "rooms": ["hall", "bed1"]},
+    {"type": "door", "wall": [[4.4, 8.0], [4.4, 8.8]], "rooms": ["hall", "bath"]},
+    {"type": "opening", "wall": [[0.6, 7.8], [2.6, 7.8]], "rooms": ["dining", "kitchen"]},
+    {"type": "window", "wall": [[0.4, 0], [4.0, 0]], "rooms": ["living"]},
+    {"type": "window", "wall": [[5.2, 0], [6.6, 0]], "rooms": ["office"]},
+    {"type": "window", "wall": [[7.4, 4.6], [7.4, 5.6]], "rooms": ["bed1"]},
+    {"type": "window", "wall": [[6.2, 8.0], [6.2, 8.6]], "rooms": ["bath"]},
+    {"type": "window", "wall": [[0, 9.0], [0, 9.9]], "rooms": ["kitchen"]}
+  ],
+  "notes": "Occupied apartment with people and furniture in frame. Room set and adjacencies (kitchen->dining->living->French-door office; hall->bath, bedroom) are from the walk order; left/right placement and the hall position are assumptions."
+}

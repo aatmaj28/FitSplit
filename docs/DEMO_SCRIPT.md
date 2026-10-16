@@ -27,9 +27,11 @@ from your listing**: "Dishwasher found in photo 10. Renters filtering for a dish
 missed this listing. Now it matches 3 more common renter filters, and the description is written
 from the photos only."
 Click **Walkthrough · 9 rooms**, drag to look around, click an arrow to walk into the next room. Click
-**Floor plan**: "From the same video we size each room against doors, appliances and fixtures, and
-lay the rooms out by how they connect. Every size says 'Estimated from photos, ±25%'." Type a title
-and a rent, then **Publish listing**.
+**Floor plan**: "Tanvi's layout maker reads the whole video at once: every room, the bay window, every
+door. We size each room against its doors and fixtures and fuse the two. Every size says 'Estimated
+from photos', with its ± range." Optional: flip the **Layout engine** switch between Combined, Tanvi's
+and FitSplit: "Combined scores 85 out of 100 against Tanvi's hand-checked plan of this apartment."
+Type a title and a rent, then **Publish listing**.
 Optional: "A floor plan still works too": click **Floor plan** in the top switch, then **JVUE 3 bed**:
 3D in seconds. **3. Publish listing**. "That's the unit our students will rent."
 

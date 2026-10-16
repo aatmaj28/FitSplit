@@ -111,6 +111,19 @@ for (const [viewport, offline] of [[{ width: 1366, height: 900 }, false], [{ wid
     check(/^Estimated from photos ±\d+%$/.test(badge ?? ""), `${tag} the 3D plan says "${badge}"`);
     const rows = await page.locator("[data-estimated-plan] tr").allTextContents();
     check(rows.length === job.plan.rooms.length && rows.every((t) => /≈ .*±\d+%.*≈ \d+ sq ft/.test(t)), `${tag} every room size reads "≈ … ±N%" (${rows.length} rooms)`);
+    // layout engines: the default is pressed, each switch shows its own plan and credit
+    if (job.plans) {
+      const credit = async () => (await page.locator("[data-estimated-plan] [data-engine-credit]").textContent())?.split(" · ")[0];
+      check((await page.locator(`[data-engine="${job.layout_engine}"]`).getAttribute("aria-pressed")) === "true", `${tag} the default engine (${job.layout_engine}) is on`);
+      for (const [engine, who] of [["tanvi", "Layout engine by Tanvi Deshpande"], ["fitsplit", "Layout engine by Aatmaj Salunke"], ["combined", "Layout engine by Tanvi Deshpande and Aatmaj Salunke"]]) {
+        if (!job.plans[engine]) continue;
+        await page.locator(`[data-engine="${engine}"]`).click();
+        await page.waitForFunction((w) => document.querySelector("[data-estimated-plan] [data-engine-credit]")?.textContent?.split(" · ")[0] === w, who, { timeout: 10000 }).catch(() => {});
+        await page.locator("[data-estimated-plan] [data-ready=true]").waitFor({ timeout: 20000 });
+        const n = await page.locator("[data-estimated-plan] tr").count();
+        check(n === job.plans[engine].rooms.length && (await credit()) === who, `${tag} ${engine}: ${n} rooms, "${who}"`);
+      }
+    }
     await page.locator('[data-view-tab="amenities"]').click();
   }
 
@@ -147,13 +160,20 @@ for (const [viewport, offline] of [[{ width: 1366, height: 900 }, false], [{ wid
     check((await page.locator("[data-estimated]").count()) >= 2, `${tag} Roombae 3D view and rent split are labelled as estimated`);
     const label = page.locator("button", { hasText: /≈ \d+ sq ft/ }).first();
     check((await label.count()) === 1, `${tag} room labels read "≈ N sq ft"`);
+    if (job.plans?.tanvi) {  // the listing page has the switch too
+      await page.locator('[data-engine-switch] [data-engine="tanvi"]').click();
+      await page.waitForFunction(() => document.querySelector("[data-engine-credit]")?.textContent?.startsWith("Layout engine by Tanvi Deshpande ·") || document.querySelector("[data-engine-credit]")?.textContent === "Layout engine by Tanvi Deshpande · Tanvi's layout maker", null, { timeout: 10000 }).catch(() => {});
+      await page.locator("[data-ready=true]").first().waitFor({ timeout: 20000 });
+      check((await page.locator("[data-engine-credit]").first().textContent())?.startsWith("Layout engine by Tanvi Deshpande"), `${tag} Roombae listing switches to Tanvi's engine`);
+      check(new URL(page.url()).searchParams.get("engine") === "tanvi", `${tag} the engine is kept in the URL`);
+    }
     await label.dispatchEvent("click"); // on a phone the label may sit under the wrapped toolbar
     await page.locator("[data-estimate-note]").waitFor({ timeout: 5000 });
     check(/Estimated from photos ±\d+%/.test(await page.locator("[data-estimate-note]").textContent()), `${tag} the room panel explains the estimate`);
     check(Number(await page.locator("[data-room-photos]").getAttribute("data-room-photos")) > 0, `${tag} the room panel shows that room's photos`);
     // lived-in look is on for listings; furnished view places furniture with the fit check
     check((await page.locator("[data-lived-in]").getAttribute("data-lived-in")) === "true", `${tag} listing 3D opens in the lived-in look`);
-    await page.getByRole("button", { name: "Close" }).first().click(); // the room panel covers the right of the toolbar
+    await page.getByRole("button", { name: "Close", exact: true }).first().click(); // the room panel covers the right of the toolbar
     await page.locator('[data-toggle="furnished"]').click();
     await page.waitForFunction(() => Number(document.querySelector("[data-furnished]")?.getAttribute("data-furnished") ?? 0) > 0, null, { timeout: 8000 });
     check(true, `${tag} furnished view places furniture (${await page.locator("[data-furnished]").getAttribute("data-furnished")} pieces)`);

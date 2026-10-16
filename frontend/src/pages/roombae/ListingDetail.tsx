@@ -8,6 +8,7 @@ import { baths, money } from "../../data/listings";
 import { usePlan } from "../../data/plans";
 import { useDemo } from "../../data/store";
 import { estimatedPlan, layoutRects } from "../../media/api";
+import { EngineBuilding, EngineCredit, LayoutEngineSwitch, useLayoutEngine } from "../../media/EngineSwitch";
 import { useMediaJob } from "../../media/hooks";
 import { ListingAmenities, PhotoGallery } from "../../media/ListingMedia";
 import { RoomPhotos } from "../../media/RoomPhotos";
@@ -26,7 +27,8 @@ export default function ListingDetail() {
   const [params, setParams] = useSearchParams();
   const l = useCatalogListing(id);
   const { data, error } = usePlan(l?.hasPlan ? l.id : undefined);
-  const { job } = useMediaJob(l?.media?.jobId);
+  const { job, kick } = useMediaJob(l?.media?.jobId);
+  const [engine, setEngine] = useLayoutEngine(job);
   const { group } = useDemo();
   const [roomId, setRoomId] = useState<string | null>(null);
   const { profiles } = useProfiles();
@@ -41,16 +43,23 @@ export default function ListingDetail() {
   if (!l) return <EmptyState title="Listing not found" action={<Link to="/roombae/listings" className={`rounded-full px-4 py-1.5 text-sm font-medium ${R.primary}`}>All listings</Link>} />;
   const ours = group?.listingId === l.id;
   const walk = l.media ? walkOf(job) : null;
-  const est = !l.hasPlan && job?.status === "complete" ? estimatedPlan(job, l.rent) : null;
+  const fromVideo = !l.hasPlan && job?.status === "complete";
+  const est = fromVideo ? estimatedPlan(job, l.rent, engine) : null; // the engine on show (null while it's being built)
+  const anyEst = fromVideo ? (est ?? estimatedPlan(job, l.rent)) : null;
   const plan3d = l.hasPlan ? data : est;
   const walkTab = walk || (l.media && !job) ? [{ id: "walk" as const, label: "Walkthrough" }] : [];
-  const tab3d = l.hasPlan || est ? [{ id: "3d" as const, label: "3D" }] : [];
+  const tab3d = l.hasPlan || anyEst ? [{ id: "3d" as const, label: "3D" }] : [];
   const photoTab = l.media ? [{ id: "photos" as const, label: "Photos" }] : [];
   // floor plan listings open on their 3D view, listings made from a video on the walkthrough
   const tabs: { id: View; label: string }[] = l.hasPlan ? [...tab3d, ...walkTab, ...photoTab] : [...walkTab, ...tab3d, ...photoTab];
   const asked = params.get("view") as View | null;
   const view: View = tabs.some((t) => t.id === asked) ? asked! : tabs[0]?.id ?? "3d";
-  const setView = (v: View) => setParams(v === tabs[0]?.id ? {} : { view: v }, { replace: true });
+  const setView = (v: View) => {
+    const p = new URLSearchParams(params); // keeps ?engine=
+    if (v === tabs[0]?.id) p.delete("view");
+    else p.set("view", v);
+    setParams(p, { replace: true });
+  };
   const media = l.media && job?.status === "complete" ? job : null;
   const look = plan3d && media ? listingLook(plan3d.plan, media) : null;
   return (
@@ -64,8 +73,8 @@ export default function ListingDetail() {
           </div>
           <p className="text-sm text-slate-500">
             {l.location} · {l.beds} bed · {baths(l.baths)}
-            {l.sqft ? ` · ${l.sqft.toLocaleString()} sq ft` : est?.plan.unit.total_sqft ? ` · ≈ ${est.plan.unit.total_sqft.toLocaleString()} sq ft` : ""} · {money(l.rent)}/mo
-            {!l.sqft && est && <span className="ml-2 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-900 ring-1 ring-amber-200">{estimateLabel(est.plan)}</span>}
+            {l.sqft ? ` · ${l.sqft.toLocaleString()} sq ft` : anyEst?.plan.unit.total_sqft ? ` · ≈ ${anyEst.plan.unit.total_sqft.toLocaleString()} sq ft` : ""} · {money(l.rent)}/mo
+            {!l.sqft && anyEst && <span className="ml-2 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-900 ring-1 ring-amber-200">{estimateLabel(anyEst.plan)}</span>}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -84,7 +93,7 @@ export default function ListingDetail() {
       </div>
       {view === "walk" ? (
         media && walk ? (
-          <div className="h-[62vh] min-h-[420px] sm:h-[68vh]"><Walkthrough job={media} walk={walk} rects={layoutRects(media)} /></div>
+          <div className="h-[62vh] min-h-[420px] sm:h-[68vh]"><Walkthrough job={media} walk={walk} rects={layoutRects(media, engine)} /></div>
         ) : (
           <PageLoading label="Loading the walkthrough…" />
         )
@@ -96,19 +105,26 @@ export default function ListingDetail() {
         )
       ) : error && l.hasPlan ? (
         <ErrorState title="Couldn't load this floor plan">{error}</ErrorState>
+      ) : fromVideo && media && !est ? (
+        <div className="space-y-2">
+          <LayoutEngineSwitch job={media} engine={engine} onChange={setEngine} onAsked={kick} />
+          <EngineBuilding job={media} engine={engine} />
+        </div>
       ) : !plan3d ? (
         <PageLoading label="Loading the floor plan…" />
       ) : (
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+          {fromVideo && media && <LayoutEngineSwitch job={media} engine={engine} onChange={setEngine} onAsked={kick} className="lg:col-span-2" />}
           <div className="space-y-2">
             <div className="relative h-[62vh] min-h-[420px] sm:h-[68vh]">
-              <FloorPlan3D plan={plan3d.plan} imageUrl={plan3d.imageUrl} editable selectedRoomId={roomId} onRoomSelect={(r) => setRoomId(r?.id ?? null)}
+              <FloorPlan3D key={fromVideo ? engine : "plan"} plan={plan3d.plan} imageUrl={plan3d.imageUrl} editable selectedRoomId={roomId} onRoomSelect={(r) => setRoomId(r?.id ?? null)}
                 initialLivedIn roomStyle={look?.styles} roomExtra={media && look ? (room) => <RoomPhotos job={media} frames={look.frames[room.id]} name={room.name} /> : undefined} />
             </div>
             <p className="text-xs text-slate-500">
               Click a room for its size. <span className="font-medium text-slate-700">Edit layout</span> to try your furniture: green fits, red doesn't.
               {est && " Sizes and room positions are estimated from the listing's photos."}
             </p>
+            {est && <EngineCredit plan={est.plan} />}
           </div>
           {plan3d.plan.rooms.some((r) => r.type === "bedroom") && (
             <RentSplit key={l.id} plan={plan3d.plan} selectedRoomId={roomId} onSelectRoom={setRoomId} onSplit={(sp) => setRows(sp.rows)} defaultNames={defaultNames} aiCheck={!est} className="self-start" />

@@ -111,7 +111,8 @@ CALLS: dict[str, Callable[..., ProviderReply]] = {
 
 
 def vision_multi_json(images: Images, prompt: str, parse: Callable[[str], T], *, kind: str, max_tokens: int = 6000,
-                      order: Optional[list[str]] = None, sleep: Callable[[float], None] = time.sleep) -> tuple[T, str]:
+                      order: Optional[list[str]] = None, sleep: Callable[[float], None] = time.sleep,
+                      timeout_s: float = TIMEOUT_S) -> tuple[T, str]:
     """(parsed value, provider or "cache"). Raises RuntimeError when no provider gives a valid answer."""
     key = cache.key_of([CACHE_VERSION, kind, prompt, [(lbl, hashlib.sha256(d).hexdigest()) for lbl, d in images]])
     hit = cache.get("media", key)
@@ -134,7 +135,7 @@ def vision_multi_json(images: Images, prompt: str, parse: Callable[[str], T], *,
                 with usage.purpose("media"):
                     # the provider runs in a worker thread: carry the usage purpose label over
                     ctx = contextvars.copy_context()
-                    reply = _call_with_timeout(lambda **kw: ctx.run(CALLS[name], **kw), TIMEOUT_S, images=images, prompt=p,
+                    reply = _call_with_timeout(lambda **kw: ctx.run(CALLS[name], **kw), timeout_s, images=images, prompt=p,
                                                model=s["model"], api_key=s["api_key"], max_tokens=max_tokens)
             except Exception as e:  # noqa: BLE001 - API error, timeout or cap: next provider
                 errors.append(f"{name}: {_short(e)}")

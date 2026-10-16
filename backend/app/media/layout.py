@@ -537,6 +537,8 @@ def build_plan(job: dict) -> tuple[dict, dict[str, Rect]]:
                  "baths": sum(1 for r in rooms if r["type"] == "bathroom"), "rent": None},
         "warnings": [f"Estimated from photos: room sizes ±{pct}% on average", "Room positions are schematic (from which rooms connect), not surveyed"] + notes,
         "layout_source": "estimated_from_photos",
+        "layout_engine": "fitsplit",
+        "credit": "Layout engine by Aatmaj Salunke",
         "estimate": {"plus_minus_pct": pct, "rooms_sized": sum(1 for r in rooms if r["dims"].get("source") not in ("typical", "assumed")),
                      "rooms": len(out_rooms), "method": "reference objects in the photos (doors, appliances, fixtures, beds)"},
     }
@@ -573,12 +575,18 @@ def render_png(plan: dict, path: Path, scale: int = 2) -> None:
         (x0, y0), _, (x1, y1), _ = o["polygon"]
         if o["kind"] == "window":
             dr.rectangle([x0 * scale, y0 * scale, x1 * scale, y1 * scale], fill="#bae6fd", outline="#0284c7", width=scale)
-    big, small = _font(13 * scale), _font(10 * scale)
+    for (ax, ay), (bx, by) in plan.get("window_lines", []):  # windows in angled walls (bays): 2D only
+        dr.line([ax * scale, ay * scale, bx * scale, by * scale], fill="#0284c7", width=4 * scale)
     for r in plan["rooms"]:
         x, y = r["label_point"]
+        xs = [p[0] for p in r["polygon"]]
+        room_w = (max(xs) - min(xs) - 8) * scale
+        size = 13
+        while size > 8 and dr.textbbox((0, 0), r["name"], font=_font(size * scale))[2] > room_w:
+            size -= 1  # long names in narrow rooms (stairs, passages) shrink to fit
+        big, small = _font(size * scale), _font(min(10, size) * scale)
         lines = [(r["name"], big, "#0f172a"), (r["printed_dims_text"], small, "#334155"), (f"±{r['dims_confidence']['plus_minus_pct']}%", small, "#64748b")]
-        rw = (r["polygon"][1][0] - r["polygon"][0][0]) * scale
-        if rw < 90 * scale / 2:
+        if room_w < 90 * scale / 2:
             lines = lines[:1]
         hts = [dr.textbbox((0, 0), t, font=f)[3] for t, f, _ in lines]
         cy = y * scale - (sum(hts) + 4 * scale * (len(lines) - 1)) / 2
@@ -604,14 +612,17 @@ def render_svg(plan: dict, path: Path) -> None:
     for o in plan["openings"]:
         if o["kind"] == "window":
             parts.append(f'<polygon points="{pts(o["polygon"])}" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>')
+    for (ax, ay), (bx, by) in plan.get("window_lines", []):
+        parts.append(f'<line x1="{ax:.1f}" y1="{ay:.1f}" x2="{bx:.1f}" y2="{by:.1f}" stroke="#0284c7" stroke-width="4"/>')
     for r in plan["rooms"]:
         x, y = r["label_point"]
-        rw = r["polygon"][1][0] - r["polygon"][0][0]
+        rw = max(p[0] for p in r["polygon"]) - min(p[0] for p in r["polygon"])
         esc = lambda t: t.replace("&", "&amp;").replace("<", "&lt;")  # noqa: E731
+        fs = max(8.0, min(13.0, (rw - 8) / (0.56 * max(1, len(r["name"])))))  # ~0.56 em per character
         if rw < 45:
-            parts.append(f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">{esc(r["name"])}</text>')
+            parts.append(f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle" font-size="{min(11.0, fs):.1f}" font-weight="600" fill="#0f172a">{esc(r["name"])}</text>')
             continue
-        parts.append(f'<text x="{x:.1f}" y="{y - 6:.1f}" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">{esc(r["name"])}</text>')
+        parts.append(f'<text x="{x:.1f}" y="{y - 6:.1f}" text-anchor="middle" font-size="{fs:.1f}" font-weight="600" fill="#0f172a">{esc(r["name"])}</text>')
         parts.append(f'<text x="{x:.1f}" y="{y + 9:.1f}" text-anchor="middle" font-size="10.5" fill="#334155">{esc(r["printed_dims_text"])} · ±{r["dims_confidence"]["plus_minus_pct"]}%</text>')
     parts.append("</svg>")
     path.write_text("\n".join(parts))

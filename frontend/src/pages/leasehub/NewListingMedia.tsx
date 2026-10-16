@@ -6,6 +6,7 @@ import { FloorPlan3D } from "../../components/FloorPlan3D";
 import { estimateLabel, formatRoomArea } from "../../components/FloorPlan3D/theme";
 import { checkFiles, createMediaJob, estimatedPlan, kindOf, layoutRects, listMediaJobs, MAX_UPLOAD_MB, PHOTO_ACCEPT, VIDEO_ACCEPT, type Amenity, type MediaJob, type MediaSummary } from "../../media/api";
 import { AmenityChips, PhotoStrip } from "../../media/Amenities";
+import { EngineBuilding, EngineCredit, LayoutEngineSwitch, useLayoutEngine } from "../../media/EngineSwitch";
 import { useMediaJob } from "../../media/hooks";
 import { RoomPhotos } from "../../media/RoomPhotos";
 import { listingLook } from "../../media/style";
@@ -179,7 +180,8 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   const [started, setStarted] = useState(Date.now());
   const [error, setError] = useState<string | null>(null);
   const [recent, setRecent] = useState<MediaSummary[]>([]);
-  const { job, error: pollError } = useMediaJob(jobId);
+  const { job, error: pollError, kick } = useMediaJob(jobId);
+  const [engine, setEngine] = useLayoutEngine(job);
   const [removed, setRemoved] = useState<Set<string>>(new Set());
   const [confirmed, setConfirmed] = useState<Set<string>>(new Set());
   const [desc, setDesc] = useState<{ full: string; short: string } | null>(null);
@@ -323,7 +325,8 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   const rooms = Object.entries(job.rooms_seen).filter(([t]) => t !== "other").sort((a, b) => b[1] - a[1]);
   const walk = walkOf(job);
   const nRooms = job.rooms?.length ?? 0;
-  const est = estimatedPlan(job);
+  const est = estimatedPlan(job, undefined, engine);
+  const anyPlan = estimatedPlan(job);
   return (
     <div className="space-y-4" data-media-results={job.id}>
       <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -339,18 +342,22 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
           <ViewTabs value={tab} onChange={setTab} tabs={[
             { id: "amenities" as const, label: "Amenities" },
             ...(walk ? [{ id: "walk" as const, label: `Walkthrough · ${walk.rooms.length} rooms` }] : []),
-            ...(est ? [{ id: "plan" as const, label: "Floor plan" }] : []),
+            ...(anyPlan ? [{ id: "plan" as const, label: "Floor plan" }] : []),
           ]} />
-          {tab === "plan" && est ? (
+          {tab === "plan" && anyPlan ? (
             <div className="space-y-3" data-estimated-plan>
-              <div className="relative h-[56vh] min-h-[380px]"><FloorPlan3D plan={est.plan} imageUrl={est.imageUrl} initialView="top" initialLivedIn roomStyle={listingLook(est.plan, job).styles}
+              <LayoutEngineSwitch job={job} engine={engine} onChange={setEngine} onAsked={kick} />
+              {!est ? <EngineBuilding job={job} engine={engine} /> : (<>
+              <div className="relative h-[56vh] min-h-[380px]"><FloorPlan3D key={engine} plan={est.plan} imageUrl={est.imageUrl} initialView="top" initialLivedIn roomStyle={listingLook(est.plan, job).styles}
                 roomExtra={(room) => <RoomPhotos job={job} frames={listingLook(est.plan, job).frames[room.id]} name={room.name} />} /></div>
+              <EngineCredit plan={est.plan} />
               <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h2 className="font-semibold text-slate-900">Room sizes</h2>
                   <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-amber-200">{estimateLabel(est.plan)}</span>
                 </div>
                 <p className="mt-1 text-xs text-slate-500">Each room is measured against objects of known size in its photos (doors, appliances, fixtures, beds). Where rooms sit is schematic: worked out from which rooms connect.</p>
+                {est.plan.notes ? <p className="mt-1 text-xs text-slate-500"><span className="font-medium text-slate-600">What the video can't confirm:</span> {est.plan.notes}</p> : null}
                 <table className="mt-2 w-full text-sm">
                   <tbody className="divide-y divide-slate-100">
                     {est.plan.rooms.map((r) => (
@@ -363,10 +370,11 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
                   </tbody>
                 </table>
               </section>
+              </>)}
             </div>
           ) : tab === "walk" && walk ? (
             <div className="space-y-2">
-              <div className="h-[60vh] min-h-[380px]"><Walkthrough job={job} walk={walk} rects={layoutRects(job)} /></div>
+              <div className="h-[60vh] min-h-[380px]"><Walkthrough job={job} walk={walk} rects={layoutRects(job, engine)} /></div>
               <p className="text-xs text-slate-500">
                 {walk.rooms.filter((r) => r.pano).length} of {walk.rooms.length} rooms stitched into panoramas; the others show their photos. Rooms and doors come from the walk order and one AI check of the photos.
               </p>

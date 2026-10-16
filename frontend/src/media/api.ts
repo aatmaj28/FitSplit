@@ -60,10 +60,33 @@ export interface MediaJob {
   finished: string | null;
   offline?: boolean; // loaded from the bundle
   rooms?: { id: string; name: string; type: string; frames: number[]; dims?: { w: number; l: number; plus_minus_pct: number; confidence: string } }[];
-  /** the estimated floor plan (parsed-plan format, layout_source "estimated_from_photos") */
+  /** the default engine's estimated floor plan (parsed-plan format, layout_source "estimated_from_photos") */
   plan?: ParsedPlan | null;
-  /** room rectangles in feet (minimap) */
+  /** the default engine's room rectangles in feet (jobs from before the engines: FitSplit's, by walkthrough room) */
   layout?: Record<string, { x: number; y: number; w: number; h: number }> | null;
+  /** the engine new jobs build first, and every engine's plan built so far */
+  layout_engine?: LayoutEngine;
+  plans?: Partial<Record<LayoutEngine, ParsedPlan>>;
+  /** per engine: room rectangles (feet) and which walkthrough room sits in which of its rooms */
+  layouts?: Partial<Record<LayoutEngine, { rects: Record<string, { x: number; y: number; w: number; h: number }>; walk: Record<string, string> }>>;
+  engine_status?: Partial<Record<LayoutEngine, string>>;
+}
+
+export type LayoutEngine = "combined" | "tanvi" | "fitsplit";
+export const ENGINES: { id: LayoutEngine; label: string; credit: string }[] = [
+  { id: "combined", label: "Combined", credit: "Layout engine by Tanvi Deshpande and Aatmaj Salunke" },
+  { id: "tanvi", label: "Tanvi's", credit: "Layout engine by Tanvi Deshpande" },
+  { id: "fitsplit", label: "FitSplit", credit: "Layout engine by Aatmaj Salunke" },
+];
+
+/** The engine whose plan a job shows first (jobs from before the engines only have FitSplit's). */
+export function defaultEngine(job: MediaJob | null): LayoutEngine {
+  return job?.layout_engine && job.plans?.[job.layout_engine] ? job.layout_engine : "fitsplit";
+}
+
+/** Ask the backend to build another engine's plan for a finished job (the switch polls for it). */
+export async function buildEngine(jobId: string, engine: LayoutEngine): Promise<MediaJob> {
+  return fetchJson<MediaJob>(`${API}/api/media/jobs/${jobId}/engines/${engine}`, { method: "POST" }, 15000);
 }
 
 export interface MediaSummary {
@@ -167,20 +190,28 @@ export function frameUrl(job: Pick<MediaJob, "id" | "offline" | "frames">, frame
 
 const planCache = new WeakMap<ParsedPlan, Map<number, { plan: ParsedPlan; imageUrl: string }>>();
 
-/** The estimated floor plan of a job, ready for <FloorPlan3D> (its 2D drawing is the overlay).
- *  Cached per plan and rent: the viewer and the rent split reset whenever they get a new plan object. */
-export function estimatedPlan(job: MediaJob | null, rent?: number): { plan: ParsedPlan; imageUrl: string } | null {
-  if (!job?.plan) return null;
-  let byRent = planCache.get(job.plan);
-  if (!byRent) planCache.set(job.plan, (byRent = new Map()));
+/** One engine's estimated floor plan of a job (default: the job's own), ready for <FloorPlan3D>
+ *  (its 2D drawing is the overlay). Cached per plan and rent: the viewer and the rent split reset
+ *  whenever they get a new plan object. */
+export function estimatedPlan(job: MediaJob | null, rent?: number, engine?: LayoutEngine): { plan: ParsedPlan; imageUrl: string } | null {
+  const fromEngine = engine ? job?.plans?.[engine] : undefined;
+  const plan = fromEngine ?? (engine && job?.plans && engine !== defaultEngine(job) ? undefined : job?.plan);
+  if (!job || !plan) return null;
+  let byRent = planCache.get(plan);
+  if (!byRent) planCache.set(plan, (byRent = new Map()));
   const key = rent ?? 0;
   if (!byRent.has(key)) {
-    byRent.set(key, { plan: rent ? { ...job.plan, unit: { ...job.plan.unit, rent } } : job.plan, imageUrl: mediaUrl(job, "plan/plan.png") });
+    const image = fromEngine ? `plan/${engine}.png` : "plan/plan.png";
+    byRent.set(key, { plan: rent ? { ...plan, unit: { ...plan.unit, rent } } : plan, imageUrl: mediaUrl(job, image) });
   }
   return byRent.get(key)!;
 }
 
-/** Room rectangles for the walkthrough minimap. */
-export function layoutRects(job: MediaJob | null) {
-  return job?.layout ? Object.entries(job.layout).map(([id, r]) => ({ id, ...r })) : undefined;
+/** Room rectangles for the walkthrough minimap, each with the walkthrough rooms inside it. */
+export function layoutRects(job: MediaJob | null, engine?: LayoutEngine) {
+  const lay = engine ? job?.layouts?.[engine] : undefined;
+  if (lay) {
+    return Object.entries(lay.rects).map(([id, r]) => ({ id, ...r, walkIds: Object.keys(lay.walk).filter((w) => lay.walk[w] === id) }));
+  }
+  return job?.layout ? Object.entries(job.layout).map(([id, r]) => ({ id, ...r, walkIds: [id] })) : undefined;
 }

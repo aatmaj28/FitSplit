@@ -14,7 +14,7 @@ export const DEMO_LISTING = "jvue_3bed";
 export const STEPS: Step[] = [
   {
     n: 1, side: "LeaseHub", title: "Agent posts a listing from a video",
-    hint: "Open the walkthrough video (or drop one in): amenities tagged with the photo that proves each, what the listing was missing, a description, a walkthrough and an estimated floor plan. Publish. The Floor plan tab still turns a plan image into 3D.",
+    hint: "Open the walkthrough video (or drop one in): amenities tagged with the photo that proves each, what the listing was missing, a description, a walkthrough and a floor plan from Tanvi's layout maker + FitSplit's sizes (switch engines to compare). Publish. The Floor plan tab still turns a plan image into 3D.",
     path: () => "/leasehub/listings/new?source=video", matches: (p) => p.startsWith("/leasehub/listings/new"),
   },
   {

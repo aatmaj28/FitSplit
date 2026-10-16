@@ -1,0 +1,16 @@
+{
+  "video": "videos/apt2.MOV",
+  "source": "Claude reading runs/apt2/sheets (1 tile/s)",
+  "segments": [
+    {"t": [0, 6],   "room": "kitchen", "label": "galley kitchen", "objects": ["white shaker cabinets", "subway tile", "gas range", "microwave", "fridge", "dishwasher"]},
+    {"t": [7, 7],   "room": "dining",  "label": "view from kitchen into dining/living", "objects": ["dining table", "ceiling fan"]},
+    {"t": [8, 9],   "room": "hall",    "label": "hall", "objects": ["mirror", "doors"]},
+    {"t": [10, 13], "room": "bath",    "label": "bathroom", "objects": ["tub + curtain", "vanity", "toilet", "medicine cabinet"]},
+    {"t": [14, 17], "room": "hall",    "label": "hall to bedroom door", "objects": ["drying rack", "door"]},
+    {"t": [18, 25], "room": "bed1",    "label": "bedroom", "objects": ["bed", "dresser", "TV", "window AC", "closet"]},
+    {"t": [26, 28], "room": "dining",  "label": "dining area", "objects": ["dining table", "track lights", "TV beyond"]},
+    {"t": [29, 35], "room": "living",  "label": "living room", "objects": ["sofa", "ceiling fan", "window bank", "radiator"]},
+    {"t": [36, 41], "room": "office",  "label": "office / bedroom 2 (French doors)", "objects": ["French doors", "desk", "bookshelves", "closet", "window AC"]},
+    {"t": [42, 42], "room": "living",  "label": "living room from French doors", "objects": ["sofa", "TV", "ceiling fan"]}
+  ]
+}

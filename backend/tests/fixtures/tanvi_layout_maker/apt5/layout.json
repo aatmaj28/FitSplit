@@ -1,0 +1,38 @@
+{
+  "units": "m",
+  "top_label": "window wall (city view)",
+  "source": "manual reading of videos/apt5.mp4 (Claude); sizes from doors (~0.8 m) and window/wall-heater units (~1.4 m)",
+  "rooms": [
+    {"id": "living", "type": "living_room", "label": "Living room", "rect": [0, 0, 5.0, 5.4], "confidence": 0.8, "evidence_s": [1, 2, 6, 12], "features": ["corner windows", "wall heaters", "balcony door up a step"]},
+    {"id": "kitchen", "type": "kitchen", "label": "Kitchen", "rect": [5.0, 0, 2.6, 2.8], "confidence": 0.75, "evidence_s": [3, 5], "features": ["sink under window", "fridge", "range", "open to living"]},
+    {"id": "entry", "type": "hallway", "label": "Entry", "rect": [5.0, 2.8, 2.6, 2.4], "confidence": 0.6, "evidence_s": [0, 13, 15], "features": ["keycard-lock door", "coat closet"]},
+    {"id": "bed1", "type": "bedroom", "label": "Bedroom 1", "rect": [7.6, 0, 3.2, 4.0], "confidence": 0.7, "evidence_s": [27, 33], "features": ["window", "wall heater", "closet"]},
+    {"id": "bed2", "type": "bedroom", "label": "Bedroom 2", "rect": [10.8, 0, 2.9, 4.0], "confidence": 0.65, "evidence_s": [38, 42], "features": ["window", "wall heater"]},
+    {"id": "bed3", "type": "bedroom", "label": "Bedroom 3", "rect": [13.7, 0, 3.9, 4.0], "confidence": 0.6, "evidence_s": [52, 57, 65], "features": ["window", "wall heater", "closet"]},
+    {"id": "hall", "type": "hallway", "label": "Hall", "rect": [7.6, 4.0, 8.0, 1.2], "confidence": 0.65, "evidence_s": [16, 19, 34, 37, 58, 64]},
+    {"id": "bath1", "type": "bathroom", "label": "Bath 1", "rect": [7.6, 5.2, 2.0, 2.3], "confidence": 0.7, "evidence_s": [20, 25], "features": ["black vanity", "toilet"]},
+    {"id": "linen", "type": "closet", "label": "Linen", "rect": [9.6, 5.2, 1.0, 1.2], "confidence": 0.4, "evidence_s": [26]},
+    {"id": "bath2", "type": "bathroom", "label": "Bath 2", "rect": [11.2, 5.2, 2.0, 2.3], "confidence": 0.6, "evidence_s": [43, 51, 58, 59], "features": ["toilet", "vanity"]}
+  ],
+  "openings": [
+    {"type": "opening", "wall": [[5.0, 0.4], [5.0, 2.4]], "rooms": ["living", "kitchen"]},
+    {"type": "opening", "wall": [[5.0, 3.2], [5.0, 4.8]], "rooms": ["living", "entry"]},
+    {"type": "door", "wall": [[5.8, 5.2], [6.7, 5.2]], "rooms": ["entry"]},
+    {"type": "opening", "wall": [[7.6, 4.0], [7.6, 5.2]], "rooms": ["entry", "hall"]},
+    {"type": "door", "wall": [[8.6, 4.0], [9.4, 4.0]], "rooms": ["hall", "bed1"]},
+    {"type": "door", "wall": [[11.4, 4.0], [12.2, 4.0]], "rooms": ["hall", "bed2"]},
+    {"type": "door", "wall": [[14.2, 4.0], [15.0, 4.0]], "rooms": ["hall", "bed3"]},
+    {"type": "door", "wall": [[8.2, 5.2], [9.0, 5.2]], "rooms": ["hall", "bath1"]},
+    {"type": "door", "wall": [[9.7, 5.2], [10.5, 5.2]], "rooms": ["hall", "linen"]},
+    {"type": "door", "wall": [[11.8, 5.2], [12.6, 5.2]], "rooms": ["hall", "bath2"]},
+    {"type": "door", "wall": [[0, 3.6], [0, 4.4]], "rooms": ["living"]},
+    {"type": "window", "wall": [[0.6, 0], [2.4, 0]], "rooms": ["living"]},
+    {"type": "window", "wall": [[0, 0.6], [0, 2.2]], "rooms": ["living"]},
+    {"type": "window", "wall": [[3.0, 0], [4.4, 0]], "rooms": ["living"]},
+    {"type": "window", "wall": [[5.6, 0], [7.0, 0]], "rooms": ["kitchen"]},
+    {"type": "window", "wall": [[8.5, 0], [9.9, 0]], "rooms": ["bed1"]},
+    {"type": "window", "wall": [[11.5, 0], [12.9, 0]], "rooms": ["bed2"]},
+    {"type": "window", "wall": [[14.8, 0], [16.4, 0]], "rooms": ["bed3"]}
+  ],
+  "notes": "Empty high-rise 3-bed/2-bath. All bedrooms, the kitchen and the living room are on the window wall; the hall runs behind them with the bathrooms and linen closet on the corridor side. The balcony door (step platform, 11-12 s) is placed on the living room's side wall; the balcony itself is not shown in the video."
+}

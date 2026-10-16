@@ -1,0 +1,6 @@
+{
+  "value": "```json\n{\"width_ft\": 4.5, \"length_ft\": 8.0, \"confidence\": \"low\", \"plus_minus_pct\": 30, \"references\": [\"back door with transom (~32 in wide, 80 in tall)\", \"rear stair width (~36 in)\", \"interior door\"], \"reasoning\": \"The landing in front of the back door is only slightly wider than the door plus its casing (about 4-5 ft), and from the apartment doorway past the stair opening to the back door it runs about 2.5 to 3 stair widths (about 8 ft). Photos 1-2 are blurred and mostly show the adjoining hall and bedroom, so confidence is low.\", \"ceiling_ft\": 8.5}\n```",
+  "created": "2026-10-16T16:04:41+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

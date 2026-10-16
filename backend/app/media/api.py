@@ -5,6 +5,7 @@
     GET  /api/media/jobs                 finished jobs, newest first
     GET  /api/media/jobs/{id}            status, current step, progress, results when done
     POST /api/media/jobs/{id}/resume     run the steps a finished job hasn't done yet
+    POST /api/media/jobs/{id}/engines/{engine}  build another layout engine's plan (combined, tanvi, fitsplit)
     GET  /api/media/jobs/{id}/files/...  frames/, pano/, plan/ files of a job
 """
 from __future__ import annotations
@@ -18,6 +19,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 
+from . import engines
 from . import frames as frames_mod
 from . import jobs
 
@@ -79,6 +81,19 @@ def resume_job(jid: str) -> dict:
     if job["status"] in ("queued", "running"):
         return job
     return jobs.summary(jobs.resume(job))
+
+
+@router.post("/jobs/{jid}/engines/{engine}")
+def build_engine(jid: str, engine: str) -> dict:
+    """Build another layout engine's floor plan for a finished job (combined, tanvi or fitsplit)."""
+    job = jobs.load(jid) if re.fullmatch(r"mj_[0-9a-f]{12}", jid) else None
+    if job is None:
+        raise HTTPException(404, f"no media job {jid!r}")
+    if job["status"] != "complete":
+        raise HTTPException(409, "the job is still running")
+    if engine not in engines.ENGINES:
+        raise HTTPException(422, f"layout engine must be one of {', '.join(engines.ENGINES)}")
+    return jobs.summary(jobs.compute_engine(job, engine))
 
 
 @router.get("/jobs/{jid}/files/{path:path}")

@@ -1,0 +1,540 @@
+{
+  "units": "m",
+  "top_label": "window wall (city view)",
+  "source": "manual reading of videos/apt5.mp4 (Claude); sizes from doors (~0.8 m) and window/wall-heater units (~1.4 m) | sizes fused with Depth Anything 3 measurements",
+  "rooms": [
+    {
+      "id": "living",
+      "type": "living_room",
+      "label": "Living room",
+      "rect": [
+        0.0,
+        -0.0,
+        6.29,
+        5.6
+      ],
+      "confidence": 0.8,
+      "evidence_s": [
+        1,
+        2,
+        6,
+        12
+      ],
+      "features": [
+        "corner windows",
+        "wall heaters",
+        "balcony door up a step"
+      ],
+      "dims_source": "measured",
+      "measured": {
+        "dims_m": [
+          6.3,
+          5.44
+        ],
+        "height_m": 2.44,
+        "outline_fraction": 0.79
+      }
+    },
+    {
+      "id": "kitchen",
+      "type": "kitchen",
+      "label": "Kitchen",
+      "rect": [
+        6.29,
+        -0.0,
+        2.6,
+        3.04
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        3,
+        5
+      ],
+      "features": [
+        "sink under window",
+        "fridge",
+        "range",
+        "open to living"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "entry",
+      "type": "hallway",
+      "label": "Entry",
+      "rect": [
+        6.29,
+        3.04,
+        2.6,
+        2.44
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        0,
+        13,
+        15
+      ],
+      "features": [
+        "keycard-lock door",
+        "coat closet"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "bed1",
+      "type": "bedroom",
+      "label": "Bedroom 1",
+      "rect": [
+        8.89,
+        -0.0,
+        3.78,
+        4.59
+      ],
+      "confidence": 0.7,
+      "evidence_s": [
+        27,
+        33
+      ],
+      "features": [
+        "window",
+        "wall heater",
+        "closet"
+      ],
+      "dims_source": "measured",
+      "measured": {
+        "dims_m": [
+          3.82,
+          4.9
+        ],
+        "height_m": 2.41,
+        "outline_fraction": 0.62
+      }
+    },
+    {
+      "id": "bed2",
+      "type": "bedroom",
+      "label": "Bedroom 2",
+      "rect": [
+        12.68,
+        -0.0,
+        2.87,
+        4.59
+      ],
+      "confidence": 0.65,
+      "evidence_s": [
+        38,
+        42
+      ],
+      "features": [
+        "window",
+        "wall heater"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "bed3",
+      "type": "bedroom",
+      "label": "Bedroom 3",
+      "rect": [
+        15.55,
+        -0.0,
+        3.87,
+        4.59
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        52,
+        57,
+        65
+      ],
+      "features": [
+        "window",
+        "wall heater",
+        "closet"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "hall",
+      "type": "hallway",
+      "label": "Hall",
+      "rect": [
+        8.89,
+        4.59,
+        8.01,
+        0.89
+      ],
+      "confidence": 0.65,
+      "evidence_s": [
+        16,
+        19,
+        34,
+        37,
+        58,
+        64
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "bath1",
+      "type": "bathroom",
+      "label": "Bath 1",
+      "rect": [
+        8.89,
+        5.48,
+        2.28,
+        2.3
+      ],
+      "confidence": 0.7,
+      "evidence_s": [
+        20,
+        25
+      ],
+      "features": [
+        "black vanity",
+        "toilet"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "linen",
+      "type": "closet",
+      "label": "Linen",
+      "rect": [
+        11.18,
+        5.48,
+        1.28,
+        1.2
+      ],
+      "confidence": 0.4,
+      "evidence_s": [
+        26
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "bath2",
+      "type": "bathroom",
+      "label": "Bath 2",
+      "rect": [
+        13.08,
+        5.48,
+        1.98,
+        2.3
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        43,
+        51,
+        58,
+        59
+      ],
+      "features": [
+        "toilet",
+        "vanity"
+      ],
+      "dims_source": "estimated"
+    }
+  ],
+  "openings": [
+    {
+      "type": "opening",
+      "wall": [
+        [
+          6.29,
+          0.43
+        ],
+        [
+          6.29,
+          2.61
+        ]
+      ],
+      "rooms": [
+        "living",
+        "kitchen"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          6.29,
+          3.56
+        ],
+        [
+          6.29,
+          5.19
+        ]
+      ],
+      "rooms": [
+        "living",
+        "entry"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          7.09,
+          5.48
+        ],
+        [
+          7.99,
+          5.48
+        ]
+      ],
+      "rooms": [
+        "entry"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          8.89,
+          4.59
+        ],
+        [
+          8.89,
+          5.48
+        ]
+      ],
+      "rooms": [
+        "entry",
+        "hall"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          10.04,
+          4.59
+        ],
+        [
+          10.95,
+          4.59
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed1"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          13.27,
+          4.59
+        ],
+        [
+          14.06,
+          4.59
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed2"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          15.91,
+          4.59
+        ],
+        [
+          16.48,
+          4.59
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed3"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          9.58,
+          5.48
+        ],
+        [
+          10.49,
+          5.48
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bath1"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          11.31,
+          5.48
+        ],
+        [
+          12.33,
+          5.48
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "linen"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          13.67,
+          5.48
+        ],
+        [
+          14.46,
+          5.48
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bath2"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          0.0,
+          4.08
+        ],
+        [
+          0.0,
+          4.89
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0.76,
+          -0.0
+        ],
+        [
+          3.02,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0.0,
+          0.65
+        ],
+        [
+          0.0,
+          2.39
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          3.78,
+          -0.0
+        ],
+        [
+          5.54,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          6.89,
+          -0.0
+        ],
+        [
+          8.29,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "kitchen"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          9.92,
+          -0.0
+        ],
+        [
+          11.56,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "bed1"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          13.37,
+          -0.0
+        ],
+        [
+          14.76,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "bed2"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          16.33,
+          -0.0
+        ],
+        [
+          17.91,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "bed3"
+      ]
+    }
+  ],
+  "notes": "Empty high-rise 3-bed/2-bath. All bedrooms, the kitchen and the living room are on the window wall; the hall runs behind them with the bathrooms and linen closet on the corridor side. The balcony door (step platform, 11-12 s) is placed on the living room's side wall; the balcony itself is not shown in the video.",
+  "ceiling_height_m": 2.42
+}

@@ -1,0 +1,2070 @@
+{
+ "plan_name": "media_e0087b208573",
+ "source_image": "plan/fitsplit.png",
+ "image_size": {
+  "w": 820,
+  "h": 630
+ },
+ "semantics_provider": "photos",
+ "semantics_model": null,
+ "scale": {
+  "pixels_per_foot": 20.0,
+  "method": "estimated_from_photos",
+  "notes": "Room sizes estimated from reference objects in the photos"
+ },
+ "walls": [
+  {
+   "id": "w1",
+   "polygon": [
+    [
+     229.0,
+     415.0
+    ],
+    [
+     228.0,
+     416.0
+    ],
+    [
+     215.0,
+     416.0
+    ],
+    [
+     215.0,
+     574.0
+    ],
+    [
+     214.0,
+     575.0
+    ],
+    [
+     46.0,
+     575.0
+    ],
+    [
+     45.0,
+     574.0
+    ],
+    [
+     45.0,
+     506.0
+    ],
+    [
+     35.0,
+     506.0
+    ],
+    [
+     35.0,
+     580.0
+    ],
+    [
+     36.0,
+     581.0
+    ],
+    [
+     36.0,
+     583.0
+    ],
+    [
+     37.0,
+     584.0
+    ],
+    [
+     39.0,
+     584.0
+    ],
+    [
+     40.0,
+     585.0
+    ],
+    [
+     220.0,
+     585.0
+    ],
+    [
+     221.0,
+     584.0
+    ],
+    [
+     223.0,
+     584.0
+    ],
+    [
+     224.0,
+     583.0
+    ],
+    [
+     224.0,
+     581.0
+    ],
+    [
+     225.0,
+     580.0
+    ],
+    [
+     225.0,
+     546.0
+    ],
+    [
+     226.0,
+     545.0
+    ],
+    [
+     390.0,
+     545.0
+    ],
+    [
+     391.0,
+     544.0
+    ],
+    [
+     393.0,
+     544.0
+    ],
+    [
+     394.0,
+     543.0
+    ],
+    [
+     394.0,
+     541.0
+    ],
+    [
+     395.0,
+     540.0
+    ],
+    [
+     395.0,
+     426.0
+    ],
+    [
+     396.0,
+     425.0
+    ],
+    [
+     424.0,
+     425.0
+    ],
+    [
+     425.0,
+     426.0
+    ],
+    [
+     425.0,
+     560.0
+    ],
+    [
+     426.0,
+     561.0
+    ],
+    [
+     426.0,
+     563.0
+    ],
+    [
+     427.0,
+     564.0
+    ],
+    [
+     429.0,
+     564.0
+    ],
+    [
+     430.0,
+     565.0
+    ],
+    [
+     664.0,
+     565.0
+    ],
+    [
+     665.0,
+     566.0
+    ],
+    [
+     665.0,
+     590.0
+    ],
+    [
+     666.0,
+     591.0
+    ],
+    [
+     666.0,
+     593.0
+    ],
+    [
+     667.0,
+     594.0
+    ],
+    [
+     669.0,
+     594.0
+    ],
+    [
+     670.0,
+     595.0
+    ],
+    [
+     780.0,
+     595.0
+    ],
+    [
+     781.0,
+     594.0
+    ],
+    [
+     783.0,
+     594.0
+    ],
+    [
+     784.0,
+     593.0
+    ],
+    [
+     784.0,
+     591.0
+    ],
+    [
+     785.0,
+     590.0
+    ],
+    [
+     785.0,
+     540.0
+    ],
+    [
+     775.0,
+     540.0
+    ],
+    [
+     775.0,
+     584.0
+    ],
+    [
+     774.0,
+     585.0
+    ],
+    [
+     676.0,
+     585.0
+    ],
+    [
+     675.0,
+     584.0
+    ],
+    [
+     675.0,
+     519.0
+    ],
+    [
+     665.0,
+     519.0
+    ],
+    [
+     665.0,
+     554.0
+    ],
+    [
+     664.0,
+     555.0
+    ],
+    [
+     436.0,
+     555.0
+    ],
+    [
+     435.0,
+     554.0
+    ],
+    [
+     435.0,
+     429.0
+    ],
+    [
+     434.0,
+     428.0
+    ],
+    [
+     434.0,
+     415.0
+    ],
+    [
+     333.0,
+     415.0
+    ],
+    [
+     333.0,
+     425.0
+    ],
+    [
+     384.0,
+     425.0
+    ],
+    [
+     385.0,
+     426.0
+    ],
+    [
+     385.0,
+     534.0
+    ],
+    [
+     384.0,
+     535.0
+    ],
+    [
+     226.0,
+     535.0
+    ],
+    [
+     225.0,
+     534.0
+    ],
+    [
+     225.0,
+     426.0
+    ],
+    [
+     226.0,
+     425.0
+    ],
+    [
+     277.0,
+     425.0
+    ],
+    [
+     277.0,
+     415.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w2",
+   "polygon": [
+    [
+     215.0,
+     340.0
+    ],
+    [
+     215.0,
+     354.0
+    ],
+    [
+     214.0,
+     355.0
+    ],
+    [
+     40.0,
+     355.0
+    ],
+    [
+     39.0,
+     356.0
+    ],
+    [
+     37.0,
+     356.0
+    ],
+    [
+     36.0,
+     357.0
+    ],
+    [
+     36.0,
+     359.0
+    ],
+    [
+     35.0,
+     360.0
+    ],
+    [
+     35.0,
+     434.0
+    ],
+    [
+     45.0,
+     434.0
+    ],
+    [
+     45.0,
+     366.0
+    ],
+    [
+     46.0,
+     365.0
+    ],
+    [
+     211.0,
+     365.0
+    ],
+    [
+     212.0,
+     364.0
+    ],
+    [
+     225.0,
+     364.0
+    ],
+    [
+     225.0,
+     340.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w3",
+   "polygon": [
+    [
+     505.0,
+     201.0
+    ],
+    [
+     505.0,
+     204.0
+    ],
+    [
+     504.0,
+     205.0
+    ],
+    [
+     383.0,
+     205.0
+    ],
+    [
+     383.0,
+     215.0
+    ],
+    [
+     484.0,
+     215.0
+    ],
+    [
+     485.0,
+     216.0
+    ],
+    [
+     485.0,
+     411.0
+    ],
+    [
+     486.0,
+     412.0
+    ],
+    [
+     486.0,
+     425.0
+    ],
+    [
+     664.0,
+     425.0
+    ],
+    [
+     665.0,
+     426.0
+    ],
+    [
+     665.0,
+     461.0
+    ],
+    [
+     675.0,
+     461.0
+    ],
+    [
+     675.0,
+     426.0
+    ],
+    [
+     676.0,
+     425.0
+    ],
+    [
+     774.0,
+     425.0
+    ],
+    [
+     775.0,
+     426.0
+    ],
+    [
+     775.0,
+     470.0
+    ],
+    [
+     785.0,
+     470.0
+    ],
+    [
+     785.0,
+     420.0
+    ],
+    [
+     784.0,
+     419.0
+    ],
+    [
+     784.0,
+     417.0
+    ],
+    [
+     783.0,
+     416.0
+    ],
+    [
+     781.0,
+     416.0
+    ],
+    [
+     780.0,
+     415.0
+    ],
+    [
+     756.0,
+     415.0
+    ],
+    [
+     755.0,
+     414.0
+    ],
+    [
+     755.0,
+     311.0
+    ],
+    [
+     745.0,
+     311.0
+    ],
+    [
+     745.0,
+     414.0
+    ],
+    [
+     744.0,
+     415.0
+    ],
+    [
+     516.0,
+     415.0
+    ],
+    [
+     515.0,
+     414.0
+    ],
+    [
+     515.0,
+     201.0
+    ]
+   ],
+   "holes": [
+    [
+     [
+      495.0,
+      216.0
+     ],
+     [
+      496.0,
+      215.0
+     ],
+     [
+      504.0,
+      215.0
+     ],
+     [
+      505.0,
+      216.0
+     ],
+     [
+      505.0,
+      414.0
+     ],
+     [
+      504.0,
+      415.0
+     ],
+     [
+      496.0,
+      415.0
+     ],
+     [
+      495.0,
+      414.0
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "w4",
+   "polygon": [
+    [
+     215.0,
+     199.0
+    ],
+    [
+     215.0,
+     284.0
+    ],
+    [
+     214.0,
+     285.0
+    ],
+    [
+     76.0,
+     285.0
+    ],
+    [
+     75.0,
+     284.0
+    ],
+    [
+     75.0,
+     206.0
+    ],
+    [
+     65.0,
+     206.0
+    ],
+    [
+     65.0,
+     290.0
+    ],
+    [
+     66.0,
+     291.0
+    ],
+    [
+     66.0,
+     293.0
+    ],
+    [
+     67.0,
+     294.0
+    ],
+    [
+     69.0,
+     294.0
+    ],
+    [
+     70.0,
+     295.0
+    ],
+    [
+     214.0,
+     295.0
+    ],
+    [
+     215.0,
+     296.0
+    ],
+    [
+     215.0,
+     310.0
+    ],
+    [
+     225.0,
+     310.0
+    ],
+    [
+     225.0,
+     216.0
+    ],
+    [
+     226.0,
+     215.0
+    ],
+    [
+     327.0,
+     215.0
+    ],
+    [
+     327.0,
+     205.0
+    ],
+    [
+     226.0,
+     205.0
+    ],
+    [
+     225.0,
+     204.0
+    ],
+    [
+     225.0,
+     199.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w5",
+   "polygon": [
+    [
+     666.0,
+     125.0
+    ],
+    [
+     666.0,
+     135.0
+    ],
+    [
+     744.0,
+     135.0
+    ],
+    [
+     745.0,
+     136.0
+    ],
+    [
+     745.0,
+     239.0
+    ],
+    [
+     755.0,
+     239.0
+    ],
+    [
+     755.0,
+     130.0
+    ],
+    [
+     754.0,
+     129.0
+    ],
+    [
+     754.0,
+     127.0
+    ],
+    [
+     753.0,
+     126.0
+    ],
+    [
+     751.0,
+     126.0
+    ],
+    [
+     750.0,
+     125.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w6",
+   "polygon": [
+    [
+     486.0,
+     35.0
+    ],
+    [
+     486.0,
+     45.0
+    ],
+    [
+     504.0,
+     45.0
+    ],
+    [
+     505.0,
+     46.0
+    ],
+    [
+     505.0,
+     124.0
+    ],
+    [
+     504.0,
+     125.0
+    ],
+    [
+     483.0,
+     125.0
+    ],
+    [
+     483.0,
+     135.0
+    ],
+    [
+     504.0,
+     135.0
+    ],
+    [
+     505.0,
+     136.0
+    ],
+    [
+     505.0,
+     139.0
+    ],
+    [
+     515.0,
+     139.0
+    ],
+    [
+     515.0,
+     136.0
+    ],
+    [
+     516.0,
+     135.0
+    ],
+    [
+     594.0,
+     135.0
+    ],
+    [
+     594.0,
+     125.0
+    ],
+    [
+     516.0,
+     125.0
+    ],
+    [
+     515.0,
+     124.0
+    ],
+    [
+     515.0,
+     40.0
+    ],
+    [
+     514.0,
+     39.0
+    ],
+    [
+     514.0,
+     37.0
+    ],
+    [
+     513.0,
+     36.0
+    ],
+    [
+     511.0,
+     36.0
+    ],
+    [
+     510.0,
+     35.0
+    ]
+   ],
+   "holes": []
+  },
+  {
+   "id": "w7",
+   "polygon": [
+    [
+     400.0,
+     35.0
+    ],
+    [
+     399.0,
+     36.0
+    ],
+    [
+     397.0,
+     36.0
+    ],
+    [
+     396.0,
+     37.0
+    ],
+    [
+     396.0,
+     39.0
+    ],
+    [
+     395.0,
+     40.0
+    ],
+    [
+     395.0,
+     124.0
+    ],
+    [
+     394.0,
+     125.0
+    ],
+    [
+     226.0,
+     125.0
+    ],
+    [
+     225.0,
+     124.0
+    ],
+    [
+     225.0,
+     50.0
+    ],
+    [
+     224.0,
+     49.0
+    ],
+    [
+     224.0,
+     47.0
+    ],
+    [
+     223.0,
+     46.0
+    ],
+    [
+     221.0,
+     46.0
+    ],
+    [
+     220.0,
+     45.0
+    ],
+    [
+     70.0,
+     45.0
+    ],
+    [
+     69.0,
+     46.0
+    ],
+    [
+     67.0,
+     46.0
+    ],
+    [
+     66.0,
+     47.0
+    ],
+    [
+     66.0,
+     49.0
+    ],
+    [
+     65.0,
+     50.0
+    ],
+    [
+     65.0,
+     134.0
+    ],
+    [
+     75.0,
+     134.0
+    ],
+    [
+     75.0,
+     56.0
+    ],
+    [
+     76.0,
+     55.0
+    ],
+    [
+     214.0,
+     55.0
+    ],
+    [
+     215.0,
+     56.0
+    ],
+    [
+     215.0,
+     141.0
+    ],
+    [
+     225.0,
+     141.0
+    ],
+    [
+     225.0,
+     136.0
+    ],
+    [
+     226.0,
+     135.0
+    ],
+    [
+     427.0,
+     135.0
+    ],
+    [
+     427.0,
+     125.0
+    ],
+    [
+     406.0,
+     125.0
+    ],
+    [
+     405.0,
+     124.0
+    ],
+    [
+     405.0,
+     46.0
+    ],
+    [
+     406.0,
+     45.0
+    ],
+    [
+     424.0,
+     45.0
+    ],
+    [
+     424.0,
+     35.0
+    ]
+   ],
+   "holes": []
+  }
+ ],
+ "rooms": [
+  {
+   "id": "r1",
+   "name": "Entry",
+   "type": "foyer",
+   "media_type": "entry",
+   "label_point": [
+    455.0,
+    85.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 4' \u00d7 5'",
+   "area_sqft": 20.0,
+   "area_sqft_final": 20.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     405.0,
+     45.0
+    ],
+    [
+     505.0,
+     45.0
+    ],
+    [
+     505.0,
+     125.0
+    ],
+    [
+     405.0,
+     125.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "reasoning": "This is a covered exterior stoop, about 4 ft wide between the siding wall and the porch post, judged from roughly 9 deck boards across and the railing scale. The landing plus top steps appear about 5 ft deep, but no standard indoor objects are visible, so confidence is low.",
+    "references": [
+     "deck board width (~5.5 in)",
+     "stair railing (~36 in high)",
+     "stair tread depth (~10-11 in)"
+    ],
+    "source": "cache",
+    "frames": [
+     1
+    ]
+   },
+   "frames": [
+    1
+   ]
+  },
+  {
+   "id": "r2",
+   "name": "Hallway 1",
+   "type": "other",
+   "media_type": "hallway",
+   "label_point": [
+    365.0,
+    170.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 3.5' \u00d7 14'",
+   "area_sqft": 49.0,
+   "area_sqft_final": 49.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     225.0,
+     135.0
+    ],
+    [
+     505.0,
+     135.0
+    ],
+    [
+     505.0,
+     205.0
+    ],
+    [
+     225.0,
+     205.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "reasoning": "The open door at the end (about 32 in) fills most of the corridor floor beside the stair rail, putting the walkable width near 3.5 ft. The staircase alongside appears to have about 13-14 treads at roughly 10 in each, plus some floor before the kitchen door, giving a length of about 14 ft.",
+    "references": [
+     "door",
+     "staircase treads",
+     "fridge"
+    ],
+    "source": "cache",
+    "frames": [
+     9,
+     38,
+     39,
+     40
+    ]
+   },
+   "frames": [
+    2,
+    9,
+    38,
+    39,
+    40
+   ]
+  },
+  {
+   "id": "r3",
+   "name": "Living room",
+   "type": "living",
+   "media_type": "living",
+   "label_point": [
+    630.0,
+    275.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 11.5' \u00d7 14'",
+   "area_sqft": 161.0,
+   "area_sqft_final": 161.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     515.0,
+     135.0
+    ],
+    [
+     745.0,
+     135.0
+    ],
+    [
+     745.0,
+     415.0
+    ],
+    [
+     515.0,
+     415.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 25,
+    "reasoning": "The three-window bay, with each window about 30-32 in plus trim, spans about 8 ft, and the flanking wall sections bring the room width to about 11.5 ft.",
+    "references": [
+     "windows (~30 in wide)",
+     "baseboard heaters",
+     "light switch/thermostat height",
+     "ceiling height"
+    ],
+    "source": "cache",
+    "frames": [
+     3,
+     41,
+     42
+    ]
+   },
+   "frames": [
+    3,
+    41,
+    42
+   ]
+  },
+  {
+   "id": "r4",
+   "name": "Bedroom 1",
+   "type": "bedroom",
+   "media_type": "bedroom",
+   "label_point": [
+    145.0,
+    170.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 7' \u00d7 11.5'",
+   "area_sqft": 80.5,
+   "area_sqft_final": 80.5,
+   "area_source": "estimated",
+   "has_private_bath": false,
+   "polygon": [
+    [
+     75.0,
+     55.0
+    ],
+    [
+     215.0,
+     55.0
+    ],
+    [
+     215.0,
+     285.0
+    ],
+    [
+     75.0,
+     285.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 25,
+    "reasoning": "The window wall holds a roughly 30 in window plus a baseboard radiator, and the opposite wall fits a closet opening of about 30 in and a doorway of about 32 in with short wall returns, which suggests a width near 7 ft.",
+    "references": [
+     "window",
+     "interior door",
+     "closet opening",
+     "baseboard radiator"
+    ],
+    "source": "cache",
+    "frames": [
+     4,
+     7,
+     43,
+     44
+    ]
+   },
+   "frames": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    43,
+    44,
+    45
+   ]
+  },
+  {
+   "id": "r5",
+   "name": "Kitchen",
+   "type": "kitchen",
+   "media_type": "kitchen",
+   "label_point": [
+    355.0,
+    315.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 10' \u00d7 13'",
+   "area_sqft": 130.0,
+   "area_sqft_final": 130.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     225.0,
+     215.0
+    ],
+    [
+     485.0,
+     215.0
+    ],
+    [
+     485.0,
+     415.0
+    ],
+    [
+     225.0,
+     415.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 25,
+    "reasoning": "The cabinet run (a tall pantry plus about 5 ft of base cabinets with the sink) and the dishwasher-and-fridge alcove past it make up about 13 ft along the long side. The window wall is about 3.5 window-widths, or roughly 10 ft wide, though the wide-angle video distortion lowers confidence.",
+    "references": [
+     "refrigerator",
+     "dishwasher",
+     "kitchen counter",
+     "window",
+     "door"
+    ],
+    "source": "cache",
+    "frames": [
+     10,
+     15,
+     19,
+     47
+    ]
+   },
+   "frames": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    46,
+    47
+   ]
+  },
+  {
+   "id": "r6",
+   "name": "Hallway 2",
+   "type": "other",
+   "media_type": "hallway",
+   "label_point": [
+    550.0,
+    490.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 6.5' \u00d7 11.5'",
+   "area_sqft": 74.8,
+   "area_sqft_final": 74.8,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     435.0,
+     425.0
+    ],
+    [
+     665.0,
+     425.0
+    ],
+    [
+     665.0,
+     555.0
+    ],
+    [
+     435.0,
+     555.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "reasoning": "The end door (about 30 in wide, 80 in tall with a transom) shows the walkway is about 3.3 ft wide, and the open stairwell beside it adds about 3 ft, for a total width near 6.5 ft. The run from the foreground landing to the end door looks like roughly 4\u20135 door-widths of floor, giving a length near 11.5 ft.",
+    "references": [
+     "door",
+     "stair width",
+     "transom window"
+    ],
+    "source": "cache",
+    "frames": [
+     22,
+     25,
+     26,
+     27
+    ]
+   },
+   "frames": [
+    22,
+    25,
+    26,
+    27
+   ]
+  },
+  {
+   "id": "r7",
+   "name": "Bedroom 2",
+   "type": "bedroom",
+   "media_type": "bedroom",
+   "label_point": [
+    130.0,
+    470.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 8.5' \u00d7 10.5'",
+   "area_sqft": 89.2,
+   "area_sqft_final": 89.2,
+   "area_source": "estimated",
+   "has_private_bath": false,
+   "polygon": [
+    [
+     45.0,
+     365.0
+    ],
+    [
+     215.0,
+     365.0
+    ],
+    [
+     215.0,
+     575.0
+    ],
+    [
+     45.0,
+     575.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 25,
+    "reasoning": "The window wall is about 2.5 window-trim widths across (trim is about 38-40 in), which gives roughly 8-9 ft. The side walls run noticeably longer in the wide shots, and the door sits near the window wall, which suggests about 10-11 ft of depth.",
+    "references": [
+     "window",
+     "door",
+     "baseboard radiator"
+    ],
+    "source": "cache",
+    "frames": [
+     23,
+     48,
+     49,
+     50
+    ]
+   },
+   "frames": [
+    23,
+    48,
+    49,
+    50
+   ]
+  },
+  {
+   "id": "r8",
+   "name": "Bathroom",
+   "type": "bathroom",
+   "media_type": "bathroom",
+   "label_point": [
+    305.0,
+    480.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 5.5' \u00d7 8'",
+   "area_sqft": 44.0,
+   "area_sqft_final": 44.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     225.0,
+     425.0
+    ],
+    [
+     385.0,
+     425.0
+    ],
+    [
+     385.0,
+     535.0
+    ],
+    [
+     225.0,
+     535.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "medium",
+    "plus_minus_pct": 20,
+    "reasoning": "The back wall holds the toilet space (~28 in), a ~24 in vanity and the 30 in tub end, giving about 5.5 ft of width. The 60 in tub runs along the right wall, and the door and entry zone add about 3 ft, giving roughly 8 ft of length.",
+    "references": [
+     "bathtub",
+     "toilet",
+     "vanity",
+     "door"
+    ],
+    "source": "cache",
+    "frames": [
+     24
+    ]
+   },
+   "frames": [
+    24
+   ]
+  },
+  {
+   "id": "r9",
+   "name": "Balcony",
+   "type": "balcony",
+   "media_type": "balcony",
+   "label_point": [
+    725.0,
+    505.0
+   ],
+   "printed_dims_ft": null,
+   "printed_dims_text": "\u2248 5' \u00d7 8'",
+   "area_sqft": 40.0,
+   "area_sqft_final": 40.0,
+   "area_source": "estimated",
+   "has_private_bath": null,
+   "polygon": [
+    [
+     675.0,
+     425.0
+    ],
+    [
+     775.0,
+     425.0
+    ],
+    [
+     775.0,
+     585.0
+    ],
+    [
+     675.0,
+     585.0
+    ]
+   ],
+   "dims_confidence": {
+    "confidence": "low",
+    "plus_minus_pct": 30,
+    "reasoning": "About 20 balusters at roughly 4 in spacing span the main railing between posts, giving a length of about 7-8 ft. Roughly 10-11 deck boards of about 5.5 in each run from the camera to the railing, giving a depth of about 5 ft.",
+    "references": [
+     "deck boards (~5.5 in)",
+     "railing balusters (~4 in spaci",
+     "porch posts"
+    ],
+    "source": "cache",
+    "frames": [
+     29,
+     31,
+     35,
+     37
+    ]
+   },
+   "frames": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ]
+  }
+ ],
+ "footprint": [
+  [
+   [
+    400.0,
+    40.0
+   ],
+   [
+    400.0,
+    129.0
+   ],
+   [
+    399.0,
+    130.0
+   ],
+   [
+    221.0,
+    130.0
+   ],
+   [
+    220.0,
+    129.0
+   ],
+   [
+    220.0,
+    50.0
+   ],
+   [
+    70.0,
+    50.0
+   ],
+   [
+    70.0,
+    290.0
+   ],
+   [
+    219.0,
+    290.0
+   ],
+   [
+    220.0,
+    291.0
+   ],
+   [
+    220.0,
+    359.0
+   ],
+   [
+    219.0,
+    360.0
+   ],
+   [
+    40.0,
+    360.0
+   ],
+   [
+    40.0,
+    580.0
+   ],
+   [
+    220.0,
+    580.0
+   ],
+   [
+    220.0,
+    541.0
+   ],
+   [
+    221.0,
+    540.0
+   ],
+   [
+    390.0,
+    540.0
+   ],
+   [
+    390.0,
+    421.0
+   ],
+   [
+    391.0,
+    420.0
+   ],
+   [
+    429.0,
+    420.0
+   ],
+   [
+    430.0,
+    421.0
+   ],
+   [
+    430.0,
+    560.0
+   ],
+   [
+    669.0,
+    560.0
+   ],
+   [
+    670.0,
+    561.0
+   ],
+   [
+    670.0,
+    590.0
+   ],
+   [
+    780.0,
+    590.0
+   ],
+   [
+    780.0,
+    420.0
+   ],
+   [
+    751.0,
+    420.0
+   ],
+   [
+    750.0,
+    419.0
+   ],
+   [
+    750.0,
+    130.0
+   ],
+   [
+    511.0,
+    130.0
+   ],
+   [
+    510.0,
+    129.0
+   ],
+   [
+    510.0,
+    40.0
+   ]
+  ]
+ ],
+ "openings": [
+  {
+   "id": "o1",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.75,
+   "polygon": [
+    [
+     427.5,
+     122.0
+    ],
+    [
+     482.5,
+     122.0
+    ],
+    [
+     482.5,
+     138.0
+    ],
+    [
+     427.5,
+     138.0
+    ]
+   ]
+  },
+  {
+   "id": "o2",
+   "kind": "opening",
+   "axis": "v",
+   "width_ft": 3.0,
+   "polygon": [
+    [
+     502.0,
+     140.0
+    ],
+    [
+     518.0,
+     140.0
+    ],
+    [
+     518.0,
+     200.0
+    ],
+    [
+     502.0,
+     200.0
+    ]
+   ]
+  },
+  {
+   "id": "o3",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.75,
+   "polygon": [
+    [
+     212.0,
+     142.5
+    ],
+    [
+     228.0,
+     142.5
+    ],
+    [
+     228.0,
+     197.5
+    ],
+    [
+     212.0,
+     197.5
+    ]
+   ]
+  },
+  {
+   "id": "o4",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.75,
+   "polygon": [
+    [
+     327.5,
+     202.0
+    ],
+    [
+     382.5,
+     202.0
+    ],
+    [
+     382.5,
+     218.0
+    ],
+    [
+     327.5,
+     218.0
+    ]
+   ]
+  },
+  {
+   "id": "o5",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.5,
+   "polygon": [
+    [
+     435.0,
+     412.0
+    ],
+    [
+     485.0,
+     412.0
+    ],
+    [
+     485.0,
+     428.0
+    ],
+    [
+     435.0,
+     428.0
+    ]
+   ]
+  },
+  {
+   "id": "o6",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.5,
+   "polygon": [
+    [
+     212.0,
+     365.0
+    ],
+    [
+     228.0,
+     365.0
+    ],
+    [
+     228.0,
+     415.0
+    ],
+    [
+     212.0,
+     415.0
+    ]
+   ]
+  },
+  {
+   "id": "o7",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 2.75,
+   "polygon": [
+    [
+     277.5,
+     412.0
+    ],
+    [
+     332.5,
+     412.0
+    ],
+    [
+     332.5,
+     428.0
+    ],
+    [
+     277.5,
+     428.0
+    ]
+   ]
+  },
+  {
+   "id": "o8",
+   "kind": "door",
+   "axis": "v",
+   "width_ft": 2.75,
+   "polygon": [
+    [
+     662.0,
+     462.5
+    ],
+    [
+     678.0,
+     462.5
+    ],
+    [
+     678.0,
+     517.5
+    ],
+    [
+     662.0,
+     517.5
+    ]
+   ]
+  },
+  {
+   "id": "o9",
+   "kind": "door",
+   "axis": "h",
+   "width_ft": 3.0,
+   "polygon": [
+    [
+     425.0,
+     32.0
+    ],
+    [
+     485.0,
+     32.0
+    ],
+    [
+     485.0,
+     48.0
+    ],
+    [
+     425.0,
+     48.0
+    ]
+   ]
+  },
+  {
+   "id": "o10",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 3.5,
+   "polygon": [
+    [
+     742.0,
+     240.0
+    ],
+    [
+     758.0,
+     240.0
+    ],
+    [
+     758.0,
+     310.0
+    ],
+    [
+     742.0,
+     310.0
+    ]
+   ]
+  },
+  {
+   "id": "o11",
+   "kind": "window",
+   "axis": "h",
+   "width_ft": 3.5,
+   "polygon": [
+    [
+     595.0,
+     122.0
+    ],
+    [
+     665.0,
+     122.0
+    ],
+    [
+     665.0,
+     138.0
+    ],
+    [
+     595.0,
+     138.0
+    ]
+   ]
+  },
+  {
+   "id": "o12",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 3.5,
+   "polygon": [
+    [
+     62.0,
+     135.0
+    ],
+    [
+     78.0,
+     135.0
+    ],
+    [
+     78.0,
+     205.0
+    ],
+    [
+     62.0,
+     205.0
+    ]
+   ]
+  },
+  {
+   "id": "o13",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 1.4,
+   "polygon": [
+    [
+     212.0,
+     311.0
+    ],
+    [
+     228.0,
+     311.0
+    ],
+    [
+     228.0,
+     339.0
+    ],
+    [
+     212.0,
+     339.0
+    ]
+   ]
+  },
+  {
+   "id": "o14",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 3.5,
+   "polygon": [
+    [
+     32.0,
+     435.0
+    ],
+    [
+     48.0,
+     435.0
+    ],
+    [
+     48.0,
+     505.0
+    ],
+    [
+     32.0,
+     505.0
+    ]
+   ]
+  },
+  {
+   "id": "o15",
+   "kind": "window",
+   "axis": "v",
+   "width_ft": 3.4,
+   "polygon": [
+    [
+     772.0,
+     471.0
+    ],
+    [
+     788.0,
+     471.0
+    ],
+    [
+     788.0,
+     539.0
+    ],
+    [
+     772.0,
+     539.0
+    ]
+   ]
+  }
+ ],
+ "unit": {
+  "total_sqft": 648,
+  "beds": 2,
+  "baths": 1,
+  "rent": null
+ },
+ "warnings": [
+  "Estimated from photos: room sizes \u00b125% on average",
+  "Room positions are schematic (from which rooms connect), not surveyed"
+ ],
+ "layout_source": "estimated_from_photos",
+ "layout_engine": "fitsplit",
+ "credit": "Layout engine by Aatmaj Salunke",
+ "estimate": {
+  "plus_minus_pct": 25,
+  "rooms_sized": 9,
+  "rooms": 9,
+  "method": "reference objects in the photos (doors, appliances, fixtures, beds)"
+ }
+}

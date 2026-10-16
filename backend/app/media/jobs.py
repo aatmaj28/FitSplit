@@ -24,7 +24,7 @@ from typing import Callable, Optional
 from ..config import DATA_DIR
 from . import describe as describe_mod
 from . import frames as frames_mod
-from . import layout, tagging, walkthrough
+from . import engines, layout, tagging, walkthrough
 
 MEDIA_DIR = DATA_DIR / "media_jobs"
 PIPELINE_VERSION = "media-1"
@@ -108,6 +108,7 @@ def create(uploads: list[Path], *, listing_id: Optional[str] = None, existing: O
         "listing_id": listing_id, "existing_amenities": existing or [], "inputs": inputs,
         "frames": [], "tags": [], "amenities": [], "rooms_seen": {}, "description": None, "insight": None,
         "rooms": [], "connections": [], "entrance": None, "walkthrough": None, "plan": None, "layout": None,
+        "layout_engine": engines.DEFAULT, "plans": {}, "layouts": {},
         "error": None, "created": _now(), "finished": None,
     }
     with _lock:
@@ -211,8 +212,37 @@ def _listing(listing_id: Optional[str]) -> Optional[dict]:
     return {"title": m.get("title") or listing_id.replace("_", " "), "beds": m.get("beds"), "baths": m.get("baths")} if isinstance(m, dict) else None
 
 
-BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthrough.group_rooms, "sizes": layout.estimate_sizes,
-                               "layout": layout.build_layout, "walkthrough": walkthrough.build_walkthrough}
+BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthrough.group_rooms, "sizes": engines.sizes_step,
+                               "layout": engines.layout_step, "walkthrough": walkthrough.build_walkthrough}
+
+
+def compute_engine(job: dict, engine: str, *, background: Optional[bool] = None) -> dict:
+    """Build another layout engine's plan for a finished job (the listing page's engine switch).
+    Runs after any job in progress; job["engine_status"][engine] says how it's going."""
+    if engine not in engines.ENGINES:
+        raise ValueError(f"unknown layout engine {engine!r}")
+    if engine in (job.get("plans") or {}) or (job.get("engine_status") or {}).get(engine) == "running":
+        return job
+    job.setdefault("engine_status", {})[engine] = "running"
+    _save(job)
+
+    def run() -> None:
+        with _one_at_a_time:
+            fresh = load(job["id"]) or job
+            fresh.setdefault("engine_status", {})[engine] = "running"
+            try:
+                engines.build(fresh, job_dir(job["id"]), engine)
+                fresh["engine_status"][engine] = "done"
+            except Exception as e:  # noqa: BLE001 - surfaced to the page; the switch can retry
+                fresh["engine_status"][engine] = "error: " + " ".join(str(e).split())[:200]
+                traceback.print_exc()
+            _save(fresh)
+
+    if BACKGROUND if background is None else background:
+        threading.Thread(target=run, name=f"engine-{job['id']}-{engine}", daemon=True).start()
+    else:
+        run()
+    return load(job["id"]) or job
 
 
 def _cover(job: dict) -> Optional[str]:

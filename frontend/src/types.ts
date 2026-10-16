@@ -67,6 +67,10 @@ export interface ParsedPlan {
   /** a schematic plan built from a listing video / photos (sizes from reference objects) */
   layout_source?: "estimated_from_photos";
   estimate?: { plus_minus_pct: number; rooms_sized: number; rooms: number; method: string };
+  /** which layout engine built it ("combined" | "tanvi" | "fitsplit"), its credit line and notes */
+  layout_engine?: string;
+  credit?: string;
+  notes?: string;
 }
 
 export interface PlanSummary {

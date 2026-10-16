@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 1235" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="540" height="1235" fill="#ffffff"/>
+<polygon points="45.0,84.0 45.0,311.0 337.0,311.0 337.0,84.0 297.0,45.0 84.0,45.0" fill="#cdebd2"/>
+<polygon points="346.8,45.0 441.8,45.0 441.8,310.6 346.8,310.6" fill="#e3e6ea"/>
+<polygon points="228.7,320.6 297.5,320.6 297.5,638.7 228.7,638.7" fill="#e3e6ea"/>
+<polygon points="45.0,320.6 218.7,320.6 218.7,533.7 45.0,533.7" fill="#c9d5f7"/>
+<polygon points="45.0,543.7 218.7,543.7 218.7,638.7 45.0,638.7" fill="#e4ded6"/>
+<polygon points="307.5,320.6 494.3,320.6 494.3,559.9 307.5,559.9" fill="#c9d5f7"/>
+<polygon points="45.0,648.7 297.5,648.7 297.5,861.8 45.0,861.8" fill="#f6d9b8"/>
+<polygon points="307.5,674.9 428.7,674.9 428.7,822.4 307.5,822.4" fill="#b6e6ee"/>
+<polygon points="45.0,871.8 258.1,871.8 258.1,1071.7 45.0,1071.7" fill="#c9d5f7"/>
+<polygon points="268.1,871.8 350.0,871.8 350.0,1071.7 268.1,1071.7" fill="#e3e6ea"/>
+<polygon points="360.0,871.8 494.3,871.8 494.3,1071.7 360.0,1071.7" fill="#e3e6ea"/>
+<polygon points="268.1,1081.7 494.3,1081.7 494.3,1189.9 268.1,1189.9" fill="#d9bf98"/>
+<path d="M350.0,960.0 L350.0,1071.0 L349.0,1072.0 L269.0,1072.0 L268.0,1071.0 L268.0,973.0 L258.0,973.0 L258.0,1071.0 L257.0,1072.0 L46.0,1072.0 L45.0,1071.0 L45.0,999.0 L35.0,999.0 L35.0,1077.0 L36.0,1078.0 L36.0,1080.0 L37.0,1081.0 L39.0,1081.0 L40.0,1082.0 L380.0,1082.0 L380.0,1072.0 L361.0,1072.0 L360.0,1071.0 L360.0,960.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M35.0,763.0 L35.0,945.0 L45.0,945.0 L45.0,873.0 L46.0,872.0 L257.0,872.0 L258.0,873.0 L258.0,918.0 L268.0,918.0 L268.0,876.0 L263.0,876.0 L262.0,875.0 L262.0,862.0 L46.0,862.0 L45.0,861.0 L45.0,763.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M297.0,422.0 L297.0,635.0 L302.0,635.0 L303.0,636.0 L303.0,652.0 L302.0,653.0 L297.0,653.0 L297.0,708.0 L307.0,708.0 L307.0,676.0 L308.0,675.0 L428.0,675.0 L429.0,676.0 L429.0,821.0 L428.0,822.0 L308.0,822.0 L307.0,821.0 L307.0,763.0 L297.0,763.0 L297.0,858.0 L302.0,858.0 L303.0,859.0 L303.0,872.0 L349.0,872.0 L350.0,873.0 L350.0,905.0 L360.0,905.0 L360.0,873.0 L361.0,872.0 L493.0,872.0 L494.0,873.0 L494.0,1071.0 L493.0,1072.0 L435.0,1072.0 L435.0,1082.0 L499.0,1082.0 L500.0,1081.0 L502.0,1081.0 L503.0,1080.0 L503.0,1078.0 L504.0,1077.0 L504.0,867.0 L503.0,866.0 L503.0,864.0 L502.0,863.0 L500.0,863.0 L499.0,862.0 L308.0,862.0 L307.0,861.0 L307.0,833.0 L308.0,832.0 L434.0,832.0 L435.0,831.0 L437.0,831.0 L438.0,830.0 L438.0,828.0 L439.0,827.0 L439.0,670.0 L438.0,669.0 L438.0,667.0 L437.0,666.0 L435.0,666.0 L434.0,665.0 L308.0,665.0 L307.0,664.0 L307.0,571.0 L308.0,570.0 L499.0,570.0 L500.0,569.0 L502.0,569.0 L503.0,568.0 L503.0,566.0 L504.0,565.0 L504.0,513.0 L494.0,513.0 L494.0,559.0 L493.0,560.0 L308.0,560.0 L307.0,559.0 L307.0,422.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M219.0,422.0 L219.0,533.0 L218.0,534.0 L46.0,534.0 L45.0,533.0 L45.0,448.0 L35.0,448.0 L35.0,708.0 L45.0,708.0 L45.0,650.0 L46.0,649.0 L223.0,649.0 L223.0,636.0 L224.0,635.0 L229.0,635.0 L229.0,618.0 L219.0,618.0 L219.0,638.0 L218.0,639.0 L46.0,639.0 L45.0,638.0 L45.0,545.0 L46.0,544.0 L218.0,544.0 L219.0,545.0 L219.0,564.0 L229.0,564.0 L229.0,422.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M494.0,408.0 L494.0,459.0 L504.0,459.0 L504.0,408.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M75.0,36.0 L36.0,75.0 L36.0,78.0 L35.0,79.0 L35.0,393.0 L45.0,393.0 L45.0,322.0 L46.0,321.0 L218.0,321.0 L219.0,322.0 L219.0,367.0 L229.0,367.0 L229.0,311.0 L46.0,311.0 L45.0,310.0 L45.0,82.0 L78.0,49.0 L78.0,36.0 Z" fill="#334155" fill-rule="evenodd"/>
+<path d="M342.0,35.0 L341.0,36.0 L339.0,36.0 L338.0,37.0 L338.0,39.0 L337.0,40.0 L337.0,65.0 L336.0,66.0 L307.0,37.0 L306.0,37.0 L305.0,36.0 L303.0,36.0 L303.0,48.0 L337.0,82.0 L337.0,236.0 L347.0,236.0 L347.0,46.0 L348.0,45.0 L441.0,45.0 L442.0,46.0 L442.0,310.0 L441.0,311.0 L348.0,311.0 L347.0,310.0 L347.0,303.0 L337.0,303.0 L337.0,310.0 L336.0,311.0 L284.0,311.0 L284.0,321.0 L296.0,321.0 L297.0,322.0 L297.0,367.0 L307.0,367.0 L307.0,322.0 L308.0,321.0 L493.0,321.0 L494.0,322.0 L494.0,354.0 L504.0,354.0 L504.0,316.0 L503.0,315.0 L503.0,313.0 L502.0,312.0 L500.0,312.0 L499.0,311.0 L453.0,311.0 L452.0,310.0 L452.0,40.0 L451.0,39.0 L451.0,37.0 L450.0,36.0 L448.0,36.0 L447.0,35.0 Z" fill="#334155" fill-rule="evenodd"/>
+<polygon points="79.4,32.0 302.5,32.0 302.5,48.0 79.4,48.0" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<polygon points="32.0,394.3 48.0,394.3 48.0,446.8 32.0,446.8" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<polygon points="491.3,355.0 507.3,355.0 507.3,407.5 491.3,407.5" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<polygon points="491.3,459.9 507.3,459.9 507.3,512.4 491.3,512.4" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<polygon points="32.0,709.3 48.0,709.3 48.0,761.8 32.0,761.8" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<polygon points="32.0,945.5 48.0,945.5 48.0,998.0 32.0,998.0" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+<text x="191.0" y="174.4" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Front room with bay</text>
+<text x="191.0" y="189.4" text-anchor="middle" font-size="10.5" fill="#334155">≈ 14' × 15' · ±30%</text>
+<text x="394.3" y="171.8" text-anchor="middle" font-size="8.0" font-weight="600" fill="#0f172a">Front entry and stair</text>
+<text x="394.3" y="186.8" text-anchor="middle" font-size="10.5" fill="#334155">≈ 5' × 14' · ±40%</text>
+<text x="263.1" y="473.6" text-anchor="middle" font-size="9.0" font-weight="600" fill="#0f172a">Central hall</text>
+<text x="263.1" y="488.6" text-anchor="middle" font-size="10.5" fill="#334155">≈ 4' × 16.5' · ±40%</text>
+<text x="131.9" y="421.1" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Bedroom 1 (small)</text>
+<text x="131.9" y="436.1" text-anchor="middle" font-size="10.5" fill="#334155">≈ 9' × 11' · ±30%</text>
+<text x="131.9" y="585.2" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Hall closets</text>
+<text x="131.9" y="600.2" text-anchor="middle" font-size="10.5" fill="#334155">≈ 5' × 9' · ±40%</text>
+<text x="400.9" y="434.3" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Bedroom 2</text>
+<text x="400.9" y="449.3" text-anchor="middle" font-size="10.5" fill="#334155">≈ 10' × 12.5' · ±30%</text>
+<text x="171.2" y="749.2" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Kitchen</text>
+<text x="171.2" y="764.2" text-anchor="middle" font-size="10.5" fill="#334155">≈ 11' × 13' · ±30%</text>
+<text x="368.1" y="742.7" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Bathroom</text>
+<text x="368.1" y="757.7" text-anchor="middle" font-size="10.5" fill="#334155">≈ 6.5' × 8' · ±40%</text>
+<text x="151.5" y="965.8" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Bedroom 3 (rear)</text>
+<text x="151.5" y="980.8" text-anchor="middle" font-size="10.5" fill="#334155">≈ 10.5' × 11' · ±40%</text>
+<text x="309.0" y="965.8" text-anchor="middle" font-size="11.0" font-weight="600" fill="#0f172a">Rear passage</text>
+<text x="309.0" y="980.8" text-anchor="middle" font-size="10.5" fill="#334155">≈ 4.5' × 10.5' · ±40%</text>
+<text x="427.1" y="965.8" text-anchor="middle" font-size="8.4" font-weight="600" fill="#0f172a">Rear stair hall / back door</text>
+<text x="427.1" y="980.8" text-anchor="middle" font-size="10.5" fill="#334155">≈ 7' × 10.5' · ±40%</text>
+<text x="381.2" y="1129.8" text-anchor="middle" font-size="13.0" font-weight="600" fill="#0f172a">Rear deck</text>
+<text x="381.2" y="1144.8" text-anchor="middle" font-size="10.5" fill="#334155">≈ 6' × 12' · ±40%</text>
+</svg>

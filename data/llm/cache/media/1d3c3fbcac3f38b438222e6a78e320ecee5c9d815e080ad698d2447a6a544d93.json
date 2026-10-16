@@ -1,0 +1,6 @@
+{
+  "value": "{\"width_ft\": 3.5, \"length_ft\": 13.0, \"confidence\": \"low\", \"plus_minus_pct\": 30, \"references\": [\"interior door\", \"doorway\", \"ceiling height\"], \"reasoning\": \"The hallway is only a little wider than a 30-32 in bedroom doorway, so it is about 3.5 ft wide. Its length is roughly three to four doorway widths plus wall runs to the far end, but the end is only partly visible in blurry frames, so confidence is low.\", \"ceiling_ft\": 8.5}",
+  "created": "2026-10-16T16:04:04+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

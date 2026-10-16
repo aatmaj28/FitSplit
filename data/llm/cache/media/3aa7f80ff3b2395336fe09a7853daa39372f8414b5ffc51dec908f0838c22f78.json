@@ -1,0 +1,6 @@
+{
+  "value": "{\"width_ft\": 7.0, \"length_ft\": 11.5, \"confidence\": \"low\", \"plus_minus_pct\": 25, \"references\": [\"window (~28-30 in sash plus trim)\", \"ceiling height\", \"door frame\"], \"reasoning\": \"The back wall is about 2.1 times the width of the trimmed window (about 36-38 in), which gives roughly 6.5-7.5 ft. From the doorway, the side walls look about 1.6-1.7 times the back-wall width, about 11-12 ft, judged by perspective against an assumed 8 ft ceiling.\", \"ceiling_ft\": 8.0}",
+  "created": "2026-10-16T16:04:11+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

@@ -1,0 +1,32 @@
+{
+  "video": "videos/apartment1.mp4",
+  "source": "Claude reading runs/apartment1/sheets (1 tile/s)",
+  "segments": [
+    {"t": [0, 1],    "room": "outside_front", "label": "front porch, unit door #2", "objects": ["porch", "mailbox", "door"]},
+    {"t": [5, 11],   "room": "stairs_front",  "label": "front stairs up", "objects": ["stairs", "railing"]},
+    {"t": [12, 15],  "room": "hall",          "label": "top of stairs into hall", "objects": ["doors", "ceiling light"]},
+    {"t": [16, 24],  "room": "living",        "label": "living room", "objects": ["3-window bay", "ceiling fan", "street view"]},
+    {"t": [25, 27],  "room": "hall",          "label": "living room doorway to hall", "objects": ["doorway"]},
+    {"t": [28, 33],  "room": "bed1",          "label": "small bedroom", "objects": ["1 window", "ceiling light", "debris on floor"]},
+    {"t": [34, 38],  "room": "closets",       "label": "closets off hall", "objects": ["closet", "door"]},
+    {"t": [41, 49],  "room": "bed2",          "label": "bedroom with 2 windows", "objects": ["2 windows", "walk-in closet"]},
+    {"t": [50, 52],  "room": "hall",          "label": "hall toward kitchen", "objects": []},
+    {"t": [53, 64],  "room": "kitchen",       "label": "kitchen", "objects": ["gas range", "sink", "fridge", "dishwasher", "cabinets", "tile floor"]},
+    {"t": [65, 69],  "room": "stairs_back",   "label": "back stair hall", "objects": ["door with transom", "stairs"]},
+    {"t": [70, 77],  "room": "bed3",          "label": "bedroom near kitchen", "objects": ["windows", "closet"]},
+    {"t": [78, 81],  "room": "kitchen",       "label": "kitchen to bathroom door", "objects": ["fridge"]},
+    {"t": [82, 83],  "room": "bath",          "label": "bathroom", "objects": ["toilet", "vanity", "tub/shower", "hex tile"]},
+    {"t": [84, 89],  "room": "stairs_back",   "label": "back stair landing", "objects": ["door with transom"]},
+    {"t": [90, 101], "room": "porch",         "label": "covered back porch (outdoor)", "objects": ["deck", "railing", "siding"]},
+    {"t": [102, 108],"room": "stairs_back",   "label": "back stairwell to kitchen door", "objects": ["stairs", "door"]},
+    {"t": [109, 112],"room": "kitchen",       "label": "kitchen", "objects": ["fridge", "cabinets"]},
+    {"t": [113, 118],"room": "hall",          "label": "hall toward front", "objects": ["doors"]},
+    {"t": [119, 122],"room": "living",        "label": "living room again", "objects": ["bay window", "ceiling fan", "thermostat"]},
+    {"t": [123, 126],"room": "bed1",          "label": "small bedroom again", "objects": ["1 window", "debris"]},
+    {"t": [127, 129],"room": "bed2",          "label": "bedroom 2 again", "objects": ["2 windows"]},
+    {"t": [130, 133],"room": "kitchen",       "label": "hall into kitchen", "objects": ["cabinets", "range"]},
+    {"t": [134, 136],"room": "bed3",          "label": "bedroom 3 again", "objects": ["window"]},
+    {"t": [137, 138],"room": "bath",          "label": "bathroom again", "objects": ["hex tile"]},
+    {"t": [139, 140],"room": "kitchen",       "label": "kitchen", "objects": ["fridge", "dishwasher"]}
+  ]
+}

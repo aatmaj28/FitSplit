@@ -1,0 +1,381 @@
+{
+  "units": "m",
+  "source": "manual reading of videos/apt2.MOV (Claude); dimensions estimated from doors, windows, furniture (queen bed ~1.5x2.0 m) | sizes fused with Depth Anything 3 measurements",
+  "rooms": [
+    {
+      "id": "living",
+      "type": "living_room",
+      "label": "Living room",
+      "rect": [
+        0.0,
+        -0.0,
+        4.4,
+        4.36
+      ],
+      "confidence": 0.8,
+      "evidence_s": [
+        29,
+        35,
+        42
+      ],
+      "features": [
+        "window bank at front",
+        "ceiling fan",
+        "radiator"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "office",
+      "type": "office",
+      "label": "Office / Bedroom 2",
+      "rect": [
+        4.4,
+        -0.0,
+        2.51,
+        3.51
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        36,
+        41
+      ],
+      "features": [
+        "French doors",
+        "bookshelves",
+        "closet",
+        "window AC"
+      ],
+      "dims_source": "measured",
+      "measured": {
+        "dims_m": [
+          3.18,
+          3.5
+        ],
+        "height_m": 2.64,
+        "outline_fraction": 0.61
+      }
+    },
+    {
+      "id": "dining",
+      "type": "dining_room",
+      "label": "Dining",
+      "rect": [
+        0.0,
+        4.36,
+        3.2,
+        3.29
+      ],
+      "confidence": 0.6,
+      "evidence_s": [
+        7,
+        26,
+        28
+      ],
+      "features": [
+        "dining table",
+        "track lights"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "hall",
+      "type": "hallway",
+      "label": "Hall",
+      "rect": [
+        3.2,
+        4.36,
+        1.2,
+        4.98
+      ],
+      "confidence": 0.5,
+      "evidence_s": [
+        8,
+        9,
+        14,
+        17
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "bed1",
+      "type": "bedroom",
+      "label": "Bedroom 1",
+      "rect": [
+        4.4,
+        3.51,
+        2.51,
+        3.18
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        18,
+        25
+      ],
+      "features": [
+        "queen bed",
+        "dresser",
+        "window AC",
+        "closet"
+      ],
+      "dims_source": "measured",
+      "measured": {
+        "dims_m": [
+          1.84,
+          3.16
+        ],
+        "height_m": 2.66,
+        "outline_fraction": 0.68
+      }
+    },
+    {
+      "id": "bath",
+      "type": "bathroom",
+      "label": "Bathroom",
+      "rect": [
+        4.4,
+        6.69,
+        1.78,
+        2.64
+      ],
+      "confidence": 0.75,
+      "evidence_s": [
+        10,
+        13
+      ],
+      "features": [
+        "tub",
+        "vanity",
+        "toilet"
+      ],
+      "dims_source": "estimated"
+    },
+    {
+      "id": "kitchen",
+      "type": "kitchen",
+      "label": "Kitchen (galley)",
+      "rect": [
+        0.0,
+        7.65,
+        3.2,
+        3.4
+      ],
+      "confidence": 0.8,
+      "evidence_s": [
+        0,
+        6
+      ],
+      "features": [
+        "gas range",
+        "microwave",
+        "fridge",
+        "dishwasher",
+        "subway tile"
+      ],
+      "dims_source": "estimated"
+    }
+  ],
+  "openings": [
+    {
+      "type": "opening",
+      "wall": [
+        [
+          0.3,
+          4.36
+        ],
+        [
+          2.9,
+          4.36
+        ]
+      ],
+      "rooms": [
+        "living",
+        "dining"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          4.4,
+          1.03
+        ],
+        [
+          4.4,
+          2.48
+        ]
+      ],
+      "rooms": [
+        "living",
+        "office"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          3.2,
+          4.82
+        ],
+        [
+          3.2,
+          5.76
+        ]
+      ],
+      "rooms": [
+        "dining",
+        "hall"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          3.4,
+          4.36
+        ],
+        [
+          4.2,
+          4.36
+        ]
+      ],
+      "rooms": [
+        "living",
+        "hall"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          4.4,
+          5.38
+        ],
+        [
+          4.4,
+          6.13
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bed1"
+      ]
+    },
+    {
+      "type": "door",
+      "wall": [
+        [
+          4.4,
+          7.84
+        ],
+        [
+          4.4,
+          8.64
+        ]
+      ],
+      "rooms": [
+        "hall",
+        "bath"
+      ]
+    },
+    {
+      "type": "opening",
+      "wall": [
+        [
+          0.6,
+          7.65
+        ],
+        [
+          2.6,
+          7.65
+        ]
+      ],
+      "rooms": [
+        "dining",
+        "kitchen"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0.4,
+          -0.0
+        ],
+        [
+          4.0,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "living"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          5.19,
+          -0.0
+        ],
+        [
+          6.42,
+          -0.0
+        ]
+      ],
+      "rooms": [
+        "office"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          6.91,
+          4.45
+        ],
+        [
+          6.91,
+          5.38
+        ]
+      ],
+      "rooms": [
+        "bed1"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          6.18,
+          7.84
+        ],
+        [
+          6.18,
+          8.44
+        ]
+      ],
+      "rooms": [
+        "bath"
+      ]
+    },
+    {
+      "type": "window",
+      "wall": [
+        [
+          0.0,
+          8.84
+        ],
+        [
+          0.0,
+          9.73
+        ]
+      ],
+      "rooms": [
+        "kitchen"
+      ]
+    }
+  ],
+  "notes": "Occupied apartment with people and furniture in frame. Room set and adjacencies (kitchen->dining->living->French-door office; hall->bath, bedroom) are from the walk order; left/right placement and the hall position are assumptions.",
+  "ceiling_height_m": 2.64
+}
