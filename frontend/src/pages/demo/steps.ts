@@ -13,9 +13,9 @@ export const DEMO_LISTING = "jvue_3bed";
 
 export const STEPS: Step[] = [
   {
-    n: 1, side: "LeaseHub", title: "Agent posts the listing",
-    hint: "Pick the JVUE 3 bed floor plan (or upload jvue_3bed.png): 3D view and room sizes appear instantly. Publish.",
-    path: () => "/leasehub/listings/new", matches: (p) => p.startsWith("/leasehub/listings/new"),
+    n: 1, side: "LeaseHub", title: "Agent posts a listing from a video",
+    hint: "Open the walkthrough video (or drop one in): amenities tagged with the photo that proves each, what the listing was missing, a description, a walkthrough and an estimated floor plan. Publish. The Floor plan tab still turns a plan image into 3D.",
+    path: () => "/leasehub/listings/new?source=video", matches: (p) => p.startsWith("/leasehub/listings/new"),
   },
   {
     n: 2, side: "Roombae", title: "Students match",

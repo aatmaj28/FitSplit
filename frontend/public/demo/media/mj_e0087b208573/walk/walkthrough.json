@@ -1,0 +1,441 @@
+{
+ "rooms": [
+  {
+   "id": "r1",
+   "name": "Entry",
+   "type": "entry",
+   "frames": [
+    1
+   ],
+   "photos": [
+    "frames/f001.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r2",
+     "name": "Hallway 1",
+     "frame": 1,
+     "x": null,
+     "photo": 0
+    }
+   ]
+  },
+  {
+   "id": "r2",
+   "name": "Hallway 1",
+   "type": "hallway",
+   "frames": [
+    2,
+    9,
+    38,
+    39,
+    40
+   ],
+   "photos": [
+    "frames/f002.jpg",
+    "frames/f009.jpg",
+    "frames/f038.jpg",
+    "frames/f039.jpg",
+    "frames/f040.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r1",
+     "name": "Entry",
+     "frame": 2,
+     "x": null,
+     "photo": 0
+    },
+    {
+     "to": "r3",
+     "name": "Living room",
+     "frame": 2,
+     "x": null,
+     "photo": 0
+    },
+    {
+     "to": "r4",
+     "name": "Bedroom 1",
+     "frame": 9,
+     "x": null,
+     "photo": 1
+    },
+    {
+     "to": "r5",
+     "name": "Kitchen",
+     "frame": 9,
+     "x": null,
+     "photo": 1
+    }
+   ]
+  },
+  {
+   "id": "r3",
+   "name": "Living room",
+   "type": "living",
+   "frames": [
+    3,
+    41,
+    42
+   ],
+   "photos": [
+    "frames/f003.jpg",
+    "frames/f041.jpg",
+    "frames/f042.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r2",
+     "name": "Hallway 1",
+     "frame": 3,
+     "x": null,
+     "photo": 0
+    }
+   ]
+  },
+  {
+   "id": "r4",
+   "name": "Bedroom 1",
+   "type": "bedroom",
+   "frames": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    43,
+    44,
+    45
+   ],
+   "photos": [
+    "frames/f004.jpg",
+    "frames/f005.jpg",
+    "frames/f006.jpg",
+    "frames/f007.jpg",
+    "frames/f008.jpg",
+    "frames/f043.jpg",
+    "frames/f044.jpg",
+    "frames/f045.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r2",
+     "name": "Hallway 1",
+     "frame": 8,
+     "x": null,
+     "photo": 4
+    }
+   ]
+  },
+  {
+   "id": "r5",
+   "name": "Kitchen",
+   "type": "kitchen",
+   "frames": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    46,
+    47
+   ],
+   "photos": [
+    "frames/f010.jpg",
+    "frames/f011.jpg",
+    "frames/f012.jpg",
+    "frames/f013.jpg",
+    "frames/f014.jpg",
+    "frames/f015.jpg",
+    "frames/f016.jpg",
+    "frames/f017.jpg",
+    "frames/f018.jpg",
+    "frames/f019.jpg",
+    "frames/f020.jpg",
+    "frames/f021.jpg",
+    "frames/f046.jpg",
+    "frames/f047.jpg"
+   ],
+   "pano": "pano/r5.jpg",
+   "pano_size": [
+    616,
+    536
+   ],
+   "pano_frames": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "hotspots": [
+    {
+     "to": "r2",
+     "name": "Hallway 1",
+     "frame": 10,
+     "x": 0.699,
+     "photo": 0
+    },
+    {
+     "to": "r6",
+     "name": "Hallway 2",
+     "frame": 21,
+     "x": null,
+     "photo": 11
+    },
+    {
+     "to": "r7",
+     "name": "Bedroom 2",
+     "frame": 47,
+     "x": 0.295,
+     "photo": 13
+    },
+    {
+     "to": "r8",
+     "name": "Bathroom",
+     "frame": 21,
+     "x": null,
+     "photo": 11
+    }
+   ]
+  },
+  {
+   "id": "r6",
+   "name": "Hallway 2",
+   "type": "hallway",
+   "frames": [
+    22,
+    25,
+    26,
+    27
+   ],
+   "photos": [
+    "frames/f022.jpg",
+    "frames/f025.jpg",
+    "frames/f026.jpg",
+    "frames/f027.jpg"
+   ],
+   "pano": "pano/r6.jpg",
+   "pano_size": [
+    899,
+    856
+   ],
+   "pano_frames": [
+    25,
+    26,
+    27
+   ],
+   "hotspots": [
+    {
+     "to": "r5",
+     "name": "Kitchen",
+     "frame": 22,
+     "x": null,
+     "photo": 0
+    },
+    {
+     "to": "r9",
+     "name": "Balcony",
+     "frame": 27,
+     "x": 0.581,
+     "photo": 3
+    }
+   ]
+  },
+  {
+   "id": "r7",
+   "name": "Bedroom 2",
+   "type": "bedroom",
+   "frames": [
+    23,
+    48,
+    49,
+    50
+   ],
+   "photos": [
+    "frames/f023.jpg",
+    "frames/f048.jpg",
+    "frames/f049.jpg",
+    "frames/f050.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r5",
+     "name": "Kitchen",
+     "frame": 48,
+     "x": null,
+     "photo": 1
+    }
+   ]
+  },
+  {
+   "id": "r8",
+   "name": "Bathroom",
+   "type": "bathroom",
+   "frames": [
+    24
+   ],
+   "photos": [
+    "frames/f024.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r5",
+     "name": "Kitchen",
+     "frame": 24,
+     "x": null,
+     "photo": 0
+    }
+   ]
+  },
+  {
+   "id": "r9",
+   "name": "Balcony",
+   "type": "balcony",
+   "frames": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ],
+   "photos": [
+    "frames/f028.jpg",
+    "frames/f029.jpg",
+    "frames/f030.jpg",
+    "frames/f031.jpg",
+    "frames/f032.jpg",
+    "frames/f033.jpg",
+    "frames/f034.jpg",
+    "frames/f035.jpg",
+    "frames/f036.jpg",
+    "frames/f037.jpg"
+   ],
+   "pano": null,
+   "pano_size": null,
+   "pano_frames": [],
+   "hotspots": [
+    {
+     "to": "r6",
+     "name": "Hallway 2",
+     "frame": 28,
+     "x": null,
+     "photo": 0
+    }
+   ]
+  }
+ ],
+ "entrance": "r1",
+ "connections": [
+  {
+   "a": "r1",
+   "b": "r2",
+   "via": [
+    2
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r2",
+   "b": "r3",
+   "via": [
+    3
+   ],
+   "kind": "opening",
+   "source": "model"
+  },
+  {
+   "a": "r2",
+   "b": "r4",
+   "via": [
+    7,
+    9
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r2",
+   "b": "r5",
+   "via": [
+    39,
+    40,
+    46
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r5",
+   "b": "r6",
+   "via": [
+    22
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r5",
+   "b": "r7",
+   "via": [
+    47,
+    48
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r5",
+   "b": "r8",
+   "via": [
+    24
+   ],
+   "kind": "door",
+   "source": "model"
+  },
+  {
+   "a": "r6",
+   "b": "r9",
+   "via": [
+    27,
+    28
+   ],
+   "kind": "door",
+   "source": "model"
+  }
+ ]
+}

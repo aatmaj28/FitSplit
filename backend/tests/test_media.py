@@ -51,11 +51,21 @@ def test_video_frames_are_sampled_filtered_and_in_walk_order(tmp_path):
 
 
 def test_select_drops_blurry_frames_and_near_duplicates():
-    c = lambda i, sharp, h: {"order": i, "sharp": sharp, "hash": h, "path": None, "t": i * 0.5, "source": "v"}  # noqa: E731
+    c = lambda i, sharp, h: {"order": i, "sharp": sharp, "hash": h, "path": None, "t": i * 2.0, "source": "v"}  # noqa: E731
     cands = [c(0, 300, 0b1111), c(1, 320, 0b1110), c(2, 20, 0xF0F0F0), c(3, 280, 0xFFFF0000), c(4, 290, 0x0000FFFF)]
     kept = frames.select(cands, video=True)
     assert [k["order"] for k in kept] == [1, 3, 4]  # the sharper of the duplicates, no blur
     assert len(frames.select([c(i, 200, (i * 0x9E3779B97F4A7C15) & (2**64 - 1)) for i in range(80)], video=False, max_frames=50)) == 50
+
+
+def test_soft_footage_still_covers_the_walk():
+    # compressed / tone-mapped HDR video: every frame scores low; a fixed floor kept just one
+    c = lambda i, sharp: {"order": i, "sharp": sharp, "hash": (i * 0x9E3779B97F4A7C15) & (2**64 - 1), "path": None, "t": i * 0.5, "source": "v"}  # noqa: E731
+    cands = [c(i, 3.0 + (i % 3)) for i in range(40)]  # 20 s at 2 fps, sharpness 3-5
+    kept = frames.select(cands, video=True)
+    assert len(kept) == 14 and all(k["sharp"] == 5.0 for k in kept[:-1])  # the sharpest of each 1.5 s window (the last holds one frame)
+    blank = [c(i, 0.5) for i in range(10)]
+    assert len(frames.select(blank, video=True)) == len(blank[:8])  # nothing usable: the sharpest few, not nothing
 
 
 def test_photos_heic_and_exif_rotation(tmp_path):
@@ -314,6 +324,9 @@ def test_size_answers_are_cleaned():
     assert (odd["w"], odd["l"], odd["confidence"]) == (4, 14, "low") and "Adjusted" in odd["reasoning"]
     with pytest.raises(ValueError):
         lay.parse_size('{"width_ft": -3, "length_ft": 10}')
+    long = "The bay spans about 8 ft. " * 20
+    assert lay.trim_sentences(long).endswith("ft.") and len(lay.trim_sentences(long)) <= 320
+    assert lay.trim_sentences("word " * 100).endswith("…")
 
 
 def test_sizes_one_call_per_room_with_the_best_frames(tmp_path, monkeypatch, keys):

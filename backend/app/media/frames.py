@@ -24,8 +24,10 @@ PHOTO_EXT = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".bmp", ".tif",
 SAMPLE_FPS = 2.0
 MAX_FRAMES = 50
 VISION_SIDE = 1024
-BLUR_ABS = 25.0   # Laplacian variance below this (at 1024 px) is blurry
-BLUR_REL = 0.35   # video only: below 35% of the clip's median sharpness is a blurry, moving frame
+BLUR_ABS = 25.0   # photos: Laplacian variance below this (at 1024 px) is blurry, unless the whole set is soft
+BLUR_REL = 0.35   # below 35% of the clip's (or set's) median sharpness is a blurry, moving frame
+MIN_SHARP = 2.0   # video: a window whose best frame is below this is blank or all blur
+WINDOW_S = 1.5    # video: keep the sharpest frame of each window of the walk
 DUP_BITS = 6      # dHash distance at or below this = a near duplicate of the last kept frame
 
 
@@ -121,15 +123,27 @@ def _measure(img_path: Path) -> tuple[float, int]:
 
 
 def select(cands: list[dict], *, video: bool, max_frames: int = MAX_FRAMES) -> list[dict]:
-    """Drop blurry frames and near duplicates of the last kept frame (keeping the sharper one),
-    then thin evenly to max_frames. Order is preserved."""
+    """Video: the sharpest frame of each WINDOW_S window of the walk (so every part of it is
+    covered), unless the window is all blur next to the rest of the clip. Sharpness is relative to
+    the clip: compressed or tone-mapped HDR footage is soft all over, so a fixed floor would keep
+    almost nothing. Photos: drop the ones much blurrier than the set. Then drop near duplicates of
+    the last kept frame (keeping the sharper one) and thin evenly to max_frames, in order."""
     if not cands:
         return []
-    floor = BLUR_ABS
+    median = float(np.median([c["sharp"] for c in cands]))
     if video:
-        floor = max(BLUR_ABS, BLUR_REL * float(np.median([c["sharp"] for c in cands])))
+        floor = max(MIN_SHARP, BLUR_REL * median)
+        windows: dict[int, dict] = {}
+        for c in cands:
+            w = int((c["t"] or 0.0) // WINDOW_S)
+            if w not in windows or c["sharp"] > windows[w]["sharp"]:
+                windows[w] = c
+        pool = sorted(windows.values(), key=lambda c: c["order"])
+    else:
+        floor = min(BLUR_ABS, BLUR_REL * median)
+        pool = cands
     kept: list[dict] = []
-    for c in cands:
+    for c in pool:
         if c["sharp"] < floor:
             continue
         if kept and hamming(c["hash"], kept[-1]["hash"]) <= DUP_BITS:

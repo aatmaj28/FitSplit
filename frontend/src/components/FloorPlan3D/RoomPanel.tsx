@@ -105,7 +105,7 @@ export function RoomPanel({ room, plan, onClose, onSelect, compact = false, fold
         {!compact && est && (
           <div className="mt-2 rounded-lg bg-amber-50 px-2.5 py-2 text-xs text-amber-900" data-estimate-note>
             <div className="font-semibold">Estimated from photos ±{est.plus_minus_pct}% <span className="font-normal text-amber-700">({est.confidence} confidence)</span></div>
-            {est.reasoning && <p className="mt-0.5 text-amber-800">{est.reasoning}</p>}
+            {est.reasoning && <p className="mt-0.5 line-clamp-4 text-amber-800" title={est.reasoning}>{est.reasoning}</p>}
             {est.references && est.references.length > 0 && <p className="mt-0.5 text-amber-700">Measured against: {est.references.join(", ")}</p>}
           </div>
         )}

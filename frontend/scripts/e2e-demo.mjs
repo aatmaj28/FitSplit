@@ -1,7 +1,7 @@
 // End-to-end check of the guided demo (both portals), online and with the backend blocked, plus
 // screenshots of every demo step and the main screens of both portals into docs/screenshots/.
 //   (dev server running)  node scripts/e2e-demo.mjs [--offline-only] [--no-shots]
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
@@ -50,7 +50,22 @@ async function flow(offline) {
   await page.waitForURL(/\/leasehub\/listings\/new/);
   check((await step(1)) === 1, `${tag}: demo starts at step 1 (agent posts listing)`);
 
-  // 1. agent: sample JVUE 3 bed -> parse -> 3D -> publish
+  // 1. agent: the walkthrough video -> tags with photo evidence, what the listing was missing, a
+  //    walkthrough and an estimated plan -> publish; then the floor plan path (JVUE 3 bed) still works
+  check(new URL(page.url()).searchParams.get("source") === "video", `${tag}: step 1 opens the video upload`);
+  const video = JSON.parse(readFileSync(new URL("../public/demo/media/index.json", import.meta.url), "utf8"))[0].id;
+  await page.locator(`[data-media-job="${video}"]`).click();
+  await page.locator("[data-media-results]").waitFor({ timeout: 15000 });
+  check((await page.locator("[data-missing] li").count()) > 0 && (await page.locator("[data-amenity]").count()) > 5, `${tag}: video tagged, "Missing from your listing" shows`);
+  check((await page.locator('[data-view-tab="walk"]').count()) === 1 && (await page.locator('[data-view-tab="plan"]').count()) === 1, `${tag}: walkthrough and estimated floor plan ready`);
+  await page.waitForTimeout(600);
+  await shot("demo_step1_video.png");
+  await page.locator("[data-media-title]").fill("2 bed with back porch");
+  await page.locator('[data-media-field="rent"]').fill("2600");
+  await page.locator("[data-media-publish]").click();
+  await page.locator("[data-media-published]").waitFor({ timeout: 8000 });
+  check(true, `${tag}: video listing published`);
+  await page.locator('[data-source="plan"]').click();
   await page.locator("[data-sample='jvue_3bed']").click();
   await page.waitForSelector('[data-ready="true"]', { timeout: 30000 });
   check(await page.getByText(/Parsed in/).isVisible(), `${tag}: plan parsed (cached) with 3D preview`);

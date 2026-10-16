@@ -215,6 +215,16 @@ BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthr
                                "layout": layout.build_layout, "walkthrough": walkthrough.build_walkthrough}
 
 
+def _cover(job: dict) -> Optional[str]:
+    """The card photo: the first living room frame, else kitchen, else the first frame."""
+    frames = {f["id"]: f["file"] for f in job.get("frames", [])}
+    for room in ("living", "kitchen"):
+        hit = next((frames.get(t["frame"]) for t in job.get("tags", []) if t["room_type"] == room), None)
+        if hit:
+            return hit
+    return next(iter(frames.values()), None)
+
+
 def list_jobs() -> list[dict]:
     """Finished jobs, newest first: what the upload page offers to reopen."""
     out = []
@@ -228,7 +238,7 @@ def list_jobs() -> list[dict]:
         names = [i["name"] for i in job.get("inputs", [])]
         out.append({"id": job["id"], "title": job.get("title") or (names[0] if len(names) == 1 else f"{len(names)} photos"),
                     "inputs": ", ".join(names[:3]) + ("…" if len(names) > 3 else ""), "frames": len(job.get("frames", [])),
-                    "cover": (job.get("frames") or [{}])[0].get("file"), "created": job.get("created")})
+                    "cover": _cover(job), "created": job.get("created")})
     return sorted(out, key=lambda j: j["created"] or "", reverse=True)
 
 

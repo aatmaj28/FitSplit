@@ -87,12 +87,22 @@ class SizeOut(BaseModel):
     @field_validator("reasoning", mode="before")
     @classmethod
     def _why(cls, v):
-        return " ".join(str(v or "").split())[:320]
+        return trim_sentences(str(v or ""))
 
     @field_validator("references", mode="before")
     @classmethod
     def _refs(cls, v):
         return [str(x).strip().lower()[:30] for x in (v or [])][:6]
+
+
+def trim_sentences(text: str, limit: int = 320) -> str:
+    """At most `limit` chars, cut after a whole sentence (or a word, with an ellipsis)."""
+    t = " ".join(text.split())
+    if len(t) <= limit:
+        return t
+    cut = t[:limit]
+    end = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "))
+    return cut[:end + 1] if end >= limit // 3 else cut[:cut.rfind(" ")].rstrip(",;:") + "…"
 
 
 def parse_size(text: str) -> SizeOut:

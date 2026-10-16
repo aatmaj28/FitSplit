@@ -2,10 +2,12 @@
 
 **One floor plan. Everything fits.**
 
-FitSplit turns a single apartment floor plan into everything renters and agents need. You get a 3D
-model with real room sizes, a check that your furniture fits, a fair rent split that AI double-checks,
-and roommates matched by AI clones that talk to each other first. It powers two portals: **LeaseHub**,
-where agents post listings, and **Roombae**, where students find roommates and a place together.
+FitSplit turns a single apartment floor plan, or a phone walkthrough video, into everything renters
+and agents need. You get a 3D model with room sizes, a check that your furniture fits, a fair rent
+split that AI double-checks, and roommates matched by AI clones that talk to each other first. From a
+video it also tags every amenity with the photo that shows it, writes the description, builds a
+walkthrough and estimates a floor plan. It powers two portals: **LeaseHub**, where agents post
+listings, and **Roombae**, where students find roommates and a place together.
 
 ![FitSplit home](docs/screenshots/landing.png)
 
@@ -25,6 +27,23 @@ matched group with an agreed split, so the agent receives one complete applicati
 - **Floor plan to 3D.** Upload a floor plan image and get walls, rooms with areas, doors and windows,
   and a 3D model. It has Top / Corner / Front / Side views, a wall cutaway, touch controls and Reset
   view.
+- **Listing video or photos** (LeaseHub, New listing, "Video or photos"). Upload one phone video
+  (.mov / HEVC, .mp4) or several photos (.jpg, .heic), up to 500 MB:
+  - **Photo tagging:** each sharp frame is tagged with its room, amenities, flooring, wall color and
+    light. The listing gets an amenity checklist where every amenity links to the photos that show
+    it. You confirm or remove each one.
+  - **"Missing from your listing":** what the photos show that your listing text doesn't, e.g.
+    "Dishwasher found in photo 10. Renters filtering for a dishwasher would have missed you."
+  - **Description:** a full and a short version, written from the tags only (no invented claims or
+    numbers), and editable.
+  - **Walkthrough:** frames grouped into rooms; each room is a stitched panorama (or its photos)
+    with arrows to the next room, a minimap, keyboard and touch.
+  - **Estimated floor plan:** each room sized against doors, appliances and fixtures in its photos,
+    then laid out by how the rooms connect. It feeds the same 3D view, furniture fit and rent split,
+    and every size is labelled "Estimated from photos ±N%".
+- **Lived-in 3D.** Walls painted and floors in real materials (from the listing's photos when it has
+  them), and a **Furnished** view that places furniture in every room with the fit check. Click a
+  room to see its photos.
 - **Furniture fit.** Place a bed, desk or dresser (or a custom size) in any room. Green means it fits
   against the real walls; red means it hits a wall or another piece. Doorways are kept clear, and
   "Will my stuff fit?" places a whole set along the walls.
@@ -44,8 +63,9 @@ matched group with an agreed split, so the agent receives one complete applicati
     a chat for the roommates.
 - **Group apply.** You only see listings where every fair-split share fits each person's budget. Each
   roommate's name and exact share is filled in, and you get a PDF summary of the application.
-- **Agent view (LeaseHub).** A dashboard, a new listing flow (upload, parse, 3D preview, auto-filled
-  details, publish) and group applications next to the listing and its 3D plan.
+- **Agent view (LeaseHub).** A dashboard, a new listing flow (a floor plan: upload, parse, 3D
+  preview, auto-filled details, publish; or a video, see above) and group applications next to the
+  listing and its 3D plan.
 - **Guided 3-minute demo** at `/demo` that walks through both portals. It works fully offline.
 
 | 3D view and furniture fit | Swipe to match |
@@ -56,6 +76,10 @@ matched group with an agreed split, so the agent receives one complete applicati
 |---|---|
 | ![Rent split](docs/screenshots/demo_step4_rent_check.png) | ![Application view](docs/screenshots/demo_step6_application.png) |
 
+| Video: amenities with photo evidence | Walkthrough | Floor plan estimated from photos |
+|---|---|---|
+| ![Video results](docs/screenshots/leasehub_video_results.png) | ![Walkthrough](docs/screenshots/roombae_walkthrough.png) | ![Estimated plan](docs/screenshots/roombae_estimated_3d.png) |
+
 ## How it works
 
 ```
@@ -63,15 +87,33 @@ floor plan image ─┬─► OpenCV: walls, rooms, doors/windows, scale ─┐
                   └─► vision model: room names, printed sizes ────┴─► plan JSON ─► 3D view, furniture fit, rent split
                                                                                          │
 student profiles ──► AI clones negotiate (4 phases, shared memory) ──► verdict + scores ─┴─► swipe, matches, group, apply
+
+phone video / photos ─► frames (2 fps, blur + duplicate filter) ─► tags (10 photos per vision call) ─► amenities, description
+                                                                 ─► rooms (1 call on contact sheets) ─► panoramas, walkthrough
+                                                                 ─► sizes (1 call per room) ─► layout ─► plan JSON (estimated)
 ```
 
 - **Floor plan parser** (`backend/app/geometry`, `pipeline.py`). OpenCV finds walls and door and
   window gaps, then closes the rooms off. A vision model (Claude, then Gemini, then Groq; see
   `VISION_CHAIN_ORDER`) reads the room names and printed dimensions, which set the scale. Results
   are cached by image hash, so a known plan comes back instantly and never calls a model again.
+- **Media pipeline** (`backend/app/media`). One background job per upload, one at a time:
+  - **Frames:** about 2 per second with ffmpeg; blurry frames (Laplacian variance) and near
+    duplicates (perceptual hash) are dropped, and at most 50 are kept in walk order.
+  - **Tags:** 10 frames per vision call.
+  - **Rooms:** one call on numbered contact sheets groups frames into rooms and finds which rooms
+    connect.
+  - **Panoramas:** OpenCV's Stitcher, with the photos as a fallback.
+  - **Sizes:** one call per room, measured against reference objects, then checked in code.
+  - **Layout:** rooms placed as rectangles over the room graph.
+
+  Job ids and every model answer are keyed by content hash, so the same video comes back instantly
+  and costs nothing the second time. A 2:20 phone video takes about 3 minutes and 16 model calls the
+  first time. Endpoints: `POST /api/media/jobs`, `GET /api/media/jobs/{id}` (step, progress,
+  results), `GET /api/media/jobs` and `/api/media/jobs/{id}/files/...`.
 - **FastAPI backend.** It serves parsing, plans, the AI rent check, the roommate engine (REST plus a
-  streamed conversation) and an LLM layer. That layer counts every call, caps Claude and caches every
-  answer on disk.
+  streamed conversation), the media jobs and an LLM layer. That layer counts every call, caps Claude
+  and caches every answer on disk.
 - **React + three.js frontend.** React Three Fiber renders the 3D model. Furniture fit and the rent
   split are computed in the browser. Everything the guided demo needs is bundled in
   `frontend/public/demo/`, so it runs with the backend stopped.
@@ -89,7 +131,7 @@ student profiles ──► AI clones negotiate (4 phases, shared memory) ──�
 
 | Layer | Tools |
 |---|---|
-| Backend | Python 3.11, FastAPI, Uvicorn, OpenCV, NumPy, Pillow, Pydantic, pytest |
+| Backend | Python 3.11, FastAPI, Uvicorn, OpenCV (incl. Stitcher), NumPy, Pillow, pillow-heif, imageio-ffmpeg, Pydantic, pytest |
 | AI | Claude Opus (vision) and Sonnet (text), Gemini Flash (vision), Groq (gpt-oss-120b / 20b, qwen3.8-27b); SDKs `anthropic`, `google-genai`, `groq` |
 | Frontend | React 19, TypeScript 7, Vite 8, Tailwind CSS 4, React Router 7, three.js + React Three Fiber + drei, Framer Motion, jsPDF |
 | Tests | pytest (backend), Node checks on the real TS modules, Playwright browser tests (in Google Chrome) |
@@ -99,14 +141,17 @@ student profiles ──► AI clones negotiate (4 phases, shared memory) ──�
 ```
 backend/
   app/              FastAPI app: parser (geometry/, semantics/, pipeline.py), rent check,
-                    roommates/ (engine, memory, checks, house rules), llm/ (chain, usage cap, cache)
+                    roommates/ (engine, memory, checks, house rules), media/ (video and photos:
+                    frames, tagging, description, rooms, walkthrough, layout), llm/ (chain, usage cap, cache)
   scripts/          parse_all.py, seed_roommates.py
   tests/            pytest suite (never calls a real model)
 frontend/
   src/              pages/ (home, roombae/, leasehub/, demo/), components/FloorPlan3D/, roommates/
-  public/demo/      bundled plans, rent checks, profiles, conversations, avatars, house rules
+  public/demo/      bundled plans, rent checks, profiles, conversations, avatars, house rules,
+                    media/ (the demo video's frames, tags, walkthrough and estimated plan)
   scripts/          checks, browser tests, data and screenshot scripts
 data/               floor plans + meta.json, parsed plans, roommate data, LLM call log + cache
+                    (media/ and media_jobs/ hold your test videos and job folders; both stay out of git)
 docs/               demo script, decisions, reports, screenshots
 scripts/dev-all.mjs starts the API and the web app together
 ```
@@ -125,6 +170,10 @@ scripts/dev-all.mjs starts the API and the web app together
 | Google Chrome | any recent | only for the browser tests |
 
 macOS and Linux work as is. On Windows, use WSL: `dev:all` starts the API from `backend/.venv/bin`.
+
+**Video and HEIC need nothing extra.** `imageio-ffmpeg` (in `requirements.txt`) ships its own ffmpeg
+binary, which reads iPhone .mov / HEVC and tone-maps HDR clips. `pillow-heif` opens iPhone .heic
+photos. A system ffmpeg (`brew install ffmpeg`) isn't needed.
 
 ### Install
 
@@ -182,15 +231,17 @@ restart `npm run dev:all`.
 | Feature | Needs |
 |---|---|
 | Uploading a new floor plan, AI check of a new split | a vision key: Anthropic or Gemini (Groq as a last resort) |
+| Uploading a new video or photos (tags, rooms, sizes) | a vision key (Claude first); the description uses a text key |
 | A new clone conversation, house rules for a new group | a text key: Anthropic or Groq (Gemini as a last resort) |
 | Everything in the guided demo | nothing |
 
 Settings, in `backend/.env` or the shell:
 
-- **`CLAUDE_CALL_CAP`** (default `250`): a hard cap on the total number of Claude calls, counted in
+- **`CLAUDE_CALL_CAP`** (default `192`): a hard cap on the total number of Claude calls, counted in
   `data/llm/usage.json`. Once it's reached, Claude is skipped and the next provider is used.
 - **`VISION_CHAIN_ORDER`** (default `claude,gemini,groq`): the order of the vision providers for
-  floor plan parsing and the AI rent check. Use `gemini,claude,groq` to try Gemini's free tier first.
+  floor plan parsing, the AI rent check and listing video / photos. Use `gemini,claude,groq` to try
+  Gemini's free tier first.
 - **`TEXT_CHAIN_ORDER`** (default `claude,groq,gemini`): the order of the text providers. Use
   `groq,gemini,claude` to put the free Groq models first.
 - Both orders in use are shown at http://localhost:8000/api/health.
@@ -209,7 +260,8 @@ twice.
    - Next / Back, or Shift + arrows, or Page Down / Page Up;
    - minimize it to a small pill in the corner.
 3. The six steps:
-   1. LeaseHub: the agent posts a JVUE 3 bed;
+   1. LeaseHub: the agent posts a listing from a walkthrough video (tags, missing amenities,
+      walkthrough, estimated plan); the floor plan path (JVUE 3 bed) is one click away;
    2. Roombae: swipe to match;
    3. 3D view and furniture fit;
    4. fair rent split + AI check;
@@ -224,7 +276,7 @@ starting data at any time.
 ```bash
 npm test                                   # from the root: backend pytest + frontend offline checks
 
-cd backend && .venv/bin/python -m pytest -q   # backend: API, parser extras, rent check, LLM chain, roommates
+cd backend && .venv/bin/python -m pytest -q   # backend: API, parser extras, rent check, LLM chain, roommates, media pipeline
 cd frontend && npm run check && npm run build # offline logic checks + type check + production build
 ```
 
@@ -240,7 +292,11 @@ node scripts/e2e-nav.mjs         # home page and portal navigation
 node scripts/e2e-reset.mjs       # 3D Reset view
 node scripts/e2e-viewer.mjs      # 3D drag, orbit, touch, resize
 node scripts/e2e-rentcheck.mjs   # AI check badge and suggestions
+node scripts/e2e-media.mjs       # video results, walkthrough, estimated plan, lived-in / furnished (laptop, phone, offline)
 ```
+
+`node scripts/bundle-media.mjs [job ids]` copies a finished video job into `frontend/public/demo/media/`
+for offline use.
 
 ## Troubleshooting
 
@@ -265,12 +321,20 @@ node scripts/e2e-rentcheck.mjs   # AI check badge and suggestions
 - **Browser tests can't start Chrome.** Install Google Chrome, or run `npx playwright install
   chromium` in `frontend/` and set `PW_CHANNEL=chromium`.
 - **`pip install` fails on OpenCV or NumPy.** Use Python 3.11.
+- **A video upload fails with "could not read video".** The file is cut off or uses a codec the
+  bundled ffmpeg can't decode. Re-export it as H.264 .mp4, or upload photos instead. A video job
+  takes a few minutes; the page shows each step live, and the same file uploaded again comes back
+  instantly.
+- **A room in the walkthrough shows photos instead of a panorama.** Its frames didn't stitch (walking
+  adds parallax). Turning slowly on the spot while filming gives panoramas.
 
 ## About the data
 
 Everything in the app is sample data:
 - The students, the agent (Dana Brooks) and the group chat messages are fictional.
 - Listing facts come only from `data/floorplans/meta.json`.
+- The bundled walkthrough (`frontend/public/demo/media/`) comes from a phone video of a real apartment;
+  the video itself stays out of the repo. Its sizes are estimates from photos, labelled as such.
 - Syndication badges, 3D view counts and the time-saved figures are illustrative.
 
 Roombae and LeaseHub appear by name only. The portals use original styling and simple original

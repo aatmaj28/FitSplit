@@ -1,9 +1,12 @@
 // Listing video / photos (LeaseHub "Video or photos" -> Roombae listing): opens a finished media job
-// (MEDIA_JOB, default: the newest one the backend lists), checks the results screen (amenity chips
-// with photo evidence, confirm / remove / undo, "Missing from your listing", description editor),
-// publishes a new listing and checks Roombae shows its photos, amenities and description.
+// (MEDIA_JOB, default: the bundled demo video in public/demo/media), checks the results screen
+// (amenity chips with photo evidence, confirm / remove / undo, "Missing from your listing", the
+// walkthrough, the estimated floor plan, the description editor), publishes a new listing and checks
+// Roombae (walkthrough, photos, amenities, description, estimated 3D, lived-in and furnished views).
+// Runs on a laptop and a phone with the backend, then on a laptop offline (every /api call blocked).
 // Never starts a new job, so it makes no model calls.
 //   (dev server + backend running)  node scripts/e2e-media.mjs
+import { readFileSync } from "node:fs";
 import { chromium } from "playwright";
 
 const APP = process.env.APP_URL ?? "http://localhost:5173";
@@ -14,18 +17,22 @@ const check = (ok, msg) => {
   console.log(`${ok ? "PASS" : "FAIL"}  ${msg}`);
   if (!ok) failures++;
 };
-const jobs = await fetch(`${API}/api/media/jobs`).then((r) => r.json()).catch(() => []);
-const JOB = process.env.MEDIA_JOB ?? jobs[0]?.id;
+const BUNDLE = new URL("../public/demo/media/", import.meta.url);
+const JOB = process.env.MEDIA_JOB ?? JSON.parse(readFileSync(new URL("index.json", BUNDLE), "utf8"))[0]?.id;
 if (!JOB) {
-  console.log("no finished media job to open (upload a video first)");
+  console.log("no media job to open (bundle one with scripts/bundle-media.mjs)");
   process.exit(1);
 }
-const job = await fetch(`${API}/api/media/jobs/${JOB}`).then((r) => r.json());
+const job = process.env.MEDIA_JOB
+  ? await fetch(`${API}/api/media/jobs/${JOB}`).then((r) => r.json())
+  : JSON.parse(readFileSync(new URL(`${JOB}/job.json`, BUNDLE), "utf8"));
 
-for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 }]) {
+for (const [viewport, offline] of [[{ width: 1366, height: 900 }, false], [{ width: 390, height: 844 }, false], [{ width: 1366, height: 900 }, true]]) {
   const phone = viewport.width < 500;
-  const tag = phone ? "[phone]" : "[laptop]";
-  const page = await browser.newPage({ viewport });
+  const tag = `${phone ? "[phone]" : "[laptop]"}${offline ? "[offline]" : ""}`;
+  const context = await browser.newContext({ viewport });
+  if (offline) await context.route("**/api/**", (r) => r.abort());
+  const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(`${APP}/leasehub`);
@@ -33,6 +40,10 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   await page.goto(`${APP}/leasehub/listings/new`);
   await page.locator('[data-source="video"]').click();
   check(new URL(page.url()).searchParams.get("source") === "video", `${tag} the switch puts ?source=video in the URL`);
+  if (offline) {
+    await page.locator(`[data-media-job="${JOB}"]`).waitFor();
+    check(await page.locator("[data-media-start]").isDisabled(), `${tag} uploads are off, the bundled video still opens`);
+  }
   await page.locator(`[data-media-job="${JOB}"]`).click();
   await page.locator(`[data-media-results="${JOB}"]`).waitFor({ timeout: 15000 });
   const chips = await page.locator("[data-amenity]").count();
@@ -168,7 +179,7 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   await page.locator('[data-toggle="lived-in"]').click();
   check((await page.locator("[data-lived-in]").getAttribute("data-lived-in")) === "false", `${tag} Lived-in toggles back to plan colors`);
   check(errors.length === 0, `${tag} no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
-  await page.close();
+  await context.close();
 }
 await browser.close();
 console.log(failures ? `\n${failures} failure(s)` : "\nall media checks passed");

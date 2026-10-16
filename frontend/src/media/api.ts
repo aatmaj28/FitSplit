@@ -139,17 +139,20 @@ export async function getMediaJob(id: string): Promise<MediaJob> {
   }
 }
 
-/** Finished jobs to pick from (backend list, or the bundled index offline). */
+/** Finished jobs to pick from: the backend's, plus the bundled demo video (so a fresh checkout
+ *  offers it too; it opens from the bundle when the backend doesn't have it). */
 export async function listMediaJobs(): Promise<{ jobs: MediaSummary[]; offline: boolean }> {
   const { offline } = await planSource();
+  const bundled = await fetchJson<MediaSummary[]>(`${DEMO}/media/index.json`).catch(() => [] as MediaSummary[]);
   if (!offline) {
     try {
-      return { jobs: await fetchJson<MediaSummary[]>(`${API}/api/media/jobs`), offline: false };
+      const live = await fetchJson<MediaSummary[]>(`${API}/api/media/jobs`);
+      return { jobs: [...live, ...bundled.filter((b) => !live.some((j) => j.id === b.id))], offline: false };
     } catch {
       /* fall through to the bundle */
     }
   }
-  return { jobs: await fetchJson<MediaSummary[]>(`${DEMO}/media/index.json`).catch(() => []), offline: true };
+  return { jobs: bundled, offline: true };
 }
 
 /** URL of a job file ("frames/f001.jpg", "plan/plan.svg", ...). */

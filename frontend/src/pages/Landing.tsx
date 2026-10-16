@@ -62,7 +62,7 @@ const PORTALS: Portal[] = [
     who: "For leasing agents",
     headline: "List once. Get complete group applications.",
     points: [
-      { icon: <IconUpload />, text: "Upload a floor plan once." },
+      { icon: <IconUpload />, text: "Upload a floor plan or a walkthrough video once." },
       { icon: <IconRuler />, text: "Every listing gets a 3D view and real room sizes." },
       { icon: <IconFileCheck />, text: "Receive complete group applications." },
     ],
@@ -177,11 +177,11 @@ export default function Landing() {
             <span className="text-teal-600">Everything fits.</span>
           </motion.p>
           <motion.p {...rise(0.16)} className="mt-5 max-w-xl text-[17px] leading-relaxed text-slate-600">
-            An agent uploads a floor plan once. Renters walk through the apartment in 3D, check their furniture fits, meet compatible
+            An agent uploads a floor plan or a walkthrough video once. Renters walk through the apartment in 3D, check their furniture fits, meet compatible
             roommates whose AI clones talk first, split the rent fairly and apply as a group.
           </motion.p>
           <motion.ul {...rise(0.24)} className="mt-7 hidden flex-wrap gap-2 text-[13px] font-medium text-slate-600 sm:flex">
-            {["3D from a floor plan", "Furniture fit check", "AI roommate match", "Fair rent split", "One group application"].map((t) => (
+            {["3D from a floor plan", "Amenities from a video", "Furniture fit check", "AI roommate match", "Fair rent split", "One group application"].map((t) => (
               <li key={t} className="rounded-full bg-white/80 px-3 py-1.5 shadow-sm ring-1 ring-slate-200/90 backdrop-blur">{t}</li>
             ))}
           </motion.ul>

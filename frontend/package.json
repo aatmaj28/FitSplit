@@ -17,7 +17,9 @@
     "e2e:rentcheck": "node scripts/e2e-rentcheck.mjs",
     "precompute:rentcheck": "node scripts/precompute-rentcheck.mjs",
     "e2e:demo": "node scripts/e2e-demo.mjs",
-    "seed:roommates": "node scripts/seed-roommates.mjs"
+    "seed:roommates": "node scripts/seed-roommates.mjs",
+    "e2e:media": "node scripts/e2e-media.mjs",
+    "demo:media": "node scripts/bundle-media.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
