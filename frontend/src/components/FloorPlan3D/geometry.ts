@@ -216,3 +216,32 @@ function modelOpenings(raw: Opening[], ft: (p: Pt) => Pt, rooms: RoomEntry[], fo
   }
   return out;
 }
+
+/**
+ * Paint each side face of a wall with the color of the room it faces (vertex colors, one color per
+ * triangle). The face's outward normal points into the room on that side; faces on the outside or
+ * a hall keep `base`. Caps keep their own material, so their colors don't matter.
+ */
+export function paintWalls(geo: THREE.BufferGeometry, rooms: RoomEntry[], colorOf: (roomId: string) => THREE.Color | null, base: THREE.Color): void {
+  const pos = geo.getAttribute("position") as THREE.BufferAttribute;
+  const colors = new Float32Array(pos.count * 3);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3(), e = new THREE.Vector3();
+  const tri = geo.index ? geo.index.count / 3 : pos.count / 3;
+  const at = (k: number) => (geo.index ? geo.index.getX(k) : k);
+  for (let t = 0; t < tri; t++) {
+    const [i, j, k] = [at(3 * t), at(3 * t + 1), at(3 * t + 2)];
+    a.fromBufferAttribute(pos, i);
+    b.fromBufferAttribute(pos, j);
+    c.fromBufferAttribute(pos, k);
+    n.subVectors(c, b).cross(e.subVectors(a, b)).normalize();
+    let col = base;
+    if (Math.abs(n.y) < 0.5) {
+      const cx = (a.x + b.x + c.x) / 3 + n.x * 0.6;
+      const cz = (a.z + b.z + c.z) / 3 + n.z * 0.6;
+      const room = rooms.find((r) => pointInPoly([cx, cz], r.poly));
+      col = (room && colorOf(room.room.id)) ?? base;
+    }
+    for (const v of [i, j, k]) col.toArray(colors, v * 3);
+  }
+  geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+}

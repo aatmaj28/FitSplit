@@ -1,5 +1,5 @@
 import type { ParsedPlan, Room } from "../../types";
-import { ROOM_COLORS, ROOM_LABELS, formatSqft } from "./theme";
+import { ROOM_COLORS, ROOM_LABELS, formatRoomArea, formatSqft } from "./theme";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -25,6 +25,7 @@ export function RoomPanel({ room, plan, onClose, onSelect, compact = false, fold
 }) {
   const closets = (room.closet_ids ?? []).map((id) => plan.rooms.find((r) => r.id === id)).filter((r): r is Room => !!r);
   const approx = room.segmentation === "split";
+  const est = room.area_source === "estimated" ? room.dims_confidence : undefined;
   return (
     <aside
       className={`absolute inset-x-2 bottom-2 z-40 overflow-y-auto rounded-2xl bg-white/95 p-3 text-xs shadow-xl ring-1 ring-slate-200 backdrop-blur sm:inset-x-auto sm:bottom-auto sm:right-3 sm:top-16 sm:max-h-[calc(100%-5rem)] sm:w-72 sm:p-4 sm:text-sm ${
@@ -68,17 +69,18 @@ export function RoomPanel({ room, plan, onClose, onSelect, compact = false, fold
       <div className={folded ? "hidden sm:block" : ""}>
         <dl className="mt-2 divide-y divide-slate-100 sm:mt-3">
           <Row label="Area">
-            <span className="text-teal-700">{formatSqft(room.area_sqft_final)}</span>
-            {room.area_source && <span className="ml-1 text-xs font-normal text-slate-400">({room.area_source})</span>}
+            <span className="text-teal-700">{formatRoomArea(room, room.area_sqft_final)}</span>
+            {est ? <span className="ml-1 text-xs font-normal text-slate-500">±{est.plus_minus_pct}%</span>
+              : room.area_source && <span className="ml-1 text-xs font-normal text-slate-400">({room.area_source})</span>}
           </Row>
           {!compact && room.area_source === "printed" && <Row label="Measured">{formatSqft(room.area_sqft)}</Row>}
-          {!compact && <Row label="Printed dims">{room.printed_dims_text ?? "not printed"}</Row>}
+          {!compact && <Row label={est ? "Size" : "Printed dims"}>{room.printed_dims_text ?? "not printed"}</Row>}
           {!compact && room.type === "bedroom" && (
             <>
               <Row label="Private bath">
                 {room.has_private_bath ? <span className="text-teal-700">Yes</span> : "No"}
               </Row>
-              <Row label="With closets">{formatSqft(room.area_with_closets_sqft)}</Row>
+              {!est && <Row label="With closets">{formatSqft(room.area_with_closets_sqft)}</Row>}
             </>
           )}
         </dl>
@@ -98,6 +100,13 @@ export function RoomPanel({ room, plan, onClose, onSelect, compact = false, fold
                 </button>
               ))}
             </div>
+          </div>
+        )}
+        {!compact && est && (
+          <div className="mt-2 rounded-lg bg-amber-50 px-2.5 py-2 text-xs text-amber-900" data-estimate-note>
+            <div className="font-semibold">Estimated from photos ±{est.plus_minus_pct}% <span className="font-normal text-amber-700">({est.confidence} confidence)</span></div>
+            {est.reasoning && <p className="mt-0.5 text-amber-800">{est.reasoning}</p>}
+            {est.references && est.references.length > 0 && <p className="mt-0.5 text-amber-700">Measured against: {est.references.join(", ")}</p>}
           </div>
         )}
         {!compact && approx && (

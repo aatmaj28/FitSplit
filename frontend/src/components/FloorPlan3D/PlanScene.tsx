@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject }
 import * as THREE from "three";
 import type { FitResult, FurnitureItem } from "./furniture";
 import { DoorZones, FurnitureLayer } from "./FurnitureLayer";
-import { flatGeometry, plankTexture, pointInPoly, wallGeometry, type PlanModel, type RoomEntry } from "./geometry";
+import { flatGeometry, paintWalls, plankTexture, pointInPoly, wallGeometry, type PlanModel, type RoomEntry } from "./geometry";
+import { floorTexture, type RoomStyle } from "./livedIn";
 import { ACCENT, ACCENT_SOFT, BACKGROUND, GROUND, ROOM_COLORS, SLAB, WALL_CAP, WALL_SIDE } from "./theme";
 
 export type ViewMode = "3d" | "top";
@@ -63,6 +64,8 @@ interface SceneProps {
   panelFolded?: boolean;
   /** the room panel covers part of the canvas (default: whenever a room is selected) */
   panelOpen?: boolean;
+  /** lived-in look: painted walls and floor materials per room (from photos or the soft palette) */
+  styles?: Map<string, Required<RoomStyle>> | null;
 }
 
 export interface FurnitureProps {
@@ -72,12 +75,14 @@ export interface FurnitureProps {
   editing: boolean;
   /** clearance in front of the selected room's doorways (edit mode) */
   doorZones?: [number, number][][];
+  /** furnished view: no fit plates */
+  plain?: boolean;
   onSelect: (id: string) => void;
   onDrag: (id: string, x: number, z: number) => void;
 }
 
 export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight, selectedId, onSelect, onReady, labelEls, furniture,
-  focusId = null, angle = "corner", angleOffset = 0, spin, panelFolded = false, panelOpen }: SceneProps) {
+  focusId = null, angle = "corner", angleOffset = 0, spin, panelFolded = false, panelOpen, styles = null }: SceneProps) {
   const { cx, cz, sx, sz } = model.bounds;
   const roomType = useMemo(() => new Map(model.rooms.map((r) => [r.room.id, r.room.type])), [model]);
   const fit = useRef<FitState>({ zoom: 1, distance: 50 }); // last fit, the panel offset's baseline
@@ -115,6 +120,7 @@ export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight,
           <RoomFloor
             key={r.room.id}
             entry={r}
+            style={styles?.get(r.room.id) ?? null}
             selected={r.room.id === selectedId}
             hovered={r.room.id === hoverId}
             subtle={Boolean(furniture?.editing)}
@@ -122,7 +128,7 @@ export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight,
             onHover={setHoverId}
           />
         ))}
-        <Walls model={model} height={wallHeight} ghost={show2D} cut={cut} openings={view === "3d"} />
+        <Walls model={model} height={wallHeight} ghost={show2D} cut={cut} openings={view === "3d"} styles={styles} />
         {show2D && imageUrl && <PlanImage model={model} url={imageUrl} />}
         {furniture && (
           <FurnitureLayer
@@ -134,6 +140,7 @@ export function PlanScene({ model, view, resetKey, show2D, imageUrl, wallHeight,
             origin={[cx, cz]}
             onSelect={furniture.onSelect}
             onDrag={furniture.onDrag}
+            plain={furniture.plain}
           />
         )}
         {furniture?.doorZones && furniture.doorZones.length > 0 && (
@@ -479,8 +486,10 @@ function Slab({ model }: { model: PlanModel }) {
   );
 }
 
-function RoomFloor({ entry, selected, hovered, subtle, onSelect, onHover }: {
+function RoomFloor({ entry, style, selected, hovered, subtle, onSelect, onHover }: {
   entry: RoomEntry;
+  /** lived-in: the floor material instead of the type color */
+  style: Required<RoomStyle> | null;
   selected: boolean;
   hovered: boolean;
   /** editing furniture: only tint the selected room, so the green / red fit plates stand out */
@@ -528,6 +537,9 @@ function RoomFloor({ entry, selected, hovered, subtle, onSelect, onHover }: {
       >
         {balcony ? (
           <meshStandardMaterial map={planks} color={selected ? ACCENT_SOFT : "#ffffff"} roughness={1} side={THREE.DoubleSide} />
+        ) : style ? (
+          <meshStandardMaterial map={floorTexture(style.floor)} color={selected ? (subtle ? "#ccfbf1" : ACCENT_SOFT) : hovered ? "#f8fafc" : "#ffffff"}
+            roughness={style.floor === "tile" || style.floor === "stone" ? 0.55 : 0.9} side={THREE.DoubleSide} />
         ) : (
           <meshStandardMaterial color={color} roughness={0.85} side={THREE.DoubleSide} />
         )}
@@ -621,28 +633,43 @@ function openingPieces(model: PlanModel, height: number): { wall: Piece[]; glass
   return { wall, glass, frame };
 }
 
-function Walls({ model, height, ghost, cut, openings }: { model: PlanModel; height: number; ghost: boolean; cut: Cut | null; openings: boolean }) {
-  const geos = useMemo(() => model.walls.map((w) => wallGeometry(w.outer, w.holes)), [model]);
+function Walls({ model, height, ghost, cut, openings, styles }: {
+  model: PlanModel; height: number; ghost: boolean; cut: Cut | null; openings: boolean; styles?: Map<string, Required<RoomStyle>> | null;
+}) {
+  const geos = useMemo(() => {
+    const out = model.walls.map((w) => wallGeometry(w.outer, w.holes));
+    if (styles) {
+      // lived-in: every wall face takes the paint of the room it faces
+      const colors = new Map([...styles].map(([id, st]) => [id, new THREE.Color(st.wall)]));
+      out.forEach((g) => paintWalls(g, model.rooms, (id) => colors.get(id) ?? null, new THREE.Color(WALL_SIDE)));
+    }
+    return out;
+  }, [model, styles]);
   useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
   const uniforms = useMemo<CutUniforms>(
     () => ({ uCutOn: { value: 0 }, uEye: { value: new THREE.Vector3() }, uCutBox: { value: new THREE.Vector4() }, uCutY: { value: 0 } }),
     [],
   );
+  const painted = Boolean(styles);
   const mats = useMemo(
-    () => [WALL_CAP, WALL_SIDE].map((color) => withCutaway(new THREE.MeshStandardMaterial({ color, roughness: 0.9, transparent: true }), uniforms, false)),
-    [uniforms],
+    () => [WALL_CAP, painted ? "#ffffff" : WALL_SIDE].map((color, i) =>
+      withCutaway(new THREE.MeshStandardMaterial({ color, roughness: 0.9, transparent: true, vertexColors: painted && i === 1 }), uniforms, false)),
+    [uniforms, painted],
   );
+  // the wall above doors and below windows has no paint colors of its own
+  const pieceMat = useMemo(() => (painted ? withCutaway(new THREE.MeshStandardMaterial({ color: WALL_SIDE, roughness: 0.9, transparent: true }), uniforms, false) : null), [uniforms, painted]);
+  useEffect(() => () => pieceMat?.dispose(), [pieceMat]);
   const depthMat = useMemo(() => withCutaway(new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking }), uniforms, true), [uniforms]);
   // door frames fade with the walls they sit in
   const frameMat = useMemo(() => withCutaway(new THREE.MeshStandardMaterial({ color: FRAME, roughness: 0.7, transparent: true }), uniforms, false), [uniforms]);
   useEffect(() => () => [...mats, depthMat, frameMat].forEach((m) => m.dispose()), [mats, depthMat, frameMat]);
   useEffect(() => {
-    for (const m of mats) {
+    for (const m of pieceMat ? [...mats, pieceMat] : mats) {
       m.opacity = ghost ? 0.45 : 1; // see-through walls while the 2D plan is shown, so the drawn walls stay visible
       m.depthWrite = !ghost;
       m.needsUpdate = true;
     }
-  }, [ghost, mats]);
+  }, [ghost, mats, pieceMat]);
   useFrame(({ camera }) => {
     uniforms.uEye.value.copy(camera.position);
     uniforms.uCutOn.value = cut && !(camera as THREE.OrthographicCamera).isOrthographicCamera ? 1 : 0;
@@ -661,7 +688,7 @@ function Walls({ model, height, ghost, cut, openings }: { model: PlanModel; heig
         ))}
       </group>
       {pieces.wall.map((p, i) => (
-        <mesh key={`w${i}`} position={p.pos} material={mats[1]} customDepthMaterial={depthMat} castShadow={!ghost} receiveShadow renderOrder={10}>
+        <mesh key={`w${i}`} position={p.pos} material={pieceMat ?? mats[1]} customDepthMaterial={depthMat} castShadow={!ghost} receiveShadow renderOrder={10}>
           <boxGeometry args={p.size} />
         </mesh>
       ))}

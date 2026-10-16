@@ -36,3 +36,17 @@ export const ROOM_LABELS: Record<RoomType, string> = {
 export function formatSqft(v: number | null | undefined): string {
   return v == null ? "-" : `${Math.round(v).toLocaleString()} sq ft`;
 }
+
+/** Plans built from photos carry their uncertainty everywhere a size is shown. */
+export function isEstimated(plan: { layout_source?: string } | null | undefined): boolean {
+  return plan?.layout_source === "estimated_from_photos";
+}
+
+export function estimateLabel(plan: { estimate?: { plus_minus_pct: number } }): string {
+  return `Estimated from photos ±${plan.estimate?.plus_minus_pct ?? 25}%`;
+}
+
+/** "132 sq ft", or "≈ 132 sq ft" for a size estimated from photos. */
+export function formatRoomArea(room: { area_source?: string | null }, v: number | null | undefined): string {
+  return v == null ? "-" : `${room.area_source === "estimated" ? "≈ " : ""}${formatSqft(v)}`;
+}

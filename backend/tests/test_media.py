@@ -80,6 +80,8 @@ def fake_tagger(answer_for):
         calls.append([lbl for lbl, _ in images])
         if images[0][0].startswith("Contact sheet"):
             return ProviderReply(json.dumps({"rooms": [{"id": "a", "type": "living", "frames": list(range(1, 51))}], "connections": []}), "fake", 0.01)
+        if "floor size in feet" in prompt:
+            return ProviderReply(json.dumps({"width_ft": 12, "length_ft": 15, "confidence": "medium", "plus_minus_pct": 18, "references": ["door"], "reasoning": "Two doors fit."}), "fake", 0.01)
         frames_ = [answer_for(int(lbl.split()[1])) for lbl, _ in images]
         return ProviderReply(json.dumps({"frames": frames_}), "fake", 0.01)
 
@@ -137,6 +139,11 @@ def test_description_never_keeps_made_up_numbers_or_money(monkeypatch, keys):
     out = describe.describe([{"id": "dishwasher", "label": "Dishwasher", "confidence": 0.8}], {"kitchen": 2}, tags)
     assert out["source"] == "template" and "$" not in out["full"] and "Dishwasher".lower() in out["full"].lower()
 
+    puffed = lambda *a, **k: (json.dumps({"full": "A spacious home with a private balcony and hardwood floors. Come see it.", "short": "Spacious home with a private balcony."}), {})  # noqa: E731
+    for name in list(text.CALLS):
+        monkeypatch.setitem(text.CALLS, name, puffed)
+    assert describe.describe([{"id": "dishwasher", "label": "Dishwasher", "confidence": 0.8}], {"kitchen": 2}, tags)["source"] == "template"
+
     good = lambda *a, **k: (json.dumps({"full": "A bright home with a dishwasher and hardwood floors. Come see it.", "short": "Bright home with a dishwasher."}), {})  # noqa: E731
     for name in list(text.CALLS):
         monkeypatch.setitem(text.CALLS, name, good)
@@ -163,7 +170,9 @@ def test_media_job_endpoint(tmp_path, monkeypatch, keys, client):
     assert r.status_code == 200, r.text
     job = r.json()
     assert job["status"] == "complete" and job["id"].startswith("mj_") and len(job["frames"]) == 5
-    assert [s["status"] for s in job["steps"]] == ["done", "done", "done", "skipped", "skipped", "done"]
+    assert [s["status"] for s in job["steps"]] == ["done"] * 6
+    assert job["plan"]["layout_source"] == "estimated_from_photos" and job["plan"]["rooms"][0]["area_sqft_final"] == 180
+    assert client.get(f"/api/media/jobs/{job['id']}/files/plan/plan.png").status_code == 200
     assert [r["name"] for r in job["rooms"]] == ["Living room"] and job["walkthrough"]["rooms"][0]["photos"][0] == "frames/f001.jpg"
     assert {a["id"] for a in job["amenities"]} >= {"dishwasher", "bathtub"} and job["description"]["short"]
     assert job["insight"]["new_filter_matches"] >= 1
@@ -285,3 +294,100 @@ def test_hotspots_never_overlap():
     assert wt.spread([0.95, 0.9, 0.5]) == [0.96, 0.84, 0.5]
     xs = wt.spread([0.5] * 9)
     assert sorted(xs) == xs and all(b - a > 0.1 for a, b in zip(xs, xs[1:])) and xs[-1] <= 0.96
+
+
+
+# ----------------------------------------------------------------------------- sizes + layout
+
+from app.media import layout as lay  # noqa: E402
+
+
+def sized(rid: str, rtype: str, w: float, l: float, frames=None) -> dict:
+    return {"id": rid, "name": rtype.title(), "type": rtype, "frames": frames or [],
+            "dims": {"w": w, "l": l, "confidence": "medium", "plus_minus_pct": 20, "references": [], "reasoning": "", "source": "test"}}
+
+
+def test_size_answers_are_cleaned():
+    ok = lay._clean(lay.SizeOut(width_ft=13, length_ft=11, confidence="High", plus_minus_pct=40), "bedroom")
+    assert (ok["w"], ok["l"], ok["confidence"], ok["plus_minus_pct"]) == (11, 13, "high", 15)  # short side first, pct within the level's range
+    odd = lay._clean(lay.SizeOut(width_ft=2, length_ft=40, confidence="high"), "bathroom")
+    assert (odd["w"], odd["l"], odd["confidence"]) == (4, 14, "low") and "Adjusted" in odd["reasoning"]
+    with pytest.raises(ValueError):
+        lay.parse_size('{"width_ft": -3, "length_ft": 10}')
+
+
+def test_sizes_one_call_per_room_with_the_best_frames(tmp_path, monkeypatch, keys):
+    calls = []
+
+    def fake(images, prompt, **kw):
+        calls.append((prompt.split("the ")[1].split(" (")[0], [lbl for lbl, _ in images]))
+        if "Bathroom" in prompt:
+            return ProviderReply("not json", "fake", 0.01)
+        return ProviderReply(json.dumps({"width_ft": 10, "length_ft": 12.5, "confidence": "medium", "references": ["door"], "reasoning": "x"}), "fake", 0.01)
+
+    monkeypatch.setitem(vision_multi.CALLS, "claude", fake)
+    monkeypatch.setattr(vision_multi, "PROVIDER_ORDER", ["claude"])
+    (tmp_path / "frames").mkdir()
+    for i in range(1, 11):
+        Image.fromarray(scene(i)[:, :, ::-1]).save(tmp_path / f"frames/f{i:03d}.jpg")
+    frames = [{"id": i, "file": f"frames/f{i:03d}.jpg", "sharpness": 100 + i} for i in range(1, 11)]
+    tags = [tag(i, "bedroom" if i <= 8 else "bathroom") | {"objects": ["door"] if i == 2 else []} for i in range(1, 11)]
+    job = {"frames": frames, "tags": tags, "rooms": [{"id": "r1", "name": "Bedroom", "type": "bedroom", "frames": list(range(1, 9))},
+                                                       {"id": "r2", "name": "Bathroom", "type": "bathroom", "frames": [9, 10]}]}
+    detail = lay.estimate_sizes(job, tmp_path, lambda p, d: None)
+    bed, bath = job["rooms"]
+    assert [c[0] for c in calls if c[0] == "Bedroom"] == ["Bedroom"] and len(calls[0][1]) == 4 and "Photo 2" in calls[0][1]
+    assert (bed["dims"]["w"], bed["dims"]["l"], bed["dims"]["source"]) == (10, 12.5, "claude")
+    assert bath["dims"]["source"] == "typical" and bath["dims"]["confidence"] == "low"  # no valid answer: typical size, said so
+    assert "2 rooms sized" in detail
+
+
+def test_layout_places_rooms_against_their_neighbours_without_overlaps():
+    rooms = [sized("r1", "living", 12, 16), sized("r2", "kitchen", 9, 11), sized("r3", "hallway", 3.5, 12), sized("r4", "bedroom", 11, 12),
+             sized("r5", "bathroom", 5, 8), sized("r6", "bedroom", 10, 11)]
+    conns = [{"a": "r1", "b": "r2", "kind": "opening"}, {"a": "r1", "b": "r3"}, {"a": "r3", "b": "r4"}, {"a": "r3", "b": "r5"}, {"a": "r3", "b": "r6"}]
+    placed, halls, notes = lay.place(rooms, conns, "r1")
+    rects = list(placed.values()) + [h["rect"] for h in halls]
+    assert not any(a.overlaps(b) for i, a in enumerate(rects) for b in rects[i + 1:])
+    touching = [c for c in conns if (e := lay.shared_edge(placed[c["a"]], placed[c["b"]])) and e[3] - e[2] >= 2.5]
+    assert len(touching) + len(halls) >= len(conns) - 1  # every connection gets a door (directly or through a hallway), at worst one doesn't
+    inner = lambda r: round((r.w - lay.WALL_FT) * (r.h - lay.WALL_FT))  # noqa: E731 - rectangles are on the wall centerlines
+    assert {inner(placed[r["id"]]) for r in rooms} == {192, 99, 42, 132, 40, 110}  # interior sizes kept
+
+
+def test_layout_keeps_free_walls_for_rooms_still_to_place():
+    # a small hub with four big rooms: placed greedily, the first three box in the fourth side;
+    # the lookahead keeps a wall free, so every room touches the hub and no hallway is invented
+    hub = sized("r1", "entry", 4, 4)
+    rooms = [hub] + [sized(f"r{i}", "bedroom", 12, 14) for i in range(2, 6)]
+    placed, halls, notes = lay.place(rooms, [{"a": "r1", "b": f"r{i}"} for i in range(2, 6)], "r1")
+    rects = list(placed.values()) + [h["rect"] for h in halls]
+    assert not any(a.overlaps(b) for i, a in enumerate(rects) for b in rects[i + 1:])
+    assert not halls and not notes
+    assert all((e := lay.shared_edge(placed["r1"], placed[f"r{i}"])) and e[3] - e[2] >= 2.9 for i in range(2, 6))
+
+
+def test_hallway_candidates_touch_both_rooms():
+    p = lay.Rect(0, 0, 10, 4)
+    for r, hall in lay._candidates(p, 8, 10, gap=lay.HALL_FT) + lay._corridors(p, 8, 10, 8.0):
+        assert lay.shared_edge(hall, p) and lay.shared_edge(hall, r) and not hall.overlaps(r) and not hall.overlaps(p)
+        assert min(hall.w, hall.h) >= 2.9
+
+
+def test_estimated_plan_uses_the_parsed_plan_format(tmp_path):
+    rooms = [sized("r1", "living", 12, 16, [1, 2]), sized("r2", "kitchen", 9, 11, [3]), sized("r3", "bedroom", 11, 12, [4]), sized("r4", "bathroom", 5, 8, [5])]
+    job = {"id": "mj_0123456789ab", "rooms": rooms, "entrance": "r1",
+           "connections": [{"a": "r1", "b": "r2", "kind": "opening"}, {"a": "r1", "b": "r3", "kind": "door"}, {"a": "r3", "b": "r4", "kind": "door"}],
+           "tags": [tag(1, "living") | {"windows": 2}, tag(4, "bedroom") | {"windows": 1}]}
+    detail = lay.build_layout(job, tmp_path, lambda p, d: None)
+    plan = job["plan"]
+    assert plan["layout_source"] == "estimated_from_photos" and plan["scale"]["pixels_per_foot"] == lay.PPF
+    assert [r["area_sqft_final"] for r in plan["rooms"]] == [192, 99, 132, 40] and plan["unit"] == {"total_sqft": 463, "beds": 1, "baths": 1, "rent": None}
+    assert all(r["area_source"] == "estimated" and r["dims_confidence"]["plus_minus_pct"] == 20 and len(r["polygon"]) == 4 for r in plan["rooms"])
+    bed = next(r for r in plan["rooms"] if r["type"] == "bedroom")
+    assert bed["has_private_bath"] is True and bed["printed_dims_text"] == "≈ 11' × 12'"
+    kinds = sorted(o["kind"] for o in plan["openings"])
+    assert kinds.count("door") >= 3 and "opening" in kinds and kinds.count("window") >= 2  # 2 inside doors + the entry, the open kitchen, windows
+    assert plan["walls"] and all(len(w["polygon"]) >= 4 for w in plan["walls"]) and plan["footprint"]
+    assert "±20%" in detail and (tmp_path / "plan/plan.png").is_file() and "<svg" in (tmp_path / "plan/plan.svg").read_text()
+    assert json.loads((tmp_path / "plan/plan.json").read_text())["plan_name"] == "media_0123456789ab"

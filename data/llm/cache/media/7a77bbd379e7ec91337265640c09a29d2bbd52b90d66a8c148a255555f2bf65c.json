@@ -1,0 +1,9 @@
+{
+  "value": {
+    "full": "Welcome to a bright, well-kept apartment filled with lots of natural light. Hardwood, tile and vinyl flooring run throughout, and freshly painted rooms feel clean and inviting. The older staircase with original woodwork adds a touch of character.\n\nThe kitchen features dark wood cabinets, a gas stove, a dishwasher and a refrigerator. The renovated bathroom includes a bathtub, and radiant warmth comes from radiator heat, with a ceiling fan for added comfort.\n\nStep out onto the balcony to relax. A well-kept porch and landscaped front yard complete the welcoming feel.",
+    "short": "Bright, freshly painted apartment with hardwood floors, a renovated bathroom, a kitchen with gas stove and dishwasher, and a private balcony."
+  },
+  "created": "2026-10-16T01:16:07+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

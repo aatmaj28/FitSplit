@@ -36,8 +36,10 @@ export function DoorZones({ zones, y }: { zones: [number, number][][]; y: number
 }
 
 /** Furniture boxes on the floor. Lives inside the plan-offset group, so positions are plan feet. */
-export function FurnitureLayer({ items, fits, baseY, selectedId, editing, origin, onSelect, onDrag }: {
+export function FurnitureLayer({ items, fits, baseY, selectedId, editing, origin, onSelect, onDrag, plain = false }: {
   items: FurnitureItem[];
+  /** furnished view: just the furniture, no fit plates */
+  plain?: boolean;
   fits: Map<string, FitResult>;
   baseY: (item: FurnitureItem) => number;
   selectedId: string | null;
@@ -58,6 +60,7 @@ export function FurnitureLayer({ items, fits, baseY, selectedId, editing, origin
           y={baseY(it)}
           selected={it.id === selectedId}
           editing={editing}
+          plain={plain}
           origin={origin}
           onSelect={onSelect}
           onDrag={onDrag}
@@ -162,8 +165,9 @@ function TouchControls({ editing, items, selectedId, origin, group, onSelect, on
   return null;
 }
 
-function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
+function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag, plain = false }: {
   item: FurnitureItem;
+  plain?: boolean;
   ok: boolean;
   y: number;
   selected: boolean;
@@ -220,11 +224,15 @@ function Piece({ item, ok, y, selected, editing, origin, onSelect, onDrag }: {
   return (
     <group position={[item.x, y, item.z]} rotation-y={(-item.rot * Math.PI) / 180} userData={{ itemId: item.id }}>
       {/* fit status plate: green = fits, red = hits a wall / furniture / sticks out */}
-      <mesh rotation-x={-Math.PI / 2} position-y={0.035} renderOrder={3}>
-        <planeGeometry args={[w + 0.2, d + 0.2]} />
-        <meshBasicMaterial color={ok ? OK : BAD} transparent opacity={selected ? 0.7 : 0.5} depthWrite={false} />
-      </mesh>
-      <Line points={ring} color={ok ? OK : BAD} lineWidth={2.5} />
+      {!plain && (
+        <>
+          <mesh rotation-x={-Math.PI / 2} position-y={0.035} renderOrder={3}>
+            <planeGeometry args={[w + 0.2, d + 0.2]} />
+            <meshBasicMaterial color={ok ? OK : BAD} transparent opacity={selected ? 0.7 : 0.5} depthWrite={false} />
+          </mesh>
+          <Line points={ring} color={ok ? OK : BAD} lineWidth={2.5} />
+        </>
+      )}
       <RoundedBox
         args={[w, h, d]}
         radius={radius}

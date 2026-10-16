@@ -92,6 +92,17 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
     await page.locator('[data-view-tab="amenities"]').click();
   }
 
+  // estimated floor plan (when the job has one): labelled, every size with ≈ and ±
+  if (job.plan) {
+    await page.locator('[data-view-tab="plan"]').click();
+    await page.locator("[data-estimated-plan] [data-ready=true]").waitFor({ timeout: 20000 });
+    const badge = await page.locator("[data-estimated-plan] [data-estimated]").first().textContent();
+    check(/^Estimated from photos ±\d+%$/.test(badge ?? ""), `${tag} the 3D plan says "${badge}"`);
+    const rows = await page.locator("[data-estimated-plan] tr").allTextContents();
+    check(rows.length === job.plan.rooms.length && rows.every((t) => /≈ .*±\d+%.*≈ \d+ sq ft/.test(t)), `${tag} every room size reads "≈ … ±N%" (${rows.length} rooms)`);
+    await page.locator('[data-view-tab="amenities"]').click();
+  }
+
   // remove + undo, confirm
   await chip.getByRole("button", { name: `Remove ${a.label}` }).click();
   check((await page.locator(`[data-amenity="${a.id}"]`).count()) === 0, `${tag} ✕ removes ${a.label}`);
@@ -119,6 +130,23 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   }
   await page.locator("[data-photo-gallery]").waitFor({ timeout: 10000 });
   check(true, `${tag} Roombae shows the listing's photos`);
+  if (job.plan) {
+    await page.locator('[data-view-tab="3d"]').click();
+    await page.locator("[data-ready=true]").first().waitFor({ timeout: 20000 });
+    check((await page.locator("[data-estimated]").count()) >= 2, `${tag} Roombae 3D view and rent split are labelled as estimated`);
+    const label = page.locator("button", { hasText: /≈ \d+ sq ft/ }).first();
+    check((await label.count()) === 1, `${tag} room labels read "≈ N sq ft"`);
+    await label.dispatchEvent("click"); // on a phone the label may sit under the wrapped toolbar
+    await page.locator("[data-estimate-note]").waitFor({ timeout: 5000 });
+    check(/Estimated from photos ±\d+%/.test(await page.locator("[data-estimate-note]").textContent()), `${tag} the room panel explains the estimate`);
+    check(Number(await page.locator("[data-room-photos]").getAttribute("data-room-photos")) > 0, `${tag} the room panel shows that room's photos`);
+    // lived-in look is on for listings; furnished view places furniture with the fit check
+    check((await page.locator("[data-lived-in]").getAttribute("data-lived-in")) === "true", `${tag} listing 3D opens in the lived-in look`);
+    await page.getByRole("button", { name: "Close" }).first().click(); // the room panel covers the right of the toolbar
+    await page.locator('[data-toggle="furnished"]').click();
+    await page.waitForFunction(() => Number(document.querySelector("[data-furnished]")?.getAttribute("data-furnished") ?? 0) > 0, null, { timeout: 8000 });
+    check(true, `${tag} furnished view places furniture (${await page.locator("[data-furnished]").getAttribute("data-furnished")} pieces)`);
+  }
   await page.locator("[data-listing-media]").waitFor();
   const shown = await page.locator("[data-listing-media] [data-amenity]").count();
   check(shown === job.amenities.length - 1, `${tag} Roombae shows the kept amenities (${shown}, one removed)`);
@@ -133,6 +161,12 @@ for (const viewport of [{ width: 1366, height: 900 }, { width: 390, height: 844 
   await page.goto(`${APP}/roombae/listings/jvue_3bed`);
   await page.locator("canvas").first().waitFor({ timeout: 15000 });
   check((await page.locator("[data-view-tab]").count()) === 0, `${tag} floor plan listings keep the 3D view alone`);
+  check((await page.locator("[data-lived-in]").getAttribute("data-lived-in")) === "true", `${tag} floor plan listings open lived-in too`);
+  await page.locator('[data-toggle="furnished"]').click();
+  await page.waitForFunction(() => Number(document.querySelector("[data-furnished]")?.getAttribute("data-furnished") ?? 0) >= 6, null, { timeout: 8000 });
+  check(true, `${tag} JVUE 3 bed furnished (${await page.locator("[data-furnished]").getAttribute("data-furnished")} pieces)`);
+  await page.locator('[data-toggle="lived-in"]').click();
+  check((await page.locator("[data-lived-in]").getAttribute("data-lived-in")) === "false", `${tag} Lived-in toggles back to plan colors`);
   check(errors.length === 0, `${tag} no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await page.close();
 }

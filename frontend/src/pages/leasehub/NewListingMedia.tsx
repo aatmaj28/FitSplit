@@ -2,9 +2,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { LISTINGS, listing } from "../../data/listings";
 import { demo, SYNDICATION, useDemo, type ListingMedia } from "../../data/store";
-import { checkFiles, createMediaJob, kindOf, listMediaJobs, MAX_UPLOAD_MB, PHOTO_ACCEPT, VIDEO_ACCEPT, type Amenity, type MediaJob, type MediaSummary } from "../../media/api";
+import { FloorPlan3D } from "../../components/FloorPlan3D";
+import { estimateLabel, formatRoomArea } from "../../components/FloorPlan3D/theme";
+import { checkFiles, createMediaJob, estimatedPlan, kindOf, layoutRects, listMediaJobs, MAX_UPLOAD_MB, PHOTO_ACCEPT, VIDEO_ACCEPT, type Amenity, type MediaJob, type MediaSummary } from "../../media/api";
 import { AmenityChips, PhotoStrip } from "../../media/Amenities";
 import { useMediaJob } from "../../media/hooks";
+import { RoomPhotos } from "../../media/RoomPhotos";
+import { listingLook } from "../../media/style";
 import { MediaImg } from "../../media/PhotoViewer";
 import { filterPhrase, mentioned, ROOM_LABEL } from "../../media/vocab";
 import { walkOf, Walkthrough } from "../../media/Walkthrough";
@@ -182,7 +186,7 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   const [form, setForm] = useState({ title: "", location: "Boston, MA", rent: 0, beds: 1, baths: 1, sqft: 0 });
   const [publishing, setPublishing] = useState(false);
   const [published, setPublished] = useState(0);
-  const [tab, setTab] = useState<"amenities" | "walk">("amenities");
+  const [tab, setTab] = useState<"amenities" | "walk" | "plan">("amenities");
 
   useEffect(() => {
     listMediaJobs().then((r) => setRecent(r.jobs)).catch(() => {});
@@ -318,7 +322,8 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
   const ready = publishing && published >= SYNDICATION.length;
   const rooms = Object.entries(job.rooms_seen).filter(([t]) => t !== "other").sort((a, b) => b[1] - a[1]);
   const walk = walkOf(job);
-  const nRooms = (job as MediaJob & { rooms?: unknown[] }).rooms?.length ?? 0;
+  const nRooms = job.rooms?.length ?? 0;
+  const est = estimatedPlan(job);
   return (
     <div className="space-y-4" data-media-results={job.id}>
       <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -331,10 +336,37 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
       <MissingCallout job={job} kept={kept} existing={existing} />
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
-          <ViewTabs value={tab} onChange={setTab} tabs={[{ id: "amenities" as const, label: "Amenities" }, ...(walk ? [{ id: "walk" as const, label: `Walkthrough · ${walk.rooms.length} rooms` }] : [])]} />
-          {tab === "walk" && walk ? (
+          <ViewTabs value={tab} onChange={setTab} tabs={[
+            { id: "amenities" as const, label: "Amenities" },
+            ...(walk ? [{ id: "walk" as const, label: `Walkthrough · ${walk.rooms.length} rooms` }] : []),
+            ...(est ? [{ id: "plan" as const, label: "Floor plan" }] : []),
+          ]} />
+          {tab === "plan" && est ? (
+            <div className="space-y-3" data-estimated-plan>
+              <div className="relative h-[56vh] min-h-[380px]"><FloorPlan3D plan={est.plan} imageUrl={est.imageUrl} initialView="top" initialLivedIn roomStyle={listingLook(est.plan, job).styles}
+                roomExtra={(room) => <RoomPhotos job={job} frames={listingLook(est.plan, job).frames[room.id]} name={room.name} />} /></div>
+              <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h2 className="font-semibold text-slate-900">Room sizes</h2>
+                  <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-amber-200">{estimateLabel(est.plan)}</span>
+                </div>
+                <p className="mt-1 text-xs text-slate-500">Each room is measured against objects of known size in its photos (doors, appliances, fixtures, beds). Where rooms sit is schematic: worked out from which rooms connect.</p>
+                <table className="mt-2 w-full text-sm">
+                  <tbody className="divide-y divide-slate-100">
+                    {est.plan.rooms.map((r) => (
+                      <tr key={r.id} title={r.dims_confidence?.reasoning}>
+                        <td className="py-1.5 text-slate-800">{r.name}<span className="ml-1.5 text-xs text-slate-400">{r.dims_confidence?.confidence} confidence</span></td>
+                        <td className="py-1.5 text-right text-xs text-slate-500">{r.printed_dims_text} ±{r.dims_confidence?.plus_minus_pct}%</td>
+                        <td className="py-1.5 text-right tabular-nums text-slate-800">{formatRoomArea(r, r.area_sqft_final)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            </div>
+          ) : tab === "walk" && walk ? (
             <div className="space-y-2">
-              <div className="h-[60vh] min-h-[380px]"><Walkthrough job={job} walk={walk} /></div>
+              <div className="h-[60vh] min-h-[380px]"><Walkthrough job={job} walk={walk} rects={layoutRects(job)} /></div>
               <p className="text-xs text-slate-500">
                 {walk.rooms.filter((r) => r.pano).length} of {walk.rooms.length} rooms stitched into panoramas; the others show their photos. Rooms and doors come from the walk order and one AI check of the photos.
               </p>
@@ -390,6 +422,7 @@ export default function NewListingMedia({ offline }: { offline: boolean | null }
               {(["rent", "sqft", "beds", "baths"] as const).map((k) => (
                 <label key={k} className="text-xs font-medium text-slate-600">
                   {{ rent: "Rent ($/mo)", sqft: "Total sq ft (optional)", beds: "Bedrooms", baths: "Bathrooms" }[k]}
+                  {k === "sqft" && est?.plan.unit.total_sqft ? <span className="ml-1 font-normal text-amber-700" title={estimateLabel(est.plan)}>≈ {est.plan.unit.total_sqft} from photos</span> : null}
                   <input type="number" min={0} step={k === "baths" ? 0.5 : 1} className={field} value={form[k]} onChange={(e) => setForm({ ...form, [k]: Number(e.target.value) })} data-media-field={k} />
                 </label>
               ))}

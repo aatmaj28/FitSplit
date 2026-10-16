@@ -1,12 +1,14 @@
 import { Canvas } from "@react-three/fiber";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { ParsedPlan, Room } from "../../types";
 import { FitChecker, autoPlace, describe, newId, snapCenter, type FurnitureItem, type FurnitureKind } from "./furniture";
 import { FurniturePanel } from "./FurniturePanel";
 import { FALLBACK_PPF, buildModel } from "./geometry";
 import { LabelLayer } from "./LabelLayer";
+import { furnish, styleOf, type RoomStyle } from "./livedIn";
 import { PlanScene, type Angle, type ViewMode } from "./PlanScene";
 import { RoomPanel } from "./RoomPanel";
+import { estimateLabel, isEstimated } from "./theme";
 import { useLayout } from "./useLayout";
 import { Legend, ResetViewButton, ViewerToolbar } from "./ViewerToolbar";
 
@@ -33,6 +35,12 @@ export interface FloorPlan3DProps {
   defaultLayout?: FurnitureItem[];
   /** Show the clicked room's details panel (embeds that show room facts themselves turn it off). */
   roomPanel?: boolean;
+  /** Start in the lived-in look (painted walls, floor materials) instead of the plan's type colors. */
+  initialLivedIn?: boolean;
+  /** Per-room paint / floor from the listing's photos (room id -> style); others use the soft palette. */
+  roomStyle?: Record<string, RoomStyle>;
+  /** Extra content in a clicked room's panel, e.g. the listing's photos of that room. */
+  roomExtra?: (room: Room) => ReactNode;
 }
 
 /** 3D model of a parsed floor plan: 1 scene unit = 1 ft, top view matches the 2D image. */
@@ -50,9 +58,20 @@ export function FloorPlan3D({
   layoutKey,
   defaultLayout,
   roomPanel = true,
+  initialLivedIn = false,
+  roomStyle,
+  roomExtra,
 }: FloorPlan3DProps) {
   const model = useMemo(() => buildModel(plan), [plan]);
   const checker = useMemo(() => new FitChecker(model), [model]);
+  const [livedIn, setLivedIn] = useState(initialLivedIn);
+  const [furnished, setFurnished] = useState(false);
+  const styleKey = JSON.stringify(roomStyle ?? null);
+  const styles = useMemo(
+    () => (livedIn ? new Map(plan.rooms.map((r) => [r.id, styleOf(r.type, roomStyle?.[r.id])])) : null),
+    [livedIn, plan, styleKey], // eslint-disable-line react-hooks/exhaustive-deps -- roomStyle by value
+  );
+  const furnishedItems = useMemo(() => (furnished ? furnish(model, checker) : []), [furnished, model, checker]);
   const [view, setView] = useState<ViewMode>(initialView);
   const [angle, setAngle] = useState<Angle>("corner");
   const [angleOffset, setAngleOffset] = useState(0);
@@ -80,6 +99,10 @@ export function FloorPlan3D({
   }, [plan]);
 
   const fits = useMemo(() => new Map(items.map((it) => [it.id, checker.check(it, items)])), [items, checker]);
+  // furnished view: the auto-placed set while not editing (your own layout comes back in edit mode)
+  const showFurnished = furnished && !editing;
+  const shownItems = showFurnished ? furnishedItems : items;
+  const shownFits = useMemo(() => (showFurnished ? new Map(furnishedItems.map((it) => [it.id, { ok: true, issues: [] } as unknown as ReturnType<FitChecker["check"]>])) : fits), [showFurnished, furnishedItems, fits]);
   const doorZones = useMemo(
     () => (editing && roomId ? checker.doorways(roomId).map((d) => d.zone as [number, number][]) : []),
     [editing, roomId, checker],
@@ -223,6 +246,8 @@ export function FloorPlan3D({
       data-view={view}
       data-angle={view === "top" ? "top" : angle}
       data-editing={editing}
+      data-lived-in={livedIn}
+      data-furnished={showFurnished ? furnishedItems.length : undefined}
       data-item-selected={editing && itemId != null}
       onPointerDown={(e) => {
         pointerDown.current = [e.clientX, e.clientY];
@@ -249,7 +274,8 @@ export function FloorPlan3D({
           onSelect={selectFromScene}
           onReady={onReady}
           labelEls={labelEls}
-          furniture={{ items, fits, selectedId: itemId, editing, doorZones, onSelect: selectItem, onDrag: drag }}
+          furniture={{ items: shownItems, fits: shownFits, selectedId: showFurnished ? null : itemId, editing, doorZones, onSelect: selectItem, onDrag: drag, plain: showFurnished }}
+          styles={styles}
           focusId={editing ? roomId : null}
           angle={angle}
           angleOffset={angleOffset}
@@ -280,13 +306,23 @@ export function FloorPlan3D({
             }}
             onReset={reset}
             itemCount={items.length}
+            livedIn={livedIn}
+            onLivedIn={setLivedIn}
+            furnished={furnished}
+            onFurnished={setFurnished}
           />
-          <Legend model={model} editing={editing} />
+          <Legend model={model} editing={editing} styles={styles} />
         </>
       )}
       {!showControls && (
         <div className="absolute left-2 top-2 z-30 rounded-full bg-white/90 p-0.5 shadow-sm ring-1 ring-slate-200 backdrop-blur sm:left-3 sm:top-3">
           <ResetViewButton onClick={resetView} />
+        </div>
+      )}
+      {isEstimated(plan) && (
+        <div className="pointer-events-none absolute bottom-3 right-3 z-30 rounded-full bg-amber-50/95 px-3 py-1 text-xs font-medium text-amber-900 shadow-sm ring-1 ring-amber-200" data-estimated
+          title="Room sizes come from objects of known size in the photos (doors, appliances, beds); room positions are schematic.">
+          {estimateLabel(plan)}
         </div>
       )}
       {model.scaleMissing && (
@@ -296,6 +332,7 @@ export function FloorPlan3D({
       )}
       {room && roomPanel && (
         <RoomPanel room={room} plan={plan} onClose={() => selectFromScene(null)} onSelect={selectFromScene} compact={editing} folded={folded} onFold={setFolded}>
+          {!editing && roomExtra?.(room)}
           {editing && (
             <FurniturePanel
               items={roomItems}

@@ -785,3 +785,22 @@
 {"t": "2026-10-15T20:19:44+00:00", "provider": "gemini", "model": "gemini-flash-latest", "purpose": "semantics", "status": "error", "latency_s": 30.33, "input_tokens": null, "output_tokens": null, "error": "ReadTimeout: The read operation timed out"}
 {"t": "2026-10-15T20:19:52+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "semantics", "status": "ok", "latency_s": 7.83, "input_tokens": 3799, "output_tokens": 814}
 {"t": "2026-10-15T22:07:41+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "semantics", "status": "ok", "latency_s": 9.3, "input_tokens": 3683, "output_tokens": 854}
+{"t": "2026-10-16T01:14:41+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 23.35, "input_tokens": 6816, "output_tokens": 2402}
+{"t": "2026-10-16T01:15:00+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 18.98, "input_tokens": 6816, "output_tokens": 2102}
+{"t": "2026-10-16T01:15:25+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 25.06, "input_tokens": 6816, "output_tokens": 2443}
+{"t": "2026-10-16T01:15:45+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 19.31, "input_tokens": 6816, "output_tokens": 2014}
+{"t": "2026-10-16T01:16:04+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 19.69, "input_tokens": 6816, "output_tokens": 2223}
+{"t": "2026-10-16T01:16:07+00:00", "provider": "claude", "model": "claude-sonnet-5-5", "purpose": "media", "status": "ok", "latency_s": 2.54, "input_tokens": 507, "output_tokens": 278}
+{"t": "2026-10-16T01:16:23+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 15.98, "input_tokens": 10032, "output_tokens": 1682}
+{"t": "2026-10-16T01:16:28+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 4.86, "input_tokens": 907, "output_tokens": 345}
+{"t": "2026-10-16T01:16:34+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 5.79, "input_tokens": 2284, "output_tokens": 415}
+{"t": "2026-10-16T01:16:40+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 6.07, "input_tokens": 1828, "output_tokens": 456}
+{"t": "2026-10-16T01:16:47+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 6.71, "input_tokens": 2288, "output_tokens": 574}
+{"t": "2026-10-16T01:16:53+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 6.25, "input_tokens": 2308, "output_tokens": 478}
+{"t": "2026-10-16T01:17:00+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 6.83, "input_tokens": 2282, "output_tokens": 480}
+{"t": "2026-10-16T01:17:04+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 4.4, "input_tokens": 2288, "output_tokens": 376}
+{"t": "2026-10-16T01:17:11+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 6.59, "input_tokens": 923, "output_tokens": 544}
+{"t": "2026-10-16T01:17:15+00:00", "provider": "claude", "model": "claude-opus-5-5", "purpose": "media", "status": "ok", "latency_s": 4.62, "input_tokens": 2277, "output_tokens": 370}
+{"t": "2026-10-16T01:17:41+00:00", "provider": "claude", "model": "claude-sonnet-5-5", "purpose": "media", "status": "error", "latency_s": 6.99, "input_tokens": null, "output_tokens": null, "error": "RuntimeError: output truncated at 900 tokens"}
+{"t": "2026-10-16T01:17:42+00:00", "provider": "groq", "model": "openai/gpt-oss-120b", "purpose": "media", "status": "ok", "latency_s": 1.56, "input_tokens": 408, "output_tokens": 416}
+{"t": "2026-10-16T01:18:33+00:00", "provider": "claude", "model": "claude-sonnet-5-5", "purpose": "media", "status": "ok", "latency_s": 7.46, "input_tokens": 884, "output_tokens": 944}

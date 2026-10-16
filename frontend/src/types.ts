@@ -21,13 +21,17 @@ export interface Room {
   printed_dims_text?: string | null;
   area_sqft: number | null; // measured
   area_sqft_final: number | null; // printed when available, else measured
-  area_source: "printed" | "measured" | null;
+  area_source: "printed" | "measured" | "estimated" | null;
   has_private_bath: boolean | null;
   polygon: Pt[] | null; // original-image px
   segmentation?: string;
   closet_ids?: string[];
   shared_region_with?: string[];
   area_with_closets_sqft?: number | null;
+  /** plans estimated from photos: how sure the size is, and how it was worked out */
+  dims_confidence?: { confidence: "low" | "medium" | "high"; plus_minus_pct: number; reasoning?: string; references?: string[]; source?: string; frames?: number[] };
+  media_type?: string;
+  frames?: number[];
 }
 
 export interface Wall {
@@ -60,6 +64,9 @@ export interface ParsedPlan {
   unit: Unit;
   warnings: string[];
   cached?: boolean;
+  /** a schematic plan built from a listing video / photos (sizes from reference objects) */
+  layout_source?: "estimated_from_photos";
+  estimate?: { plus_minus_pct: number; rooms_sized: number; rooms: number; method: string };
 }
 
 export interface PlanSummary {

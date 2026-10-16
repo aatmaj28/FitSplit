@@ -1,0 +1,9 @@
+{
+  "value": {
+    "full": "Welcome to this well kept home featuring a bright entry, hallway and living area with lots of natural light, hardwood, tile and vinyl flooring. The kitchen includes a dishwasher, gas stove, refrigerator and clean dark wood cabinets. The bathroom offers a bathtub, renovated finishes, ceiling fan and radiator heat. Enjoy a balcony/patio, a well kept porch and landscaped front yard. An older staircase showcases original woodwork, and the interior is freshly painted with glossy floors, though paint debris remains on the floor.",
+    "short": "Bright home with hardwood, tile, vinyl floors, dishwasher, gas stove, bathtub, balcony, porch, landscaped yard, original woodwork staircase, freshly painted interior."
+  },
+  "created": "2026-10-16T01:17:42+00:00",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b"
+}

@@ -1,0 +1,9 @@
+{
+  "value": {
+    "full": "Welcome to this bright apartment with a well-kept porch and a landscaped front yard. In the living room you'll find hardwood floors, a ceiling fan, radiator heat and lots of natural light.\n\nThe kitchen has a dishwasher, gas stove, refrigerator and radiator heat. The bedroom offers hardwood floors and radiator heat, and the hardwood continues into the hallway.\n\nThe renovated bathroom features a bathtub and tile floors. The balcony also gets lots of natural light. Fresh paint and the original woodwork on the older staircase complete the home.",
+    "short": "Bright apartment with hardwood floors, a renovated bathroom with a bathtub, a kitchen with dishwasher and gas stove, and a balcony."
+  },
+  "created": "2026-10-16T01:18:33+00:00",
+  "provider": "claude",
+  "model": "claude-sonnet-5-5"
+}

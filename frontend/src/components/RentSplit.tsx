@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { computeSplit, type SplitMethod, type SplitResult } from "../rentSplit";
 import type { ParsedPlan } from "../types";
+import { estimateLabel, isEstimated } from "./FloorPlan3D/theme";
 import { RentCheckBadge, RentCheckDetails, useRentCheck, type Suggestion } from "./RentCheck";
 
 export interface RentSplitProps {
@@ -98,8 +99,13 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck =
           </div>
           <p className="text-xs text-slate-500">
             {n} bedroom{n === 1 ? "" : "s"}
-            {plan.unit.total_sqft ? ` · ${sqft(plan.unit.total_sqft)}` : ""}
+            {plan.unit.total_sqft ? ` · ${isEstimated(plan) ? "≈ " : ""}${sqft(plan.unit.total_sqft)}` : ""}
           </p>
+          {isEstimated(plan) && (
+            <p className="mt-1 rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900 ring-1 ring-amber-200" data-estimated>
+              {estimateLabel(plan)}: room sizes, and so these shares, are estimates.
+            </p>
+          )}
         </div>
         <label className="flex items-center gap-1.5 rounded-xl bg-slate-50 px-2.5 py-1.5 text-sm ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-teal-500">
           <span className="text-slate-400">$</span>
@@ -179,7 +185,7 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck =
                 </div>
                 <div className="truncate text-xs text-slate-500">
                   {r.room.printed_dims_text ? `${r.room.printed_dims_text} · ` : ""}
-                  {sqft(r.bedroomArea)}
+                  {isEstimated(plan) ? "≈ " : ""}{sqft(r.bedroomArea)}
                 </div>
                 <div className="mt-1.5 flex min-h-5 flex-wrap gap-1">
                   <button
@@ -236,7 +242,7 @@ export function RentSplit({ plan, selectedRoomId = null, onSelectRoom, aiCheck =
               Total {money(total)} {total === Math.round(rent) ? "= rent ✓" : "≠ rent"}
             </span>
           </div>
-          <p className="text-xs leading-relaxed text-slate-500">{explain(split, method, closets)}</p>
+          <p className="text-xs leading-relaxed text-slate-500">{explain(split, method, closets)}{isEstimated(plan) ? ` Sizes are ${estimateLabel(plan).toLowerCase()}.` : ""}</p>
           {split.notes.map((note) => (
             <p key={note} className="text-xs text-amber-700">
               {note}

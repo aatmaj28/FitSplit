@@ -1,6 +1,7 @@
 import type { RoomType } from "../../types";
 import type { PlanModel } from "./geometry";
 import type { Angle } from "./PlanScene";
+import { FLOOR_LABEL, FLOOR_SWATCH, type FloorKind, type RoomStyle } from "./livedIn";
 import { ROOM_COLORS, ROOM_LABELS, SLAB } from "./theme";
 
 const pill = "pointer-events-auto rounded-full bg-white/90 shadow-sm ring-1 ring-slate-200 backdrop-blur";
@@ -35,7 +36,8 @@ export function ResetViewButton({ onClick, className = "" }: { onClick: () => vo
   );
 }
 
-export function ViewerToolbar({ preset, onPreset, onRotate, onResetView, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount }: {
+export function ViewerToolbar({ preset, onPreset, onRotate, onResetView, show2D, onShow2D, canShow2D, wallHeight, onWallHeight, editable, editing, onEditing, onReset, itemCount,
+  livedIn, onLivedIn, furnished, onFurnished }: {
   preset: "top" | Angle;
   onPreset: (p: "top" | Angle) => void;
   onRotate: (deg: number) => void;
@@ -50,7 +52,12 @@ export function ViewerToolbar({ preset, onPreset, onRotate, onResetView, show2D,
   onEditing: (v: boolean) => void;
   onReset: () => void;
   itemCount: number;
+  livedIn: boolean;
+  onLivedIn: (v: boolean) => void;
+  furnished: boolean;
+  onFurnished: (v: boolean) => void;
 }) {
+  const toggle = (on: boolean) => `rounded-full px-2.5 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${on ? "bg-teal-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`;
   return (
     <div className="pointer-events-none absolute inset-x-2 top-2 z-30 flex flex-wrap items-center gap-1.5 sm:inset-x-3 sm:top-3 sm:gap-2">
       <div className={`${pill} inline-flex items-center p-0.5 sm:p-1`} role="group" aria-label="Camera">
@@ -125,15 +132,33 @@ export function ViewerToolbar({ preset, onPreset, onRotate, onResetView, show2D,
           Reset layout
         </button>
       )}
+      {/* last, so the camera / edit controls keep their places (the room panel covers the right side) */}
+      <div className={`${pill} inline-flex items-center p-0.5 sm:p-1`} role="group" aria-label="Look">
+        <button type="button" onClick={() => onLivedIn(!livedIn)} aria-pressed={livedIn} title="Painted walls and real floors (from the listing's photos when it has them)" className={toggle(livedIn)} data-toggle="lived-in">
+          Lived-in
+        </button>
+        <button type="button" onClick={() => onFurnished(!furnished)} aria-pressed={furnished} disabled={editing} title="Furniture placed in every room with the fit check" className={`${toggle(furnished)} disabled:opacity-40`} data-toggle="furnished">
+          Furnished
+        </button>
+      </div>
     </div>
   );
 }
 
-export function Legend({ model, editing = false }: { model: PlanModel; editing?: boolean }) {
+export function Legend({ model, editing = false, styles = null }: { model: PlanModel; editing?: boolean; styles?: Map<string, Required<RoomStyle>> | null }) {
   const types = Array.from(new Set(model.rooms.map((r) => r.room.type))) as RoomType[];
+  const floors = styles ? (Array.from(new Set([...styles.values()].map((s) => s.floor))) as FloorKind[]) : [];
+  const fromPhotos = styles ? [...styles.values()].some((s) => s.source === "photos") : false;
   return (
     <div className="pointer-events-none absolute bottom-3 left-3 z-20 hidden flex-wrap gap-x-3 gap-y-1 rounded-xl bg-white/80 px-3 py-2 text-[11px] text-slate-600 ring-1 ring-slate-200 backdrop-blur sm:flex sm:max-w-[60%]">
-      {types.map((t) => (
+      {styles && floors.map((f) => (
+        <span key={f} className="inline-flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-sm ring-1 ring-black/10" style={{ background: FLOOR_SWATCH[f] }} />
+          {FLOOR_LABEL[f]}
+        </span>
+      ))}
+      {styles && <span className="text-slate-500">{fromPhotos ? "Walls and floors from the photos" : "Walls: soft palette"}</span>}
+      {!styles && types.map((t) => (
         <span key={t} className="inline-flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm ring-1 ring-black/10" style={{ background: ROOM_COLORS[t] }} />
           {ROOM_LABELS[t]}

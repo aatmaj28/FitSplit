@@ -1,0 +1,6 @@
+{
+  "value": "```json\n{\"width_ft\": 11.5, \"length_ft\": 14.0, \"confidence\": \"low\", \"plus_minus_pct\": 25, \"references\": [\"windows (~30 in wide)\", \"baseboard heaters\", \"light switch/thermostat height\", \"ceiling height\"], \"reasoning\": \"The three-window bay, with each window about 30-32 in plus trim, spans about 8 ft, and the flanking wall sections bring the room width to about 11.5 ft. The floor depth in the wide shot looks like roughly 1.2 times the width, about 14 ft not counting the bay alcove, though no doors or furniture are visible to confirm this.\"}\n```",
+  "created": "2026-10-16T01:16:40+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

@@ -8,6 +8,7 @@ data/media_jobs/<id>/input/       the original upload (gitignored)
 data/media_jobs/<id>/frames/      the kept frames (1024 px)
 data/media_jobs/<id>/pano/        per-room panoramas
 data/media_jobs/<id>/walk/        walkthrough.json (rooms, panoramas, hotspots)
+data/media_jobs/<id>/plan/        the estimated floor plan: plan.json (parsed-plan format), plan.png, plan.svg
 """
 from __future__ import annotations
 
@@ -23,7 +24,7 @@ from typing import Callable, Optional
 from ..config import DATA_DIR
 from . import describe as describe_mod
 from . import frames as frames_mod
-from . import tagging, walkthrough
+from . import layout, tagging, walkthrough
 
 MEDIA_DIR = DATA_DIR / "media_jobs"
 PIPELINE_VERSION = "media-1"
@@ -106,7 +107,7 @@ def create(uploads: list[Path], *, listing_id: Optional[str] = None, existing: O
         "steps": [{"id": s, "label": label, "status": "pending", "detail": ""} for s, label in STEPS],
         "listing_id": listing_id, "existing_amenities": existing or [], "inputs": inputs,
         "frames": [], "tags": [], "amenities": [], "rooms_seen": {}, "description": None, "insight": None,
-        "rooms": [], "connections": [], "entrance": None, "walkthrough": None,
+        "rooms": [], "connections": [], "entrance": None, "walkthrough": None, "plan": None, "layout": None,
         "error": None, "created": _now(), "finished": None,
     }
     with _lock:
@@ -210,7 +211,8 @@ def _listing(listing_id: Optional[str]) -> Optional[dict]:
     return {"title": m.get("title") or listing_id.replace("_", " "), "beds": m.get("beds"), "baths": m.get("baths")} if isinstance(m, dict) else None
 
 
-BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthrough.group_rooms, "walkthrough": walkthrough.build_walkthrough}
+BUILTIN: dict[str, StepFn] = {"extract": _extract, "tag": _tag, "rooms": walkthrough.group_rooms, "sizes": layout.estimate_sizes,
+                               "layout": layout.build_layout, "walkthrough": walkthrough.build_walkthrough}
 
 
 def list_jobs() -> list[dict]:

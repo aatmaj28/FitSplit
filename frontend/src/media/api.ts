@@ -4,6 +4,7 @@
  */
 import { API, DEMO, fetchJson } from "../api";
 import { planSource } from "../data/plans";
+import type { ParsedPlan } from "../types";
 
 export type StepStatus = "pending" | "running" | "done" | "skipped" | "error";
 
@@ -58,6 +59,11 @@ export interface MediaJob {
   created: string;
   finished: string | null;
   offline?: boolean; // loaded from the bundle
+  rooms?: { id: string; name: string; type: string; frames: number[]; dims?: { w: number; l: number; plus_minus_pct: number; confidence: string } }[];
+  /** the estimated floor plan (parsed-plan format, layout_source "estimated_from_photos") */
+  plan?: ParsedPlan | null;
+  /** room rectangles in feet (minimap) */
+  layout?: Record<string, { x: number; y: number; w: number; h: number }> | null;
 }
 
 export interface MediaSummary {
@@ -154,4 +160,24 @@ export function mediaUrl(job: Pick<MediaJob, "id" | "offline">, file: string): s
 export function frameUrl(job: Pick<MediaJob, "id" | "offline" | "frames">, frameId: number): string | undefined {
   const f = job.frames.find((x) => x.id === frameId);
   return f && mediaUrl(job, f.file);
+}
+
+const planCache = new WeakMap<ParsedPlan, Map<number, { plan: ParsedPlan; imageUrl: string }>>();
+
+/** The estimated floor plan of a job, ready for <FloorPlan3D> (its 2D drawing is the overlay).
+ *  Cached per plan and rent: the viewer and the rent split reset whenever they get a new plan object. */
+export function estimatedPlan(job: MediaJob | null, rent?: number): { plan: ParsedPlan; imageUrl: string } | null {
+  if (!job?.plan) return null;
+  let byRent = planCache.get(job.plan);
+  if (!byRent) planCache.set(job.plan, (byRent = new Map()));
+  const key = rent ?? 0;
+  if (!byRent.has(key)) {
+    byRent.set(key, { plan: rent ? { ...job.plan, unit: { ...job.plan.unit, rent } } : job.plan, imageUrl: mediaUrl(job, "plan/plan.png") });
+  }
+  return byRent.get(key)!;
+}
+
+/** Room rectangles for the walkthrough minimap. */
+export function layoutRects(job: MediaJob | null) {
+  return job?.layout ? Object.entries(job.layout).map(([id, r]) => ({ id, ...r })) : undefined;
 }

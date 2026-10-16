@@ -1,0 +1,6 @@
+{
+  "value": "{\"width_ft\": 4.0, \"length_ft\": 5.0, \"confidence\": \"low\", \"plus_minus_pct\": 30, \"references\": [\"deck board width (~5.5 in)\", \"stair railing (~36 in high)\", \"stair tread depth (~10-11 in)\"], \"reasoning\": \"This is a covered exterior stoop, about 4 ft wide between the siding wall and the porch post, judged from roughly 9 deck boards across and the railing scale. The landing plus top steps appear about 5 ft deep, but no standard indoor objects are visible, so confidence is low.\", \"ceiling_ft\": 8.0}",
+  "created": "2026-10-16T01:16:28+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

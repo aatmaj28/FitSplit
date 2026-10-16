@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import type { PlanModel } from "./geometry";
-import { formatSqft } from "./theme";
+import { formatRoomArea } from "./theme";
 
 /**
  * One DOM layer for all room labels (crisp text, readable from any angle, works offline).
@@ -36,7 +36,7 @@ export function LabelLayer({ model, selectedId, onSelect, els, passThrough = fal
             ].join(" ")}
           >
             {room.name}
-            {area != null && <span className={selected ? "text-teal-50" : "text-slate-500"}> · {formatSqft(area)}</span>}
+            {area != null && <span className={selected ? "text-teal-50" : "text-slate-500"}> · {formatRoomArea(room, area)}</span>}
           </button>
         );
       })}

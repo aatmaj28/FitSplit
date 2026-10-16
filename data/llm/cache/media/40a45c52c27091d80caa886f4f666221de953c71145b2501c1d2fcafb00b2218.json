@@ -1,0 +1,6 @@
+{
+  "value": "```json\n{\"width_ft\": 6.5, \"length_ft\": 11.5, \"confidence\": \"low\", \"plus_minus_pct\": 30, \"references\": [\"door\", \"stair width\", \"transom window\"], \"reasoning\": \"The end door (about 30 in wide, 80 in tall with a transom) shows the walkway is about 3.3 ft wide, and the open stairwell beside it adds about 3 ft, for a total width near 6.5 ft. The run from the foreground landing to the end door looks like roughly 4–5 door-widths of floor, giving a length near 11.5 ft.\"}\n```",
+  "created": "2026-10-16T01:17:00+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}

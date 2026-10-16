@@ -1,0 +1,6 @@
+{
+  "value": "{\"width_ft\": 3.5, \"length_ft\": 14.0, \"confidence\": \"low\", \"plus_minus_pct\": 30, \"references\": [\"door\", \"staircase treads\", \"fridge\"], \"reasoning\": \"The open door at the end (about 32 in) fills most of the corridor floor beside the stair rail, putting the walkable width near 3.5 ft. The staircase alongside appears to have about 13-14 treads at roughly 10 in each, plus some floor before the kitchen door, giving a length of about 14 ft.\", \"ceiling_ft\": 8.5}",
+  "created": "2026-10-16T01:16:34+00:00",
+  "provider": "claude",
+  "model": "claude-opus-5-5"
+}
